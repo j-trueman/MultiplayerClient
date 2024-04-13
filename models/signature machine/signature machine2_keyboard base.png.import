@@ -1,0 +1,19 @@
+[remap]
+
+importer="texture"
+type="CompressedTexture2D"
+uid="uid://cyh7nafnpuani"
+path="res://.godot/imported/signature machine2_keyboard base.png-4641573e45b99c780eaa3d18df2362df.ctex"
+metadata={
+"vram_texture": false
+}
+generator_parameters={}
+
+[deps]
+
+source_file="res://models/signature machine/signature machine2_keyboard base.png"
+dest_files=PackedStringArray("res://.godot/imported/signature machine2_keyboard base.png-4641573e45b99c780eaa3d18df2362df.ctex")
+
+[params]
+
+dummy_value_ignore_me=0

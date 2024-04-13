@@ -1,0 +1,19 @@
+[remap]
+
+importer="texture"
+type="CompressedTexture2D"
+uid="uid://c1cqy57c73pvt"
+path="res://.godot/imported/backroom blockout4_paperwork1_with coffee leak.png-c5dc09c2c567e992db0fee0d56eb75b1.ctex"
+metadata={
+"vram_texture": false
+}
+generator_parameters={}
+
+[deps]
+
+source_file="res://models/backroom blockout3/backroom blockout4_paperwork1_with coffee leak.png"
+dest_files=PackedStringArray("res://.godot/imported/backroom blockout4_paperwork1_with coffee leak.png-c5dc09c2c567e992db0fee0d56eb75b1.ctex")
+
+[params]
+
+dummy_value_ignore_me=0

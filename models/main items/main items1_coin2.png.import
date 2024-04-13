@@ -1,0 +1,19 @@
+[remap]
+
+importer="texture"
+type="CompressedTexture2D"
+uid="uid://b3y468a1d0qya"
+path="res://.godot/imported/main items1_coin2.png-aa8182c8a2a4b43cc000380948bcabd1.ctex"
+metadata={
+"vram_texture": false
+}
+generator_parameters={}
+
+[deps]
+
+source_file="res://models/main items/main items1_coin2.png"
+dest_files=PackedStringArray("res://.godot/imported/main items1_coin2.png-aa8182c8a2a4b43cc000380948bcabd1.ctex")
+
+[params]
+
+dummy_value_ignore_me=0

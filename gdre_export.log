@@ -1,0 +1,351 @@
+GDRE Tools v0.6.2
+Windows 10.0.22631, NVIDIA GeForce RTX 2060, opengl3
+Extracted 2350 files, no errors detected!
+USER WARNING: Converting lossy imports, you may lose fidelity for indicated assets when re-importing upon loading the project
+   at: ImportExporter::_export_imports (modules\gdsdecomp\utility\import_exporter.cpp:58)
+Recreated plugin config for godot-xr-tools
+USER ERROR: Failed to find main script for plugin JSON_Schema_Validator!
+   at: ImportExporter::recreate_plugin_config (modules\gdsdecomp\utility\import_exporter.cpp:610)
+USER WARNING: Failed to recreate plugin.cfg for JSON_Schema_Validator
+   at: ImportExporter::recreate_plugin_configs (modules\gdsdecomp\utility\import_exporter.cpp:651)
+USER ERROR: Failed to find main script for plugin mod_loader!
+   at: ImportExporter::recreate_plugin_config (modules\gdsdecomp\utility\import_exporter.cpp:610)
+USER WARNING: Failed to recreate plugin.cfg for mod_loader
+   at: ImportExporter::recreate_plugin_configs (modules\gdsdecomp\utility\import_exporter.cpp:651)
+Did not rewrite import metadata for res://addons/godot-xr-tools/editor/icons/audio.svg
+Did not rewrite import metadata for res://addons/godot-xr-tools/editor/icons/body.svg
+Did not rewrite import metadata for res://addons/godot-xr-tools/editor/icons/foot.svg
+Did not rewrite import metadata for res://addons/godot-xr-tools/editor/icons/function.svg
+Did not rewrite import metadata for res://addons/godot-xr-tools/editor/icons/hand.svg
+Did not rewrite import metadata for res://addons/godot-xr-tools/editor/icons/movement_provider.svg
+Did not rewrite import metadata for res://addons/godot-xr-tools/editor/icons/node.svg
+USER WARNING: Export of models/imported scenes currently unimplemented
+   at: ImportExporter::_export_imports (modules\gdsdecomp\utility\import_exporter.cpp:181)
+USER WARNING: Conversion for Resource of type PackedScene and format gltf not implemented
+   at: ImportExporter::report_unsupported_resource (modules\gdsdecomp\utility\import_exporter.cpp:1052)
+Did not convert PackedScene resource res://.godot/imported/Hand_Glove_L.gltf-ac6c06fe48ca0d7ce0f9faffd177a897.scn
+Did not convert PackedScene resource res://.godot/imported/Hand_Glove_R.gltf-0e99922c663867da8d37af9597ab1ce8.scn
+Did not convert PackedScene resource res://.godot/imported/Hand_Glove_low_L.gltf-7b94b12c0dff159d494da6cafd52895d.scn
+Did not convert PackedScene resource res://.godot/imported/Hand_Glove_low_R.gltf-c32907596b2287c95aff0e704780ef3d.scn
+Did not convert PackedScene resource res://.godot/imported/Hand_Nails_L.gltf-22452b307072e9d363b1f547e2b6a365.scn
+Did not convert PackedScene resource res://.godot/imported/Hand_Nails_R.gltf-35869d6a39400588d95465aa5e3b528d.scn
+Did not convert PackedScene resource res://.godot/imported/Hand_Nails_low_L.gltf-60d8096917582bfe1d760ff1ad173fc8.scn
+Did not convert PackedScene resource res://.godot/imported/Hand_Nails_low_R.gltf-7d9fc9507def4b4fd9c10cdae7aa6e11.scn
+Did not convert PackedScene resource res://.godot/imported/Hand_low_L.gltf-a83bdf9115e4fb62c63deabade61cbbb.scn
+Did not convert PackedScene resource res://.godot/imported/Hand_low_R.gltf-8b164aff014e5c5bfa2eccc8e40e7e97.scn
+Did not convert PackedScene resource res://.godot/imported/hand_l.gltf-6ba1595ac4c28aef3719b7f0b4f2f4f2.scn
+Did not convert PackedScene resource res://.godot/imported/hand_r.gltf-dd429687cadefbc3e7a21ae26addfb30.scn
+USER WARNING: res://.godot/imported/DOTMATRI.TTF-199287babf245a92bc2ef85bd599a155.fontdata: In external resource #0, invalid UID: uid://b0df1ns6fwvs4 - using text path instead: res://fonts/fonts language/RobotoSlab-Medium_cyrillic.ttf
+   at: ResourceLoaderBinary::open (core\io\resource_format_binary.cpp:1059)
+USER WARNING: res://.godot/imported/DOTMATRI.TTF-199287babf245a92bc2ef85bd599a155.fontdata: In external resource #1, invalid UID: uid://cajrxbaw0122g - using text path instead: res://fonts/fonts language/NotoSansKR-Regular.ttf
+   at: ResourceLoaderBinary::open (core\io\resource_format_binary.cpp:1059)
+USER WARNING: res://.godot/imported/OLDSSCH_.TTF-c57f27601627648dd8855239f4a13da1.fontdata: In external resource #0, invalid UID: uid://b0df1ns6fwvs4 - using text path instead: res://fonts/fonts language/RobotoSlab-Medium_cyrillic.ttf
+   at: ResourceLoaderBinary::open (core\io\resource_format_binary.cpp:1059)
+USER WARNING: res://.godot/imported/OLDSSCH_.TTF-c57f27601627648dd8855239f4a13da1.fontdata: In external resource #1, invalid UID: uid://cajrxbaw0122g - using text path instead: res://fonts/fonts language/NotoSansKR-Regular.ttf
+   at: ResourceLoaderBinary::open (core\io\resource_format_binary.cpp:1059)
+USER WARNING: res://.godot/imported/fake receipt.otf-c8c50fa084fceb91a150024c0a391d05.fontdata: In external resource #0, invalid UID: uid://b0df1ns6fwvs4 - using text path instead: res://fonts/fonts language/RobotoSlab-Medium_cyrillic.ttf
+   at: ResourceLoaderBinary::open (core\io\resource_format_binary.cpp:1059)
+USER WARNING: res://.godot/imported/fake receipt.otf-c8c50fa084fceb91a150024c0a391d05.fontdata: In external resource #1, invalid UID: uid://cajrxbaw0122g - using text path instead: res://fonts/fonts language/NotoSansKR-Regular.ttf
+   at: ResourceLoaderBinary::open (core\io\resource_format_binary.cpp:1059)
+USER WARNING: res://.godot/imported/hydrogen copy.ttf-7cef80ea61c9f33fb8c7039ea79ad566.fontdata: In external resource #0, invalid UID: uid://cajrxbaw0122g - using text path instead: res://fonts/fonts language/NotoSansKR-Regular.ttf
+   at: ResourceLoaderBinary::open (core\io\resource_format_binary.cpp:1059)
+USER WARNING: res://.godot/imported/steelfish rg.otf-a23826553f6f970013142b7794e4df00.fontdata: In external resource #0, invalid UID: uid://b0df1ns6fwvs4 - using text path instead: res://fonts/fonts language/RobotoSlab-Medium_cyrillic.ttf
+   at: ResourceLoaderBinary::open (core\io\resource_format_binary.cpp:1059)
+USER WARNING: res://.godot/imported/steelfish rg.otf-a23826553f6f970013142b7794e4df00.fontdata: In external resource #1, invalid UID: uid://cajrxbaw0122g - using text path instead: res://fonts/fonts language/NotoSansKR-Regular.ttf
+   at: ResourceLoaderBinary::open (core\io\resource_format_binary.cpp:1059)
+USER WARNING: res://.godot/imported/hydrogen.ttf-3541890cd66ef4b87be4d28233c64309.fontdata: In external resource #0, invalid UID: uid://b0df1ns6fwvs4 - using text path instead: res://fonts/fonts language/RobotoSlab-Medium_cyrillic.ttf
+   at: ResourceLoaderBinary::open (core\io\resource_format_binary.cpp:1059)
+USER WARNING: res://.godot/imported/hydrogen.ttf-3541890cd66ef4b87be4d28233c64309.fontdata: In external resource #1, invalid UID: uid://cajrxbaw0122g - using text path instead: res://fonts/fonts language/NotoSansKR-Regular.ttf
+   at: ResourceLoaderBinary::open (core\io\resource_format_binary.cpp:1059)
+Saved project config project.godot.
+
+
+********************************EXPORT REPORT********************************
+
+Totals:                                 
+Decompiled scripts:                     0
+Failed scripts:                         0
+Imported resources for export session:  2350
+Successfully converted:                 995
+Lossy:                                  215
+Rewrote metadata:                       0
+Non-importable conversions:             7
+Not converted:                          12
+Failed conversions:                     0
+-------------
+
+
+The following files were converted from an import that was stored lossy.
+You may lose fidelity when re-importing these files upon loading the project.
+res://.godot/imported/grain.jpg-657f15066c3ccdf93bc92f8ff87ee7db.ctex to res://GodotRetro/Other/Images/grain.jpg
+res://.godot/imported/audio.svg-20d7f0b624a1b2ef54f1b4d12970c8d0.ctex to res://.assets/addons/godot-xr-tools/editor/icons/audio.png
+res://.godot/imported/body.svg-324e141d452c32f3136ca97c338025b4.ctex to res://.assets/addons/godot-xr-tools/editor/icons/body.png
+res://.godot/imported/foot.svg-9e361563e010aa07be49bfb25fdb6639.ctex to res://.assets/addons/godot-xr-tools/editor/icons/foot.png
+res://.godot/imported/function.svg-52c5f936037e0f38a4da2b1e16ae67fe.ctex to res://.assets/addons/godot-xr-tools/editor/icons/function.png
+res://.godot/imported/hand.svg-a05486d804ef16320d6cf54e06292b8f.ctex to res://.assets/addons/godot-xr-tools/editor/icons/hand.png
+res://.godot/imported/movement_provider.svg-3c994cf0a3775c20f333be563d69fbf8.ctex to res://.assets/addons/godot-xr-tools/editor/icons/movement_provider.png
+res://.godot/imported/node.svg-37d53571b4a4459efefcc791c5402b4f.ctex to res://.assets/addons/godot-xr-tools/editor/icons/node.png
+res://.godot/imported/ambience1.ogg-4996594357d7e8b0bc8b0410d49ee2dd.oggvorbisstr to res://audio/ambience1.ogg
+res://.godot/imported/ambience_fluorescent light.ogg-ed7fbf3cf769ad8e53efe5f76a1f3d74.oggvorbisstr to res://audio/ambience_fluorescent light.ogg
+res://.godot/imported/blade cut.ogg-0eddb42d90d0a7add6d6d9b81968962b.oggvorbisstr to res://audio/blade cut.ogg
+res://.godot/imported/briefcase compartment hide.ogg-07abc67711d83f6b96150bdad9e20a6d.oggvorbisstr to res://audio/briefcase compartment hide.ogg
+res://.godot/imported/briefcase compartment show.ogg-97d79957f1fdac08c4f97379b0aa9509.oggvorbisstr to res://audio/briefcase compartment show.ogg
+res://.godot/imported/briefcase latch1.ogg-847a990bcda57dbfb02786d9f8cb08d7.oggvorbisstr to res://audio/briefcase latch1.ogg
+res://.godot/imported/briefcase latch2.ogg-cb3c21466adafad7b65f805978e824ee.oggvorbisstr to res://audio/briefcase latch2.ogg
+res://.godot/imported/briefcase machine full 1.71s machine move start.ogg-9a2643f076ef815cb3bb8cd00231c60f.oggvorbisstr to res://audio/briefcase machine full 1.71s machine move start.ogg
+res://.godot/imported/button death new.ogg-e659c5598ff74460e5ab0e5794a7a274.oggvorbisstr to res://audio/button death new.ogg
+res://.godot/imported/button press2.ogg-1fe49392a15d1462f7aa4b55e4ac3824.oggvorbisstr to res://audio/button press2.ogg
+res://.godot/imported/button press3.ogg-17c3425005c1f23c45c35c0f5acd4313.oggvorbisstr to res://audio/button press3.ogg
+res://.godot/imported/button press_sub.ogg-089b61c034c651196f168fe60ec491dc.oggvorbisstr to res://audio/button press_sub.ogg
+res://.godot/imported/button_hover.ogg-2b9923237eb601795538e26bc97badaa.oggvorbisstr to res://audio/button_hover.ogg
+res://.godot/imported/button_press.ogg-cda1671e17730ad7183ba743d79e59ad.oggvorbisstr to res://audio/button_press.ogg
+res://.godot/imported/button_start main.ogg-cd009521a91c4e3ab9b32d8db03bb096.oggvorbisstr to res://audio/button_start main.ogg
+res://.godot/imported/camera pan test.ogg-e64f34dd9ff2ae8407a39b4a13aee127.oggvorbisstr to res://audio/camera pan test.ogg
+res://.godot/imported/camera pan2.ogg-6fb79170a78242964f5f30d87cd1e815.oggvorbisstr to res://audio/camera pan2.ogg
+res://.godot/imported/car drive ambience.ogg-3faaff5f538e7d129a41d45f8d01a771.oggvorbisstr to res://audio/car drive ambience.ogg
+res://.godot/imported/check item_pickup.ogg-21b9b7460abb2dfd0ee87ef34859bb94.oggvorbisstr to res://audio/check item_pickup.ogg
+res://.godot/imported/check item_place down.ogg-b663240a7e47a169bd605c48b25b4f68.oggvorbisstr to res://audio/check item_place down.ogg
+res://.godot/imported/club ambience1.ogg-64c67ec46add79ba8cb965bb556e10a3.oggvorbisstr to res://audio/club ambience1.ogg
+res://.godot/imported/crack1.ogg-a40c84c237194e787a8bdbf23810c0b3.oggvorbisstr to res://audio/crack1.ogg
+res://.godot/imported/crack2.ogg-3f83665b395076813cfc0c0bcf227aca.oggvorbisstr to res://audio/crack2.ogg
+res://.godot/imported/crack3.ogg-ecd5c1c944a1798fb3dedcc150cf394a.oggvorbisstr to res://audio/crack3.ogg
+res://.godot/imported/crack4.ogg-4115560a79d58ddddad830c7945bd360.oggvorbisstr to res://audio/crack4.ogg
+res://.godot/imported/crack5.ogg-7053fdf90ef48df5fe7fc69ff0d8b529.oggvorbisstr to res://audio/crack5.ogg
+res://.godot/imported/crack6.ogg-5b4f10b5fb9ef09d0ab51ac137f3dca9.oggvorbisstr to res://audio/crack6.ogg
+res://.godot/imported/crt_bootup2.ogg-d7ffa1c9673ba1aa571e4c0da6edf161.oggvorbisstr to res://audio/crt_bootup2.ogg
+res://.godot/imported/crt_part click.ogg-13ac214ec0840b5dfeacc723e9c3dd53.oggvorbisstr to res://audio/crt_part click.ogg
+res://.godot/imported/crt_player walk.ogg-2987496c3cd1eba8a0af8c5b6378d576.oggvorbisstr to res://audio/crt_player walk.ogg
+res://.godot/imported/crt_show icons.ogg-067045dd3999353f220fe9c58d0be8d7.oggvorbisstr to res://audio/crt_show icons.ogg
+res://.godot/imported/crt_turn off display2.ogg-65cd7e6b7d52ac990718cd0ecab8bcb8.oggvorbisstr to res://audio/crt_turn off display2.ogg
+res://.godot/imported/crt_volta melody hide.ogg-55997cbae6fe1d519b866de07b04c4ef.oggvorbisstr to res://audio/crt_volta melody hide.ogg
+res://.godot/imported/crt_volta melody.ogg-19517727caf09241c1aeb852a156cfd5.oggvorbisstr to res://audio/crt_volta melody.ogg
+res://.godot/imported/crystalc anvvern.ogg-e661107ee3a9d64720fb6d25432fe0a8.oggvorbisstr to res://audio/crystalc anvvern.ogg
+res://.godot/imported/dealer break handcuffs.ogg-634172c2c9b6a4cbcaac2809c0695c17.oggvorbisstr to res://audio/dealer break handcuffs.ogg
+res://.godot/imported/dealer check handcuffs.ogg-59d21671306112dd4cc06f9beab2267b.oggvorbisstr to res://audio/dealer check handcuffs.ogg
+res://.godot/imported/dealer death medicine1.ogg-96a2b80fac3148d660dbb3020a21424d.oggvorbisstr to res://audio/dealer death medicine1.ogg
+res://.godot/imported/dealer fly away crash.ogg-22f4abf785c1c077c5b38f46e7d0b8e3.oggvorbisstr to res://audio/dealer fly away crash.ogg
+res://.godot/imported/dealer fly away crash2.ogg-38a038bafee1beceb43eb334611d1e8a.oggvorbisstr to res://audio/dealer fly away crash2.ogg
+res://.godot/imported/dealer hands on table.ogg-7ca719820fadafde7749053a78f442c1.oggvorbisstr to res://audio/dealer hands on table.ogg
+res://.godot/imported/dealer hands on table_cuffed.ogg-f0a5d7bfc4246e3c60a236beecc3ef0d.oggvorbisstr to res://audio/dealer hands on table_cuffed.ogg
+res://.godot/imported/dealer use adrenaline.ogg-153b26484382651b2cbba07f9950eb8c.oggvorbisstr to res://audio/dealer use adrenaline.ogg
+res://.godot/imported/dealer use beer.ogg-91488b5ca2b39adc79853fbf0f01549a.oggvorbisstr to res://audio/dealer use beer.ogg
+res://.godot/imported/dealer use burner phone.ogg-8fbffd4cb2c6fea022f5e63015c2df62.oggvorbisstr to res://audio/dealer use burner phone.ogg
+res://.godot/imported/dealer use cigarettes.ogg-dfb3e817206d29741fc21fb73518fae5.oggvorbisstr to res://audio/dealer use cigarettes.ogg
+res://.godot/imported/dealer use handcuffs.ogg-b562cc7e942d715cf16dd040f4d24493.oggvorbisstr to res://audio/dealer use handcuffs.ogg
+res://.godot/imported/dealer use handsaw.ogg-0d13b70c93f96bc0085f8bcc98d078d9.oggvorbisstr to res://audio/dealer use handsaw.ogg
+res://.godot/imported/dealer use inverter.ogg-f39e02fa57df059431842c27f7f28719.oggvorbisstr to res://audio/dealer use inverter.ogg
+res://.godot/imported/dealer use magnifier.ogg-08d07d53ce72e9cddd874b0b4bb4cfa1.oggvorbisstr to res://audio/dealer use magnifier.ogg
+res://.godot/imported/dealer use medicine.ogg-76ce61595c4e6f722d6df3606dae0983.oggvorbisstr to res://audio/dealer use medicine.ogg
+res://.godot/imported/dealer use.ogg-0595eb587dad9f4636fcdebd49ec1804.oggvorbisstr to res://audio/dealer use.ogg
+res://.godot/imported/dealer use1.ogg-439f48d1d93bc7ed5949e0c2b8db93d3.oggvorbisstr to res://audio/dealer use1.ogg
+res://.godot/imported/death temp.ogg-d4f3bc0904963d50f4f9556487e43e4a.oggvorbisstr to res://audio/death temp.ogg
+res://.godot/imported/defib blade move.ogg-75bd2babba1d3276920fee3c65189295.oggvorbisstr to res://audio/defib blade move.ogg
+res://.godot/imported/defib blade open.ogg-ebc0d8f7a98b9c1cd514ca417b23ccb1.oggvorbisstr to res://audio/defib blade open.ogg
+res://.godot/imported/defib bootup.ogg-4fe64b8112bf5517b5016f3638c74246.oggvorbisstr to res://audio/defib bootup.ogg
+res://.godot/imported/defib console beep.ogg-00b7eb9e6c4af73701b13eb8f06b38bb.oggvorbisstr to res://audio/defib console beep.ogg
+res://.godot/imported/defib discharge.ogg-b5849c8bc90cd241b407bfbba333826f.oggvorbisstr to res://audio/defib discharge.ogg
+res://.godot/imported/defib motor.ogg-bc3d06943bf9c484a3910455d929e92d.oggvorbisstr to res://audio/defib motor.ogg
+res://.godot/imported/dialogue click1.ogg-2d4a6724e58ceaa7e9cd058a5ab6822e.oggvorbisstr to res://audio/dialogue click1.ogg
+res://.godot/imported/dialogue click2.ogg-21c933a7c070ff7c293e258769f878a7.oggvorbisstr to res://audio/dialogue click2.ogg
+res://.godot/imported/dialogue click3.ogg-4215eccb56a7a1b7bec5130cebbc3202.oggvorbisstr to res://audio/dialogue click3.ogg
+res://.godot/imported/dialogue click4.ogg-11ef9699dc8dc6503019e99f919d678b.oggvorbisstr to res://audio/dialogue click4.ogg
+res://.godot/imported/dialogue click_ending.ogg-b90d793bc35dee8a52ba2743c98bc801.oggvorbisstr to res://audio/dialogue click_ending.ogg
+res://.godot/imported/double or hide.ogg-3cedfc3a658d8d100387e8e76d3688be.oggvorbisstr to res://audio/double or hide.ogg
+res://.godot/imported/double or nothing bootup.ogg-ea6f2a9195e30e7ee81ad11d13a19232.oggvorbisstr to res://audio/double or nothing bootup.ogg
+res://.godot/imported/double or show.ogg-a22e81c7bccee6ebff00f39ac9d1a7b9.oggvorbisstr to res://audio/double or show.ogg
+res://.godot/imported/drop shotgun testr.ogg-a65c7fa9525c3f0e22ec9ddf43638a24.oggvorbisstr to res://audio/drop shotgun testr.ogg
+res://.godot/imported/error vol3.ogg-c9235774de3f061388cf856dd46f8745.oggvorbisstr to res://audio/error vol3.ogg
+res://.godot/imported/god.ogg-d067a857b0a9db7d593f7bbac5552f5b.oggvorbisstr to res://audio/god.ogg
+res://.godot/imported/grab item1.ogg-ff61912405cccec82c3f7ddd5eb2d9c4.oggvorbisstr to res://audio/grab item1.ogg
+res://.godot/imported/grab item2.ogg-e310fc29f0bf5bd250428482c0783e9e.oggvorbisstr to res://audio/grab item2.ogg
+res://.godot/imported/grab item3.ogg-73c0e975849e8f0873f9b99078077ec7.oggvorbisstr to res://audio/grab item3.ogg
+res://.godot/imported/grab item4.ogg-540fc00784c79a6e528e9c893bfe712b.oggvorbisstr to res://audio/grab item4.ogg
+res://.godot/imported/grab item5.ogg-7d07da57adc96111d4cd46977e4de485.oggvorbisstr to res://audio/grab item5.ogg
+res://.godot/imported/grab1.ogg-6d434227403f8d508e32a4df80580191.oggvorbisstr to res://audio/grab1.ogg
+res://.godot/imported/grab2.ogg-0c1f097be0b92c7c11d48491c61c254e.oggvorbisstr to res://audio/grab2.ogg
+res://.godot/imported/grab3.ogg-1aed11b750349f9471eaeb541a95a079.oggvorbisstr to res://audio/grab3.ogg
+res://.godot/imported/grab4.ogg-7c2cfeae579e5a63da97d253b17f28a9.oggvorbisstr to res://audio/grab4.ogg
+res://.godot/imported/grab5.ogg-033f5c49d721a91f04240b31e2dbd4b7.oggvorbisstr to res://audio/grab5.ogg
+res://.godot/imported/grow barrel.ogg-4e08704e574b93b0fdf86290c33b5163.oggvorbisstr to res://audio/grow barrel.ogg
+res://.godot/imported/gun foley1.ogg-126d99561a2a5e9b3b64cede87563fe6.oggvorbisstr to res://audio/gun foley1.ogg
+res://.godot/imported/gun foley2.ogg-44a381718f0715ec1957f596e699bd3b.oggvorbisstr to res://audio/gun foley2.ogg
+res://.godot/imported/gun foley3.ogg-ae6e0ac322e8566d04811e8a82bd1de8.oggvorbisstr to res://audio/gun foley3.ogg
+res://.godot/imported/gun foley4.ogg-ab29d4ec2085d91c2867c367177aa844.oggvorbisstr to res://audio/gun foley4.ogg
+res://.godot/imported/gun foley5.ogg-06e1e8c27839090afe62101e8db87c61.oggvorbisstr to res://audio/gun foley5.ogg
+res://.godot/imported/gun foley6.ogg-41a6bfa1f333ed75cf71ca459875ef4f.oggvorbisstr to res://audio/gun foley6.ogg
+res://.godot/imported/gun foley7.ogg-bc7728b24aabbac122c1abb06bd457ae.oggvorbisstr to res://audio/gun foley7.ogg
+res://.godot/imported/gun foley8.ogg-6df791b4885dae56065938f184714d69.oggvorbisstr to res://audio/gun foley8.ogg
+res://.godot/imported/health counter beep2.wav-5241d040ca7e72f2847a29f2d2060d27.sample to res://audio/health counter beep2.wav
+res://.godot/imported/health counter bootup.ogg-be1de0f5abdb3b85decabb39c29ad05f.oggvorbisstr to res://audio/health counter bootup.ogg
+res://.godot/imported/health counter confirmation.ogg-40091db2813baf3aae1fd28bf3d40912.oggvorbisstr to res://audio/health counter confirmation.ogg
+res://.godot/imported/health counter confirmation2.ogg-bb3bdb281f15a869bd4b3f5740d733c2.oggvorbisstr to res://audio/health counter confirmation2.ogg
+res://.godot/imported/health counter error1.ogg-bb4333499a353fd0b9429155f2f1bd6d.oggvorbisstr to res://audio/health counter error1.ogg
+res://.godot/imported/health counter error2.ogg-648315be81956bc448c28d0299b3e2de.oggvorbisstr to res://audio/health counter error2.ogg
+res://.godot/imported/health counter error3.ogg-330f18838b470550288352a298e2791b.oggvorbisstr to res://audio/health counter error3.ogg
+res://.godot/imported/health counter error4.ogg-f2c0896d5faef9fd1e0310a20efbc27d.oggvorbisstr to res://audio/health counter error4.ogg
+res://.godot/imported/health counter reduce health.ogg-d551fcf9fba21a601c26ab46a0ca488d.oggvorbisstr to res://audio/health counter reduce health.ogg
+res://.godot/imported/heartbeat effect.ogg-5ef5c8b0e5530e2315d05e703182e4f7.oggvorbisstr to res://audio/heartbeat effect.ogg
+res://.godot/imported/heartbeat effect2.ogg-29b6488b0d92ba23b618ed8fa92c1160.oggvorbisstr to res://audio/heartbeat effect2.ogg
+res://.godot/imported/item grid indicator blip.ogg-b1ac2cebd9a124f50296885c82a5fa24.oggvorbisstr to res://audio/item grid indicator blip.ogg
+res://.godot/imported/kick door enter backroom.ogg-c94851da37ba7dc387a69224e7d581a9.oggvorbisstr to res://audio/kick door enter backroom.ogg
+res://.godot/imported/kick door enter lobby.ogg-92ad8d6e7e05484d2ddae74b380b2754.oggvorbisstr to res://audio/kick door enter lobby.ogg
+res://.godot/imported/load single shell.ogg-b783c8f425fa7d927af81f34a7787f24.oggvorbisstr to res://audio/load single shell.ogg
+res://.godot/imported/main compartment clear.ogg-b22b50fdc7e67b7a76d1743788282243.oggvorbisstr to res://audio/main compartment clear.ogg
+res://.godot/imported/main compartment hide items.ogg-05bca1f6b2d08e16ca60cdb96cc8814b.oggvorbisstr to res://audio/main compartment hide items.ogg
+res://.godot/imported/main compartment show items.ogg-5c34914468ef2019d0caa1c11cae8a13.oggvorbisstr to res://audio/main compartment show items.ogg
+res://.godot/imported/music main second loop_error.ogg-ca98645617f9fbe99e13d468b0b736e5.oggvorbisstr to res://audio/music/music main second loop_error.ogg
+res://.godot/imported/music main second loop_room.ogg-aeb26764f83643336e706c7ac61a1aec.oggvorbisstr to res://audio/music/music main second loop_room.ogg
+res://.godot/imported/music main second loop_techno techno.ogg-bd81ce66f5cc7258ea47870daf78bb64.oggvorbisstr to res://audio/music/music main second loop_techno techno.ogg
+res://.godot/imported/music main_error.ogg-b7e98cca74a7f21c22971f17eefcdc7d.oggvorbisstr to res://audio/music/music main_error.ogg
+res://.godot/imported/music main_gate modded.ogg-090b0385d0d49603356ff7ba36d0575f.oggvorbisstr to res://audio/music/music main_gate modded.ogg
+res://.godot/imported/music main_glass.ogg-de0b6c399248b43d29226acf03f78af6.oggvorbisstr to res://audio/music/music main_glass.ogg
+res://.godot/imported/music main_room.ogg-7985212bc78e8db99a05adcebd1a3a2f.oggvorbisstr to res://audio/music/music main_room.ogg
+res://.godot/imported/music main_techno techno.ogg-483a5b1429463985ba2eef4b5921f0ba.oggvorbisstr to res://audio/music/music main_techno techno.ogg
+res://.godot/imported/music main_you are presented.ogg-97c7acb51b2ec8a03b3102c9e33d2230.oggvorbisstr to res://audio/music/music main_you are presented.ogg
+res://.godot/imported/music_error vol3.ogg-cf8da21c25458f86bc7ff36dffc3a309.oggvorbisstr to res://audio/music_error vol3.ogg
+res://.godot/imported/music_helicopter vol1.ogg-8780a85344376ffede3b9eab6a9b086e.oggvorbisstr to res://audio/music_helicopter vol1.ogg
+res://.godot/imported/music_room vol2.ogg-cf674bed7934ff4f8a050e50725b65f9.oggvorbisstr to res://audio/music_room vol2.ogg
+res://.godot/imported/music_techno techno vol2.ogg-8120955b2ae8b34ddb8584988f811371.oggvorbisstr to res://audio/music_techno techno vol2.ogg
+res://.godot/imported/music_true death vol1.ogg-8d82786e7e40a7927c99bb3894f9a74d.oggvorbisstr to res://audio/music_true death vol1.ogg
+res://.godot/imported/music_true death vol2.ogg-3ec9d701b651260a7a927fcdaedb885c.oggvorbisstr to res://audio/music_true death vol2.ogg
+res://.godot/imported/open briefcase.ogg-03f7af31f5f547dc5a3e46908e925489.oggvorbisstr to res://audio/open briefcase.ogg
+res://.godot/imported/pick up adrenaline.ogg-3f970d14095e838d69be3b22f3518e15.oggvorbisstr to res://audio/pick up adrenaline.ogg
+res://.godot/imported/pick up beer.ogg-dbafaf59544f5e13a0d54553053d539e.oggvorbisstr to res://audio/pick up beer.ogg
+res://.godot/imported/pick up burner phone.ogg-438da456106c50246dc3fefed2d63115.oggvorbisstr to res://audio/pick up burner phone.ogg
+res://.godot/imported/pick up cigarettes.ogg-f0b060e615cf0fd6bc4e2c6c4c020065.oggvorbisstr to res://audio/pick up cigarettes.ogg
+res://.godot/imported/pick up handcuffs.ogg-b6635a75926c932608b457128e677844.oggvorbisstr to res://audio/pick up handcuffs.ogg
+res://.godot/imported/pick up inverter.ogg-cfbd7c760fb87573feae82bad424cdb3.oggvorbisstr to res://audio/pick up inverter.ogg
+res://.godot/imported/pick up magnifier.ogg-6df4b49ec7c020755d91e45bf3f3a631.oggvorbisstr to res://audio/pick up magnifier.ogg
+res://.godot/imported/pick up medicine.ogg-fc2841ab866e4a85de3cff583ef5426a.oggvorbisstr to res://audio/pick up medicine.ogg
+res://.godot/imported/pick up metal.ogg-6a18c61e728f6de820fd60b591a67a4f.oggvorbisstr to res://audio/pick up metal.ogg
+res://.godot/imported/pill choice audio.ogg-9f607619e032eaa29d40a6264cb4a0c4.oggvorbisstr to res://audio/pill choice audio.ogg
+res://.godot/imported/pill grab.ogg-1c02a5a6c9b410958c9894e708e0e223.oggvorbisstr to res://audio/pill grab.ogg
+res://.godot/imported/pill grab2.ogg-c9f3f89b928034eb634c2308a0c957ee.oggvorbisstr to res://audio/pill grab2.ogg
+res://.godot/imported/pill select1.ogg-001d00bc7e138bf3086ad4e6f3f78743.oggvorbisstr to res://audio/pill select1.ogg
+res://.godot/imported/place down adrenaline.ogg-abeb2886d2e2fa2acac015db06ebdbe9.oggvorbisstr to res://audio/place down adrenaline.ogg
+res://.godot/imported/place down beer.ogg-d0b003260e3b40cb0b0adb1f97145b04.oggvorbisstr to res://audio/place down beer.ogg
+res://.godot/imported/place down burner phone.ogg-63f3bebcafac6c246a0e09c19d7c15cd.oggvorbisstr to res://audio/place down burner phone.ogg
+res://.godot/imported/place down cigarettes.ogg-fb253056ce53b8eda502467c1cec42b6.oggvorbisstr to res://audio/place down cigarettes.ogg
+res://.godot/imported/place down handcuffs.ogg-5e08bf675227b5367e4d8c50a210cb4d.oggvorbisstr to res://audio/place down handcuffs.ogg
+res://.godot/imported/place down handsaw.ogg-9346b92c6824765405d832a5184da282.oggvorbisstr to res://audio/place down handsaw.ogg
+res://.godot/imported/place down inverter.ogg-f0d8fc65b7c8ef2c193acae17da52f67.oggvorbisstr to res://audio/place down inverter.ogg
+res://.godot/imported/place down magnifier.ogg-974f497a26b5d7e1f949205480ada40c.oggvorbisstr to res://audio/place down magnifier.ogg
+res://.godot/imported/place down magnifier2.ogg-32713ff697f83f842a76a7dcf5a89a85.oggvorbisstr to res://audio/place down magnifier2.ogg
+res://.godot/imported/place down medicine.ogg-e255f34b7aaf93b791dbb8d7e5194935.oggvorbisstr to res://audio/place down medicine.ogg
+res://.godot/imported/player break handcuffs.ogg-b8ae3891baf9aad7b8308790999fc43e.oggvorbisstr to res://audio/player break handcuffs.ogg
+res://.godot/imported/player check handcuffs.ogg-60684f1756e28129c112a2de6744016d.oggvorbisstr to res://audio/player check handcuffs.ogg
+res://.godot/imported/player death medicine.ogg-e34e1a4e5f4e04042435a1697e585211.oggvorbisstr to res://audio/player death medicine.ogg
+res://.godot/imported/player use adrenaline.ogg-6a00151ccdb4bb2d7fad744635975e4d.oggvorbisstr to res://audio/player use adrenaline.ogg
+res://.godot/imported/player use beer.ogg-8b61954b1e2b6a8331bf638753a6a8ce.oggvorbisstr to res://audio/player use beer.ogg
+res://.godot/imported/player use burner phone.ogg-728f6294582a1b89525d6305e1230283.oggvorbisstr to res://audio/player use burner phone.ogg
+res://.godot/imported/player use cigarettes.ogg-70840ca3d1e5c34996557d2c30d7ac28.oggvorbisstr to res://audio/player use cigarettes.ogg
+res://.godot/imported/player use cigarettes1.ogg-b3265b8d5b02537670b99ac23ffffc9b.oggvorbisstr to res://audio/player use cigarettes1.ogg
+res://.godot/imported/player use handcuffs.ogg-657f9ce9ae27457a303328d31c41a162.oggvorbisstr to res://audio/player use handcuffs.ogg
+res://.godot/imported/player use handsaw.ogg-59d7e9b03e2ccd28f03963e6e2560744.oggvorbisstr to res://audio/player use handsaw.ogg
+res://.godot/imported/player use handsaw1.ogg-07ce59e9045a331f595d37672802c6f7.oggvorbisstr to res://audio/player use handsaw1.ogg
+res://.godot/imported/player use inverter.ogg-c93f32b9d72e95cc44ab67177600711f.oggvorbisstr to res://audio/player use inverter.ogg
+res://.godot/imported/player use magnifier.ogg-bbd895c0300f325a611625247704b6eb.oggvorbisstr to res://audio/player use magnifier.ogg
+res://.godot/imported/player use magnifier1.ogg-93de816486c9a22eb91cba4588f0f17c.oggvorbisstr to res://audio/player use magnifier1.ogg
+res://.godot/imported/player use medicine.ogg-b77c9e524a256e2b883f42cb24deb407.oggvorbisstr to res://audio/player use medicine.ogg
+res://.godot/imported/player use.ogg-47a281baf6a6d2c4d907fa000cb6d9b7.oggvorbisstr to res://audio/player use.ogg
+res://.godot/imported/playtest death theme.ogg-26d537adbf6f02a1eb6037d6f37d1478.oggvorbisstr to res://audio/playtest death theme.ogg
+res://.godot/imported/playtest menu.ogg-81ce299d55db723ecfc8cdf2b306960b.oggvorbisstr to res://audio/playtest menu.ogg
+res://.godot/imported/playtest win.ogg-839483857780de666ed7b41488dbc54e.oggvorbisstr to res://audio/playtest win.ogg
+res://.godot/imported/rack shotgun.ogg-5e894cd00e9633d4fa79899c06ea98f5.oggvorbisstr to res://audio/rack shotgun.ogg
+res://.godot/imported/rack shotgun_back.ogg-bbb13004da385205bcf65a8d795e5766.oggvorbisstr to res://audio/rack shotgun_back.ogg
+res://.godot/imported/rack shotgun_forward.ogg-1db76db72b175a66a6de2bf96162b453.oggvorbisstr to res://audio/rack shotgun_forward.ogg
+res://.godot/imported/round blinker wave.ogg-01c9b8061e7f9eaa148fecdda5dcfafa.oggvorbisstr to res://audio/round blinker wave.ogg
+res://.godot/imported/round indicator hum.ogg-9c258b33ca8a021f843c02507290f311.oggvorbisstr to res://audio/round indicator hum.ogg
+res://.godot/imported/round indicator shut down.ogg-5ae3fe836072c2be25f5098c4e191e4b.oggvorbisstr to res://audio/round indicator shut down.ogg
+res://.godot/imported/shell indicator_blank.ogg-726c8919e0a32a221e1a6864cc66a1fe.oggvorbisstr to res://audio/shell indicator_blank.ogg
+res://.godot/imported/shell indicator_live.ogg-6cf3bacddf4b6279dc05f0a0b6ed75f2.oggvorbisstr to res://audio/shell indicator_live.ogg
+res://.godot/imported/shell latch1.ogg-8d6449b9de87a9cf3b8095308ee666bc.oggvorbisstr to res://audio/shell latch1.ogg
+res://.godot/imported/shell latch2.ogg-f14f519c34f0e69746a7f6eb7d9150ff.oggvorbisstr to res://audio/shell latch2.ogg
+res://.godot/imported/shelldrop1.ogg-62356fa616f4213236d8b86ebc501307.oggvorbisstr to res://audio/shelldrop1.ogg
+res://.godot/imported/shelldrop2.ogg-ee012b45aed555ee053bc4c1dda48b07.oggvorbisstr to res://audio/shelldrop2.ogg
+res://.godot/imported/shelldrop3.ogg-1caebfb835e9b47ad5dc52ff0dbe640e.oggvorbisstr to res://audio/shelldrop3.ogg
+res://.godot/imported/shelldrop4.ogg-8b9629bc73c707b01cd673b81b33a266.oggvorbisstr to res://audio/shelldrop4.ogg
+res://.godot/imported/shelldrop5.ogg-575c2c76d635fac933073f17b4733ee1.oggvorbisstr to res://audio/shelldrop5.ogg
+res://.godot/imported/shelldrop6.ogg-1ec2523d35dbd4f115d45b97cd2a4e6f.oggvorbisstr to res://audio/shelldrop6.ogg
+res://.godot/imported/shelldrop7.ogg-40820f6590733dc27f883b363807dafc.oggvorbisstr to res://audio/shelldrop7.ogg
+res://.godot/imported/show cursor.ogg-2bb95e66431506e9ad89c1a933ae83fb.oggvorbisstr to res://audio/show cursor.ogg
+res://.godot/imported/signature machine bootup high pass.ogg-84fdc5a26163151d386bcfebf3570a35.oggvorbisstr to res://audio/signature machine bootup high pass.ogg
+res://.godot/imported/signature machine key press.ogg-f95e401c4bd0e59723fa50ed60b11021.oggvorbisstr to res://audio/signature machine key press.ogg
+res://.godot/imported/signature machine letter punch.ogg-fa52ad370634cf641fc9ca9ea6db01e6.oggvorbisstr to res://audio/signature machine letter punch.ogg
+res://.godot/imported/signature machine shutdown1.ogg-12612896ada7d112cf78ad7f0f1576c8.oggvorbisstr to res://audio/signature machine shutdown1.ogg
+res://.godot/imported/splatter1.ogg-eca59ce45797bc473ab484190b524dd6.oggvorbisstr to res://audio/splatter1.ogg
+res://.godot/imported/techno techno.ogg-bceb8f53a2cf679100cc3c48eefb42c8.oggvorbisstr to res://audio/techno techno.ogg
+res://.godot/imported/temp gunshot_blank.wav-96b8fac8691489907d5a150fd1230d3f.sample to res://audio/temp gunshot_blank.wav
+res://.godot/imported/temp gunshot_live.wav-d77f5145ffed6ecdc5018d0a8da50ccb.sample to res://audio/temp gunshot_live.wav
+res://.godot/imported/winner.ogg-9f02431168433b860784ef2b811ec450.oggvorbisstr to res://audio/winner.ogg
+res://.godot/imported/AveriaSerif-Bold.ttf-962f5ad2b83d7c9a932594eada13915d.fontdata to res://fonts/AveriaSerif-Bold.ttf
+res://.godot/imported/AveriaSerif-Regular.ttf-ebc82e499d6be2716da9f00beb505bbb.fontdata to res://fonts/AveriaSerif-Regular.ttf
+res://.godot/imported/DOTMATRI.TTF-199287babf245a92bc2ef85bd599a155.fontdata to res://fonts/DOTMATRI.TTF
+res://.godot/imported/OLDSSCH_.TTF-c57f27601627648dd8855239f4a13da1.fontdata to res://fonts/OLDSSCH_.TTF
+res://.godot/imported/fake receipt.otf-c8c50fa084fceb91a150024c0a391d05.fontdata to res://fonts/fake receipt.otf
+res://.godot/imported/GothicA1-Medium.ttf-12febae6a795d20ea9fabd25a3b7dee8.fontdata to res://fonts/fonts language/GothicA1-Medium.ttf
+res://.godot/imported/NanumGothic-Regular.ttf-f1439dfde504491e2e47a2300a412829.fontdata to res://fonts/fonts language/NanumGothic-Regular.ttf
+res://.godot/imported/NotoSansKR-Medium.ttf-4eba874f7b47c2a93df05473826b4592.fontdata to res://fonts/fonts language/NotoSansKR-Medium.ttf
+res://.godot/imported/NotoSansKR-Regular.ttf-6534224f4aa91677bc733fa87a22e266.fontdata to res://fonts/fonts language/NotoSansKR-Regular.ttf
+res://.godot/imported/RobotoSlab-Medium_cyrillic.ttf-e2a42ff0df476daca05cac731a6df918.fontdata to res://fonts/fonts language/RobotoSlab-Medium_cyrillic.ttf
+res://.godot/imported/hydrogen copy.ttf-7cef80ea61c9f33fb8c7039ea79ad566.fontdata to res://fonts/fonts language/hydrogen copy.ttf
+res://.godot/imported/steelfish rg.otf-a23826553f6f970013142b7794e4df00.fontdata to res://fonts/steelfish rg.otf
+res://.godot/imported/volta3.ogg-6960a7c9cf0d0681d5a5b8d62c49d02f.oggvorbisstr to res://instances/volta3.ogg
+res://.godot/imported/hydrogen.ttf-3541890cd66ef4b87be4d28233c64309.fontdata to res://main player/hydrogen.ttf
+------
+
+The following plugins failed to have their plugin.cfg regenerated:
+JSON_Schema_Validator
+mod_loader
+------
+
+The following files were converted and saved to a non-original path, but did not have their import data rewritten.
+These files will not be re-imported when loading the project.
+res://.godot/imported/audio.svg-20d7f0b624a1b2ef54f1b4d12970c8d0.ctex to res://.assets/addons/godot-xr-tools/editor/icons/audio.png
+res://.godot/imported/body.svg-324e141d452c32f3136ca97c338025b4.ctex to res://.assets/addons/godot-xr-tools/editor/icons/body.png
+res://.godot/imported/foot.svg-9e361563e010aa07be49bfb25fdb6639.ctex to res://.assets/addons/godot-xr-tools/editor/icons/foot.png
+res://.godot/imported/function.svg-52c5f936037e0f38a4da2b1e16ae67fe.ctex to res://.assets/addons/godot-xr-tools/editor/icons/function.png
+res://.godot/imported/hand.svg-a05486d804ef16320d6cf54e06292b8f.ctex to res://.assets/addons/godot-xr-tools/editor/icons/hand.png
+res://.godot/imported/movement_provider.svg-3c994cf0a3775c20f333be563d69fbf8.ctex to res://.assets/addons/godot-xr-tools/editor/icons/movement_provider.png
+res://.godot/imported/node.svg-37d53571b4a4459efefcc791c5402b4f.ctex to res://.assets/addons/godot-xr-tools/editor/icons/node.png
+------
+
+The following files were not converted because support has not been implemented yet:
+res://.godot/imported/Hand_Glove_L.gltf-ac6c06fe48ca0d7ce0f9faffd177a897.scn
+res://.godot/imported/Hand_Glove_R.gltf-0e99922c663867da8d37af9597ab1ce8.scn
+res://.godot/imported/Hand_Glove_low_L.gltf-7b94b12c0dff159d494da6cafd52895d.scn
+res://.godot/imported/Hand_Glove_low_R.gltf-c32907596b2287c95aff0e704780ef3d.scn
+res://.godot/imported/Hand_Nails_L.gltf-22452b307072e9d363b1f547e2b6a365.scn
+res://.godot/imported/Hand_Nails_R.gltf-35869d6a39400588d95465aa5e3b528d.scn
+res://.godot/imported/Hand_Nails_low_L.gltf-60d8096917582bfe1d760ff1ad173fc8.scn
+res://.godot/imported/Hand_Nails_low_R.gltf-7d9fc9507def4b4fd9c10cdae7aa6e11.scn
+res://.godot/imported/Hand_low_L.gltf-a83bdf9115e4fb62c63deabade61cbbb.scn
+res://.godot/imported/Hand_low_R.gltf-8b164aff014e5c5bfa2eccc8e40e7e97.scn
+res://.godot/imported/hand_l.gltf-6ba1595ac4c28aef3719b7f0b4f2f4f2.scn
+res://.godot/imported/hand_r.gltf-dd429687cadefbc3e7a21ae26addfb30.scn
+
+
+
+---------------------------------IMPORTANT NOTES----------------------------------
+
+The following resource types were detected in the project that conversion is not implemented for yet:
+Type: PackedScene         	Format: gltf
+See Export Report to see which resources were not exported.
+You will still be able to edit the project in the editor regardless.
+-------
+The following addons failed to have their libraries copied or plugin.cfg regenerated:
+- JSON_Schema_Validator
+- mod_loader
+You may encounter editor errors due to this.
+Tip: Try finding the plugin in the Godot Asset Library or Github.
+
+
+------------------------------------------------------------------------------------
+
+Use Godot editor version 4.1.1 to edit the project.
+Note: the project may be using a custom version of Godot. Detection for this has not been implemented yet.
+If you find that you have many non-import errors upon opening the project 
+(i.e. scripts or shaders have many errors), use the original game's binary as the export template.
+
+*******************************************************************************
+

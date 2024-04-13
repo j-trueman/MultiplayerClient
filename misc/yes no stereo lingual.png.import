@@ -1,0 +1,18 @@
+[remap]
+
+importer="texture"
+type="CompressedTexture2D"
+uid="uid://cbijpc553csqi"
+path="res://.godot/imported/yes no stereo lingual.png-1d9f3b99433a12bf8b85b1c7c6469c4a.ctex"
+metadata={
+"vram_texture": false
+}
+
+[deps]
+
+source_file="res://misc/yes no stereo lingual.png"
+dest_files=PackedStringArray("res://.godot/imported/yes no stereo lingual.png-1d9f3b99433a12bf8b85b1c7c6469c4a.ctex")
+
+[params]
+
+dummy_value_ignore_me=0

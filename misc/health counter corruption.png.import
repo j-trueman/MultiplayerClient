@@ -1,0 +1,18 @@
+[remap]
+
+importer="texture"
+type="CompressedTexture2D"
+uid="uid://r64orbmboxkg"
+path="res://.godot/imported/health counter corruption.png-ac4e28843ad437efc932ebcc54fc11a1.ctex"
+metadata={
+"vram_texture": false
+}
+
+[deps]
+
+source_file="res://misc/health counter corruption.png"
+dest_files=PackedStringArray("res://.godot/imported/health counter corruption.png-ac4e28843ad437efc932ebcc54fc11a1.ctex")
+
+[params]
+
+dummy_value_ignore_me=0

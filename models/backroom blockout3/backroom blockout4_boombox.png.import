@@ -1,0 +1,19 @@
+[remap]
+
+importer="texture"
+type="CompressedTexture2D"
+uid="uid://0p7hdthkml2a"
+path="res://.godot/imported/backroom blockout4_boombox.png-40a2081f307022f03cf18f97a20138f2.ctex"
+metadata={
+"vram_texture": false
+}
+generator_parameters={}
+
+[deps]
+
+source_file="res://models/backroom blockout3/backroom blockout4_boombox.png"
+dest_files=PackedStringArray("res://.godot/imported/backroom blockout4_boombox.png-40a2081f307022f03cf18f97a20138f2.ctex")
+
+[params]
+
+dummy_value_ignore_me=0

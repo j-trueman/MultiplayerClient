@@ -1,0 +1,19 @@
+[remap]
+
+importer="texture"
+type="CompressedTexture2D"
+uid="uid://cv1uybhj2dcru"
+path="res://.godot/imported/crt sa1_soap.png-6e7c8b8989ec443b4a3070fadfb26067.ctex"
+metadata={
+"vram_texture": false
+}
+generator_parameters={}
+
+[deps]
+
+source_file="res://models/crt sa11/crt sa1_soap.png"
+dest_files=PackedStringArray("res://.godot/imported/crt sa1_soap.png-6e7c8b8989ec443b4a3070fadfb26067.ctex")
+
+[params]
+
+dummy_value_ignore_me=0

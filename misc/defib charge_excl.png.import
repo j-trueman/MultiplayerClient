@@ -1,0 +1,18 @@
+[remap]
+
+importer="texture"
+type="CompressedTexture2D"
+uid="uid://beb2g4w73xw8t"
+path="res://.godot/imported/defib charge_excl.png-d78fbc1a5d5a59e44006ea82432a7a17.ctex"
+metadata={
+"vram_texture": false
+}
+
+[deps]
+
+source_file="res://misc/defib charge_excl.png"
+dest_files=PackedStringArray("res://.godot/imported/defib charge_excl.png-d78fbc1a5d5a59e44006ea82432a7a17.ctex")
+
+[params]
+
+dummy_value_ignore_me=0

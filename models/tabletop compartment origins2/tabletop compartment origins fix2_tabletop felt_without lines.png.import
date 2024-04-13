@@ -1,0 +1,19 @@
+[remap]
+
+importer="texture"
+type="CompressedTexture2D"
+uid="uid://bjo30fe7p8nnq"
+path="res://.godot/imported/tabletop compartment origins fix2_tabletop felt_without lines.png-8cc01fd2676e7c92bd619c9ed9bd81c8.ctex"
+metadata={
+"vram_texture": false
+}
+generator_parameters={}
+
+[deps]
+
+source_file="res://models/tabletop compartment origins2/tabletop compartment origins fix2_tabletop felt_without lines.png"
+dest_files=PackedStringArray("res://.godot/imported/tabletop compartment origins fix2_tabletop felt_without lines.png-8cc01fd2676e7c92bd619c9ed9bd81c8.ctex")
+
+[params]
+
+dummy_value_ignore_me=0

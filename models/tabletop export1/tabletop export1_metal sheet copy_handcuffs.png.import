@@ -1,0 +1,19 @@
+[remap]
+
+importer="texture"
+type="CompressedTexture2D"
+uid="uid://dvmu07lsxm8i1"
+path="res://.godot/imported/tabletop export1_metal sheet copy_handcuffs.png-f22654a244ddd5da2afcfda3b2a5b8e3.ctex"
+metadata={
+"vram_texture": false
+}
+generator_parameters={}
+
+[deps]
+
+source_file="res://models/tabletop export1/tabletop export1_metal sheet copy_handcuffs.png"
+dest_files=PackedStringArray("res://.godot/imported/tabletop export1_metal sheet copy_handcuffs.png-f22654a244ddd5da2afcfda3b2a5b8e3.ctex")
+
+[params]
+
+dummy_value_ignore_me=0

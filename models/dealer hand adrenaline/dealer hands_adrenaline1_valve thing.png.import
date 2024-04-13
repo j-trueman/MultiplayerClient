@@ -1,0 +1,19 @@
+[remap]
+
+importer="texture"
+type="CompressedTexture2D"
+uid="uid://cu5fsh4h7olrw"
+path="res://.godot/imported/dealer hands_adrenaline1_valve thing.png-24b6c59264c9bff1206d435e579b7457.ctex"
+metadata={
+"vram_texture": false
+}
+generator_parameters={}
+
+[deps]
+
+source_file="res://models/dealer hand adrenaline/dealer hands_adrenaline1_valve thing.png"
+dest_files=PackedStringArray("res://.godot/imported/dealer hands_adrenaline1_valve thing.png-24b6c59264c9bff1206d435e579b7457.ctex")
+
+[params]
+
+dummy_value_ignore_me=0

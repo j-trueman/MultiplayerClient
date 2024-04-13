@@ -1,0 +1,19 @@
+[remap]
+
+importer="texture"
+type="CompressedTexture2D"
+uid="uid://c2jk28dnvhm3"
+path="res://.godot/imported/restroom1_pill bottle.png-a9496c2cfc1a20b298207047bbd09c2d.ctex"
+metadata={
+"vram_texture": false
+}
+generator_parameters={}
+
+[deps]
+
+source_file="res://models/restroom1/restroom1_pill bottle.png"
+dest_files=PackedStringArray("res://.godot/imported/restroom1_pill bottle.png-a9496c2cfc1a20b298207047bbd09c2d.ctex")
+
+[params]
+
+dummy_value_ignore_me=0

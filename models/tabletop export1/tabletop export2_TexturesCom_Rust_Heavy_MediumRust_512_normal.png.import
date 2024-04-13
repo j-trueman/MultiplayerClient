@@ -1,0 +1,19 @@
+[remap]
+
+importer="texture"
+type="CompressedTexture2D"
+uid="uid://4e81laaokdp8"
+path="res://.godot/imported/tabletop export2_TexturesCom_Rust_Heavy_MediumRust_512_normal.png-a53484133ce4bf06fc59a4734e7429ea.ctex"
+metadata={
+"vram_texture": false
+}
+generator_parameters={}
+
+[deps]
+
+source_file="res://models/tabletop export1/tabletop export2_TexturesCom_Rust_Heavy_MediumRust_512_normal.png"
+dest_files=PackedStringArray("res://.godot/imported/tabletop export2_TexturesCom_Rust_Heavy_MediumRust_512_normal.png-a53484133ce4bf06fc59a4734e7429ea.ctex")
+
+[params]
+
+dummy_value_ignore_me=0

@@ -1,0 +1,19 @@
+[remap]
+
+importer="texture"
+type="CompressedTexture2D"
+uid="uid://dqiybj46mpxqo"
+path="res://.godot/imported/tabletop standalone export2_tabletop felt.png-3796fd3dcc7b3d284b6324d8c2ec58d6.ctex"
+metadata={
+"vram_texture": false
+}
+generator_parameters={}
+
+[deps]
+
+source_file="res://models/tabletop standalone2/tabletop standalone export2_tabletop felt.png"
+dest_files=PackedStringArray("res://.godot/imported/tabletop standalone export2_tabletop felt.png-3796fd3dcc7b3d284b6324d8c2ec58d6.ctex")
+
+[params]
+
+dummy_value_ignore_me=0

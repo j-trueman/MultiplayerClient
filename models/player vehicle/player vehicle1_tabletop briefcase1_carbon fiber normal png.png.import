@@ -1,0 +1,19 @@
+[remap]
+
+importer="texture"
+type="CompressedTexture2D"
+uid="uid://drv4s7fduxr6s"
+path="res://.godot/imported/player vehicle1_tabletop briefcase1_carbon fiber normal png.png-4bb364b4586999aa66fb042c04dcfc01.ctex"
+metadata={
+"vram_texture": false
+}
+generator_parameters={}
+
+[deps]
+
+source_file="res://models/player vehicle/player vehicle1_tabletop briefcase1_carbon fiber normal png.png"
+dest_files=PackedStringArray("res://.godot/imported/player vehicle1_tabletop briefcase1_carbon fiber normal png.png-4bb364b4586999aa66fb042c04dcfc01.ctex")
+
+[params]
+
+dummy_value_ignore_me=0

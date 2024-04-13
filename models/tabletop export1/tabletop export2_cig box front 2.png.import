@@ -1,0 +1,19 @@
+[remap]
+
+importer="texture"
+type="CompressedTexture2D"
+uid="uid://54vmtpbmrb4q"
+path="res://.godot/imported/tabletop export2_cig box front 2.png-21e629d2bf8915f9042c3c48a5dc3166.ctex"
+metadata={
+"vram_texture": false
+}
+generator_parameters={}
+
+[deps]
+
+source_file="res://models/tabletop export1/tabletop export2_cig box front 2.png"
+dest_files=PackedStringArray("res://.godot/imported/tabletop export2_cig box front 2.png-21e629d2bf8915f9042c3c48a5dc3166.ctex")
+
+[params]
+
+dummy_value_ignore_me=0

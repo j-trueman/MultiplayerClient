@@ -1,0 +1,19 @@
+[remap]
+
+importer="texture"
+type="CompressedTexture2D"
+uid="uid://buvwrtbymjqvc"
+path="res://.godot/imported/dealer temp model export1_skin base.png-353e292f0f8ffe22e25c46f7bfc9960d.ctex"
+metadata={
+"vram_texture": false
+}
+generator_parameters={}
+
+[deps]
+
+source_file="res://models/temp delaer export1/dealer temp model export1_skin base.png"
+dest_files=PackedStringArray("res://.godot/imported/dealer temp model export1_skin base.png-353e292f0f8ffe22e25c46f7bfc9960d.ctex")
+
+[params]
+
+dummy_value_ignore_me=0

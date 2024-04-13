@@ -1,0 +1,19 @@
+[remap]
+
+importer="texture"
+type="CompressedTexture2D"
+uid="uid://dq0wjqcjsslbm"
+path="res://.godot/imported/adrenalline without pointers1_syringe test2.png-168e0bb207c7c3000c176981758aa960.ctex"
+metadata={
+"vram_texture": false
+}
+generator_parameters={}
+
+[deps]
+
+source_file="res://models/adrenaline without pointers/adrenalline without pointers1_syringe test2.png"
+dest_files=PackedStringArray("res://.godot/imported/adrenalline without pointers1_syringe test2.png-168e0bb207c7c3000c176981758aa960.ctex")
+
+[params]
+
+dummy_value_ignore_me=0

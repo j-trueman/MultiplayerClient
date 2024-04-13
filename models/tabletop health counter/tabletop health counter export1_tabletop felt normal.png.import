@@ -1,0 +1,19 @@
+[remap]
+
+importer="texture"
+type="CompressedTexture2D"
+uid="uid://d0jtrx0617wc1"
+path="res://.godot/imported/tabletop health counter export1_tabletop felt normal.png-137bd122282ab1c61b73173c2db03505.ctex"
+metadata={
+"vram_texture": false
+}
+generator_parameters={}
+
+[deps]
+
+source_file="res://models/tabletop health counter/tabletop health counter export1_tabletop felt normal.png"
+dest_files=PackedStringArray("res://.godot/imported/tabletop health counter export1_tabletop felt normal.png-137bd122282ab1c61b73173c2db03505.ctex")
+
+[params]
+
+dummy_value_ignore_me=0

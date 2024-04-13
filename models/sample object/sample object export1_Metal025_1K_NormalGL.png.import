@@ -1,0 +1,19 @@
+[remap]
+
+importer="texture"
+type="CompressedTexture2D"
+uid="uid://dc6e7dhr58q7q"
+path="res://.godot/imported/sample object export1_Metal025_1K_NormalGL.png-798fa9c74f77836b8c026ff26c2a191e.ctex"
+metadata={
+"vram_texture": false
+}
+generator_parameters={}
+
+[deps]
+
+source_file="res://models/sample object/sample object export1_Metal025_1K_NormalGL.png"
+dest_files=PackedStringArray("res://.godot/imported/sample object export1_Metal025_1K_NormalGL.png-798fa9c74f77836b8c026ff26c2a191e.ctex")
+
+[params]
+
+dummy_value_ignore_me=0

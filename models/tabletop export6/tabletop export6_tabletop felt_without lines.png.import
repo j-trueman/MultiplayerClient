@@ -1,0 +1,19 @@
+[remap]
+
+importer="texture"
+type="CompressedTexture2D"
+uid="uid://cfw75irx6wi1t"
+path="res://.godot/imported/tabletop export6_tabletop felt_without lines.png-55ad631806340a27deefb8aeff7a962b.ctex"
+metadata={
+"vram_texture": false
+}
+generator_parameters={}
+
+[deps]
+
+source_file="res://models/tabletop export6/tabletop export6_tabletop felt_without lines.png"
+dest_files=PackedStringArray("res://.godot/imported/tabletop export6_tabletop felt_without lines.png-55ad631806340a27deefb8aeff7a962b.ctex")
+
+[params]
+
+dummy_value_ignore_me=0

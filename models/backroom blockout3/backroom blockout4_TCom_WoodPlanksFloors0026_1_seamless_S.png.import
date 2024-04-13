@@ -1,0 +1,19 @@
+[remap]
+
+importer="texture"
+type="CompressedTexture2D"
+uid="uid://cyutsx6pdb4t5"
+path="res://.godot/imported/backroom blockout4_TCom_WoodPlanksFloors0026_1_seamless_S.png-863eea01bd6150cc810c5edaeed0783f.ctex"
+metadata={
+"vram_texture": false
+}
+generator_parameters={}
+
+[deps]
+
+source_file="res://models/backroom blockout3/backroom blockout4_TCom_WoodPlanksFloors0026_1_seamless_S.png"
+dest_files=PackedStringArray("res://.godot/imported/backroom blockout4_TCom_WoodPlanksFloors0026_1_seamless_S.png-863eea01bd6150cc810c5edaeed0783f.ctex")
+
+[params]
+
+dummy_value_ignore_me=0

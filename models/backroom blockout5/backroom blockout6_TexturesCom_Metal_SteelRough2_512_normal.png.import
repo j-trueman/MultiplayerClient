@@ -1,0 +1,19 @@
+[remap]
+
+importer="texture"
+type="CompressedTexture2D"
+uid="uid://l45qhotinvr8"
+path="res://.godot/imported/backroom blockout6_TexturesCom_Metal_SteelRough2_512_normal.png-a70b230d30da84311f24594036acc90e.ctex"
+metadata={
+"vram_texture": false
+}
+generator_parameters={}
+
+[deps]
+
+source_file="res://models/backroom blockout5/backroom blockout6_TexturesCom_Metal_SteelRough2_512_normal.png"
+dest_files=PackedStringArray("res://.godot/imported/backroom blockout6_TexturesCom_Metal_SteelRough2_512_normal.png-a70b230d30da84311f24594036acc90e.ctex")
+
+[params]
+
+dummy_value_ignore_me=0

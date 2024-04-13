@@ -1,0 +1,19 @@
+[remap]
+
+importer="texture"
+type="CompressedTexture2D"
+uid="uid://ft5ql5x0l6uv"
+path="res://.godot/imported/restroom1_stall door.png-b294caf74b04f6d8a768a41a5412e688.ctex"
+metadata={
+"vram_texture": false
+}
+generator_parameters={}
+
+[deps]
+
+source_file="res://models/restroom1/restroom1_stall door.png"
+dest_files=PackedStringArray("res://.godot/imported/restroom1_stall door.png-b294caf74b04f6d8a768a41a5412e688.ctex")
+
+[params]
+
+dummy_value_ignore_me=0

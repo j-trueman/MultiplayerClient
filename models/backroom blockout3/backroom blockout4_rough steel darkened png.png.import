@@ -1,0 +1,19 @@
+[remap]
+
+importer="texture"
+type="CompressedTexture2D"
+uid="uid://7xcp863lafi3"
+path="res://.godot/imported/backroom blockout4_rough steel darkened png.png-2bc66bf2a502c6e5291cd3338434ca13.ctex"
+metadata={
+"vram_texture": false
+}
+generator_parameters={}
+
+[deps]
+
+source_file="res://models/backroom blockout3/backroom blockout4_rough steel darkened png.png"
+dest_files=PackedStringArray("res://.godot/imported/backroom blockout4_rough steel darkened png.png-2bc66bf2a502c6e5291cd3338434ca13.ctex")
+
+[params]
+
+dummy_value_ignore_me=0

@@ -1,0 +1,19 @@
+[remap]
+
+importer="texture"
+type="CompressedTexture2D"
+uid="uid://dejv3nyeyrj08"
+path="res://.godot/imported/tabletop compartment origins fix2_TexturesCom_WornMetal_512_normal.png-56799f86307cff920ee215ae96d4ccc7.ctex"
+metadata={
+"vram_texture": false
+}
+generator_parameters={}
+
+[deps]
+
+source_file="res://models/tabletop compartment origins2/tabletop compartment origins fix2_TexturesCom_WornMetal_512_normal.png"
+dest_files=PackedStringArray("res://.godot/imported/tabletop compartment origins fix2_TexturesCom_WornMetal_512_normal.png-56799f86307cff920ee215ae96d4ccc7.ctex")
+
+[params]
+
+dummy_value_ignore_me=0

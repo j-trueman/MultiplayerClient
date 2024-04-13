@@ -1,0 +1,19 @@
+[remap]
+
+importer="texture"
+type="CompressedTexture2D"
+uid="uid://b18bcmtubv6ek"
+path="res://.godot/imported/crt main1_crt buttons2.png-b36b99f57936a0268af52f26c6e8026f.ctex"
+metadata={
+"vram_texture": false
+}
+generator_parameters={}
+
+[deps]
+
+source_file="res://models/crt/crt main1_crt buttons2.png"
+dest_files=PackedStringArray("res://.godot/imported/crt main1_crt buttons2.png-b36b99f57936a0268af52f26c6e8026f.ctex")
+
+[params]
+
+dummy_value_ignore_me=0

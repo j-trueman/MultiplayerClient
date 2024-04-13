@@ -1,0 +1,19 @@
+[remap]
+
+importer="texture"
+type="CompressedTexture2D"
+uid="uid://dtuseb0rncfag"
+path="res://.godot/imported/restroom1_marble png.png-3cbae9875bbbaf80bd17e1652dceebe7.ctex"
+metadata={
+"vram_texture": false
+}
+generator_parameters={}
+
+[deps]
+
+source_file="res://models/restroom1/restroom1_marble png.png"
+dest_files=PackedStringArray("res://.godot/imported/restroom1_marble png.png-3cbae9875bbbaf80bd17e1652dceebe7.ctex")
+
+[params]
+
+dummy_value_ignore_me=0

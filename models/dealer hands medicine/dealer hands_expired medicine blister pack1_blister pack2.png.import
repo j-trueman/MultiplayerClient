@@ -1,0 +1,19 @@
+[remap]
+
+importer="texture"
+type="CompressedTexture2D"
+uid="uid://v0d2tmxqewsf"
+path="res://.godot/imported/dealer hands_expired medicine blister pack1_blister pack2.png-838d3c23d98841e0725e4c012f854fa6.ctex"
+metadata={
+"vram_texture": false
+}
+generator_parameters={}
+
+[deps]
+
+source_file="res://models/dealer hands medicine/dealer hands_expired medicine blister pack1_blister pack2.png"
+dest_files=PackedStringArray("res://.godot/imported/dealer hands_expired medicine blister pack1_blister pack2.png-838d3c23d98841e0725e4c012f854fa6.ctex")
+
+[params]
+
+dummy_value_ignore_me=0

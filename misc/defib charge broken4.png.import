@@ -1,0 +1,18 @@
+[remap]
+
+importer="texture"
+type="CompressedTexture2D"
+uid="uid://ylnp3kt0y5se"
+path="res://.godot/imported/defib charge broken4.png-241e158dfb996d6155ec8faabfa972d1.ctex"
+metadata={
+"vram_texture": false
+}
+
+[deps]
+
+source_file="res://misc/defib charge broken4.png"
+dest_files=PackedStringArray("res://.godot/imported/defib charge broken4.png-241e158dfb996d6155ec8faabfa972d1.ctex")
+
+[params]
+
+dummy_value_ignore_me=0

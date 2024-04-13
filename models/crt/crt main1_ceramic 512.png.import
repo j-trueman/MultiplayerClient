@@ -1,0 +1,19 @@
+[remap]
+
+importer="texture"
+type="CompressedTexture2D"
+uid="uid://c8oog2siy53g2"
+path="res://.godot/imported/crt main1_ceramic 512.png-16a9ef3f351a23f34cbc0543d88cff9b.ctex"
+metadata={
+"vram_texture": false
+}
+generator_parameters={}
+
+[deps]
+
+source_file="res://models/crt/crt main1_ceramic 512.png"
+dest_files=PackedStringArray("res://.godot/imported/crt main1_ceramic 512.png-16a9ef3f351a23f34cbc0543d88cff9b.ctex")
+
+[params]
+
+dummy_value_ignore_me=0

@@ -1,0 +1,18 @@
+[remap]
+
+importer="texture"
+type="CompressedTexture2D"
+uid="uid://bjaon04dmu15g"
+path="res://.godot/imported/checkmark_active.png-a8b5b1554050226eea241b8e31125c5a.ctex"
+metadata={
+"vram_texture": false
+}
+
+[deps]
+
+source_file="res://misc/checkmark_active.png"
+dest_files=PackedStringArray("res://.godot/imported/checkmark_active.png-a8b5b1554050226eea241b8e31125c5a.ctex")
+
+[params]
+
+dummy_value_ignore_me=0

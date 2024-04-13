@@ -1,0 +1,19 @@
+[remap]
+
+importer="texture"
+type="CompressedTexture2D"
+uid="uid://c7vapsork5gn"
+path="res://.godot/imported/briefcase machine1_briefcase machine tex.png-3f39d6d18b1f65800a74edee229d7e23.ctex"
+metadata={
+"vram_texture": false
+}
+generator_parameters={}
+
+[deps]
+
+source_file="res://models/briefcase machine/briefcase machine1_briefcase machine tex.png"
+dest_files=PackedStringArray("res://.godot/imported/briefcase machine1_briefcase machine tex.png-3f39d6d18b1f65800a74edee229d7e23.ctex")
+
+[params]
+
+dummy_value_ignore_me=0

@@ -1,0 +1,19 @@
+[remap]
+
+importer="texture"
+type="CompressedTexture2D"
+uid="uid://dmgsy7vbryu8a"
+path="res://.godot/imported/player vehicle1_TCom_Wood_Worn2_512_normal.png-ff4fdb4242edf8bac68666191b689acb.ctex"
+metadata={
+"vram_texture": false
+}
+generator_parameters={}
+
+[deps]
+
+source_file="res://models/player vehicle/player vehicle1_TCom_Wood_Worn2_512_normal.png"
+dest_files=PackedStringArray("res://.godot/imported/player vehicle1_TCom_Wood_Worn2_512_normal.png-ff4fdb4242edf8bac68666191b689acb.ctex")
+
+[params]
+
+dummy_value_ignore_me=0

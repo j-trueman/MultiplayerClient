@@ -1,0 +1,19 @@
+[remap]
+
+importer="texture"
+type="CompressedTexture2D"
+uid="uid://d3phbq5f3cco3"
+path="res://.godot/imported/backroom blockout4_TCom_AudioEquipment0068_S.png-9d004689b10cb3137e39a12ff803add0.ctex"
+metadata={
+"vram_texture": false
+}
+generator_parameters={}
+
+[deps]
+
+source_file="res://models/backroom blockout3/backroom blockout4_TCom_AudioEquipment0068_S.png"
+dest_files=PackedStringArray("res://.godot/imported/backroom blockout4_TCom_AudioEquipment0068_S.png-9d004689b10cb3137e39a12ff803add0.ctex")
+
+[params]
+
+dummy_value_ignore_me=0

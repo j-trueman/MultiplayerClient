@@ -1,0 +1,19 @@
+[remap]
+
+importer="texture"
+type="CompressedTexture2D"
+uid="uid://dfbo61g8513mw"
+path="res://.godot/imported/signature machine2_release form1.png-facc79e5df04c9e56aab7bd1b174632c.ctex"
+metadata={
+"vram_texture": false
+}
+generator_parameters={}
+
+[deps]
+
+source_file="res://models/signature machine/signature machine2_release form1.png"
+dest_files=PackedStringArray("res://.godot/imported/signature machine2_release form1.png-facc79e5df04c9e56aab7bd1b174632c.ctex")
+
+[params]
+
+dummy_value_ignore_me=0

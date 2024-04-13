@@ -1,0 +1,19 @@
+[remap]
+
+importer="texture"
+type="CompressedTexture2D"
+uid="uid://cryth7nr3k86k"
+path="res://.godot/imported/backroom blockout6_tabletop felt_without lines.png-94928a36bb4374347eb805107482be86.ctex"
+metadata={
+"vram_texture": false
+}
+generator_parameters={}
+
+[deps]
+
+source_file="res://models/backroom blockout5/backroom blockout6_tabletop felt_without lines.png"
+dest_files=PackedStringArray("res://.godot/imported/backroom blockout6_tabletop felt_without lines.png-94928a36bb4374347eb805107482be86.ctex")
+
+[params]
+
+dummy_value_ignore_me=0

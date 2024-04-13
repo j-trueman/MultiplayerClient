@@ -1,0 +1,19 @@
+[remap]
+
+importer="texture"
+type="CompressedTexture2D"
+uid="uid://cd8nsen3fsvnh"
+path="res://.godot/imported/shotgun with hands2_metal24 pump action painted2.png-b3091b455a35bcba0d80f5706e0830b3.ctex"
+metadata={
+"vram_texture": false
+}
+generator_parameters={}
+
+[deps]
+
+source_file="res://models/shotgun new/shotgun with hands2_metal24 pump action painted2.png"
+dest_files=PackedStringArray("res://.godot/imported/shotgun with hands2_metal24 pump action painted2.png-b3091b455a35bcba0d80f5706e0830b3.ctex")
+
+[params]
+
+dummy_value_ignore_me=0

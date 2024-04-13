@@ -1,0 +1,19 @@
+[remap]
+
+importer="texture"
+type="CompressedTexture2D"
+uid="uid://djmwy5hv7dpp3"
+path="res://.godot/imported/tabletop export6_steel battered albedo png.png-9a6d4b570b90c66575fe47d8c5ccc3ac.ctex"
+metadata={
+"vram_texture": false
+}
+generator_parameters={}
+
+[deps]
+
+source_file="res://models/tabletop export6/tabletop export6_steel battered albedo png.png"
+dest_files=PackedStringArray("res://.godot/imported/tabletop export6_steel battered albedo png.png-9a6d4b570b90c66575fe47d8c5ccc3ac.ctex")
+
+[params]
+
+dummy_value_ignore_me=0

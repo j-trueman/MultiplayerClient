@@ -1,0 +1,19 @@
+[remap]
+
+importer="texture"
+type="CompressedTexture2D"
+uid="uid://cvsfsv2cqyi4p"
+path="res://.godot/imported/heaven door1_TexturesCom_Rust_Heavy_MediumRust_512_albedo.png-e0fc53d51c7b1c1aec2b668af13a8f82.ctex"
+metadata={
+"vram_texture": false
+}
+generator_parameters={}
+
+[deps]
+
+source_file="res://models/heaven door1/heaven door1_TexturesCom_Rust_Heavy_MediumRust_512_albedo.png"
+dest_files=PackedStringArray("res://.godot/imported/heaven door1_TexturesCom_Rust_Heavy_MediumRust_512_albedo.png-e0fc53d51c7b1c1aec2b668af13a8f82.ctex")
+
+[params]
+
+dummy_value_ignore_me=0

@@ -1,0 +1,19 @@
+[remap]
+
+importer="texture"
+type="CompressedTexture2D"
+uid="uid://c021o0i7ylbsw"
+path="res://.godot/imported/tabletop export2_tabletop felt shotgun radius with lines greyed out flippeed.png-59534c7acbeb8d9b07d0640492ccd556.ctex"
+metadata={
+"vram_texture": false
+}
+generator_parameters={}
+
+[deps]
+
+source_file="res://models/tabletop export1/tabletop export2_tabletop felt shotgun radius with lines greyed out flippeed.png"
+dest_files=PackedStringArray("res://.godot/imported/tabletop export2_tabletop felt shotgun radius with lines greyed out flippeed.png-59534c7acbeb8d9b07d0640492ccd556.ctex")
+
+[params]
+
+dummy_value_ignore_me=0

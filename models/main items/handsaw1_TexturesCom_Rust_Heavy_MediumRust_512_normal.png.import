@@ -1,0 +1,19 @@
+[remap]
+
+importer="texture"
+type="CompressedTexture2D"
+uid="uid://05ko87s37nap"
+path="res://.godot/imported/handsaw1_TexturesCom_Rust_Heavy_MediumRust_512_normal.png-af0617cd2dd040b073f15201907b501e.ctex"
+metadata={
+"vram_texture": false
+}
+generator_parameters={}
+
+[deps]
+
+source_file="res://models/main items/handsaw1_TexturesCom_Rust_Heavy_MediumRust_512_normal.png"
+dest_files=PackedStringArray("res://.godot/imported/handsaw1_TexturesCom_Rust_Heavy_MediumRust_512_normal.png-af0617cd2dd040b073f15201907b501e.ctex")
+
+[params]
+
+dummy_value_ignore_me=0

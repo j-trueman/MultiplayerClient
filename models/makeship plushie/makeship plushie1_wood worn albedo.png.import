@@ -1,0 +1,19 @@
+[remap]
+
+importer="texture"
+type="CompressedTexture2D"
+uid="uid://dmsaoqno4pxca"
+path="res://.godot/imported/makeship plushie1_wood worn albedo.png-97ccc336a96f9cc8fd41a5530b9aea6d.ctex"
+metadata={
+"vram_texture": false
+}
+generator_parameters={}
+
+[deps]
+
+source_file="res://models/makeship plushie/makeship plushie1_wood worn albedo.png"
+dest_files=PackedStringArray("res://.godot/imported/makeship plushie1_wood worn albedo.png-97ccc336a96f9cc8fd41a5530b9aea6d.ctex")
+
+[params]
+
+dummy_value_ignore_me=0

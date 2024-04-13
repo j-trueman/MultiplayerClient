@@ -1,0 +1,16 @@
+[remap]
+
+importer="scene"
+importer_version=1
+type="PackedScene"
+uid="uid://w7th3d2hl7b5"
+path="res://.godot/imported/Hand_Glove_R.gltf-0e99922c663867da8d37af9597ab1ce8.scn"
+
+[deps]
+
+source_file="res://addons/godot-xr-tools/hands/model/Hand_Glove_R.gltf"
+dest_files=PackedStringArray("res://.godot/imported/Hand_Glove_R.gltf-0e99922c663867da8d37af9597ab1ce8.scn")
+
+[params]
+
+dummy_value_ignore_me=0

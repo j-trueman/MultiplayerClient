@@ -1,0 +1,19 @@
+[remap]
+
+importer="texture"
+type="CompressedTexture2D"
+uid="uid://dicfeh6wd3v4"
+path="res://.godot/imported/backroom blockout6_paper normal map_33.png-cd0f3b33aae0662c23c132e22e0492d0.ctex"
+metadata={
+"vram_texture": false
+}
+generator_parameters={}
+
+[deps]
+
+source_file="res://models/backroom blockout5/backroom blockout6_paper normal map_33.png"
+dest_files=PackedStringArray("res://.godot/imported/backroom blockout6_paper normal map_33.png-cd0f3b33aae0662c23c132e22e0492d0.ctex")
+
+[params]
+
+dummy_value_ignore_me=0

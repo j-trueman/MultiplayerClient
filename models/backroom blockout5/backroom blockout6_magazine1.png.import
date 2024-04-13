@@ -1,0 +1,19 @@
+[remap]
+
+importer="texture"
+type="CompressedTexture2D"
+uid="uid://cilbnf6qtynto"
+path="res://.godot/imported/backroom blockout6_magazine1.png-0c4f3701f30c4257cf7586ba09d81c61.ctex"
+metadata={
+"vram_texture": false
+}
+generator_parameters={}
+
+[deps]
+
+source_file="res://models/backroom blockout5/backroom blockout6_magazine1.png"
+dest_files=PackedStringArray("res://.godot/imported/backroom blockout6_magazine1.png-0c4f3701f30c4257cf7586ba09d81c61.ctex")
+
+[params]
+
+dummy_value_ignore_me=0

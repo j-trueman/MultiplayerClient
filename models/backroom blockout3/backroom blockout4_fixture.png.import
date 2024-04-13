@@ -1,0 +1,19 @@
+[remap]
+
+importer="texture"
+type="CompressedTexture2D"
+uid="uid://yl48dhd3lj6d"
+path="res://.godot/imported/backroom blockout4_fixture.png-938bcb5eb89d9add4585a55b74e998b7.ctex"
+metadata={
+"vram_texture": false
+}
+generator_parameters={}
+
+[deps]
+
+source_file="res://models/backroom blockout3/backroom blockout4_fixture.png"
+dest_files=PackedStringArray("res://.godot/imported/backroom blockout4_fixture.png-938bcb5eb89d9add4585a55b74e998b7.ctex")
+
+[params]
+
+dummy_value_ignore_me=0

@@ -1,0 +1,19 @@
+[remap]
+
+importer="texture"
+type="CompressedTexture2D"
+uid="uid://mb1wo7j1yav3"
+path="res://.godot/imported/crt sa1_bvm_side edited bw desat1.png-93274aac9d125ae7c5c2f6cddfc6e05b.ctex"
+metadata={
+"vram_texture": false
+}
+generator_parameters={}
+
+[deps]
+
+source_file="res://models/crt sa11/crt sa1_bvm_side edited bw desat1.png"
+dest_files=PackedStringArray("res://.godot/imported/crt sa1_bvm_side edited bw desat1.png-93274aac9d125ae7c5c2f6cddfc6e05b.ctex")
+
+[params]
+
+dummy_value_ignore_me=0

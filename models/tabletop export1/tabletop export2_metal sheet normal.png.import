@@ -1,0 +1,19 @@
+[remap]
+
+importer="texture"
+type="CompressedTexture2D"
+uid="uid://dy3emqtibdc8w"
+path="res://.godot/imported/tabletop export2_metal sheet normal.png-35a44c4b30a53cfc6fba6f27469050a6.ctex"
+metadata={
+"vram_texture": false
+}
+generator_parameters={}
+
+[deps]
+
+source_file="res://models/tabletop export1/tabletop export2_metal sheet normal.png"
+dest_files=PackedStringArray("res://.godot/imported/tabletop export2_metal sheet normal.png-35a44c4b30a53cfc6fba6f27469050a6.ctex")
+
+[params]
+
+dummy_value_ignore_me=0

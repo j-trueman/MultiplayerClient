@@ -1,0 +1,19 @@
+[remap]
+
+importer="texture"
+type="CompressedTexture2D"
+uid="uid://bgniqqqwhtm5n"
+path="res://.godot/imported/lobby area blockout2_concrete dark png.png-671b4f5927e3dda5a523ca0457e17ad8.ctex"
+metadata={
+"vram_texture": false
+}
+generator_parameters={}
+
+[deps]
+
+source_file="res://models/lobby area2/lobby area blockout2_concrete dark png.png"
+dest_files=PackedStringArray("res://.godot/imported/lobby area blockout2_concrete dark png.png-671b4f5927e3dda5a523ca0457e17ad8.ctex")
+
+[params]
+
+dummy_value_ignore_me=0

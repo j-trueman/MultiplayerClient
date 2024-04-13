@@ -1,0 +1,19 @@
+[remap]
+
+importer="texture"
+type="CompressedTexture2D"
+uid="uid://bt0swiwgwduxk"
+path="res://.godot/imported/bird4_angel base.png-bb9774427448d1b8007b26f83f8eab17.ctex"
+metadata={
+"vram_texture": false
+}
+generator_parameters={}
+
+[deps]
+
+source_file="res://models/bird1/bird4_angel base.png"
+dest_files=PackedStringArray("res://.godot/imported/bird4_angel base.png-bb9774427448d1b8007b26f83f8eab17.ctex")
+
+[params]
+
+dummy_value_ignore_me=0

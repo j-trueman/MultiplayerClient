@@ -1,0 +1,19 @@
+[remap]
+
+importer="texture"
+type="CompressedTexture2D"
+uid="uid://dnbvdpbb6ygso"
+path="res://.godot/imported/dealer hands_burner phone1_wood worn albedo.png-99e09acd34d314dd2faaa0d6b399b7ae.ctex"
+metadata={
+"vram_texture": false
+}
+generator_parameters={}
+
+[deps]
+
+source_file="res://models/dealer hand burner phone/dealer hands_burner phone1_wood worn albedo.png"
+dest_files=PackedStringArray("res://.godot/imported/dealer hands_burner phone1_wood worn albedo.png-99e09acd34d314dd2faaa0d6b399b7ae.ctex")
+
+[params]
+
+dummy_value_ignore_me=0

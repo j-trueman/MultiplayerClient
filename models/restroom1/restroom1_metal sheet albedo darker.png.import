@@ -1,0 +1,19 @@
+[remap]
+
+importer="texture"
+type="CompressedTexture2D"
+uid="uid://biitidovpcxox"
+path="res://.godot/imported/restroom1_metal sheet albedo darker.png-b5055b12a7d6e1458651b04150e161b6.ctex"
+metadata={
+"vram_texture": false
+}
+generator_parameters={}
+
+[deps]
+
+source_file="res://models/restroom1/restroom1_metal sheet albedo darker.png"
+dest_files=PackedStringArray("res://.godot/imported/restroom1_metal sheet albedo darker.png-b5055b12a7d6e1458651b04150e161b6.ctex")
+
+[params]
+
+dummy_value_ignore_me=0

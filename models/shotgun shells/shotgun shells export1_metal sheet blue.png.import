@@ -1,0 +1,19 @@
+[remap]
+
+importer="texture"
+type="CompressedTexture2D"
+uid="uid://o6ktxjmwlkjg"
+path="res://.godot/imported/shotgun shells export1_metal sheet blue.png-028c1d84ff9e37b2c503fe350a0beccd.ctex"
+metadata={
+"vram_texture": false
+}
+generator_parameters={}
+
+[deps]
+
+source_file="res://models/shotgun shells/shotgun shells export1_metal sheet blue.png"
+dest_files=PackedStringArray("res://.godot/imported/shotgun shells export1_metal sheet blue.png-028c1d84ff9e37b2c503fe350a0beccd.ctex")
+
+[params]
+
+dummy_value_ignore_me=0

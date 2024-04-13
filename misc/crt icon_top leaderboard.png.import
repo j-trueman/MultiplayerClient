@@ -1,0 +1,18 @@
+[remap]
+
+importer="texture"
+type="CompressedTexture2D"
+uid="uid://d27bkrmyjaalb"
+path="res://.godot/imported/crt icon_top leaderboard.png-c8320bf0880c4f757c4f98111578a3ea.ctex"
+metadata={
+"vram_texture": false
+}
+
+[deps]
+
+source_file="res://misc/crt icon_top leaderboard.png"
+dest_files=PackedStringArray("res://.godot/imported/crt icon_top leaderboard.png-c8320bf0880c4f757c4f98111578a3ea.ctex")
+
+[params]
+
+dummy_value_ignore_me=0

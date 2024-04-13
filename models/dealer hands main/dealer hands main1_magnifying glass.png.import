@@ -1,0 +1,19 @@
+[remap]
+
+importer="texture"
+type="CompressedTexture2D"
+uid="uid://ctxwomm3h5pwc"
+path="res://.godot/imported/dealer hands main1_magnifying glass.png-6222d6b68ab3936030fd438ccf8d9ae3.ctex"
+metadata={
+"vram_texture": false
+}
+generator_parameters={}
+
+[deps]
+
+source_file="res://models/dealer hands main/dealer hands main1_magnifying glass.png"
+dest_files=PackedStringArray("res://.godot/imported/dealer hands main1_magnifying glass.png-6222d6b68ab3936030fd438ccf8d9ae3.ctex")
+
+[params]
+
+dummy_value_ignore_me=0

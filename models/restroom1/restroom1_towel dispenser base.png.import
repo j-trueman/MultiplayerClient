@@ -1,0 +1,19 @@
+[remap]
+
+importer="texture"
+type="CompressedTexture2D"
+uid="uid://ugq1p3ecx6qk"
+path="res://.godot/imported/restroom1_towel dispenser base.png-2924d15bddb723cec5f842939ae59047.ctex"
+metadata={
+"vram_texture": false
+}
+generator_parameters={}
+
+[deps]
+
+source_file="res://models/restroom1/restroom1_towel dispenser base.png"
+dest_files=PackedStringArray("res://.godot/imported/restroom1_towel dispenser base.png-2924d15bddb723cec5f842939ae59047.ctex")
+
+[params]
+
+dummy_value_ignore_me=0

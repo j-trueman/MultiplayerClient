@@ -1,0 +1,19 @@
+[remap]
+
+importer="texture"
+type="CompressedTexture2D"
+uid="uid://cg4c8wqg7oc3i"
+path="res://.godot/imported/inverter shattered frame1_plastic stained.png-b3599353df7cd51e50ff36148d5f69ae.ctex"
+metadata={
+"vram_texture": false
+}
+generator_parameters={}
+
+[deps]
+
+source_file="res://models/inverter shattered frame/inverter shattered frame1_plastic stained.png"
+dest_files=PackedStringArray("res://.godot/imported/inverter shattered frame1_plastic stained.png-b3599353df7cd51e50ff36148d5f69ae.ctex")
+
+[params]
+
+dummy_value_ignore_me=0

@@ -1,0 +1,18 @@
+[remap]
+
+importer="texture"
+type="CompressedTexture2D"
+uid="uid://c4d2mqb8ot4dc"
+path="res://.godot/imported/defib charge_skull png.png-52e39bb73b226e3aa1eeee426da3f476.ctex"
+metadata={
+"vram_texture": false
+}
+
+[deps]
+
+source_file="res://misc/defib charge_skull png.png"
+dest_files=PackedStringArray("res://.godot/imported/defib charge_skull png.png-52e39bb73b226e3aa1eeee426da3f476.ctex")
+
+[params]
+
+dummy_value_ignore_me=0

@@ -1,0 +1,19 @@
+[remap]
+
+importer="texture"
+type="CompressedTexture2D"
+uid="uid://boy3wajnrckhu"
+path="res://.godot/imported/shotgun shells export1_TexturesCom_MetalSheet_Aged_512_normal.png-dc66eb3abaa24bd489faab5f6fc4f307.ctex"
+metadata={
+"vram_texture": false
+}
+generator_parameters={}
+
+[deps]
+
+source_file="res://models/shotgun shells/shotgun shells export1_TexturesCom_MetalSheet_Aged_512_normal.png"
+dest_files=PackedStringArray("res://.godot/imported/shotgun shells export1_TexturesCom_MetalSheet_Aged_512_normal.png-dc66eb3abaa24bd489faab5f6fc4f307.ctex")
+
+[params]
+
+dummy_value_ignore_me=0

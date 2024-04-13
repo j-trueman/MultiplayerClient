@@ -1,0 +1,19 @@
+[remap]
+
+importer="texture"
+type="CompressedTexture2D"
+uid="uid://bd3dn1n403wsu"
+path="res://.godot/imported/handcuffs_player bar2_metal sheet copy_handcuffs.png-9c62f65a722420677c13cd2dd34ee97e.ctex"
+metadata={
+"vram_texture": false
+}
+generator_parameters={}
+
+[deps]
+
+source_file="res://models/player handcuffs on bar/handcuffs_player bar2_metal sheet copy_handcuffs.png"
+dest_files=PackedStringArray("res://.godot/imported/handcuffs_player bar2_metal sheet copy_handcuffs.png-9c62f65a722420677c13cd2dd34ee97e.ctex")
+
+[params]
+
+dummy_value_ignore_me=0

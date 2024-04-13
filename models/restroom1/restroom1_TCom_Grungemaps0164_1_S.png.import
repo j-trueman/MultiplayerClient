@@ -1,0 +1,19 @@
+[remap]
+
+importer="texture"
+type="CompressedTexture2D"
+uid="uid://cqgfg2r0i7y2u"
+path="res://.godot/imported/restroom1_TCom_Grungemaps0164_1_S.png-7b0f5e1227ec6896580fbf4f46026e2d.ctex"
+metadata={
+"vram_texture": false
+}
+generator_parameters={}
+
+[deps]
+
+source_file="res://models/restroom1/restroom1_TCom_Grungemaps0164_1_S.png"
+dest_files=PackedStringArray("res://.godot/imported/restroom1_TCom_Grungemaps0164_1_S.png-7b0f5e1227ec6896580fbf4f46026e2d.ctex")
+
+[params]
+
+dummy_value_ignore_me=0

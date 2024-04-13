@@ -1,0 +1,18 @@
+[remap]
+
+importer="texture"
+type="CompressedTexture2D"
+uid="uid://cdswntd7hfklk"
+path="res://.godot/imported/phone screen backdrop cracked2.png-1630a0bf6a608dd4d92601aea5961299.ctex"
+metadata={
+"vram_texture": false
+}
+
+[deps]
+
+source_file="res://misc/phone screen backdrop cracked2.png"
+dest_files=PackedStringArray("res://.godot/imported/phone screen backdrop cracked2.png-1630a0bf6a608dd4d92601aea5961299.ctex")
+
+[params]
+
+dummy_value_ignore_me=0

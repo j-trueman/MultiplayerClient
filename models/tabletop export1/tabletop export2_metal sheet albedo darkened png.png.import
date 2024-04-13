@@ -1,0 +1,19 @@
+[remap]
+
+importer="texture"
+type="CompressedTexture2D"
+uid="uid://mghfwp0jp8m7"
+path="res://.godot/imported/tabletop export2_metal sheet albedo darkened png.png-8be3c312bf76d51adc0fd695f7536444.ctex"
+metadata={
+"vram_texture": false
+}
+generator_parameters={}
+
+[deps]
+
+source_file="res://models/tabletop export1/tabletop export2_metal sheet albedo darkened png.png"
+dest_files=PackedStringArray("res://.godot/imported/tabletop export2_metal sheet albedo darkened png.png-8be3c312bf76d51adc0fd695f7536444.ctex")
+
+[params]
+
+dummy_value_ignore_me=0

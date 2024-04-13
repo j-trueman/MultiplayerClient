@@ -1,0 +1,19 @@
+[remap]
+
+importer="texture"
+type="CompressedTexture2D"
+uid="uid://ckq7oxjskvc2o"
+path="res://.godot/imported/crt main1_TCom_Grungemaps0164_1_S.png-76f5fd01d32453a717ab572b5e3f541b.ctex"
+metadata={
+"vram_texture": false
+}
+generator_parameters={}
+
+[deps]
+
+source_file="res://models/crt/crt main1_TCom_Grungemaps0164_1_S.png"
+dest_files=PackedStringArray("res://.godot/imported/crt main1_TCom_Grungemaps0164_1_S.png-76f5fd01d32453a717ab572b5e3f541b.ctex")
+
+[params]
+
+dummy_value_ignore_me=0

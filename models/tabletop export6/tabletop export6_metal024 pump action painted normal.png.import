@@ -1,0 +1,19 @@
+[remap]
+
+importer="texture"
+type="CompressedTexture2D"
+uid="uid://b4f2xkft3hfpj"
+path="res://.godot/imported/tabletop export6_metal024 pump action painted normal.png-f4ab72299d369d350f81179e8bfc7ad7.ctex"
+metadata={
+"vram_texture": false
+}
+generator_parameters={}
+
+[deps]
+
+source_file="res://models/tabletop export6/tabletop export6_metal024 pump action painted normal.png"
+dest_files=PackedStringArray("res://.godot/imported/tabletop export6_metal024 pump action painted normal.png-f4ab72299d369d350f81179e8bfc7ad7.ctex")
+
+[params]
+
+dummy_value_ignore_me=0

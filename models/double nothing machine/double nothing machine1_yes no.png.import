@@ -1,0 +1,19 @@
+[remap]
+
+importer="texture"
+type="CompressedTexture2D"
+uid="uid://q8ffn8i176bt"
+path="res://.godot/imported/double nothing machine1_yes no.png-d73087597d4db6c6a710ee1ee6d8517d.ctex"
+metadata={
+"vram_texture": false
+}
+generator_parameters={}
+
+[deps]
+
+source_file="res://models/double nothing machine/double nothing machine1_yes no.png"
+dest_files=PackedStringArray("res://.godot/imported/double nothing machine1_yes no.png-d73087597d4db6c6a710ee1ee6d8517d.ctex")
+
+[params]
+
+dummy_value_ignore_me=0

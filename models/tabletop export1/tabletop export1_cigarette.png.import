@@ -1,0 +1,19 @@
+[remap]
+
+importer="texture"
+type="CompressedTexture2D"
+uid="uid://bp246rursob0f"
+path="res://.godot/imported/tabletop export1_cigarette.png-10f6c9d9ee3c633862117677a0c16f75.ctex"
+metadata={
+"vram_texture": false
+}
+generator_parameters={}
+
+[deps]
+
+source_file="res://models/tabletop export1/tabletop export1_cigarette.png"
+dest_files=PackedStringArray("res://.godot/imported/tabletop export1_cigarette.png-10f6c9d9ee3c633862117677a0c16f75.ctex")
+
+[params]
+
+dummy_value_ignore_me=0

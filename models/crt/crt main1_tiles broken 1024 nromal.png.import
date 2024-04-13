@@ -1,0 +1,19 @@
+[remap]
+
+importer="texture"
+type="CompressedTexture2D"
+uid="uid://cqqqfyljwgmmk"
+path="res://.godot/imported/crt main1_tiles broken 1024 nromal.png-876fc01f62745c71ffff79d886e60425.ctex"
+metadata={
+"vram_texture": false
+}
+generator_parameters={}
+
+[deps]
+
+source_file="res://models/crt/crt main1_tiles broken 1024 nromal.png"
+dest_files=PackedStringArray("res://.godot/imported/crt main1_tiles broken 1024 nromal.png-876fc01f62745c71ffff79d886e60425.ctex")
+
+[params]
+
+dummy_value_ignore_me=0

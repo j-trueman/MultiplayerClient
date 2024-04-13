@@ -1,0 +1,16 @@
+[remap]
+
+importer="scene"
+importer_version=1
+type="PackedScene"
+uid="uid://cjrac51wst3tu"
+path="res://.godot/imported/Hand_low_R.gltf-8b164aff014e5c5bfa2eccc8e40e7e97.scn"
+
+[deps]
+
+source_file="res://addons/godot-xr-tools/hands/model/Hand_low_R.gltf"
+dest_files=PackedStringArray("res://.godot/imported/Hand_low_R.gltf-8b164aff014e5c5bfa2eccc8e40e7e97.scn")
+
+[params]
+
+dummy_value_ignore_me=0

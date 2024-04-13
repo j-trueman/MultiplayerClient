@@ -1,0 +1,19 @@
+[remap]
+
+importer="texture"
+type="CompressedTexture2D"
+uid="uid://0opwaqllpcdn"
+path="res://.godot/imported/tabletop export1_darkened png.png-86a20d3fdd4e951c995d6744b38fa78b.ctex"
+metadata={
+"vram_texture": false
+}
+generator_parameters={}
+
+[deps]
+
+source_file="res://models/tabletop export1/tabletop export1_darkened png.png"
+dest_files=PackedStringArray("res://.godot/imported/tabletop export1_darkened png.png-86a20d3fdd4e951c995d6744b38fa78b.ctex")
+
+[params]
+
+dummy_value_ignore_me=0

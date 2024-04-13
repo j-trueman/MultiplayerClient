@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://addons/godot-xr-tools/audio/area_audio.gd" id="1"]
+
+[node name="AreaAudio" type="AudioStreamPlayer3D"]
+unit_size = 3.0
+max_distance = 100.0
+script = ExtResource("1")

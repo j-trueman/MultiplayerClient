@@ -1,0 +1,19 @@
+[remap]
+
+importer="texture"
+type="CompressedTexture2D"
+uid="uid://ch3g6edsb57kn"
+path="res://.godot/imported/tabletop export1_metal sheet red saw_painted.png-9846ddee1a5d8ba50aa8133b6f8c3bdd.ctex"
+metadata={
+"vram_texture": false
+}
+generator_parameters={}
+
+[deps]
+
+source_file="res://models/tabletop export1/tabletop export1_metal sheet red saw_painted.png"
+dest_files=PackedStringArray("res://.godot/imported/tabletop export1_metal sheet red saw_painted.png-9846ddee1a5d8ba50aa8133b6f8c3bdd.ctex")
+
+[params]
+
+dummy_value_ignore_me=0

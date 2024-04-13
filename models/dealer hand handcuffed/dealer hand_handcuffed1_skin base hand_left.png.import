@@ -1,0 +1,19 @@
+[remap]
+
+importer="texture"
+type="CompressedTexture2D"
+uid="uid://ckeiujbie02v8"
+path="res://.godot/imported/dealer hand_handcuffed1_skin base hand_left.png-b2d6941d268587c0bc46006163479172.ctex"
+metadata={
+"vram_texture": false
+}
+generator_parameters={}
+
+[deps]
+
+source_file="res://models/dealer hand handcuffed/dealer hand_handcuffed1_skin base hand_left.png"
+dest_files=PackedStringArray("res://.godot/imported/dealer hand_handcuffed1_skin base hand_left.png-b2d6941d268587c0bc46006163479172.ctex")
+
+[params]
+
+dummy_value_ignore_me=0

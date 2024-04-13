@@ -1,0 +1,19 @@
+[remap]
+
+importer="texture"
+type="CompressedTexture2D"
+uid="uid://dd8ygsg1j40vs"
+path="res://.godot/imported/crt sa1_meat.png-2a36b1ae600a01eb0985f3b0a890b824.ctex"
+metadata={
+"vram_texture": false
+}
+generator_parameters={}
+
+[deps]
+
+source_file="res://models/crt sa11/crt sa1_meat.png"
+dest_files=PackedStringArray("res://.godot/imported/crt sa1_meat.png-2a36b1ae600a01eb0985f3b0a890b824.ctex")
+
+[params]
+
+dummy_value_ignore_me=0

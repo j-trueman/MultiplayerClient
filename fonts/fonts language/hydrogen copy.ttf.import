@@ -1,0 +1,15 @@
+[remap]
+
+importer="font_data_dynamic"
+type="FontFile"
+uid="uid://clv6rep63nhfk"
+path="res://.godot/imported/hydrogen copy.ttf-7cef80ea61c9f33fb8c7039ea79ad566.fontdata"
+
+[deps]
+
+source_file="res://fonts/fonts language/hydrogen copy.ttf"
+dest_files=PackedStringArray("res://.godot/imported/hydrogen copy.ttf-7cef80ea61c9f33fb8c7039ea79ad566.fontdata")
+
+[params]
+
+dummy_value_ignore_me=0

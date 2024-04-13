@@ -1,0 +1,19 @@
+[remap]
+
+importer="texture"
+type="CompressedTexture2D"
+uid="uid://c45hkdijge6t7"
+path="res://.godot/imported/player vehicle1_metal024 pump action painted normal.png-907958a77933c08cebd695445bdd53eb.ctex"
+metadata={
+"vram_texture": false
+}
+generator_parameters={}
+
+[deps]
+
+source_file="res://models/player vehicle/player vehicle1_metal024 pump action painted normal.png"
+dest_files=PackedStringArray("res://.godot/imported/player vehicle1_metal024 pump action painted normal.png-907958a77933c08cebd695445bdd53eb.ctex")
+
+[params]
+
+dummy_value_ignore_me=0

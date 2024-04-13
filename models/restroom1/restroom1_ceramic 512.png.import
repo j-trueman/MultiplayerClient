@@ -1,0 +1,19 @@
+[remap]
+
+importer="texture"
+type="CompressedTexture2D"
+uid="uid://sc3uywaowmbt"
+path="res://.godot/imported/restroom1_ceramic 512.png-294d6034a682a947f6960359ed96d7f6.ctex"
+metadata={
+"vram_texture": false
+}
+generator_parameters={}
+
+[deps]
+
+source_file="res://models/restroom1/restroom1_ceramic 512.png"
+dest_files=PackedStringArray("res://.godot/imported/restroom1_ceramic 512.png-294d6034a682a947f6960359ed96d7f6.ctex")
+
+[params]
+
+dummy_value_ignore_me=0

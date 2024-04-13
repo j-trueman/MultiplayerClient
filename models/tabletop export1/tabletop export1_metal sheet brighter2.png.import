@@ -1,0 +1,19 @@
+[remap]
+
+importer="texture"
+type="CompressedTexture2D"
+uid="uid://wppnhob5hbh6"
+path="res://.godot/imported/tabletop export1_metal sheet brighter2.png-490808c337fa66074082a94e4a1ec6bc.ctex"
+metadata={
+"vram_texture": false
+}
+generator_parameters={}
+
+[deps]
+
+source_file="res://models/tabletop export1/tabletop export1_metal sheet brighter2.png"
+dest_files=PackedStringArray("res://.godot/imported/tabletop export1_metal sheet brighter2.png-490808c337fa66074082a94e4a1ec6bc.ctex")
+
+[params]
+
+dummy_value_ignore_me=0
