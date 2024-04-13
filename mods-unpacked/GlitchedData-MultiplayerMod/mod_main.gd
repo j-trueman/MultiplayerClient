@@ -2,6 +2,7 @@ extends Node
 
 const MODPACK_LOG := "GlitchedData-MultiplayerMod:Main"
 const KeygenUtil = preload("utils/keygenutil.gd")
+const MultiplayerManager = preload("utils/MultiplayerManager.gd")
 
 var mod_dir_path := ""
 var patches_dir_path := ""
@@ -26,7 +27,11 @@ func _process(delta):
 	if (!repeated):
 		ModLoaderLog.debug("Scene loaded: " + last_scene, MODPACK_LOG)
 		if last_scene == "menu":
-			scene.add_child(KeygenUtil.new(), true)
+			get_tree().root.add_child(KeygenUtil.new(), true)
+			get_tree().root.get_node("Node").name = "KeygenUtil"
+			get_tree().root.add_child(MultiplayerManager.new(), true)
+			get_tree().root.get_node("Node").name = "MultiplayerManager"
+			print(get_tree().root.get_children())
 			
 func get_scene_root() -> Node:
 	return get_tree().get_root().get_child(5)
