@@ -1,0 +1,71 @@
+[gd_scene load_steps=2 format=3 uid="uid://4f7ulnrkgpqs"]
+
+[ext_resource type="Script" path="res://mods-unpacked/GlitchedData-MultiPlayer/MPConfig.gd" id="1_ulbqv"]
+
+[node name="MultiplayerConfig" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="loggedin" type="Label" parent="."]
+layout_mode = 0
+offset_top = 1.0
+offset_right = 158.0
+offset_bottom = 27.0
+text = "Logged In?:"
+
+[node name="status" type="Label" parent="loggedin"]
+layout_mode = 0
+offset_left = 92.0
+offset_right = 132.0
+offset_bottom = 26.0
+text = "NO"
+
+[node name="accountTitle" type="Label" parent="."]
+layout_mode = 0
+offset_top = 51.0
+offset_right = 139.0
+offset_bottom = 77.0
+text = "CREATE ACCOUNT:"
+
+[node name="nameInput" type="LineEdit" parent="."]
+layout_mode = 0
+offset_left = 116.0
+offset_top = 83.0
+offset_right = 311.0
+offset_bottom = 114.0
+theme_override_colors/clear_button_color = Color(0.870588, 0.870588, 0.870588, 1)
+theme_override_colors/clear_button_color_pressed = Color(0.753984, 0.753984, 0.753984, 1)
+
+[node name="username" type="Label" parent="nameInput"]
+layout_mode = 0
+offset_left = -88.0
+offset_top = 2.0
+offset_right = -1.0
+offset_bottom = 28.0
+text = "username: "
+
+[node name="Button" type="Button" parent="."]
+layout_mode = 0
+offset_left = 5.0
+offset_top = 132.0
+offset_right = 196.0
+offset_bottom = 163.0
+text = "CREATE USER ACCOUNT"
+
+[node name="errorlabel" type="Label" parent="."]
+layout_mode = 0
+offset_left = 8.0
+offset_top = 174.0
+offset_right = 70.0
+offset_bottom = 200.0
+
+[node name="Config" type="Node" parent="." node_paths=PackedStringArray("loggedInStatusLabel", "usernameInput", "createUserButton", "errorLabel")]
+script = ExtResource("1_ulbqv")
+loggedInStatusLabel = NodePath("../loggedin/status")
+usernameInput = NodePath("../nameInput")
+createUserButton = NodePath("../Button")
+errorLabel = NodePath("../errorlabel")

@@ -1,5 +1,5 @@
 {
-  "name": "MultiplayerMod",
+  "name": "MultiPlayer",
   "namespace": "GlitchedData",
   "version_number": "1.0.0",
   "description": "Want to enjoy Buckshot Roulette with your friends? Now you can!",
@@ -8,8 +8,8 @@
   "extra": {
 	"godot": {
 	  "compatible_mod_loader_version": ["2.0.0"],
-	  "compatible_game_version": ["1.1.0"],
-	  "authors": ["GlitchedData", "MSLaFaver"],
+	  "compatible_game_version": ["1.2.2"],
+	  "authors": ["GlitchedData & MSLaFaver"],
 	  "tags": [],
 	  "description_rich": "",
 	  "optional_dependencies": [],
