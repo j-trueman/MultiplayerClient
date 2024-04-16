@@ -5,11 +5,20 @@ signal items(itemsForPlayers)
 signal actionValidation(action, result)
 signal timeoutAdrenaline
 
+var players
+
 @rpc("any_peer")
 func receiveJoinMatch(playerName): pass
 	
 @rpc("any_peer")
 func sendJoinMatch(success): pass
+
+@rpc("any_peer")
+func receivePlayerInfo(): pass
+
+@rpc("any_peer")
+func sendPlayerInfo(players_var):
+	players = players_var
 
 @rpc("any_peer")
 func receiveLoadInfo(): pass

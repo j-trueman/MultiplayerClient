@@ -35,7 +35,7 @@ func Shoot(who : String):
 	MainSlowDownRoutine(who, false)
 	if (who == "self"): whoshot = "player"
 	else: whoshot = "dealer"
-	PlayShootingSound()
+	PlayShootingSound_New(currentRoundInChamber)
 	#SHAKE CAMERA
 	if (currentRoundInChamber == "live"):
 		smoke.SpawnSmoke("barrel")
@@ -79,3 +79,14 @@ func Shoot(who : String):
 		return
 	if (currentRoundInChamber == "blank" && who == "dealer"): disablingDelayShit = true
 	ShootingDealerEjection(currentRoundInChamber, who, false)
+
+func PlayShootingSound_New(currentRoundInChamber):
+	if (currentRoundInChamber == "live"):
+		CheckIfFinalShot()
+		speaker_live.play()
+		roundManager.playerData.stat_shotsFired += 1
+		animator_muzzleFlash.play("muzzle flash fire")
+		animator_muzzleFlash_model.play("fire")
+	else: 
+		speaker_blank.play()
+	pass
