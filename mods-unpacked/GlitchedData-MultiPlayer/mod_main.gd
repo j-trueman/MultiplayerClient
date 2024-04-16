@@ -1,35 +1,43 @@
 extends Node
 
-const MODPACK_LOG := "GlitchedData-MultiPlayer:Main"
+const AUTHORNAME_MODNAME_DIR := "GlitchedData-MultiPlayer"
 const MultiplayerManager = preload("utils/MultiplayerManager.gd")
+const MultiplayerRoundManager = preload("utils/MultiplayerRoundManager.gd")
 
 var mod_dir_path := ""
-var patches_dir_path := ""
-
-var patches := {}
-var last_scene := ""
+var extensions_dir_path := ""
 
 func _init() -> void:
-	mod_dir_path = "res://mods-unpacked/GlitchedData-MultiPlayer/"
-	add_patches()
-	
-func add_patches() -> void:
-	pass
-	
-func _ready() -> void:
-	ModLoaderLog.info("Mod Ready!", MODPACK_LOG)
+	mod_dir_path = ModLoaderMod.get_unpacked_dir()+(AUTHORNAME_MODNAME_DIR)+"/"
+	# Add extensions
+	install_script_extensions()
+
+func install_script_extensions() -> void:
+	extensions_dir_path = mod_dir_path+"extensions/"
+	const extensions = [
+		'BurnerPhone',
+		'InteractionManager',
+		'ItemManager',
+		'MedicineManager',
+		'RoundManager',
+		'ShotgunShooting'
+	]
+	for extension in extensions:
+		ModLoaderMod.install_script_extension(extensions_dir_path+extension+".gd")
+
+var fixed = false
+var scene
 	
 func _process(delta):
-	var scene := get_scene_root()
-	var repeated = (last_scene == scene.name)
-	last_scene = scene.name
-	if (!repeated):
-		ModLoaderLog.debug("Scene loaded: " + last_scene, MODPACK_LOG)
-		if last_scene == "menu":
-			get_tree().root.add_child(MultiplayerManager.new(), true)
-			get_tree().root.get_node("Node").name = "MultiplayerManager"
-			var manager = get_tree().root.get_node("MultiplayerManager")
-			get_tree().root.move_child(manager, 5)
-			
-func get_scene_root() -> Node:
-	return get_tree().get_root().get_child(5)
+	if not fixed:
+		fixed = true
+		var root = get_tree().get_root()
+		var manager = MultiplayerManager.new()
+		manager.name = "MultiplayerManager"
+		root.add_child(manager)
+		scene = GlobalVariables.get_current_scene_node()
+		root.move_child(scene, root.get_child_count()-1)
+
+		var multiplayerRoundManager = MultiplayerRoundManager.new()
+		multiplayerRoundManager.name = "multiplayer round manager"
+		manager.add_child(multiplayerRoundManager)

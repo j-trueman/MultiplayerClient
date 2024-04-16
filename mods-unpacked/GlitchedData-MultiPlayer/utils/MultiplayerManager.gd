@@ -174,3 +174,5 @@ func _input(ev):
 				closeSession("No username set. set it in the config menu")
 				return false
 			createNewMultiplayerUser.rpc(accountName)
+	if Input.is_key_pressed(KEY_J):
+		get_node("multiplayer round manager").receiveJoinMatch.rpc(myInfo["Name"])
