@@ -18,6 +18,7 @@ func install_script_extensions() -> void:
 		'BurnerPhone',
 		'DealerIntelligence',
 		'InteractionManager',
+		'ItemInteraction',
 		'ItemManager',
 		'MedicineManager',
 		'RoundManager',

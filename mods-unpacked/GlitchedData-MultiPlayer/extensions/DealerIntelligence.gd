@@ -23,22 +23,19 @@ func PerformDealerAction(action, result):
 	if not roundManager.playerTurn:
 		match action:
 			"invalid": return
+			"pickup shotgun":
+				dealerHasShot = true
+				if (roundManager.waitingForDealerReturn):
+					await get_tree().create_timer(1.8, false).timeout
+				if not dealerHoldingShotgun:
+					GrabShotgun()
+					await get_tree().create_timer(1.4 + .5 - 1, false).timeout
+				manager.receiveActionReady.rpc()
+				await manager.smartAwait("action ready")
 			"shoot self":
-				dealerHasShot = true
-				if (roundManager.waitingForDealerReturn):
-					await get_tree().create_timer(1.8, false).timeout
-				if not dealerHoldingShotgun:
-					GrabShotgun()
-					await get_tree().create_timer(1.4 + .5 - 1, false).timeout
-				Shoot("self", result)
+				Shoot_New("self", result)
 			"shoot opponent":
-				dealerHasShot = true
-				if (roundManager.waitingForDealerReturn):
-					await get_tree().create_timer(1.8, false).timeout
-				if not dealerHoldingShotgun:
-					GrabShotgun()
-					await get_tree().create_timer(1.4 + .5 - 1, false).timeout
-				Shoot("player", result)
+				Shoot_New("player", result)
 			_:
 				inv_playerside = []
 				inv_dealerside = []
@@ -117,13 +114,12 @@ func PerformDealerAction(action, result):
 				if (action == "cigarettes"): await get_tree().create_timer(1.1, false).timeout #additional delay for health update routine (called in aninator. continues outside animation)
 				itemManager.itemArray_dealer.erase(action)
 				if (subtracting): itemManager.numberOfItemsGrabbed_enemy -= 1
-		
-				if (returning): return
-		
-				await manager.actionValidation
+				if (roundManager.shellSpawner.sequenceArray.size() != 0):
+					manager.receiveActionReady.rpc()
+					await manager.smartAwait("action ready")
 				return
 
-func Shoot(who : String, shell : int):
+func Shoot_New(who : String, shell : int):
 	var currentRoundInChamber = "live" if bool(shell) else "blank"
 	dealerCanGoAgain = false
 	var playerDied = false
@@ -168,8 +164,4 @@ func Shoot(who : String, shell : int):
 	await get_tree().create_timer(1.7, false).timeout
 	#shellSpawner.sequenceArray.remove_at(0)
 	EndDealerTurn(dealerCanGoAgain)
-
-
-	
-		
 

@@ -1,9 +1,11 @@
 extends "res://scripts/ShotgunShooting.gd"
 
 var manager
+var interaction
 
 func _ready():
 	manager = get_tree().get_root().get_node("MultiplayerManager/multiplayer round manager")
+	interaction = GlobalVariables.get_current_scene_node().get_node("standalone managers/interaction manager")
 
 func Shoot(who : String):
 	dealerShotTrue = false
@@ -27,11 +29,8 @@ func Shoot(who : String):
 			camera.BeginLerp("enemy")
 	#PLAY CORRECT SOUND. ASSIGN CURRENT ROUND IN CHAMBER
 	await get_tree().create_timer(2, false).timeout
-	manager.smartAwait("action validation")
-	var interaction = roundManager.itemManager.interaction
-	var currentRoundInChamber = "live" if bool(interaction.result) else "blank"
-	interaction.action = ""
-	interaction.result = null
+	await manager.smartAwait("action validation")
+	var currentRoundInChamber = interaction.result
 	MainSlowDownRoutine(who, false)
 	if (who == "self"): whoshot = "player"
 	else: whoshot = "dealer"

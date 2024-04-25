@@ -11,11 +11,12 @@ func _ready():
 
 func items(itemsForPlayers_var):
 	itemsForPlayers = itemsForPlayers_var
+	roundManager.roundArray[roundManager.currentRound].numberOfItemsToGrab = itemsForPlayers[0].size()
 
 func BeginItemGrabbing():
 	manager.receiveItems.rpc()
 	super()
-	manager.smartAwait("items")
+	await manager.smartAwait("items")
 
 func CheckTimer():
 	if ((timer_steal_current > timer_steal_max) && checking && !fs):
@@ -47,12 +48,14 @@ func GrabItem():
 	if (roundManager.currentRound == 0 && roundManager.roundArray[roundManager.currentRound].startingHealth == 2):
 		if ("handsaw" in availableItemsToGrabArray_player): availableItemsToGrabArray_player.erase("handsaw")
 	
-	if itemsForPlayers[0].is_empty(): itemsForPlayers[0].append("handsaw")
+	var playerIdx = 0 if manager.players[0].values()[0] == manager.get_parent().myInfo["Name"] else 1
+	if itemsForPlayers[playerIdx].is_empty(): itemsForPlayers[playerIdx].append("handsaw")
 	numberOfItemsGrabbed += 1
 	#SPAWN ITEM
 	for i in range(instanceArray.size()):
-		if (itemsForPlayers[0].pop_front() == instanceArray[i].itemName):
+		if (itemsForPlayers[playerIdx].front() == instanceArray[i].itemName):
 			selectedResource = instanceArray[i]
+	itemsForPlayers[playerIdx].pop_front()
 	var itemInstance = selectedResource.instance.instantiate()
 
 	for res in amountArray:
@@ -120,6 +123,7 @@ func GrabItem():
 
 func GrabItems_Enemy():
 	var selectedResource
+	var dealerIdx = 1 if manager.players[0].values()[0] == manager.get_parent().myInfo["Name"] else 0
 	for i in range(roundManager.roundArray[roundManager.currentRound].numberOfItemsToGrab):
 		if (numberOfItemsGrabbed_enemy != 8):
 
@@ -136,11 +140,12 @@ func GrabItems_Enemy():
 			
 			#SPAWN ITEM
 			for c in range(instanceArray_dealer.size()):
-				if (itemsForPlayers[1].pop_front() == instanceArray_dealer[c].itemName):
+				if (itemsForPlayers[dealerIdx].front() == instanceArray_dealer[c].itemName):
 					selectedResource = instanceArray_dealer[c]
 					#ADD STRING TO DEALER ITEM ARRAY
 					itemArray_dealer.append(instanceArray_dealer[c].itemName.to_lower())
 					break
+			itemsForPlayers[dealerIdx].pop_front()
 			var itemInstance = selectedResource.instance.instantiate()
 			var temp_itemIndicator = itemInstance.get_child(0)
 			temp_itemIndicator.isDealerItem = true
@@ -166,3 +171,20 @@ func GrabItems_Enemy():
 			if (activeItem_enemy.get_child(1).itemName == "cigarettes"): numberOfCigs_dealer += 1
 			gridParentArray_enemy_available.erase(gridname)
 			numberOfItemsGrabbed_enemy += 1
+
+func EndItemGrabbing():
+	GrabItems_Enemy()
+	GridParents(false)
+	interaction_intake.interactionAllowed = false
+	cursor.SetCursor(false, false)
+	ClearIntakeFocus()
+	await get_tree().create_timer(.45, false).timeout
+	manager.receiveActionReady.rpc()
+	await manager.smartAwait("action ready")
+	comp.CycleCompartment("hide briefcase")
+	await get_tree().create_timer(1, false).timeout
+	camera.BeginLerp("home")
+	await get_tree().create_timer(.9, false).timeout
+	moving = false
+	roundManager.ReturnFromItemGrabbing()
+	pass

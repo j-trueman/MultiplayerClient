@@ -15,15 +15,16 @@ func _ready():
 
 func createUserAccount():
 	var username = usernameInput.text
-	var signature = keygenUtil.KeyGen()
-	if !signature:
-		print("YOU ALREADY HAVE AN ACCOUNT")
-		errorLabel.text += "ERROR: YOU ALREADY HAVE AN ACCOUNT\n"
-		return false
+	#var signature = keygenUtil.KeyGen()
+	#if !signature:
+	#	print("YOU ALREADY HAVE AN ACCOUNT")
+	#	errorLabel.text += "ERROR: YOU ALREADY HAVE AN ACCOUNT\n"
+	#	return false
 	if !multimanager.loggedIn:
 		multimanager.connectToServer()
 		await multiplayer.connected_to_server
-		multimanager.createNewMultiplayerUser.rpc(username, signature)
+	#	multimanager.createNewMultiplayerUser.rpc(username, signature)
+		multimanager.createNewMultiplayerUser.rpc(username)
 		
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):

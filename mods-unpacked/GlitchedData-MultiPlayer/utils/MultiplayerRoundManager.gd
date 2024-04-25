@@ -4,6 +4,8 @@ signal loadInfo(roundIdx, loadIdx, currentPlayerTurn, healthPlayers, totalShells
 signal items(itemsForPlayers)
 signal actionValidation(action, result)
 signal timeoutAdrenaline
+signal actionReady
+signal finished
 
 var players
 
@@ -21,47 +23,73 @@ func sendPlayerInfo(players_var):
 	players = players_var
 
 @rpc("any_peer")
+func sendTimeoutAdrenaline():
+	emit_signal("timeoutAdrenaline")
+
+@rpc("any_peer")
 func receiveLoadInfo(): pass
 
 var loadInfo_flag = false
+var loadInfo_smart = false
 @rpc("any_peer")
 func sendLoadInfo(roundIdx, loadIdx, currentPlayerTurn, healthPlayers, totalShells, liveCount):
 	emit_signal("loadInfo", roundIdx, loadIdx, currentPlayerTurn, healthPlayers, totalShells, liveCount)
-	loadInfo_flag = true
+	if not loadInfo_smart: loadInfo_flag = true
+	loadInfo_smart = false
 
 @rpc("any_peer")
 func receiveItems(): pass
 
 var items_flag = false
+var items_smart = false
 @rpc("any_peer")
 func sendItems(itemsForPlayers):
 	emit_signal("items", itemsForPlayers)
-	items_flag = true
+	if not items_smart: items_flag = true
+	items_smart = false
 
 @rpc("any_peer")
-func recieveActionValidation(action): pass
+func receiveActionValidation(action): pass
 
 var actionValidation_flag = false
+var actionValidation_smart = false
 @rpc("any_peer")
 func sendActionValidation(action, result):
 	emit_signal("actionValidation", action, result)
-	actionValidation_flag = true
+	if not actionValidation_smart: actionValidation_flag = true
+	actionValidation_smart = false
 
 @rpc("any_peer")
-func sendTimeoutAdrenaline():
-	emit_signal("timeoutAdrenaline")
+func receiveActionReady(): pass
+
+var actionReady_flag = false
+var actionReady_smart = false
+@rpc("any_peer")
+func sendActionReady():
+	emit_signal("actionReady")
+	if not actionReady_smart: actionReady_flag = true
+	actionReady_smart = false
 
 func smartAwait(method):
 	match method:
 		"load info":
 			if not loadInfo_flag:
+				loadInfo_smart = true
 				await loadInfo
 			loadInfo_flag = false
 		"items":
 			if not items_flag:
+				items_smart = true
 				await items
 			items_flag = false
 		"action validation":
 			if not actionValidation_flag:
+				actionValidation_smart = true
 				await actionValidation
 			actionValidation_flag = false
+		"action ready":
+			if not actionReady_flag:
+				actionReady_smart = true
+				await actionReady
+			actionReady_flag = false
+	emit_signal("finished")

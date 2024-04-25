@@ -5,7 +5,7 @@ signal player_disconnected(peerId)
 signal server_disconnected
 
 var players = {}
-var myInfo = {"Name": "GlitchedData64"}
+var myInfo = {"Name": "Mitch"}
 var currentLobbyId = null
 var is_host
 var keygenUtil
@@ -26,7 +26,7 @@ func _ready():
 	connectToServer()
 	await multiplayer.connected_to_server
 	print("\nSUCCESSFULLY CONNECTED TO SERVER. ATTEMPTING LOGIN")
-	doLoginStuff()
+	#doLoginStuff()
 
 func connectToServer():
 	var peer = ENetMultiplayerPeer.new()

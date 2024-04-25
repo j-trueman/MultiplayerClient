@@ -4,6 +4,7 @@ const RoundBatch = preload("res://scripts/RoundBatch.gd")
 var currentRoundIdx = 0
 var manager
 var playerTurn
+var currentPlayerTurn
 
 func _ready():
 	manager = get_tree().get_root().get_node("MultiplayerManager/multiplayer round manager")
@@ -13,23 +14,26 @@ func _ready():
 	roundArray = []
 	
 func MainBatchSetup(dealerEnterAtStart : bool):
+	manager.receivePlayerInfo.rpc()
 	manager.receiveLoadInfo.rpc()
 	super(dealerEnterAtStart)
 
 func SetupRoundArray():
-	manager.smartAwait("load info")
+	await manager.smartAwait("load info")
 	
 
-func loadInfo(roundIdx, loadIdx, currentPlayerTurn, healthPlayers, totalShells, liveCount):
+func loadInfo(roundIdx, loadIdx, currentPlayerTurn_var, healthPlayers, totalShells, liveCount):
 	if roundIdx > currentRoundIdx:
 		roundArray = []
 		currentRoundIdx = roundIdx
 	var firstLoad = true if loadIdx == 0 else false
 
+	currentPlayerTurn = currentPlayerTurn_var
+
 	var load = RoundClass.new()
 	load.hasIntroductoryText = false
 	load.isFirstRound = firstLoad
-	load.startingHealth = healthPlayers
+	load.startingHealth = healthPlayers[0]
 	load.amountBlank = totalShells - liveCount
 	load.amountLive = liveCount
 	load.usingItems = true
@@ -99,7 +103,7 @@ func LoadShells():
 	await get_tree().create_timer(.8, false).timeout
 	shellLoader.animator_shotgun.play("enemy put down shotgun")
 	shellLoader.DealerHandsDropShotgun()
-	if (manager.players.front().values().front() == manager.get_parent().myInfo["Name"]):
+	if (manager.players[currentPlayerTurn].values()[0] == manager.get_parent().myInfo["Name"]):
 		camera.BeginLerp("home")
 		#ALLOW INTERACTION
 		playerCurrentTurnItemArray = []
@@ -175,3 +179,8 @@ func BeginPlayerTurn():
 	perm.SetInteractionPermissions(true)
 	SetupDeskUI()
 	playerTurn = true
+
+func StartRound(gettingNext : bool):
+	manager.receiveActionReady.rpc()
+	await manager.smartAwait("action ready")
+	super(gettingNext)
