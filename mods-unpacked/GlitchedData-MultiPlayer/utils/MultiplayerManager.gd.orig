@@ -5,7 +5,7 @@ signal player_disconnected(peerId)
 signal server_disconnected
 
 var players = {}
-var myInfo = {"Name": "Mitch"}
+var myInfo = {"Name": "GlitchedData64"}
 var currentLobbyId = null
 var is_host
 var keygenUtil
@@ -27,7 +27,7 @@ func _ready():
 	connectToServer()
 	await multiplayer.connected_to_server
 	print("\nSUCCESSFULLY CONNECTED TO SERVER. ATTEMPTING LOGIN")
-	#doLoginStuff()
+	doLoginStuff()
 
 func connectToServer():
 	var peer = ENetMultiplayerPeer.new()
@@ -171,6 +171,7 @@ func _input(ev):
 		is_host = true
 	if Input.is_key_pressed(KEY_L):
 		requestLobbyList.rpc()
+<<<<<<< Updated upstream
 	if Input.is_key_pressed(KEY_K):
 		var keyFile = checkForUserKey()
 		if keyFile:
@@ -185,3 +186,17 @@ func _input(ev):
 			createNewMultiplayerUser.rpc(accountName)
 	if Input.is_key_pressed(KEY_J):
 		get_node("multiplayer round manager").receiveJoinMatch.rpc(myInfo["Name"])
+=======
+#	if Input.is_key_pressed(KEY_K):
+#		var keyFile = checkForUserKey()
+#		if keyFile:
+#			print("YOU ALREADY HAVE AN ACCOUNT")
+#			return false
+#		if !loggedIn:
+#			connectToServer()
+#			await multiplayer.connected_to_server
+#			if !accountName:
+#				closeSession("No username set. set it in the config menu")
+#				return false
+#			createNewMultiplayerUser.rpc(accountName)
+>>>>>>> Stashed changes
