@@ -30,10 +30,13 @@ func Shoot(who : String):
 	#PLAY CORRECT SOUND. ASSIGN CURRENT ROUND IN CHAMBER
 	await get_tree().create_timer(2, false).timeout
 	await manager.smartAwait("action validation")
-	var currentRoundInChamber = interaction.result
+	shellSpawner.sequenceArray[0] = "live" if bool(interaction.result) else "blank"
+	var currentRoundInChamber = shellSpawner.sequenceArray[0]
 	MainSlowDownRoutine(who, false)
 	if (who == "self"): whoshot = "player"
 	else: whoshot = "dealer"
+	manager.receiveActionReady.rpc()
+	await manager.smartAwait("action ready")
 	PlayShootingSound_New(currentRoundInChamber)
 	#SHAKE CAMERA
 	if (currentRoundInChamber == "live"):
@@ -89,3 +92,19 @@ func PlayShootingSound_New(currentRoundInChamber):
 	else: 
 		speaker_blank.play()
 	pass
+
+func GrabShotgun():
+	roundManager.ClearDeskUI(true)
+	perm.SetIndicators(false)
+	perm.SetInteractionPermissions(false)
+	perm.RevertDescriptionUI()
+	ShotgunCollider(false)
+	animator_shotgun.play("player grab shotgun")
+	shotgunshaker.StartShaking()
+	manager.receiveActionReady.rpc()
+	await manager.smartAwait("action ready")
+	decisionText.SetUI(true)
+	btnParent_shootingChoice.visible = true
+	if (cursorManager.controller_active): btn_you.grab_focus()
+	controller.previousFocus = btn_you
+	await get_tree().create_timer(.5, false).timeout

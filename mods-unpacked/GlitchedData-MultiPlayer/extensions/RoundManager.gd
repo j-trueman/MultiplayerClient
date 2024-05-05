@@ -5,18 +5,113 @@ var currentRoundIdx = 0
 var manager
 var playerTurn
 var currentPlayerTurn
+var gotLoadInfo
+var score = 0
+
+signal setLoadInfo
 
 func _ready():
 	manager = get_tree().get_root().get_node("MultiplayerManager/multiplayer round manager")
 	manager.loadInfo.connect(loadInfo)
-
+	GlobalVariables.get_current_scene_node().get_node("standalone managers/endless mode").SetupEndless()
+	playerData.playername = manager.get_parent().myInfo["Name"].to_upper()
+	playerData.hasSignedWaiver = true
 	super()
 	roundArray = []
-	
+
+func EndMainBatch():
+	#ADD TO BATCH INDEX
+	ignoring = true
+	playerData.currentBatchIndex += 1
+	if playerData.currentBatchIndex == 3: score *= 2
+	#PLAY WINNING SHIT
+	await get_tree().create_timer(.8, false).timeout
+	if (score > 1): 
+		healthCounter.speaker_truedeath.stop()
+		healthCounter.DisableCounter()
+		defibCutter.BlipError_Both()
+		if (endless): musicManager.EndTrack()
+		await get_tree().create_timer(.4, false).timeout
+		camera.BeginLerp("enemy")
+		await get_tree().create_timer(.7, false).timeout
+		brief.MainRoutine()
+		return
+	elif (score < -1):
+		# GET SCREWED ENDING
+		camera.BeginLerp("enemy")
+		await get_tree().create_timer(.8, false).timeout
+		await(shellLoader.DealerHandsGrabShotgun())
+		await get_tree().create_timer(.2, false).timeout
+		shellLoader.animator_shotgun.play("grab shotgun_pointing enemy")
+		await get_tree().create_timer(.45, false).timeout
+		shellLoader.speaker_loadShell.play()
+		shellLoader.animator_dealerHandRight.play("load single shell")
+		await get_tree().create_timer(.32, false).timeout
+		shellLoader.animator_dealerHandRight.play("RESET")
+		dealerAI.Speaker_HandCrack()
+		await get_tree().create_timer(.42, false).timeout
+		shellLoader.animator_shotgun.play("enemy rack shotgun start")
+		manager.receiveActionReady.rpc()
+		await manager.smartAwait("action ready")
+		dealerAI.animator_shotgun.play("enemy shoot player")
+		manager.receiveActionReady.rpc()
+		await manager.smartAwait("action ready")
+		dealerAI.shotgunShooting.PlayShootingSound_New("live")
+		await get_tree().create_timer(.08, false).timeout
+		death.viewblocker.visible = true
+		death.DisableSpeakers()
+		death.MainDeathRoutine()
+	healthCounter.DisableCounter()
+	speaker_roundShutDown.play()
+	await get_tree().create_timer(1, false).timeout
+	speaker_winner.play()
+	ui_winner.visible = true
+	itemManager.newBatchHasBegun = true
+	await get_tree().create_timer(2.33, false).timeout
+	speaker_winner.stop()
+	musicManager.EndTrack()
+	for i in range(death.speakersToDisable.size()):
+		death.speakersToDisable[i].SnapVolume(true)
+	speaker_roundShutDown.play()
+	ui_winner.visible = false
+	#REGROW BARREL IF MISSING
+	if (barrelSawedOff):
+		await get_tree().create_timer(.6, false).timeout
+		await(segmentManager.GrowBarrel())
+	#MAIN BATCH LOOP
+	MainBatchSetup(false)
+	if (!dealerAtTable): 
+		if (!dealerCuffed): animator_dealerHands.play("dealer hands on table")
+		else: animator_dealerHands.play("dealer hands on table cuffed")
+		animator_dealer.play("dealer return to table")
+	for i in range(ejectManagers.size()):
+		ejectManagers[i].FadeOutShell()
+	#TRACK MANAGER
+	await get_tree().create_timer(2, false).timeout
+	musicManager.LoadTrack_FadeIn()
+
 func MainBatchSetup(dealerEnterAtStart : bool):
+	itemManager.itemsOnTable = [["","","","","","","",""],
+				    ["","","","","","","",""]]
+	dealerAI.dealermesh_crushed.set_layer_mask_value(1, false)
+	dealerAI.dealermesh_normal.set_layer_mask_value(1, true)
+	dealerAI.swapped = false
 	manager.receivePlayerInfo.rpc()
 	manager.receiveLoadInfo.rpc()
+	gotLoadInfo = false
+	manager.receiveActionReady.rpc()
+	await manager.smartAwait("action ready")
 	super(dealerEnterAtStart)
+
+func OutOfHealth(who : String):
+	if who == "player":
+		score -= 1
+		healthCounter.ui_playerwin.text = tr("PLAYERWIN") % [manager.opponent]
+	else:
+		score += 1
+		healthCounter.ui_playerwin.text = tr("PLAYERWIN") % [playerData.playername]
+	await get_tree().create_timer(1, false).timeout
+	EndMainBatch()
 
 func SetupRoundArray():
 	await manager.smartAwait("load info")
@@ -46,6 +141,7 @@ func loadInfo(roundIdx, loadIdx, currentPlayerTurn_var, healthPlayers, totalShel
 	load.hasIntro2 = false
 
 	roundArray.append(load)
+	emit_signal("setLoadInfo")
 
 func LoadShells():
 	camera.BeginLerp("enemy")
@@ -108,6 +204,8 @@ func LoadShells():
 		#ALLOW INTERACTION
 		playerCurrentTurnItemArray = []
 		await get_tree().create_timer(.6, false).timeout
+		manager.receiveActionReady.rpc()
+		await manager.smartAwait("action ready")
 		perm.SetStackInvalidIndicators()
 		cursor.SetCursor(true, true)
 		perm.SetIndicators(true)
@@ -173,6 +271,8 @@ func BeginPlayerTurn():
 		await(defibCutter.CutWire(wireToCut))
 	await get_tree().create_timer(.6, false).timeout
 	playerCurrentTurnItemArray = []
+	manager.receiveActionReady.rpc()
+	await manager.smartAwait("action ready")
 	perm.SetStackInvalidIndicators()
 	cursor.SetCursor(true, true)
 	perm.SetIndicators(true)
@@ -181,6 +281,45 @@ func BeginPlayerTurn():
 	playerTurn = true
 
 func StartRound(gettingNext : bool):
-	manager.receiveActionReady.rpc()
-	await manager.smartAwait("action ready")
-	super(gettingNext)
+	if gotLoadInfo:
+		manager.receiveLoadInfo.rpc()
+		await setLoadInfo
+	gotLoadInfo = true
+	if (gettingNext): currentRound += 1
+	#USINGITEMS: SETUP ITEM GRIDS IF ROUND CLASS HAS SETUP ITEM GRIDS ENABLED
+	#UNCUFF BOTH PARTIES BEFORE ITEM DISTRIBUTION
+	await (handcuffs.RemoveAllCuffsRoutine())
+	#FINAL SHOWDOWN DIALOGUE
+	if (playerData.currentBatchIndex == 2 && !defibCutterReady && !endless):
+		shellLoader.dialogue.dealerLowPitched = true
+		camera.BeginLerp("enemy") 
+		await get_tree().create_timer(.6, false).timeout
+		#var origdelay = shellLoader.dialogue.incrementDelay
+		#shellLoader.dialogue.incrementDelay = .1
+		if (!playerData.cutterDialogueRead):
+			shellLoader.dialogue.scaling = true
+			shellLoader.dialogue.ShowText_Forever(tr("FINAL SHOW1"))
+			await get_tree().create_timer(4, false).timeout
+			shellLoader.dialogue.scaling = true
+			shellLoader.dialogue.ShowText_Forever(tr("FINAL SHOW2"))
+			await get_tree().create_timer(4, false).timeout
+			shellLoader.dialogue.scaling = true
+			shellLoader.dialogue.ShowText_Forever(tr("FINAL SHOW3"))
+			await get_tree().create_timer(4.8, false).timeout
+			shellLoader.dialogue.scaling = false
+			shellLoader.dialogue.HideText()
+			playerData.cutterDialogueRead = true
+		else:
+			shellLoader.dialogue.ShowText_Forever(tr("BETTER NOT"))
+			await get_tree().create_timer(3, false).timeout
+			shellLoader.dialogue.HideText()
+		await(deficutter.InitialSetup())
+		defibCutterReady = true
+		trueDeathActive = true
+		#await get_tree().create_timer(100, false).timeout
+	#USINGITEMS: SHARE ITEMS TO PLAYERS HERE
+	if (roundArray[currentRound].usingItems):
+		itemManager.BeginItemGrabbing()
+		return
+	shellSpawner.MainShellRoutine()
+	pass

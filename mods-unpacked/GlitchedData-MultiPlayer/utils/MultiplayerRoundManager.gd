@@ -5,9 +5,10 @@ signal items(itemsForPlayers)
 signal actionValidation(action, result)
 signal timeoutAdrenaline
 signal actionReady
-signal finished
+signal itemsOnTable_signal(itemsOnTable)
 
 var players
+var opponent
 
 @rpc("any_peer")
 func receiveJoinMatch(playerName): pass
@@ -21,6 +22,9 @@ func receivePlayerInfo(): pass
 @rpc("any_peer")
 func sendPlayerInfo(players_var):
 	players = players_var
+	var firstPlayer = players[0].values()[0]
+	opponent = players[1].values()[0] if firstPlayer == get_parent().myInfo["Name"] else firstPlayer
+	GlobalVariables.get_current_scene_node().get_node(tabletop parent/main tabletop/health counter/health counter ui parent/health UI_dealer side/text dealer").text = opponent
 
 @rpc("any_peer")
 func sendTimeoutAdrenaline():
@@ -70,6 +74,13 @@ func sendActionReady():
 	if not actionReady_smart: actionReady_flag = true
 	actionReady_smart = false
 
+@rpc("any_peer")
+func receiveItemsOnTable(itemTableIdxArray): pass
+
+@rpc("any_peer")
+func sendItemsOnTable(itemsOnTable):
+	emit_signal("itemsOnTable_signal", itemsOnTable)
+
 func smartAwait(method):
 	match method:
 		"load info":
@@ -92,4 +103,3 @@ func smartAwait(method):
 				actionReady_smart = true
 				await actionReady
 			actionReady_flag = false
-	emit_signal("finished")

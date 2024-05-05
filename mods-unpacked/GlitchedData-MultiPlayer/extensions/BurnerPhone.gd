@@ -26,6 +26,6 @@ func SendDialogue():
 				firstpart = tr("SEQUENCE7")
 		fulldia = tr(firstpart) + "\n" + "... " + tr(secondpart)
 	else: fulldia = tr("UNFORTUNATE")
-	dia.ShowText_Forever(fulldia)
+	dia.ShowText_Phone(fulldia)
 	await get_tree().create_timer(3, false).timeout
 	dia.HideText()
