@@ -25,18 +25,29 @@ func install_script_extensions() -> void:
 		'ItemManager',
 		'MedicineManager',
 		'RoundManager',
+		'InteractionManager',
 		'ShotgunShooting'
 	]
-	for extension in extensions:
-		ModLoaderMod.install_script_extension(extensions_dir_path+extension+".gd")
+	ModLoaderMod.install_script_extension(extensions_dir_path+"CrtManager.gd")
+#	for extension in extensions:
+#		ModLoaderMod.install_script_extension(extensions_dir_path+extension+".gd")
 
 var fixed = false
+var repeated = false
 var scene
 	
 func _process(delta):
+	if GlobalVariables.get_current_scene_node().name == "main" && not repeated:
+		repeated = true
+		var multiplayerMenu = load(mod_dir_path + "CRTMenu.tscn").instantiate()
+		multiplayerMenu.name = "crt screen_multiplayer"
+		var crtScreen = GlobalVariables.get_current_scene_node().get_node("restroom_CLUB/bathroom wall main_crt hole/crt main parent/crt screen main")
+		crtScreen.add_child(multiplayerMenu)
+		GlobalVariables.get_current_scene_node().get_node("standalone managers/crt manager").screenparent_multiplayer = multiplayerMenu
+		
 	if not fixed:
 		fixed = true
-		var root = get_tree().get_root()
+		var root = get_tree().root
 		var manager = MultiplayerManager.new()
 		manager.name = "MultiplayerManager"
 		root.add_child(manager)
