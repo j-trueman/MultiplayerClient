@@ -4,6 +4,7 @@ signal loadInfo(roundIdx, loadIdx, currentPlayerTurn, healthPlayers, totalShells
 signal items(itemsForPlayers)
 signal actionValidation(action, result)
 signal timeoutAdrenaline
+signal actionReady
 
 var players
 
@@ -39,7 +40,7 @@ func sendItems(itemsForPlayers):
 	items_flag = true
 
 @rpc("any_peer")
-func recieveActionValidation(action): pass
+func receiveActionValidation(action): pass
 
 var actionValidation_flag = false
 @rpc("any_peer")
@@ -50,6 +51,15 @@ func sendActionValidation(action, result):
 @rpc("any_peer")
 func sendTimeoutAdrenaline():
 	emit_signal("timeoutAdrenaline")
+
+@rpc("any_peer")
+func receiveActionReady(): pass
+
+var actionReady_flag = false
+@rpc("any_peer")
+func sendActionReady():
+	emit_signal("actionReady")
+	actionReady_flag = true
 
 func smartAwait(method):
 	match method:
@@ -65,3 +75,7 @@ func smartAwait(method):
 			if not actionValidation_flag:
 				await actionValidation
 			actionValidation_flag = false
+		"action ready":
+			if not actionReady_flag:
+				await actionReady
+			actionReady_flag = false

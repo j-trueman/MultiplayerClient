@@ -3,18 +3,17 @@ extends Node
 signal player_connected(peerId, playerInfo)
 signal player_disconnected(peerId)
 signal server_disconnected
+signal player_list(playerDict)
+signal loginStatus(statusFlag)
 
 var players = {}
-var myInfo = {"Name": "GlitchedData64"}
+var myInfo = {"Name": "Glitch"}
 var currentLobbyId = null
 var is_host
-var keygenUtil
 var accountName = null
-var userSignature
-var userHasCorrectKey
 var sessionEnded
 var loggedIn = false
-var errorLabel
+var peer
 
 func _ready():
 	multiplayer.peer_connected.connect(_onPlayerConnected)
@@ -23,28 +22,34 @@ func _ready():
 	multiplayer.connection_failed.connect(_onConnectionFail)
 	multiplayer.server_disconnected.connect(_onServerDisconnected)
 	
-	accountName = getUsernameFromFile()
+#	accountName = getUsernameFromFile()
+#	connectToServer()
+#	await multiplayer.connected_to_server
+#	print("\nSUCCESSFULLY CONNECTED TO SERVER. ATTEMPTING LOGIN")
+#	doLoginStuff()
+#	print(multiplayer.multiplayer_peer.get_connection_status())
+
+func connectToServer():
+	peer = ENetMultiplayerPeer.new()
+	var error = peer.create_client("localhost", 2244)
+	if error:
+		print("ERROR: %s" % error)
+		return error
+	multiplayer.set_multiplayer_peer(peer)
+
+func reconnect():
 	connectToServer()
 	await multiplayer.connected_to_server
 	print("\nSUCCESSFULLY CONNECTED TO SERVER. ATTEMPTING LOGIN")
 	doLoginStuff()
 
-func connectToServer():
-	var peer = ENetMultiplayerPeer.new()
-	var error = peer.create_client("localhost", 2244)
-	if error:
-		print("ERROR: %s" % error)
-		return error
-#	await multiplayer.connected_to_server
-	multiplayer.multiplayer_peer = peer
-
 func doLoginStuff():
 	var keyFile = checkForUserKey()
 	if !keyFile:
-		closeSession("No user key detected")
+		closeSession("noKey")
 		return false
 	if accountName == null:
-		closeSession("No username set. set it in the config menu")
+		closeSession("noUsername")
 		return false
 	verifyUserCreds.rpc(accountName, keyFile.save_to_string())
 
@@ -64,16 +69,10 @@ func getUsernameFromFile():
 	print(line)
 	return line
 
-func saveUsernameToFile(username):
-	var f = FileAccess.open("res://mpuser.txt", FileAccess.WRITE)
-	f.seek(0)
-	f.store_line(username)
-	f.close()
-	accountName = username
-
 @rpc("authority")
 func notifySuccessfulLogin():
 	print("SUCCESSFULLY LOGGED IN AS %s" % accountName)
+	loginStatus.emit(0, "SUCCESS")
 	loggedIn = true
 
 @rpc("authority")
@@ -83,6 +82,18 @@ func closeSession(reason):
 		currentLobbyId = null
 	multiplayer.multiplayer_peer = null
 	sessionEnded = true
+	if reason == "nonexistentUser":
+		loginStatus.emit(1, "User Does Not Exist.")
+	elif reason == "incorrectCreds":
+		loginStatus.emit(2, "Incorrect Credentials.")
+	elif reason == "noKey":
+		loginStatus.emit(3, "No User Key Detected.")
+	elif reason == "noUsername":
+		loginStatus.emit(3, "You didn't set a username.")
+	elif reason == "userExists":
+		loginStatus.emit(4, "User already exists")
+	else:
+		loginStatus.emit(-1, "Unknown Error.")
 	print("MULTIPLAYER SESSION TERMINATED: '%s'" % reason)
 
 func removeMultiplayerPeer():
@@ -114,6 +125,9 @@ func _onServerDisconnected():
 	multiplayer.multiplayer_peer = null
 	players.clear()
 	server_disconnected.emit()
+	print("Server Disconected")
+	if !sessionEnded:
+		reconnect()
 
 @rpc("any_peer")
 func recieveLobbyList(lobby_list):
@@ -129,13 +143,12 @@ func recieve_lobby_id(lobby_id):
 	currentLobbyId = lobby_id
 
 @rpc("any_peer")
-func recieveUserCreationStatus(return_value: bool, username): 
+func recieveUserCreationStatus(return_value: bool): 
 	if return_value == false:
 		print("USER ALREADY EXISTS")
+		closeSession("userExists")
 	else:
 		print("CREATED USER SUCCESSFULLY")
-		saveUsernameToFile(username)
-		doLoginStuff()
 
 @rpc("any_peer") 
 func requestSenderUsername():
@@ -146,14 +159,26 @@ func recieveUserKey(keyString):
 	var keyFile = CryptoKey.new()
 	keyFile.load_from_string(keyString)
 	keyFile.save("res://privatekey.key")
+	doLoginStuff()
+
+@rpc("authority")
+func recievePlayerList(dict):
+	player_list.emit(dict)
+
+@rpc("authority")
+func recieveInvite(fromUsername, fromID):
+	var crtManager = GlobalVariables.get_current_scene_node().get_node("standalone managers/crt manager")
+	crtManager.OpenInvite(fromUsername, fromID)
 
 # GHOST FUNCTIONS
 @rpc("any_peer") func closeLobby(): pass
 @rpc("any_peer", "reliable") func create_lobby(): pass
 @rpc("any_peer") func requestLobbyList(): pass
-@rpc("any_peer", "reliable") func createNewMultiplayerUser(username: String) : pass
+@rpc("any_peer", "reliable") func createNewMultiplayerUser(username: String, signature : PackedByteArray) : pass
 @rpc("any_peer") func verifyUserCreds(username: String, key): pass
 @rpc("any_peer") func recieveSenderUsername(username): pass
+@rpc("any_peer") func requestPlayerList(): pass
+@rpc("any_peer") func inviteUser(id, sender): pass
 
 # DEBUG INPUTS
 func _input(ev):
@@ -171,17 +196,17 @@ func _input(ev):
 		is_host = true
 	if Input.is_key_pressed(KEY_L):
 		requestLobbyList.rpc()
-	if Input.is_key_pressed(KEY_K):
-		var keyFile = checkForUserKey()
-		if keyFile:
-			print("YOU ALREADY HAVE AN ACCOUNT")
-			return false
-		if !loggedIn:
-			connectToServer()
-			await multiplayer.connected_to_server
-			if !accountName:
-				closeSession("No username set. set it in the config menu")
-				return false
-			createNewMultiplayerUser.rpc(accountName)
+#	if Input.is_key_pressed(KEY_K):
+#		var keyFile = checkForUserKey()
+#		if keyFile:
+#			print("YOU ALREADY HAVE AN ACCOUNT")
+#			return false
+#		if !loggedIn:
+#			connectToServer()
+#			await multiplayer.connected_to_server
+#			if !accountName:
+#				closeSession("No username set. set it in the config menu")
+#				return false
+#			createNewMultiplayerUser.rpc(accountName)
 	if Input.is_key_pressed(KEY_J):
 		get_node("multiplayer round manager").receiveJoinMatch.rpc(myInfo["Name"])
