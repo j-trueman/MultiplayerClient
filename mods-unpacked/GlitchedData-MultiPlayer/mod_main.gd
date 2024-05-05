@@ -17,6 +17,8 @@ func install_script_extensions() -> void:
 	const extensions = [
 		'BurnerPhone',
 		'DealerIntelligence',
+		'InteractionManager',
+		'ItemInteraction',
 		'ItemManager',
 		'MedicineManager',
 		'RoundManager',
