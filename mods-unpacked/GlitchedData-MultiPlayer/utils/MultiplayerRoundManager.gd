@@ -70,15 +70,6 @@ func sendActionReady():
 	if not actionReady_smart: actionReady_flag = true
 	actionReady_smart = false
 
-@rpc("any_peer")
-func receiveActionReady(): pass
-
-var actionReady_flag = false
-@rpc("any_peer")
-func sendActionReady():
-	emit_signal("actionReady")
-	actionReady_flag = true
-
 func smartAwait(method):
 	match method:
 		"load info":
