@@ -8,20 +8,36 @@ var playerListPage = 0
 var maxListPages
 var inviteeID
 
+func _unhandled_input(event):
+	if (event.is_action_pressed("ui_accept") && viewing):
+		Interaction("window")
+	if (event.is_action_pressed("exit game") && viewing):
+		Interaction("exit")
+	if (event.is_action_pressed("ui_left") && viewing):
+		Interaction("left")
+	if (event.is_action_pressed("ui_right") && viewing):
+		Interaction("right")
+
 func Bootup():
 	multiplayerManager = get_tree().root.get_node("MultiplayerManager")
 	multiplayerMenuManager = screenparent_multiplayer.get_node("multiplayermenu")
 	has_exited = false
 	board.lock.material_override.albedo_color = Color(1, 1, 1, 0)
 	screenparent_multiplayer.visible = true
-#	HighlightOption("lobbies", 0)
-#	await MultiplayerStartup()
-	multiplayerMenuManager.username_input.viewingCRT = true
-	HighlightOption("login", 0)
+	multiplayerMenuManager.username_input.SetViewing(true)
 	window_index = 0
-	for icon in iconbranches: icon.CheckState(window_index)
-	anim_iconfade.play("fade in")
-	await get_tree().create_timer(.5, false).timeout
+	if multiplayerManager.accountName != null:
+		if !multiplayerManager.loggedIn:
+			multiplayerManager.connectToServer()
+			await multiplayer.connected_to_server
+			multiplayerManager.doLoginStuff()
+		for icon in iconbranches: icon.CheckState(window_index)
+		anim_iconfade.play("fade in")
+		await get_tree().create_timer(.5, false).timeout
+		multiplayerMenuManager.options_index = 0
+		MultiplayerStartup()
+	else:
+		multiplayerMenuManager.screenparent_login.visible = true
 	intro.EnabledInteractionCRT()
 	exit.exitAllowed = false
 	viewing = true
@@ -51,6 +67,8 @@ func DrawNewPage():
 			break
 		var label = multiplayerMenuManager.options_players[i]
 		var username = playerList.keys()[currentIndex]
+		if username == multiplayerManager.accountName:
+			continue
 		label.text = username
 		label.visible = true
 		multiplayerMenuManager.options_players_visible += 1
@@ -70,38 +88,25 @@ func Interaction(alias : String):
 			CycleOptions("left")
 		"window":
 			branch_window.get_parent().get_child(1).Press()
-			SelectOption()
+			await SelectOption()
 		"exit":
-			pass
-#			has_exited = true
-#			branch_exit.get_parent().get_child(1).Press()
-#			viewing = false
-#			board.TurnOffDisplay()
-#			intro.DisableInteractionCrt()
-#			await get_tree().create_timer(.3, false).timeout
-#			intro.RevertCRT()
-#			screenparent_multiplayer.visible = false
-#			multiplayerMenuManager.options_players_visible = 0
-#			for label in multiplayerMenuManager.options_players:
-#				label.text = ""
-#				label.visible = false
-#			exit.exitAllowed = true
+			has_exited = true
+			branch_exit.get_parent().get_child(1).Press()
+			viewing = false
+			board.TurnOffDisplay()
+			intro.DisableInteractionCrt()
+			await get_tree().create_timer(.3, false).timeout
+			intro.RevertCRT()
+			screenparent_multiplayer.visible = false
+			multiplayerMenuManager.options_players_visible = 0
+			for label in multiplayerMenuManager.options_players:
+				label.text = ""
+				label.visible = false
+			exit.exitAllowed = true
+			multiplayerMenuManager.username_input.resetInput()
 
 func CycleOptions(direction : String):
 	match window_index:
-		0:
-			var optionsLength = len(multiplayerMenuManager.options_login) - 1
-			if (direction == "right"):
-				if multiplayerMenuManager.options_index < optionsLength:
-					multiplayerMenuManager.options_index += 1
-				else:
-					multiplayerMenuManager.options_index = 0
-			else:
-				if multiplayerMenuManager.options_index > 0:
-					multiplayerMenuManager.options_index -= 1
-				else:
-					multiplayerMenuManager.options_index = optionsLength
-			HighlightOption("login", multiplayerMenuManager.options_index)
 		2:
 			var optionsLength = multiplayerMenuManager.options_players_visible - 1
 			if (direction == "right"):
@@ -142,25 +147,26 @@ func CycleOptions(direction : String):
 func SelectOption():
 	match window_index:
 		0:
-			multiplayerManager.accountName = multiplayerMenuManager.username_input.textField.text
-			if multiplayerMenuManager.options_index == 0:
-				if !multiplayerManager.loggedIn:
-					multiplayerManager.connectToServer()
-					await multiplayer.connected_to_server
-					if !multiplayerManager.accountName:
-						multiplayerManager.closeSession("noUsername")
-						return false
-					multiplayerManager.createNewMultiplayerUser.rpc(multiplayerManager.accountName)
-			else:
-				multiplayerManager.connectToServer()
-				await multiplayer.connected_to_server
-				multiplayerManager.doLoginStuff()
-				
+			multiplayerManager.connectToServer()
+			await multiplayer.connected_to_server
+			multiplayerManager.accountName = multiplayerMenuManager.username_input.textField.text.to_lower()
+			multiplayerManager.doLoginStuff()
 			var statusFlag = await multiplayerManager.loginStatus
 			print(statusFlag)
 			if statusFlag[0] != 0:
-				multiplayerMenuManager.error_label.text = "ERROR: %s" % statusFlag[1]
-				return
+				if statusFlag[0] == 3 or statusFlag[0] == 1:
+					multiplayerManager.connectToServer()
+					await multiplayer.connected_to_server
+					multiplayerManager.createNewMultiplayerUser.rpc(multiplayerManager.accountName)#
+					multiplayerManager.doLoginStuff()
+				else:
+					multiplayerMenuManager.error_label.text = "ERROR: %s" % statusFlag[1]
+					multiplayerManager.accountName = null
+					return
+			multiplayerMenuManager.screenparent_login.visible = false
+			for icon in iconbranches: icon.CheckState(window_index)
+			anim_iconfade.play("fade in")
+			await get_tree().create_timer(.5, false).timeout
 			MultiplayerStartup()
 		1:
 			if multiplayerMenuManager.options_index == 0:
@@ -174,6 +180,8 @@ func SelectOption():
 			var userIndex = currentIndex + multiplayerMenuManager.options_index
 			var playerID = playerList.values()[userIndex]
 			multiplayerManager.inviteUser.rpc(playerID, multiplayerManager.accountName)
+#			var roundManager = multiplayerManager.get_child(0)
+#			roundManager.receiveJoinMatch.rpc(multiplayerManager.accountName)
 
 func OpenInvite(fromUsername, fromID):
 	multiplayerMenuManager.screenparent_invite.visible = true
@@ -184,13 +192,14 @@ func OpenInvite(fromUsername, fromID):
 	HighlightOption("invite", 0)
 	
 func CloseInvite(action : String):
+	var roundManager = multiplayerManager.get_child(0)
 	if action == "accept":
+		# This and the commented lines in SelectOption were my (bad) attempt at getting match joining to work but i was getting some funky results
+#		roundManager.receiveJoinMatch.rpc(multiplayerManager.accountName)
 		MultiplayerStartup()
-		# Function call for starting a game goes here (Mitch can do that lol cause idk the rpcs for the server)
 		return
 	inviteeID = null
 	MultiplayerStartup()
-
 
 func HighlightOption(screen : String, optionIdx : int):
 	match screen:
@@ -203,13 +212,6 @@ func HighlightOption(screen : String, optionIdx : int):
 					actualLabel.text = modified
 			var actualLabel = multiplayerMenuManager.options_players[optionIdx].get_child(0)
 			actualLabel.text = "[%s]" % actualLabel.text
-		"login":
-			for sprite in multiplayerMenuManager.options_login:
-				sprite.set_modulate(Color(0,1,0,0))
-				var childText = sprite.get_child(0)
-				childText.set_modulate(Color(0,0.9,0,1))
-			multiplayerMenuManager.options_login[optionIdx].set_modulate(Color(0,1,0,1))
-			multiplayerMenuManager.options_login[optionIdx].get_child(0).set_modulate(Color(0,0,0,1))
 		"invite":
 			for label in multiplayerMenuManager.options_invite:
 				if label.text.begins_with("["):
@@ -218,3 +220,12 @@ func HighlightOption(screen : String, optionIdx : int):
 					label.text = modified
 			var label = multiplayerMenuManager.options_invite[optionIdx]
 			label.text = "[%s]" % label.text
+			
+func _input(event):
+	if Input.is_key_pressed(KEY_ESCAPE) && viewing:
+		Interaction("exit")
+	if Input.is_key_pressed(KEY_L) && viewing && multiplayerManager.loggedIn:
+		multiplayerManager.closeSession("Logged Out")
+		multiplayerManager.accountName = null
+		multiplayerMenuManager.screenparent_players.visible = false
+		Interaction("exit")

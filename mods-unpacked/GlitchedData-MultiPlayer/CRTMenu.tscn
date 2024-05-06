@@ -1,14 +1,8 @@
-[gd_scene load_steps=8 format=3 uid="uid://bgoajj5urpdor"]
+[gd_scene load_steps=6 format=3 uid="uid://bgoajj5urpdor"]
 
 [ext_resource type="FontFile" uid="uid://bquox4twb507h" path="res://fonts/fake receipt.otf" id="1_xjdpu"]
 [ext_resource type="Script" path="res://mods-unpacked/GlitchedData-MultiPlayer/utils/InputBox.gd" id="2_1xaum"]
 [ext_resource type="Script" path="res://mods-unpacked/GlitchedData-MultiPlayer/utils/MultiplayerMenu.gd" id="2_2r4ws"]
-
-[sub_resource type="Gradient" id="Gradient_j3s0r"]
-colors = PackedColorArray(0, 1, 0, 1, 0, 1, 0, 1)
-
-[sub_resource type="GradientTexture1D" id="GradientTexture1D_apus8"]
-gradient = SubResource("Gradient_j3s0r")
 
 [sub_resource type="Gradient" id="Gradient_83xob"]
 colors = PackedColorArray(0, 0.0117647, 0, 1, 0, 0, 0, 1)
@@ -22,27 +16,25 @@ fill_to = Vector2(0.518349, 0)
 visible = false
 
 [node name="multiplayer title" type="Label3D" parent="."]
-transform = Transform3D(0.668599, -3.63216e-07, 6.10948e-07, -2.98023e-08, 1.04308e-07, 0.771329, -8.00937e-08, -0.87518, -6.85453e-07, -0.445984, 0.621937, -1.28315)
+transform = Transform3D(0.668599, -3.63216e-07, 6.10948e-07, -2.98023e-08, 1.04308e-07, 0.771329, -8.00937e-08, -0.87518, -6.85453e-07, -0.00273764, 0.621937, -1.28315)
 modulate = Color(0, 1, 0, 1)
 text = "multiplayer"
 font = ExtResource("1_xjdpu")
 font_size = 36
-horizontal_alignment = 0
 vertical_alignment = 0
 line_spacing = 22.255
 
 [node name="underline" type="Label3D" parent="multiplayer title"]
-transform = Transform3D(0.999999, 4.09782e-08, 2.98023e-08, 1.86265e-09, 0.999999, -1.63913e-07, -1.49012e-08, 1.3411e-07, 1, -0.0133514, -0.153268, 3.8147e-05)
+transform = Transform3D(0.999999, 4.09784e-08, 2.98023e-08, 1.86265e-09, 0.999999, -1.63913e-07, -1.49012e-08, 1.3411e-07, 1, 0.00192385, -0.153268, 3.80874e-05)
 modulate = Color(0, 1, 0, 1)
 text = "-----------"
 font = ExtResource("1_xjdpu")
 font_size = 36
-horizontal_alignment = 0
 vertical_alignment = 0
 line_spacing = 22.255
 
 [node name="crt screen_multiplayer players" type="Node3D" parent="."]
-transform = Transform3D(1, 4.47035e-08, 7.45058e-09, 0, 1, 1.49012e-08, -1.86265e-09, -4.47035e-08, 1, 0, 0, 0.360698)
+transform = Transform3D(1, 4.47035e-08, 7.45058e-09, 0, 1, 1.49012e-08, -1.86265e-09, -4.47035e-08, 1, 0, 0, 0.280742)
 visible = false
 
 [node name="players title" type="Label3D" parent="crt screen_multiplayer players"]
@@ -51,6 +43,16 @@ modulate = Color(0, 1, 0, 1)
 text = "ONLINE PLAYERS"
 font = ExtResource("1_xjdpu")
 font_size = 30
+horizontal_alignment = 0
+vertical_alignment = 0
+line_spacing = 22.255
+
+[node name="players title2" type="Label3D" parent="crt screen_multiplayer players"]
+transform = Transform3D(0.668599, -3.55765e-07, 6.10948e-07, -2.98023e-08, 1.49012e-08, 0.771329, -7.82311e-08, -0.87518, -6.85453e-07, -1.5843, 0.621937, 0.151054)
+modulate = Color(0, 1, 0, 1)
+text = "PRESS \"L\" to Log out"
+font = ExtResource("1_xjdpu")
+font_size = 21
 horizontal_alignment = 0
 vertical_alignment = 0
 line_spacing = 22.255
@@ -218,54 +220,50 @@ line_spacing = 22.255
 transform = Transform3D(1, 4.47035e-08, 7.45058e-09, 0, 1, 1.49012e-08, -1.86265e-09, -4.47035e-08, 1, 0, 0, 0.360698)
 
 [node name="username_inputbox" type="Node3D" parent="crt screen_multiplayer login"]
-transform = Transform3D(1, 3.33067e-16, 0, 0, 1, 0, 0, 0, 1, -0.14114, 5.02999e-10, -0.033756)
+transform = Transform3D(1, -5.94568e-10, 8.86438e-09, 2.3125e-09, 0.980785, -0.19509, -8.57806e-09, 0.19509, 0.980785, -0.00533737, -4.03935e-09, 0.271075)
 
 [node name="usernamebox" type="Label3D" parent="crt screen_multiplayer login/username_inputbox"]
-transform = Transform3D(0.668599, -3.55765e-07, 6.10948e-07, -2.98023e-08, 1.49012e-08, 0.771329, -7.82311e-08, -0.87518, -6.85453e-07, -0.311756, 0.621937, -1.12456)
+transform = Transform3D(0.668599, -3.55765e-07, 6.10948e-07, -2.98023e-08, 1.49012e-08, 0.77133, -7.82312e-08, -0.875181, -6.70552e-07, 0.00485503, 0.616109, -1.15386)
 modulate = Color(0, 1, 0, 1)
-text = "-----------------"
+text = "------------"
 font = ExtResource("1_xjdpu")
-font_size = 24
-horizontal_alignment = 0
+font_size = 29
 vertical_alignment = 0
 line_spacing = 21.9
 
 [node name="usernamebox3" type="Label3D" parent="crt screen_multiplayer login/username_inputbox"]
-transform = Transform3D(4.90057e-08, 0.87518, 6.96947e-07, -3.97652e-08, 1.85997e-09, 0.771329, 0.668599, -3.1751e-07, 6.22442e-07, -0.228087, 0.621937, -1.05933)
+transform = Transform3D(4.90057e-08, 0.87518, 6.96947e-07, 8.9407e-08, 1.86e-09, 0.77133, 0.668599, -3.1751e-07, 5.06639e-07, -0.294473, 0.6431, -0.952941)
 modulate = Color(0, 1, 0, 1)
 text = "----"
 font = ExtResource("1_xjdpu")
-font_size = 24
-horizontal_alignment = 0
+font_size = 29
 vertical_alignment = 0
 line_spacing = 21.9
 
 [node name="usernamebox4" type="Label3D" parent="crt screen_multiplayer login/username_inputbox"]
-transform = Transform3D(4.90057e-08, 0.87518, 6.96947e-07, -3.97652e-08, 1.85997e-09, 0.771329, 0.668599, -3.1751e-07, 6.22442e-07, 0.65134, 0.621937, -1.05933)
+transform = Transform3D(4.90057e-08, 0.87518, 6.96947e-07, 2.98023e-08, 1.85998e-09, 0.771329, 0.668599, -3.1751e-07, 5.66244e-07, 0.476568, 0.642848, -0.954204)
 modulate = Color(0, 1, 0, 1)
 text = "----"
 font = ExtResource("1_xjdpu")
-font_size = 24
-horizontal_alignment = 0
+font_size = 29
 vertical_alignment = 0
 line_spacing = 21.9
 
 [node name="usernamebox2" type="Label3D" parent="crt screen_multiplayer login/username_inputbox"]
-transform = Transform3D(0.668599, -3.55765e-07, 6.10948e-07, -2.98023e-08, 1.49012e-08, 0.771329, -7.82311e-08, -0.87518, -6.85453e-07, -0.30892, 0.621937, -0.91647)
+transform = Transform3D(0.668599, -3.55765e-07, 6.10948e-07, -2.98023e-08, 2.98023e-08, 0.771329, -7.82311e-08, -0.87518, -6.85453e-07, 0.00655394, 0.621525, -0.918543)
 modulate = Color(0, 1, 0, 1)
-text = "-----------------"
+text = "------------"
 font = ExtResource("1_xjdpu")
-font_size = 24
-horizontal_alignment = 0
+font_size = 29
 vertical_alignment = 0
 line_spacing = 22.255
 
 [node name="input" type="Label3D" parent="crt screen_multiplayer login/username_inputbox"]
-transform = Transform3D(0.668599, -3.55765e-07, 6.10948e-07, -2.98023e-08, 1.49012e-08, 0.771329, -7.82311e-08, -0.87518, -6.85453e-07, -0.262892, 0.621937, -1.03251)
+transform = Transform3D(0.668599, -3.55765e-07, 6.10948e-07, -2.98023e-08, 2.98023e-08, 0.771329, -7.82311e-08, -0.87518, -6.85453e-07, -0.313328, 0.620092, -1.04179)
 modulate = Color(0, 1, 0, 0.752941)
-text = "username"
+text = "USERNAME"
 font = ExtResource("1_xjdpu")
-font_size = 30
+font_size = 35
 horizontal_alignment = 0
 vertical_alignment = 0
 line_spacing = 22.255
@@ -275,54 +273,31 @@ script = ExtResource("2_1xaum")
 textField = NodePath("../input")
 placeholderText = "USERNAME"
 
-[node name="signup" type="Sprite3D" parent="crt screen_multiplayer login"]
-transform = Transform3D(0.261137, -1.42109e-14, -5.83435e-15, 2.48154e-24, -8.76422e-07, 1.92955, -5.55112e-17, -20.0502, -8.43431e-08, -0.399246, 0.693745, -0.593539)
-sorting_offset = -2.0
-modulate = Color(0.843137, 0.843137, 0.843137, 1)
-texture = SubResource("GradientTexture1D_apus8")
-
-[node name="input2" type="Label3D" parent="crt screen_multiplayer login/signup"]
-transform = Transform3D(2.56034, -1.36237e-06, 2.33957e-06, 3.90176e-09, 0.0436495, 3.25053e-08, -1.54452e-08, 2.75487e-08, 0.399746, -0.927004, 0.00396295, 0.00756201)
-modulate = Color(0, 0, 0, 1)
-text = "Sign up"
+[node name="Login" type="Label3D" parent="crt screen_multiplayer login"]
+transform = Transform3D(0.668599, -3.55765e-07, 6.10948e-07, -2.98023e-08, 1.49012e-08, 0.77133, -7.82311e-08, -0.875181, -6.85454e-07, -0.000610888, 0.713565, -0.317963)
+modulate = Color(0, 1, 0, 1)
+text = "[Login]"
 font = ExtResource("1_xjdpu")
 font_size = 30
-horizontal_alignment = 0
-vertical_alignment = 0
-line_spacing = 22.255
-
-[node name="login" type="Sprite3D" parent="crt screen_multiplayer login"]
-transform = Transform3D(0.261137, -1.42109e-14, -5.83435e-15, 2.48154e-24, -8.76422e-07, 1.92955, -5.55112e-17, -20.0502, -8.43431e-08, 0.41149, 0.698974, -0.593539)
-modulate = Color(0, 0.909804, 0, 0.560784)
-texture = SubResource("GradientTexture1D_apus8")
-
-[node name="input2" type="Label3D" parent="crt screen_multiplayer login/login"]
-transform = Transform3D(2.56034, -1.36237e-06, 2.33957e-06, 3.90176e-09, 0.0436495, 3.25053e-08, -1.54452e-08, 2.75487e-08, 0.399746, -0.656565, 0.00396295, 0.00756201)
-modulate = Color(0, 0, 0, 1)
-text = "Login"
-font = ExtResource("1_xjdpu")
-font_size = 30
-horizontal_alignment = 0
 vertical_alignment = 0
 line_spacing = 22.255
 
 [node name="errorLabel" type="Label3D" parent="crt screen_multiplayer login"]
-transform = Transform3D(0.668599, -3.55765e-07, 6.10948e-07, -2.98023e-08, 1.49012e-08, 0.771329, -7.82311e-08, -0.87518, -6.85453e-07, 0.0011192, 0.621937, -0.23597)
+transform = Transform3D(0.668599, -3.55765e-07, 6.10948e-07, -2.98023e-08, 1.49012e-08, 0.771329, -7.82311e-08, -0.87518, -6.85453e-07, 0.0011192, 0.621937, -0.0246223)
 modulate = Color(0, 1, 0, 1)
 font = ExtResource("1_xjdpu")
 font_size = 24
 vertical_alignment = 0
 line_spacing = 21.9
 
-[node name="multiplayermenu" type="Node" parent="." node_paths=PackedStringArray("screenparent_players", "screenparent_invite", "screenparent_login", "options_players", "options_invite", "options_login", "username_input", "error_label", "invitee_label")]
+[node name="multiplayermenu" type="Node" parent="." node_paths=PackedStringArray("screenparent_players", "screenparent_invite", "screenparent_login", "options_players", "options_invite", "options_login", "error_label", "invitee_label")]
 script = ExtResource("2_2r4ws")
 screenparent_players = NodePath("../crt screen_multiplayer players")
 screenparent_invite = NodePath("../crt invite_popup")
 screenparent_login = NodePath("../crt screen_multiplayer login")
 options_players = [NodePath("../crt screen_multiplayer players/players outline_top/name list_1"), NodePath("../crt screen_multiplayer players/players outline_top/name list_2"), NodePath("../crt screen_multiplayer players/players outline_top/name list_3"), NodePath("../crt screen_multiplayer players/players outline_top/name list_4"), NodePath("../crt screen_multiplayer players/players outline_top/name list_5"), NodePath("../crt screen_multiplayer players/players outline_top/name list_6"), NodePath("../crt screen_multiplayer players/players outline_top/name list_7")]
 options_invite = [NodePath("../crt invite_popup/invite accept yes"), NodePath("../crt invite_popup/invite accept no")]
-options_login = [NodePath("../crt screen_multiplayer login/signup"), NodePath("../crt screen_multiplayer login/login")]
-username_input = NodePath("../crt screen_multiplayer login/username_inputbox/InputBox")
+options_login = [NodePath("../crt screen_multiplayer login/Login")]
 error_label = NodePath("../crt screen_multiplayer login/errorLabel")
 invitee_label = NodePath("../crt invite_popup/invite name")
 

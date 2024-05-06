@@ -51,6 +51,12 @@ func sendItems(itemsForPlayers):
 @rpc("any_peer")
 func receiveActionValidation(action): pass
 
+@rpc("any_peer")
+func receiveItemsOnTable(itemTableIdxArray): pass
+
+@rpc("any_peer")
+func sendItemsOnTable(itemTableIdxArray): pass
+
 var actionValidation_flag = false
 var actionValidation_smart = false
 @rpc("any_peer")

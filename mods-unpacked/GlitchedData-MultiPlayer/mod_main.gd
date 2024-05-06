@@ -16,21 +16,22 @@ func install_script_extensions() -> void:
 	extensions_dir_path = mod_dir_path+"extensions/"
 	const extensions = [
 		'BurnerPhone',
+		'CrtManager',
 		'DealerIntelligence',
 		'DeathManager',
 		'DialogueManager',
 		'HandManager',
 		'InteractionManager',
+		'IntroManager',
 		'ItemInteraction',
 		'ItemManager',
 		'MedicineManager',
 		'RoundManager',
-		'InteractionManager',
-		'ShotgunShooting'
+		'ShotgunShooting',
 	]
-	ModLoaderMod.install_script_extension(extensions_dir_path+"CrtManager.gd")
-#	for extension in extensions:
-#		ModLoaderMod.install_script_extension(extensions_dir_path+extension+".gd")
+	for extension in extensions:
+		ModLoaderMod.install_script_extension(extensions_dir_path+extension+".gd")
+
 
 var fixed = false
 var repeated = false
@@ -57,3 +58,11 @@ func _process(delta):
 		var multiplayerRoundManager = MultiplayerRoundManager.new()
 		multiplayerRoundManager.name = "multiplayer round manager"
 		manager.add_child(multiplayerRoundManager)
+		
+		var logoObject = GlobalVariables.get_current_scene_node().get_node("title")
+		var logoFile = FileAccess.open("res://mods-unpacked/GlitchedData-MultiPlayer/media/MultiPlayer.png", FileAccess.READ)
+		var buffer = logoFile.get_buffer(logoFile.get_length())
+		var image = Image.new()
+		image.load_png_from_buffer(buffer)
+		var logoTexture = ImageTexture.create_from_image(image)
+		logoObject.get_active_material(0).set_texture(0, logoTexture)

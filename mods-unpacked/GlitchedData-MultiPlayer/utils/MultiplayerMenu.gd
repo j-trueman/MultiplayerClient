@@ -7,10 +7,13 @@ extends Node
 @export var options_players : Array[Label3D]
 @export var options_players_visible : int = 0
 @export var options_invite : Array[Label3D]
-@export var options_login : Array[SpriteBase3D]
+@export var options_login : Array[Label3D]
 
-@export var username_input : InputBox
 @export var error_label : Label3D
 @export var invitee_label : Label3D
 
 var options_index = 0
+var username_input
+
+func _ready():
+	username_input = get_parent().get_node("crt screen_multiplayer login/username_inputbox/InputBox")
