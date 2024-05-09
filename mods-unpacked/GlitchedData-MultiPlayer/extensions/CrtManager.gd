@@ -4,7 +4,7 @@ extends "res://scripts/CrtManager.gd"
 var multiplayerManager
 var multiplayerMenuManager
 var playerList
-var playerListPage = 0
+var playerListPage = 1
 var maxListPages
 var inviteeID
 
@@ -52,8 +52,11 @@ func MultiplayerStartup():
 	print(multiplayer.multiplayer_peer)
 	multiplayerManager.requestPlayerList.rpc()
 	playerList = await multiplayerManager.player_list
+	playerList.erase(playerList.keys()[len(playerList) - 1])
+	print(playerList)
 	var numOfPlayers = len(playerList)
 	maxListPages = (numOfPlayers/7) 
+	print(maxListPages)
 	DrawNewPage()
 
 func DrawNewPage():
@@ -61,14 +64,12 @@ func DrawNewPage():
 	for label in multiplayerMenuManager.options_players:
 		label.visible = false
 		label.text = ""
-	var currentIndex = playerListPage * 7
+	var currentIndex = (playerListPage - 1) * 7
 	for i in range(0,7):
 		if currentIndex > len(playerList) - 1:
 			break
 		var label = multiplayerMenuManager.options_players[i]
 		var username = playerList.keys()[currentIndex]
-		if username == multiplayerManager.accountName:
-			continue
 		label.text = username
 		label.visible = true
 		multiplayerMenuManager.options_players_visible += 1
@@ -88,7 +89,7 @@ func Interaction(alias : String):
 			CycleOptions("left")
 		"window":
 			branch_window.get_parent().get_child(1).Press()
-			await SelectOption()
+			SelectOption()
 		"exit":
 			has_exited = true
 			branch_exit.get_parent().get_child(1).Press()
@@ -123,7 +124,7 @@ func CycleOptions(direction : String):
 				if multiplayerMenuManager.options_index > 0:
 					multiplayerMenuManager.options_index -= 1
 				else:
-					if playerListPage > 0:
+					if playerListPage > 1:
 						playerListPage -= 1
 						multiplayerMenuManager.options_index = 6
 						DrawNewPage()
@@ -157,7 +158,8 @@ func SelectOption():
 				if statusFlag[0] == 3 or statusFlag[0] == 1:
 					multiplayerManager.connectToServer()
 					await multiplayer.connected_to_server
-					multiplayerManager.createNewMultiplayerUser.rpc(multiplayerManager.accountName)#
+					multiplayerManager.createNewMultiplayerUser.rpc(multiplayerManager.accountName)
+					await multiplayerManager.loginStatus
 					multiplayerManager.doLoginStuff()
 				else:
 					multiplayerMenuManager.error_label.text = "ERROR: %s" % statusFlag[1]
@@ -176,12 +178,12 @@ func SelectOption():
 				print("DENY INVITE")
 				CloseInvite("decline")
 		2:
-			var currentIndex = playerListPage * 7
+			var currentIndex = (playerListPage - 1)  * 7
 			var userIndex = currentIndex + multiplayerMenuManager.options_index
 			var playerID = playerList.values()[userIndex]
 			multiplayerManager.inviteUser.rpc(playerID, multiplayerManager.accountName)
-#			var roundManager = multiplayerManager.get_child(0)
-#			roundManager.receiveJoinMatch.rpc(multiplayerManager.accountName)
+			var roundManager = multiplayerManager.get_child(0)
+			roundManager.receiveJoinMatch.rpc()
 
 func OpenInvite(fromUsername, fromID):
 	multiplayerMenuManager.screenparent_invite.visible = true
@@ -194,8 +196,7 @@ func OpenInvite(fromUsername, fromID):
 func CloseInvite(action : String):
 	var roundManager = multiplayerManager.get_child(0)
 	if action == "accept":
-		# This and the commented lines in SelectOption were my (bad) attempt at getting match joining to work but i was getting some funky results
-#		roundManager.receiveJoinMatch.rpc(multiplayerManager.accountName)
+		roundManager.receiveJoinMatch.rpc()
 		MultiplayerStartup()
 		return
 	inviteeID = null

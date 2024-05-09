@@ -44,7 +44,7 @@ func PerformDealerAction(action, result):
 			"shoot opponent":
 				Shoot_New("player", result)
 			_:
-				var dealerIdx = 1 if manager.players[0].values()[0] == manager.get_parent().myInfo["Name"] else 0
+				var dealerIdx = 1 if manager.players[0].values()[0] == manager.get_parent().accountName else 0
 				var action_temp = action
 				action = itemManager.itemsOnTable[dealerIdx][int(action)]
 				if dealerHoldingShotgun:

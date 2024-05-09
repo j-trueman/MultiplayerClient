@@ -10,7 +10,7 @@ signal finished
 var players
 
 @rpc("any_peer")
-func receiveJoinMatch(playerName): pass
+func receiveJoinMatch(): pass
 	
 @rpc("any_peer")
 func sendJoinMatch(success): pass

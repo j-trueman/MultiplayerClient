@@ -15,7 +15,7 @@ func _ready():
 
 func items(itemsForPlayers_var):
 	itemsForPlayers = itemsForPlayers_var
-	var playerIdx = 0 if manager.players[0].values()[0] == manager.get_parent().myInfo["Name"] else 1
+	var playerIdx = 0 if manager.players[0].values()[0] == manager.get_parent().accountName else 1
 	roundManager.roundArray[roundManager.currentRound].numberOfItemsToGrab = itemsForPlayers[playerIdx].size()
 
 func BeginItemGrabbing():
@@ -75,7 +75,7 @@ func BeginItemGrabbing():
 		dialogue.HideText()
 		roundManager.playerData.hasReadItemDistributionIntro2 = true
 	await manager.smartAwait("items")
-	var playerIdx = 0 if manager.players[0].values()[0] == manager.get_parent().myInfo["Name"] else 1
+	var playerIdx = 0 if manager.players[0].values()[0] == manager.get_parent().accountName else 1
 	if itemsForPlayers[playerIdx].size() > 0:
 		#ALLOW ITEM GRAB
 		cursor.SetCursor(true, true)
@@ -114,7 +114,7 @@ func GrabItem():
 	if (roundManager.currentRound == 0 && roundManager.roundArray[roundManager.currentRound].startingHealth == 2):
 		if ("handsaw" in availableItemsToGrabArray_player): availableItemsToGrabArray_player.erase("handsaw")
 	
-	var playerIdx = 0 if manager.players[0].values()[0] == manager.get_parent().myInfo["Name"] else 1
+	var playerIdx = 0 if manager.players[0].values()[0] == manager.get_parent().accountName else 1
 	if itemsForPlayers[playerIdx].is_empty(): itemsForPlayers[playerIdx].append("handsaw")
 	numberOfItemsGrabbed += 1
 	#SPAWN ITEM
@@ -192,7 +192,7 @@ func GrabItems_Enemy_New(itemsOnTable_var):
 	itemsOnTable = itemsOnTable_var
 	var selectedResource
 	var multiIdx = 0
-	var dealerIdx = 1 if manager.players[0].values()[0] == manager.get_parent().myInfo["Name"] else 0
+	var dealerIdx = 1 if manager.players[0].values()[0] == manager.get_parent().accountName else 0
 	for i in range(8):
 		if itemsOnTable_prev[dealerIdx][i].is_empty(): multiIdx += 1
 		if itemsOnTable[dealerIdx][i].is_empty() or not itemsOnTable_prev[dealerIdx][i].is_empty(): continue

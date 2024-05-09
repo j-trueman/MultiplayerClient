@@ -23,7 +23,7 @@ func actionValidation(action_var, result_var):
 func InteractWith(alias : String):
 	match alias:
 		"item":
-			var playerIdx = 0 if manager.players[0].values()[0] == manager.get_parent().myInfo["Name"] else 1
+			var playerIdx = 0 if manager.players[0].values()[0] == manager.get_parent().accountName else 1
 			var idx = str(activeInteractionBranch.itemGridIndex)
 			actionValidation_flag = false
 			manager.receiveActionValidation.rpc(idx)

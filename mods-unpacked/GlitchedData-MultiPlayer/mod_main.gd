@@ -59,10 +59,9 @@ func _process(delta):
 		multiplayerRoundManager.name = "multiplayer round manager"
 		manager.add_child(multiplayerRoundManager)
 		
-		var logoObject = GlobalVariables.get_current_scene_node().get_node("title")
-		var logoFile = FileAccess.open("res://mods-unpacked/GlitchedData-MultiPlayer/media/MultiPlayer.png", FileAccess.READ)
-		var buffer = logoFile.get_buffer(logoFile.get_length())
-		var image = Image.new()
-		image.load_png_from_buffer(buffer)
-		var logoTexture = ImageTexture.create_from_image(image)
-		logoObject.get_active_material(0).set_texture(0, logoTexture)
+		var logo = GlobalVariables.get_current_scene_node().get_node("title")
+		var material = StandardMaterial3D.new()
+		var image = Image.load_from_file("res://mods-unpacked/GlitchedData-MultiPlayer/media/MultiPlayer.png")
+		var texture = ImageTexture.create_from_image(image)
+		material.albedo_texture = texture
+		logo.mesh.surface_set_material(0,material)

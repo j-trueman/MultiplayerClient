@@ -6,7 +6,7 @@ func _ready():
 	manager = get_tree().get_root().get_node("MultiplayerManager/multiplayer round manager")
 
 func PickupItemFromTable(itemName : String):
-	var dealerIdx = 1 if manager.players[0].values()[0] == manager.get_parent().myInfo["Name"] else 0
+	var dealerIdx = 1 if manager.players[0].values()[0] == manager.get_parent().accountName else 0
 	var itemIdx = int(itemName)
 	itemName = itemManager.itemsOnTable[dealerIdx][itemIdx] if not stealing else itemManager.itemsOnTable[int(not dealerIdx)][itemIdx]
 	dealerAI.Speaker_HandCrack()

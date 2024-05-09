@@ -15,7 +15,7 @@ var loggedIn = false
 var peer
 
 func _ready():
-	multiplayer.peer_connected.connect(_onPlayerConnected)
+#	multiplayer.peer_connected.connect(_onPlayerConnected)
 	multiplayer.peer_disconnected.connect(_onPlayerDisconnected)
 	multiplayer.connected_to_server.connect(_onConnectedOk)
 	multiplayer.connection_failed.connect(_onConnectionFail)
@@ -36,24 +36,22 @@ func reconnect():
 	doLoginStuff()
 
 func doLoginStuff():
-	var keyFile = checkForUserKey()
-	if !keyFile:
+	var fileExists = FileAccess.file_exists("res://privatekey.key")
+	if fileExists:
+		var keyFile = getUserKey()
+		verifyUserCreds.rpc(accountName, keyFile.save_to_string())
+	else:
 		closeSession("noKey")
-		return false
-	if accountName == null:
-		closeSession("noUsername")
-		return false
-	verifyUserCreds.rpc(accountName, keyFile.save_to_string())
 
-func checkForUserKey():
+func getUserKey():
 	var keyFile = CryptoKey.new()
-	var error = keyFile.load("user://privatekey.key")
+	var error = keyFile.load("res://privatekey.key")
 	if error:
 		return false
 	return keyFile
 
 func getUsernameFromFile():
-	var f = FileAccess.open("res://mpuser.txt", FileAccess.READ)
+	var f = FileAccess.open("user://mpuser.txt", FileAccess.READ)
 	if !f:
 		return null
 	var line = f.get_line()
@@ -69,12 +67,11 @@ func notifySuccessfulLogin():
 
 @rpc("authority")
 func closeSession(reason):
-#	if currentLobbyId != null:
-#		closeLobby.rpc(currentLobbyId)
-#		currentLobbyId = null
 	multiplayer.multiplayer_peer = null
 	loggedIn = false
 	sessionEnded = true
+	print("MULTIPLAYER SESSION TERMINATED: '%s'" % reason)
+	await get_tree().create_timer(1).timeout
 	if reason == "nonexistentUser":
 		loginStatus.emit(1, "User Does Not Exist.")
 	elif reason == "incorrectCreds":
@@ -87,13 +84,12 @@ func closeSession(reason):
 		loginStatus.emit(4, "User already exists")
 	else:
 		loginStatus.emit(-1, "Unknown Error.")
-	print("MULTIPLAYER SESSION TERMINATED: '%s'" % reason)
 
 func removeMultiplayerPeer():
 	multiplayer.multiplayer_peer = null
 
-func _onPlayerConnected(id):
-	registerPlayer.rpc_id(id, accountName)
+#func _onPlayerConnected(id):
+#	registerPlayer.rpc_id(id, accountName)
 
 @rpc("any_peer", "reliable")
 func registerPlayer(new_player_info):
@@ -142,6 +138,7 @@ func receiveUserCreationStatus(return_value: bool):
 		closeSession("userExists")
 	else:
 		print("CREATED USER SUCCESSFULLY")
+		loginStatus.emit(5) 
 
 @rpc("any_peer") 
 func requestSenderUsername():
@@ -167,7 +164,7 @@ func receiveInvite(fromUsername, fromID):
 #@rpc("any_peer") func closeLobby(): pass
 #@rpc("any_peer", "reliable") func create_lobby(): pass
 #@rpc("any_peer") func requestLobbyList(): pass
-@rpc("any_peer", "reliable") func createNewMultiplayerUser(username: String, signature : PackedByteArray) : pass
+@rpc("any_peer", "reliable") func createNewMultiplayerUser(username: String) : pass
 @rpc("any_peer") func verifyUserCreds(username: String, key): pass
 @rpc("any_peer") func receiveSenderUsername(username): pass
 @rpc("any_peer") func requestPlayerList(): pass
