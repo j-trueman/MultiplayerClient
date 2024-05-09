@@ -123,7 +123,7 @@ func _onServerDisconnected():
 		reconnect()
 
 #@rpc("any_peer")
-#func recieveLobbyList(lobby_list):
+#func receiveLobbyList(lobby_list):
 #	print("PUBLIC_LOBBIES:\n")
 #	for lobby in lobby_list:
 #		print("%s" % lobby)
@@ -132,11 +132,11 @@ func _onServerDisconnected():
 #		print("")
 
 #@rpc("any_peer")
-#func recieve_lobby_id(lobby_id):
+#func receive_lobby_id(lobby_id):
 #	currentLobbyId = lobby_id
 
 @rpc("any_peer")
-func recieveUserCreationStatus(return_value: bool): 
+func receiveUserCreationStatus(return_value: bool): 
 	if return_value == false:
 		print("USER ALREADY EXISTS")
 		closeSession("userExists")
@@ -145,21 +145,21 @@ func recieveUserCreationStatus(return_value: bool):
 
 @rpc("any_peer") 
 func requestSenderUsername():
-	recieveSenderUsername.rpc(accountName)
+	receiveSenderUsername.rpc(accountName)
 	
 @rpc("authority")
-func recieveUserKey(keyString):
+func receiveUserKey(keyString):
 	var keyFile = CryptoKey.new()
 	keyFile.load_from_string(keyString)
 	keyFile.save("res://privatekey.key")
 	doLoginStuff()
 
 @rpc("authority")
-func recievePlayerList(dict):
+func receivePlayerList(dict):
 	player_list.emit(dict)
 
 @rpc("authority")
-func recieveInvite(fromUsername, fromID):
+func receiveInvite(fromUsername, fromID):
 	var crtManager = GlobalVariables.get_current_scene_node().get_node("standalone managers/crt manager")
 	crtManager.OpenInvite(fromUsername, fromID)
 
@@ -169,7 +169,7 @@ func recieveInvite(fromUsername, fromID):
 #@rpc("any_peer") func requestLobbyList(): pass
 @rpc("any_peer", "reliable") func createNewMultiplayerUser(username: String, signature : PackedByteArray) : pass
 @rpc("any_peer") func verifyUserCreds(username: String, key): pass
-@rpc("any_peer") func recieveSenderUsername(username): pass
+@rpc("any_peer") func receiveSenderUsername(username): pass
 @rpc("any_peer") func requestPlayerList(): pass
 @rpc("any_peer") func inviteUser(id, sender): pass
 
