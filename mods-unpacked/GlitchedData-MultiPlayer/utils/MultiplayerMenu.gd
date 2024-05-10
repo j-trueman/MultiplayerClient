@@ -10,6 +10,7 @@ extends Node
 @export var options_login : Array[Label3D]
 
 @export var error_label : Label3D
+@export var error_label_players : Label3D
 @export var invitee_label : Label3D
 
 var options_index = 0

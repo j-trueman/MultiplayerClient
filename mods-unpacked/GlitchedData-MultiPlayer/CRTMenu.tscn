@@ -47,6 +47,15 @@ horizontal_alignment = 0
 vertical_alignment = 0
 line_spacing = 22.255
 
+[node name="playerErrors" type="Label3D" parent="crt screen_multiplayer players"]
+transform = Transform3D(0.668599, -3.55765e-07, 6.10948e-07, -2.98023e-08, 1.49012e-08, 0.771329, -7.82311e-08, -0.87518, -6.85453e-07, 1.57418, 0.621937, -1.23279)
+modulate = Color(0, 1, 0, 1)
+font = ExtResource("1_xjdpu")
+font_size = 20
+horizontal_alignment = 2
+vertical_alignment = 0
+line_spacing = 22.255
+
 [node name="players title2" type="Label3D" parent="crt screen_multiplayer players"]
 transform = Transform3D(0.668599, -3.55765e-07, 6.10948e-07, -2.98023e-08, 1.49012e-08, 0.771329, -7.82311e-08, -0.87518, -6.85453e-07, -1.5843, 0.621937, 0.151054)
 modulate = Color(0, 1, 0, 1)
@@ -218,6 +227,7 @@ line_spacing = 22.255
 
 [node name="crt screen_multiplayer login" type="Node3D" parent="."]
 transform = Transform3D(1, 4.47035e-08, 7.45058e-09, 0, 1, 1.49012e-08, -1.86265e-09, -4.47035e-08, 1, 0, 0, 0.360698)
+visible = false
 
 [node name="username_inputbox" type="Node3D" parent="crt screen_multiplayer login"]
 transform = Transform3D(1, -5.94568e-10, 8.86438e-09, 2.3125e-09, 0.980785, -0.19509, -8.57806e-09, 0.19509, 0.980785, -0.00533737, -4.03935e-09, 0.271075)
@@ -290,7 +300,7 @@ font_size = 24
 vertical_alignment = 0
 line_spacing = 21.9
 
-[node name="multiplayermenu" type="Node" parent="." node_paths=PackedStringArray("screenparent_players", "screenparent_invite", "screenparent_login", "options_players", "options_invite", "options_login", "error_label", "invitee_label")]
+[node name="multiplayermenu" type="Node" parent="." node_paths=PackedStringArray("screenparent_players", "screenparent_invite", "screenparent_login", "options_players", "options_invite", "options_login", "error_label", "error_label_players", "invitee_label")]
 script = ExtResource("2_2r4ws")
 screenparent_players = NodePath("../crt screen_multiplayer players")
 screenparent_invite = NodePath("../crt invite_popup")
@@ -299,6 +309,7 @@ options_players = [NodePath("../crt screen_multiplayer players/players outline_t
 options_invite = [NodePath("../crt invite_popup/invite accept yes"), NodePath("../crt invite_popup/invite accept no")]
 options_login = [NodePath("../crt screen_multiplayer login/Login")]
 error_label = NodePath("../crt screen_multiplayer login/errorLabel")
+error_label_players = NodePath("../crt screen_multiplayer players/playerErrors")
 invitee_label = NodePath("../crt invite_popup/invite name")
 
 [node name="crt invite_popup" type="Sprite3D" parent="."]

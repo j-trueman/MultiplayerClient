@@ -7,15 +7,13 @@ signal player_list(playerDict)
 signal loginStatus(statusFlag)
 
 var players = {}
-#var currentLobbyId = null
-#var is_host
 var accountName = null
 var sessionEnded
 var loggedIn = false
+var invitePendingIdx = null
 var peer
 
 func _ready():
-#	multiplayer.peer_connected.connect(_onPlayerConnected)
 	multiplayer.peer_disconnected.connect(_onPlayerDisconnected)
 	multiplayer.connected_to_server.connect(_onConnectedOk)
 	multiplayer.connection_failed.connect(_onConnectionFail)
@@ -88,9 +86,6 @@ func closeSession(reason):
 func removeMultiplayerPeer():
 	multiplayer.multiplayer_peer = null
 
-#func _onPlayerConnected(id):
-#	registerPlayer.rpc_id(id, accountName)
-
 @rpc("any_peer", "reliable")
 func registerPlayer(new_player_info):
 	var new_player_id = multiplayer.get_remote_sender_id()
@@ -98,8 +93,6 @@ func registerPlayer(new_player_info):
 	player_connected.emit(new_player_id, new_player_info)
 
 func _onPlayerDisconnected(id):
-#	if is_host:
-#		closeLobby.rpc(id)
 	player_disconnected.emit(id)
 
 func _onConnectedOk():
@@ -117,19 +110,6 @@ func _onServerDisconnected():
 	print("Server Disconected")
 	if !sessionEnded:
 		reconnect()
-
-#@rpc("any_peer")
-#func receiveLobbyList(lobby_list):
-#	print("PUBLIC_LOBBIES:\n")
-#	for lobby in lobby_list:
-#		print("%s" % lobby)
-#		for info in lobby_list[lobby]:
-#			print("\t%s - %s" % [info, lobby_list[lobby][info]])
-#		print("")
-
-#@rpc("any_peer")
-#func receive_lobby_id(lobby_id):
-#	currentLobbyId = lobby_id
 
 @rpc("any_peer")
 func receiveUserCreationStatus(return_value: bool): 
@@ -161,9 +141,6 @@ func receiveInvite(fromUsername, fromID):
 	crtManager.OpenInvite(fromUsername, fromID)
 
 # GHOST FUNCTIONS
-#@rpc("any_peer") func closeLobby(): pass
-#@rpc("any_peer", "reliable") func create_lobby(): pass
-#@rpc("any_peer") func requestLobbyList(): pass
 @rpc("any_peer", "reliable") func createNewMultiplayerUser(username: String) : pass
 @rpc("any_peer") func verifyUserCreds(username: String, key): pass
 @rpc("any_peer") func receiveSenderUsername(username): pass
@@ -172,32 +149,5 @@ func receiveInvite(fromUsername, fromID):
 
 # DEBUG INPUTS
 func _input(ev):
-#	if Input.is_key_pressed(KEY_C):
-#		create_lobby.rpc(2, "round robin", "public")
-#		is_host = true
-#	if Input.is_key_pressed(KEY_X):
-#		if currentLobbyId == null:
-#			print("YOU ARE NOT IN A LOBBY")
-#			return false
-#		closeLobby.rpc(currentLobbyId)
-#		currentLobbyId = null
-#	if Input.is_key_pressed(KEY_V):
-#		create_lobby.rpc(2, "round robin", "private")
-#		is_host = true
-#	if Input.is_key_pressed(KEY_L):
-#		pass
-#		requestLobbyList.rpc()
-#	if Input.is_key_pressed(KEY_K):
-#		var keyFile = checkForUserKey()
-#		if keyFile:
-#			print("YOU ALREADY HAVE AN ACCOUNT")
-#			return false
-#		if !loggedIn:
-#			connectToServer()
-#			await multiplayer.connected_to_server
-#			if !accountName:
-#				closeSession("No username set. set it in the config menu")
-#				return false
-#			createNewMultiplayerUser.rpc(accountName)
 	if Input.is_key_pressed(KEY_J):
 		get_node("multiplayer round manager").receiveJoinMatch.rpc(accountName)
