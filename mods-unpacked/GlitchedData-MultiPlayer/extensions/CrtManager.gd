@@ -4,7 +4,7 @@ var screenparent_multiplayer : Node3D
 var multiplayerManager
 var multiplayerMenuManager
 var playerList
-var playerListPage = 1
+var playerListPage = 0
 var maxListPages
 var inviteeID
 var inviteeUsername
@@ -56,14 +56,11 @@ func MultiplayerStartup():
 	multiplayerMenuManager.screenparent_login.visible = false
 	multiplayerMenuManager.screenparent_players.visible = true
 	multiplayerMenuManager.screenparent_invite.visible = false
-	print(multiplayer.multiplayer_peer)
 	multiplayerManager.requestPlayerList.rpc()
 	playerList = await multiplayerManager.player_list
 	playerList.erase(playerList.keys()[playerList.keys().find(multiplayerManager.accountName)])
-	print(playerList)
 	var numOfPlayers = len(playerList)
 	maxListPages = (numOfPlayers/7) 
-	print(maxListPages)
 	DrawNewPage()
 	refreshing = false
 	refreshPlayerList()
@@ -73,7 +70,7 @@ func DrawNewPage():
 	for label in multiplayerMenuManager.options_players:
 		label.visible = false
 		label.text = ""
-	var currentIndex = (playerListPage - 1) * 7
+	var currentIndex = playerListPage * 7
 	for i in range(0,7):
 		if currentIndex > len(playerList) - 1:
 			break
@@ -83,6 +80,11 @@ func DrawNewPage():
 		label.visible = true
 		multiplayerMenuManager.options_players_visible += 1
 		currentIndex += 1
+		if multiplayerManager.invitePendingIdx:
+			if i == multiplayerManager.invitePendingIdx[0] && playerListPage == multiplayerManager.invitePendingIdx[1]:
+				multiplayerMenuManager.options_players[multiplayerMenuManager.options_index].get_child(0).text = "PENDING"
+			else:
+				multiplayerMenuManager.options_players[multiplayerMenuManager.options_index].get_child(0).text = "INVITE"
 
 func Interaction(alias : String):
 	speaker_buttonpress.pitch_scale = randf_range(.8, 1)
@@ -98,7 +100,7 @@ func Interaction(alias : String):
 			branch_window.get_parent().get_child(1).Press()
 			SelectOption()
 		"exit":
-			if multiplayerManager.pendingInviteIdx != null:
+			if multiplayerManager.invitePendingIdx != null:
 				multiplayerMenuManager.error_label_players.text = "ERROR: YOU HAVE A PENDING INVITE"
 				clearError()
 				return
@@ -136,7 +138,7 @@ func CycleOptions(direction : String):
 				if multiplayerMenuManager.options_index > 0:
 					multiplayerMenuManager.options_index -= 1
 				else:
-					if playerListPage > 1:
+					if playerListPage > 0:
 						playerListPage -= 1
 						multiplayerMenuManager.options_index = 6
 						DrawNewPage()
@@ -165,7 +167,6 @@ func SelectOption():
 			multiplayerManager.accountName = multiplayerMenuManager.username_input.textField.text.to_lower()
 			multiplayerManager.doLoginStuff()
 			var statusFlag = await multiplayerManager.loginStatus
-			print(statusFlag)
 			if statusFlag[0] != 0:
 				if statusFlag[0] == 3 or statusFlag[0] == 1:
 					multiplayerManager.connectToServer()
@@ -185,10 +186,8 @@ func SelectOption():
 			MultiplayerStartup()
 		1:
 			if multiplayerMenuManager.options_index == 0:
-				print("ACCEPT INVITE")
 				CloseInvite("accept")
 			else:
-				print("DENY INVITE")
 				CloseInvite("decline")
 		2:
 			if !multiplayerMenuManager.options_players[multiplayerMenuManager.options_index].visible:
@@ -197,15 +196,16 @@ func SelectOption():
 				multiplayerMenuManager.error_label_players.text = "ERROR: YOU ALREADY HAVE A PENDING INVITE"
 				clearError()
 				return
-			var currentIndex = (playerListPage - 1)  * 7
+			var currentIndex = playerListPage  * 7
 			var userIndex = currentIndex + multiplayerMenuManager.options_index
-			multiplayerMenuManager.pendingInviteIdx = userIndex
+			multiplayerManager.invitePendingIdx = [multiplayerMenuManager.options_index, playerListPage]
 			var playerID = playerList.values()[userIndex]
 			multiplayerManager.inviteUser.rpc(playerID, multiplayerManager.accountName)
 
 func OpenInvite(fromUsername, fromID):
 	if fromUsername in deniedUsers:
 		return
+	multiplayerManager.invitePendingIdx = 0
 	multiplayerMenuManager.screenparent_invite.visible = true
 	multiplayerMenuManager.options_index = 0
 	multiplayerMenuManager.invitee_label.text = fromUsername
@@ -216,6 +216,7 @@ func OpenInvite(fromUsername, fromID):
 	
 func CloseInvite(action : String):
 	var roundManager = multiplayerManager.get_child(0)
+	multiplayerManager.invitePendingIdx = null
 	if action == "accept":
 		roundManager.receiveJoinMatch.rpc()
 		sendInviteStatus.rpc_id(inviteeID, "accept")
@@ -223,10 +224,10 @@ func CloseInvite(action : String):
 		var player = AudioStreamPlayer2D.new()
 		GlobalVariables.get_current_scene_node().add_child(player)
 		player.stream = joinSound
+		player.volume_db = 2.5
 		player.play()
-		await get_tree().create_timer(1, false).timeout
+		await get_tree().create_timer(2.5, false).timeout
 		SetCRT(false)
-		multiplayerManager.pendingInviteIdx = null
 		inviteeID = null
 		inviteeUsername = null
 		return
@@ -259,7 +260,7 @@ func HighlightOption(screen : String, optionIdx : int):
 func _input(event):
 	if Input.is_key_pressed(KEY_ESCAPE) && viewing:
 		Interaction("exit")
-	if Input.is_key_pressed(KEY_L) && viewing && multiplayerManager.loggedIn:
+	if Input.is_key_pressed(KEY_L) && viewing && multiplayerManager.loggedIn && multiplayerManager.invitePendingIdx == null:
 		multiplayerManager.closeSession("Logged Out")
 		multiplayerManager.accountName = null
 		multiplayerMenuManager.screenparent_players.visible = false
@@ -272,14 +273,13 @@ func refreshPlayerList():
 		multiplayerManager.requestPlayerList.rpc()
 		playerList = await multiplayerManager.player_list
 		playerList.erase(playerList.keys()[playerList.keys().find(multiplayerManager.accountName)])
-		print(playerList)
 		var numOfPlayers = len(playerList)
 		maxListPages = (numOfPlayers/7) 
 		multiplayerMenuManager.options_players_visible = 0
 		for label in multiplayerMenuManager.options_players:
 			label.visible = false
 			label.text = ""
-		var currentIndex = (playerListPage - 1) * 7
+		var currentIndex = playerListPage * 7
 		for i in range(0,7):
 			if currentIndex > len(playerList) - 1:
 				break
@@ -287,12 +287,13 @@ func refreshPlayerList():
 			var username = playerList.keys()[currentIndex]
 			label.text = username
 			label.visible = true
-			if currentIndex + i == multiplayerManager.pendingInviteIdx:
-				label.get_child(0).text = "PENDING"
-			else:
-				label.get_child(0).text = "INVITE"
 			multiplayerMenuManager.options_players_visible += 1
 			currentIndex += 1
+			if multiplayerManager.invitePendingIdx:
+				if i == multiplayerManager.invitePendingIdx[0] && playerListPage == multiplayerManager.invitePendingIdx[1]:
+					multiplayerMenuManager.options_players[i].get_child(0).text = "PENDING"
+				else:
+					multiplayerMenuManager.options_players[i].get_child(0).text = "INVITE"
 		HighlightOption("players", multiplayerMenuManager.options_index)
 
 func clearError():
@@ -305,15 +306,17 @@ func sendInviteStatus(status):
 	inviteStatus.emit(status)
 	
 func receiveInviteStatus(status):
+	multiplayerManager.invitePendingIdx = null
 	if status == "accept":
 		var roundManager = multiplayerManager.get_child(0)
 		roundManager.receiveJoinMatch.rpc()
 		Interaction("exit")
 		var player = AudioStreamPlayer2D.new()
+		GlobalVariables.get_current_scene_node().add_child(player)
 		player.stream = joinSound
+		player.volume_db = 2.5
 		player.play()
-		await get_tree().create_timer(1, false).timeout
+		await get_tree().create_timer(2.5, false).timeout
 		SetCRT(false)
 	else:
 		multiplayerMenuManager.error_label_players.text = "ERROR: INVITE DECLINED"
-	multiplayerManager.pendingInviteIdx = null
