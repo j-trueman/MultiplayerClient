@@ -10,9 +10,7 @@ var inviteeID
 var inviteeUsername
 var refreshing
 var deniedUsers = []
-var joinSound = preload("res://audio/pill select1.ogg")
-
-signal inviteStatus(status)
+#var joinSound = preload("res://audio/pill select1.ogg")
 
 func _unhandled_input(event):
 	if (event.is_action_pressed("ui_accept") && viewing):
@@ -25,8 +23,8 @@ func _unhandled_input(event):
 		Interaction("right")
 
 func Bootup():
-	inviteStatus.connect(receiveInviteStatus)
 	multiplayerManager = get_tree().root.get_node("MultiplayerManager")
+	multiplayerManager.inviteStatus.connect(receiveInviteStatus)
 	multiplayerMenuManager = screenparent_multiplayer.get_node("multiplayermenu")
 	has_exited = false
 	board.lock.material_override.albedo_color = Color(1, 1, 1, 0)
@@ -100,10 +98,8 @@ func Interaction(alias : String):
 			branch_window.get_parent().get_child(1).Press()
 			SelectOption()
 		"exit":
-			if multiplayerManager.invitePendingIdx != null:
-				multiplayerMenuManager.error_label_players.text = "ERROR: YOU HAVE A PENDING INVITE"
-				clearError()
-				return
+#			if multiplayerManager.invitePendingIdx != null:
+#				cancelInvite.rpc()
 			has_exited = true
 			branch_exit.get_parent().get_child(1).Press()
 			viewing = false
@@ -219,19 +215,19 @@ func CloseInvite(action : String):
 	multiplayerManager.invitePendingIdx = null
 	if action == "accept":
 		roundManager.receiveJoinMatch.rpc()
-		sendInviteStatus.rpc_id(inviteeID, "accept")
+		multiplayerManager.sendInviteStatus.rpc(inviteeID, "accept")
 		Interaction("exit")
 		var player = AudioStreamPlayer2D.new()
 		GlobalVariables.get_current_scene_node().add_child(player)
-		player.stream = joinSound
-		player.volume_db = 2.5
-		player.play()
+#		player.stream = joinSound
+#		player.volume_db = 2.5
+#		player.play()
 		await get_tree().create_timer(2.5, false).timeout
 		SetCRT(false)
 		inviteeID = null
 		inviteeUsername = null
 		return
-	sendInviteStatus.rpc_id(inviteeID, "deny")
+	multiplayerManager.sendInviteStatus.rpc(inviteeID, "deny")
 	deniedUsers.append(inviteeUsername)
 	inviteeID = null
 	inviteeUsername = null
@@ -301,9 +297,11 @@ func clearError():
 	multiplayerMenuManager.error_label_players.text = ""
 	multiplayerMenuManager.error_label.text = ""
 
-@rpc("any_peer")
-func sendInviteStatus(status):
-	inviteStatus.emit(status)
+#func cancelInvite():
+#	if multiplayerMenuManager.screenparent_invite.visible == true:
+#		CloseInvite("deny")
+#	else:
+#		receiveInviteStatus("deny")
 	
 func receiveInviteStatus(status):
 	multiplayerManager.invitePendingIdx = null
@@ -313,10 +311,16 @@ func receiveInviteStatus(status):
 		Interaction("exit")
 		var player = AudioStreamPlayer2D.new()
 		GlobalVariables.get_current_scene_node().add_child(player)
-		player.stream = joinSound
-		player.volume_db = 2.5
-		player.play()
+#		player.stream = joinSound
+#		player.volume_db = 2.5
+#		player.play()
 		await get_tree().create_timer(2.5, false).timeout
 		SetCRT(false)
+		inviteeID = null
+		inviteeUsername = null
+		return
 	else:
 		multiplayerMenuManager.error_label_players.text = "ERROR: INVITE DECLINED"
+		inviteeID = null
+		inviteeUsername = null
+		return

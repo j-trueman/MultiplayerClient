@@ -2,6 +2,7 @@ extends Node
 
 signal loadInfo(roundIdx, loadIdx, currentPlayerTurn, healthPlayers, totalShells, liveCount)
 signal items(itemsForPlayers)
+signal itemsOnTable_signal(itemsOnTable)
 signal actionValidation(action, result)
 signal timeoutAdrenaline
 signal actionReady
@@ -55,7 +56,8 @@ func receiveActionValidation(action): pass
 func receiveItemsOnTable(itemTableIdxArray): pass
 
 @rpc("any_peer")
-func sendItemsOnTable(itemTableIdxArray): pass
+func sendItemsOnTable(itemsOnTable):
+	emit_signal("itemsOnTable_signal", itemsOnTable)
 
 var actionValidation_flag = false
 var actionValidation_smart = false

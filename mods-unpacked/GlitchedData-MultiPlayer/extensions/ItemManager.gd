@@ -4,7 +4,7 @@ var manager
 var itemsForPlayers
 var itemTableIdxArray = []
 var itemsOnTable = [["","","","","","","",""],
-		    ["","","","","","","",""]]
+			["","","","","","","",""]]
 
 func _ready():
 	manager = get_tree().get_root().get_node("MultiplayerManager/multiplayer round manager")

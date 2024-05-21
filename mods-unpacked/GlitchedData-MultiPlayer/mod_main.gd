@@ -38,30 +38,24 @@ var repeated = false
 var scene
 	
 func _process(delta):
-	if GlobalVariables.get_current_scene_node().name == "main" && not repeated:
-		repeated = true
-		var multiplayerMenu = load(mod_dir_path + "CRTMenu.tscn").instantiate()
-		multiplayerMenu.name = "crt screen_multiplayer"
-		var crtScreen = GlobalVariables.get_current_scene_node().get_node("restroom_CLUB/bathroom wall main_crt hole/crt main parent/crt screen main")
-		crtScreen.add_child(multiplayerMenu)
-		GlobalVariables.get_current_scene_node().get_node("standalone managers/crt manager").screenparent_multiplayer = multiplayerMenu
-		
+	scene = GlobalVariables.get_current_scene_node()
 	if not fixed:
 		fixed = true
 		var root = get_tree().root
 		var manager = MultiplayerManager.new()
 		manager.name = "MultiplayerManager"
 		root.add_child(manager)
-		scene = GlobalVariables.get_current_scene_node()
 		root.move_child(scene, root.get_child_count()-2)
 
 		var multiplayerRoundManager = MultiplayerRoundManager.new()
 		multiplayerRoundManager.name = "multiplayer round manager"
 		manager.add_child(multiplayerRoundManager)
 		
-#		var logo = GlobalVariables.get_current_scene_node().get_node("title")
-#		var material = StandardMaterial3D.new()
-#		var image = Image.load_from_file("res://mods-unpacked/GlitchedData-MultiPlayer/media/MultiPlayer.png")
-#		var texture = ImageTexture.create_from_image(image)
-#		material.albedo_texture = texture
-#		logo.mesh.surface_set_material(0,material)
+	if scene.name == "menu" && !repeated:
+		var logo = scene.get_node("title")
+		var logoMat = logo.get_active_material(0)
+		var image = Image.load_from_file("res://mods-unpacked/GlitchedData-MultiPlayer/media/MultiPlayer.png")
+		var texture = ImageTexture.create_from_image(image)
+		logoMat.albedo_texture = texture
+		logo.mesh.surface_set_material(0,logoMat)
+		repeated = true

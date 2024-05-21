@@ -5,6 +5,7 @@ signal player_disconnected(peerId)
 signal server_disconnected
 signal player_list(playerDict)
 signal loginStatus(statusFlag)
+signal inviteStatus(status)
 
 var players = {}
 var accountName = null
@@ -14,10 +15,14 @@ var invitePendingIdx = null
 var peer
 
 func _ready():
+	multiplayer.peer_connected.connect(notify)
 	multiplayer.peer_disconnected.connect(_onPlayerDisconnected)
 	multiplayer.connected_to_server.connect(_onConnectedOk)
 	multiplayer.connection_failed.connect(_onConnectionFail)
 	multiplayer.server_disconnected.connect(_onServerDisconnected)
+
+func notify(id):
+	print("Peer %s connected" % id)
 
 func connectToServer():
 	peer = ENetMultiplayerPeer.new()
@@ -140,12 +145,17 @@ func receiveInvite(fromUsername, fromID):
 	var crtManager = GlobalVariables.get_current_scene_node().get_node("standalone managers/crt manager")
 	crtManager.OpenInvite(fromUsername, fromID)
 
+@rpc("any_peer")
+func receiveInviteStatus(status):
+	inviteStatus.emit(status)
+
 # GHOST FUNCTIONS
 @rpc("any_peer", "reliable") func createNewMultiplayerUser(username: String) : pass
 @rpc("any_peer") func verifyUserCreds(username: String, key): pass
 @rpc("any_peer") func receiveSenderUsername(username): pass
 @rpc("any_peer") func requestPlayerList(): pass
 @rpc("any_peer") func inviteUser(id, sender): pass
+@rpc("any_peer") func sendInviteStatus(id, status): pass
 
 # DEBUG INPUTS
 func _input(ev):
