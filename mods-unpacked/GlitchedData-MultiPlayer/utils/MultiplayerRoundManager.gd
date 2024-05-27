@@ -8,7 +8,7 @@ signal timeoutAdrenaline
 signal actionReady
 signal finished
 
-var players
+var players	
 
 @rpc("any_peer")
 func receiveJoinMatch(): pass
@@ -21,6 +21,7 @@ func receivePlayerInfo(): pass
 
 @rpc("any_peer")
 func sendPlayerInfo(players_var):
+	print("receiving")
 	players = players_var
 
 @rpc("any_peer")

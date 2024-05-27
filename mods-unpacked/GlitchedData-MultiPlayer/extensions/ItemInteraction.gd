@@ -3,7 +3,7 @@ extends "res://scripts/ItemInteraction.gd"
 var manager
 
 func _ready():
-	manager = get_tree().get_root().get_node("MultiplayerManager/multiplayer round manager")
+	manager = get_tree().get_root().get_node("MultiplayerManager/MultiplayerRoundManager")
 
 func InteractWith(itemName : String):
 	#INTERACTION

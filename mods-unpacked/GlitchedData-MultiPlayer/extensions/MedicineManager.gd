@@ -4,7 +4,7 @@ var manager
 var isDying
 
 func _ready():
-	manager = get_tree().get_root().get_node("MultiplayerManager/multiplayer round manager")
+	manager = get_tree().get_root().get_node("MultiplayerManager/MultiplayerRoundManager")
 
 func UseMedicine():
 	cam.moving = false

@@ -9,7 +9,7 @@ var elapsed_time = 0.0
 var brightness = 0.0
 
 func _ready():
-	manager = get_tree().get_root().get_node("MultiplayerManager/multiplayer round manager")
+	manager = get_tree().get_root().get_node("MultiplayerManager/MultiplayerRoundManager")
 	environment = GlobalVariables.get_current_scene_node().get_node("WorldEnvironment").environment
 	splatter = GlobalVariables.get_current_scene_node().get_node("Camera/blood splatter plane")
 	
@@ -88,7 +88,7 @@ func Kill(who : String, trueDeath : bool, returningShotgun : bool):
 					if (shotgunShooting.roundManager.health_opponent == 1 or shotgunShooting.roundManager.health_player == 1): addingDelay = true
 					#if (shellLoader.roundManager.shellSpawner.sequenceArray.size() != 0): shotgunShooting.delaying = true
 					if (shotgunShooting.roundManager.health_player == 1): shitIsFuckedUp = true
-					if (shotgunShooting.roundManager.health_player != 0): shotgunShooting.FinalizeShooting(shotgunShooting.playerCanGoAgain, false, true, addingDelay)
+					if (shotgunShooting.roundManager.health_player != 0): shotgunShooting.FinalizeShooting(shotgunShooting.playerCanGoAgain, true, true, addingDelay)
 				DisableSpeakers()
 				if (shotgunShooting.roundManager.health_player > 0):
 					await get_tree().create_timer(.4, false).timeout

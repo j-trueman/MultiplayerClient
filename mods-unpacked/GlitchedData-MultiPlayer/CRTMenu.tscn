@@ -56,16 +56,6 @@ horizontal_alignment = 2
 vertical_alignment = 0
 line_spacing = 22.255
 
-[node name="players title2" type="Label3D" parent="crt screen_multiplayer players"]
-transform = Transform3D(0.668599, -3.55765e-07, 6.10948e-07, -2.98023e-08, 1.49012e-08, 0.771329, -7.82311e-08, -0.87518, -6.85453e-07, -1.5843, 0.621937, 0.151054)
-modulate = Color(0, 1, 0, 1)
-text = "PRESS \"L\" to Log out"
-font = ExtResource("1_xjdpu")
-font_size = 21
-horizontal_alignment = 0
-vertical_alignment = 0
-line_spacing = 22.255
-
 [node name="players outline_top" type="Label3D" parent="crt screen_multiplayer players"]
 transform = Transform3D(0.668599, -3.59491e-07, 6.70552e-07, -2.98023e-08, -1.04308e-07, 0.771329, -7.26432e-08, -0.87518, -6.70552e-07, -1.58749, 0.621929, -1.14047)
 modulate = Color(0, 1, 0, 1)
@@ -300,14 +290,16 @@ font_size = 24
 vertical_alignment = 0
 line_spacing = 21.9
 
-[node name="multiplayermenu" type="Node" parent="." node_paths=PackedStringArray("screenparent_players", "screenparent_invite", "screenparent_login", "options_players", "options_invite", "options_login", "error_label", "error_label_players", "invitee_label")]
+[node name="multiplayermenu" type="Node" parent="." node_paths=PackedStringArray("screenparent_players", "screenparent_invite", "screenparent_login", "screenparent_new_account", "options_players", "options_invite", "options_login", "options_new_account", "error_label", "error_label_players", "invitee_label")]
 script = ExtResource("2_2r4ws")
 screenparent_players = NodePath("../crt screen_multiplayer players")
 screenparent_invite = NodePath("../crt invite_popup")
 screenparent_login = NodePath("../crt screen_multiplayer login")
+screenparent_new_account = NodePath("../crt new_user")
 options_players = [NodePath("../crt screen_multiplayer players/players outline_top/name list_1"), NodePath("../crt screen_multiplayer players/players outline_top/name list_2"), NodePath("../crt screen_multiplayer players/players outline_top/name list_3"), NodePath("../crt screen_multiplayer players/players outline_top/name list_4"), NodePath("../crt screen_multiplayer players/players outline_top/name list_5"), NodePath("../crt screen_multiplayer players/players outline_top/name list_6"), NodePath("../crt screen_multiplayer players/players outline_top/name list_7")]
 options_invite = [NodePath("../crt invite_popup/invite accept yes"), NodePath("../crt invite_popup/invite accept no")]
 options_login = [NodePath("../crt screen_multiplayer login/Login")]
+options_new_account = [NodePath("../crt new_user/user create yes"), NodePath("../crt new_user/user create no")]
 error_label = NodePath("../crt screen_multiplayer login/errorLabel")
 error_label_players = NodePath("../crt screen_multiplayer players/playerErrors")
 invitee_label = NodePath("../crt invite_popup/invite name")
@@ -379,5 +371,64 @@ modulate = Color(0, 1, 0, 1)
 text = "no"
 font = ExtResource("1_xjdpu")
 font_size = 30
+vertical_alignment = 0
+line_spacing = 22.255
+
+[node name="crt new_user" type="Sprite3D" parent="."]
+transform = Transform3D(3.41512, 0, 0, 0, -8.16752e-08, 1, 0, -1.86851, -4.37114e-08, 0.012, 0.63, -0.119825)
+visible = false
+sorting_offset = 1.0
+texture = SubResource("GradientTexture2D_g3pv7")
+
+[node name="user_create_title" type="Label3D" parent="crt new_user"]
+transform = Transform3D(0.195776, -1.06083e-07, 1.88992e-07, 4.25346e-08, 0.468384, 3.67254e-07, -2.98023e-08, 4.01153e-08, 0.771329, -0.00407019, 0.259046, 0.00100058)
+sorting_offset = 5.0
+modulate = Color(0, 1, 0, 1)
+text = "ARE YOU SURE YOU WANT TO CREATE
+A NEW ACCOUNT?"
+font = ExtResource("1_xjdpu")
+font_size = 30
+vertical_alignment = 0
+line_spacing = -0.7
+
+[node name="user_create_title2" type="Label3D" parent="crt new_user"]
+transform = Transform3D(0.195776, -1.06083e-07, 1.88992e-07, 4.25346e-08, 0.468384, 3.67254e-07, -2.98023e-08, 4.01153e-08, 0.771329, -0.00407019, 0.0603365, 0.00100052)
+sorting_offset = 5.0
+modulate = Color(0, 1, 0, 1)
+text = "NOTE: YOU WILL NO LONGER BE ABLE TO ACCESS 
+YOUR CURRENT ACCOUNT!"
+font = ExtResource("1_xjdpu")
+font_size = 21
+vertical_alignment = 0
+line_spacing = -0.7
+
+[node name="underline" type="Label3D" parent="crt new_user"]
+transform = Transform3D(0.195776, -1.06083e-07, 1.88992e-07, 4.25346e-08, 0.468384, 3.67254e-07, -2.98023e-08, 4.01153e-08, 0.771329, -0.30707, -0.0519416, 0.00100011)
+sorting_offset = 5.0
+modulate = Color(0, 1, 0, 1)
+text = "-------------------------------"
+font = ExtResource("1_xjdpu")
+font_size = 30
+horizontal_alignment = 0
+vertical_alignment = 0
+line_spacing = 22.255
+
+[node name="user create yes" type="Label3D" parent="crt new_user"]
+transform = Transform3D(0.195776, -1.06083e-07, 1.88992e-07, 4.25346e-08, 0.468384, 3.67254e-07, -2.98023e-08, 4.01153e-08, 0.771329, -0.0711077, -0.156138, 0.00100011)
+sorting_offset = 5.0
+modulate = Color(0, 1, 0, 1)
+text = "YES"
+font = ExtResource("1_xjdpu")
+font_size = 38
+vertical_alignment = 0
+line_spacing = 22.255
+
+[node name="user create no" type="Label3D" parent="crt new_user"]
+transform = Transform3D(0.195776, -1.06083e-07, 1.88992e-07, 4.25346e-08, 0.468384, 3.67254e-07, -2.98023e-08, 4.01153e-08, 0.771329, 0.0655219, -0.156138, 0.00100011)
+sorting_offset = 5.0
+modulate = Color(0, 1, 0, 1)
+text = "no"
+font = ExtResource("1_xjdpu")
+font_size = 38
 vertical_alignment = 0
 line_spacing = 22.255
