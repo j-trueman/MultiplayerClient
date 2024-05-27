@@ -5,7 +5,6 @@ signal player_disconnected(peerId)
 signal server_disconnected
 signal player_list(playerDict)
 signal loginStatus(statusFlag)
-signal inviteStatus(status)
 
 var players = {}
 var accountName = null
@@ -62,13 +61,13 @@ func getUsernameFromFile():
 	print(line)
 	return line
 
-@rpc("authority")
+@rpc("any_peer")
 func notifySuccessfulLogin():
 	print("SUCCESSFULLY LOGGED IN AS %s" % accountName)
 	loginStatus.emit(0, "SUCCESS")
 	loggedIn = true
 
-@rpc("authority")
+@rpc("any_peer")
 func closeSession(reason):
 	multiplayer.multiplayer_peer = null
 	loggedIn = false
@@ -129,33 +128,34 @@ func receiveUserCreationStatus(return_value: bool):
 func requestSenderUsername():
 	receiveSenderUsername.rpc(accountName)
 	
-@rpc("authority")
+@rpc("any_peer")
 func receiveUserKey(keyString):
 	var keyFile = CryptoKey.new()
 	keyFile.load_from_string(keyString)
 	keyFile.save("res://privatekey.key")
 	doLoginStuff()
 
-@rpc("authority")
+@rpc("any_peer")
 func receivePlayerList(dict):
 	player_list.emit(dict)
 
-@rpc("authority")
-func receiveInvite(fromUsername, fromID):
+@rpc("any_peer")
+func receiveInvite(senderUsername):
 	var crtManager = GlobalVariables.get_current_scene_node().get_node("standalone managers/crt manager")
-	crtManager.OpenInvite(fromUsername, fromID)
+	crtManager.OpenInvite(senderUsername)
 
 @rpc("any_peer")
-func receiveInviteStatus(status):
-	inviteStatus.emit(status)
+func sendInviteStatus(receiverUsername, status):
+	var crtManager = GlobalVariables.get_current_scene_node().get_node("standalone managers/crt manager")
+	crtManager.emit_signal("inviteStatus", receiverUsername, status)
 
 # GHOST FUNCTIONS
 @rpc("any_peer", "reliable") func createNewMultiplayerUser(username: String) : pass
 @rpc("any_peer") func verifyUserCreds(username: String, key): pass
 @rpc("any_peer") func receiveSenderUsername(username): pass
 @rpc("any_peer") func requestPlayerList(): pass
-@rpc("any_peer") func inviteUser(id, sender): pass
-@rpc("any_peer") func sendInviteStatus(id, status): pass
+@rpc("any_peer") func inviteUser(receiverUsername): pass
+@rpc("any_peer") func receiveInviteStatus(status): pass
 
 # DEBUG INPUTS
 func _input(ev):

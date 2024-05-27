@@ -32,15 +32,13 @@ func install_script_extensions() -> void:
 	for extension in extensions:
 		ModLoaderMod.install_script_extension(extensions_dir_path+extension+".gd")
 
-
-var fixed = false
-var repeated = false
+var injected = false
 var scene
 	
 func _process(delta):
 	scene = GlobalVariables.get_current_scene_node()
-	if not fixed:
-		fixed = true
+	if not injected:
+		injected = true
 		var root = get_tree().root
 		var manager = MultiplayerManager.new()
 		manager.name = "MultiplayerManager"
@@ -51,11 +49,13 @@ func _process(delta):
 		multiplayerRoundManager.name = "multiplayer round manager"
 		manager.add_child(multiplayerRoundManager)
 		
-	if scene.name == "menu" && !repeated:
+	if scene.name == "menu" && not scene.has_node("fixed"):
+		var fixed = Node.new()
+		fixed.name = "fixed"
+		scene.add_child(fixed)
 		var logo = scene.get_node("title")
 		var logoMat = logo.get_active_material(0)
 		var image = Image.load_from_file("res://mods-unpacked/GlitchedData-MultiPlayer/media/MultiPlayer.png")
 		var texture = ImageTexture.create_from_image(image)
 		logoMat.albedo_texture = texture
 		logo.mesh.surface_set_material(0,logoMat)
-		repeated = true

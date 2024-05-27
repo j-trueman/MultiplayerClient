@@ -1,6 +1,6 @@
 [gd_scene load_steps=6 format=3 uid="uid://bgoajj5urpdor"]
 
-[ext_resource type="FontFile" uid="uid://bquox4twb507h" path="res://fonts/fake receipt.otf" id="1_xjdpu"]
+[ext_resource type="FontFile" path="res://fonts/fake receipt.otf" id="1_xjdpu"]
 [ext_resource type="Script" path="res://mods-unpacked/GlitchedData-MultiPlayer/utils/InputBox.gd" id="2_1xaum"]
 [ext_resource type="Script" path="res://mods-unpacked/GlitchedData-MultiPlayer/utils/MultiplayerMenu.gd" id="2_2r4ws"]
 
@@ -13,7 +13,6 @@ fill_from = Vector2(0.513761, 1)
 fill_to = Vector2(0.518349, 0)
 
 [node name="crt screen_multiplayer" type="Node3D"]
-visible = false
 
 [node name="multiplayer title" type="Label3D" parent="."]
 transform = Transform3D(0.668599, -3.63216e-07, 6.10948e-07, -2.98023e-08, 1.04308e-07, 0.771329, -8.00937e-08, -0.87518, -6.85453e-07, -0.00273764, 0.621937, -1.28315)
@@ -300,17 +299,20 @@ font_size = 24
 vertical_alignment = 0
 line_spacing = 21.9
 
-[node name="multiplayermenu" type="Node" parent="." node_paths=PackedStringArray("screenparent_players", "screenparent_invite", "screenparent_login", "options_players", "options_invite", "options_login", "error_label", "error_label_players", "invitee_label")]
+[node name="multiplayermenu" type="Node" parent="." node_paths=PackedStringArray("screenparent_players", "screenparent_invite", "screenparent_login", "screenparent_ready", "options_players", "options_invite", "options_login", "error_label", "error_label_players", "invitee_label", "ready_username", "ready_opponent")]
 script = ExtResource("2_2r4ws")
 screenparent_players = NodePath("../crt screen_multiplayer players")
 screenparent_invite = NodePath("../crt invite_popup")
 screenparent_login = NodePath("../crt screen_multiplayer login")
+screenparent_ready = NodePath("../crt ready")
 options_players = [NodePath("../crt screen_multiplayer players/players outline_top/name list_1"), NodePath("../crt screen_multiplayer players/players outline_top/name list_2"), NodePath("../crt screen_multiplayer players/players outline_top/name list_3"), NodePath("../crt screen_multiplayer players/players outline_top/name list_4"), NodePath("../crt screen_multiplayer players/players outline_top/name list_5"), NodePath("../crt screen_multiplayer players/players outline_top/name list_6"), NodePath("../crt screen_multiplayer players/players outline_top/name list_7")]
 options_invite = [NodePath("../crt invite_popup/invite accept yes"), NodePath("../crt invite_popup/invite accept no")]
 options_login = [NodePath("../crt screen_multiplayer login/Login")]
 error_label = NodePath("../crt screen_multiplayer login/errorLabel")
 error_label_players = NodePath("../crt screen_multiplayer players/playerErrors")
 invitee_label = NodePath("../crt invite_popup/invite name")
+ready_username = NodePath("../crt ready/username")
+ready_opponent = NodePath("../crt ready/opponent")
 
 [node name="crt invite_popup" type="Sprite3D" parent="."]
 transform = Transform3D(3.20964, 0, 0, 0, -7.63488e-08, 1, 0, -1.74666, -4.37114e-08, 0.012, 0.63, -0.327)
@@ -377,6 +379,71 @@ transform = Transform3D(0.20831, -1.12874e-07, 2.01091e-07, 4.5502e-08, 0.50106,
 sorting_offset = 5.0
 modulate = Color(0, 1, 0, 1)
 text = "no"
+font = ExtResource("1_xjdpu")
+font_size = 30
+vertical_alignment = 0
+line_spacing = 22.255
+
+[node name="crt ready" type="Sprite3D" parent="."]
+transform = Transform3D(3.20964, 0, 0, 0, -7.63488e-08, 1, 0, -1.74666, -4.37114e-08, 0.012, 0.63, -0.327)
+visible = false
+sorting_offset = 1.0
+texture = SubResource("GradientTexture2D_g3pv7")
+
+[node name="ready title" type="Label3D" parent="crt ready"]
+transform = Transform3D(0.20831, -1.12874e-07, 2.01091e-07, 4.5502e-08, 0.50106, 3.92875e-07, -2.98023e-08, 4.01153e-08, 0.771329, -0.291015, 0.296886, 0.0010004)
+sorting_offset = 5.0
+modulate = Color(0, 1, 0, 1)
+text = "INVITE ACCEPTED!"
+font = ExtResource("1_xjdpu")
+font_size = 30
+horizontal_alignment = 0
+vertical_alignment = 0
+line_spacing = 22.255
+
+[node name="underline" type="Label3D" parent="crt ready"]
+transform = Transform3D(0.20831, -1.12874e-07, 2.01091e-07, 4.5502e-08, 0.50106, 3.92875e-07, -2.98023e-08, 4.01153e-08, 0.771329, -0.295, 0.235, 0.001)
+sorting_offset = 5.0
+modulate = Color(0, 1, 0, 1)
+text = "----------------------------"
+font = ExtResource("1_xjdpu")
+font_size = 30
+horizontal_alignment = 0
+vertical_alignment = 0
+line_spacing = 22.255
+
+[node name="username" type="Label3D" parent="crt ready"]
+transform = Transform3D(0.20831, -1.12874e-07, 2.01091e-07, 4.5502e-08, 0.50106, 3.92875e-07, -2.98023e-08, 4.01153e-08, 0.771329, 0, 0.135, 0)
+sorting_offset = 5.0
+modulate = Color(0, 1, 0, 1)
+text = "GLITCHEDDATA64"
+font = ExtResource("1_xjdpu")
+font_size = 30
+vertical_alignment = 0
+
+[node name="vs" type="Label3D" parent="crt ready"]
+transform = Transform3D(0.20831, -1.12874e-07, 2.01091e-07, 4.5502e-08, 0.50106, 3.92875e-07, -2.98023e-08, 4.01153e-08, 0.771329, 0, 0.042, 0)
+sorting_offset = 5.0
+modulate = Color(0, 1, 0, 1)
+text = "VS"
+font = ExtResource("1_xjdpu")
+font_size = 30
+vertical_alignment = 0
+
+[node name="opponent" type="Label3D" parent="crt ready"]
+transform = Transform3D(0.20831, -1.12874e-07, 2.01091e-07, 4.5502e-08, 0.50106, 3.92875e-07, -2.98023e-08, 4.01153e-08, 0.771329, 0, -0.053, 0)
+sorting_offset = 5.0
+modulate = Color(0, 1, 0, 1)
+text = "GLITCHEDDATA64"
+font = ExtResource("1_xjdpu")
+font_size = 30
+vertical_alignment = 0
+
+[node name="start" type="Label3D" parent="crt ready"]
+transform = Transform3D(0.20831, -1.12874e-07, 2.01091e-07, 4.5502e-08, 0.50106, 3.92875e-07, -2.98023e-08, 4.01153e-08, 0.771329, 0, -0.211, 0)
+sorting_offset = 5.0
+modulate = Color(0, 1, 0, 1)
+text = "[START]"
 font = ExtResource("1_xjdpu")
 font_size = 30
 vertical_alignment = 0

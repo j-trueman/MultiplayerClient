@@ -6,11 +6,11 @@ var multiplayerMenuManager
 var playerList
 var playerListPage = 0
 var maxListPages
-var inviteeID
 var inviteeUsername
 var refreshing
 var deniedUsers = []
-#var joinSound = preload("res://audio/pill select1.ogg")
+
+signal inviteStatus(username, status)
 
 func _unhandled_input(event):
 	if (event.is_action_pressed("ui_accept") && viewing):
@@ -22,9 +22,23 @@ func _unhandled_input(event):
 	if (event.is_action_pressed("ui_right") && viewing):
 		Interaction("right")
 
+func SetCRT(state : bool):
+	if (state):
+		bathroom_normal.set_layer_mask_value(1, false)
+		bathroom_broken.visible = true
+		for obj in objarray_normal: obj.visible = false
+		for obj in objarray_broken: obj.visible = true
+		mask.visible = true
+	else:
+		bathroom_normal.set_layer_mask_value(1, true)
+		bathroom_broken.visible = false
+		for obj in objarray_normal: obj.visible = true
+		for obj in objarray_broken: obj.visible = false
+		mask.visible = false
+
 func Bootup():
+	inviteStatus.connect(processInviteStatus)
 	multiplayerManager = get_tree().root.get_node("MultiplayerManager")
-	multiplayerManager.inviteStatus.connect(receiveInviteStatus)
 	multiplayerMenuManager = screenparent_multiplayer.get_node("multiplayermenu")
 	has_exited = false
 	board.lock.material_override.albedo_color = Color(1, 1, 1, 0)
@@ -69,7 +83,7 @@ func DrawNewPage():
 		label.visible = false
 		label.text = ""
 	var currentIndex = playerListPage * 7
-	for i in range(0,7):
+	for i in range(7):
 		if currentIndex > len(playerList) - 1:
 			break
 		var label = multiplayerMenuManager.options_players[i]
@@ -195,18 +209,25 @@ func SelectOption():
 			var currentIndex = playerListPage  * 7
 			var userIndex = currentIndex + multiplayerMenuManager.options_index
 			multiplayerManager.invitePendingIdx = [multiplayerMenuManager.options_index, playerListPage]
-			var playerID = playerList.values()[userIndex]
-			multiplayerManager.inviteUser.rpc(playerID, multiplayerManager.accountName)
+			var receiverUsername = playerList.keys()[userIndex]
+			multiplayerManager.inviteUser.rpc(receiverUsername)
+		3:
+			intro.roundManager.playerData.playername = multiplayerManager.accountName.to_upper()
+			intro.dealerName.text = inviteeUsername.to_upper()
+			Interaction("exit")
+			intro.speaker_pillselect.play()
+			await get_tree().create_timer(2.5, false).timeout
+			SetCRT(false)
+			inviteeUsername = null
 
-func OpenInvite(fromUsername, fromID):
-	if fromUsername in deniedUsers:
+func OpenInvite(senderUsername):
+	if senderUsername in deniedUsers:
 		return
 	multiplayerManager.invitePendingIdx = 0
 	multiplayerMenuManager.screenparent_invite.visible = true
 	multiplayerMenuManager.options_index = 0
-	multiplayerMenuManager.invitee_label.text = fromUsername
-	inviteeUsername = fromUsername
-	inviteeID = fromID
+	multiplayerMenuManager.invitee_label.text = senderUsername
+	inviteeUsername = senderUsername
 	window_index = 1
 	HighlightOption("invite", 0)
 	
@@ -214,24 +235,16 @@ func CloseInvite(action : String):
 	var roundManager = multiplayerManager.get_child(0)
 	multiplayerManager.invitePendingIdx = null
 	if action == "accept":
-		roundManager.receiveJoinMatch.rpc()
-		multiplayerManager.sendInviteStatus.rpc(inviteeID, "accept")
-		Interaction("exit")
-		var player = AudioStreamPlayer2D.new()
-		GlobalVariables.get_current_scene_node().add_child(player)
-#		player.stream = joinSound
-#		player.volume_db = 2.5
-#		player.play()
-		await get_tree().create_timer(2.5, false).timeout
-		SetCRT(false)
-		inviteeID = null
-		inviteeUsername = null
-		return
-	multiplayerManager.sendInviteStatus.rpc(inviteeID, "deny")
-	deniedUsers.append(inviteeUsername)
-	inviteeID = null
-	inviteeUsername = null
-	MultiplayerStartup()
+		multiplayerManager.receiveInviteStatus.rpc("accept")
+		window_index = 3
+		multiplayerMenuManager.ready_username.text = multiplayerManager.accountName
+		multiplayerMenuManager.ready_opponent.text = inviteeUsername
+		multiplayerMenuManager.screenparent_invite.visible = false
+		multiplayerMenuManager.screenparent_ready.visible = true
+	else:
+		multiplayerManager.receiveInviteStatus.rpc("deny")
+		deniedUsers.append(inviteeUsername)
+		MultiplayerStartup()
 
 func HighlightOption(screen : String, optionIdx : int):
 	match screen:
@@ -296,31 +309,18 @@ func clearError():
 	await get_tree().create_timer(5, false).timeout
 	multiplayerMenuManager.error_label_players.text = ""
 	multiplayerMenuManager.error_label.text = ""
-
-#func cancelInvite():
-#	if multiplayerMenuManager.screenparent_invite.visible == true:
-#		CloseInvite("deny")
-#	else:
-#		receiveInviteStatus("deny")
 	
-func receiveInviteStatus(status):
+func processInviteStatus(username, status):
 	multiplayerManager.invitePendingIdx = null
-	if status == "accept":
-		var roundManager = multiplayerManager.get_child(0)
-		roundManager.receiveJoinMatch.rpc()
-		Interaction("exit")
-		var player = AudioStreamPlayer2D.new()
-		GlobalVariables.get_current_scene_node().add_child(player)
-#		player.stream = joinSound
-#		player.volume_db = 2.5
-#		player.play()
-		await get_tree().create_timer(2.5, false).timeout
-		SetCRT(false)
-		inviteeID = null
-		inviteeUsername = null
-		return
-	else:
-		multiplayerMenuManager.error_label_players.text = "ERROR: INVITE DECLINED"
-		inviteeID = null
-		inviteeUsername = null
-		return
+	match status:
+		"accept":
+			inviteeUsername = username
+			window_index = 3
+			multiplayerMenuManager.ready_username.text = multiplayerManager.accountName
+			multiplayerMenuManager.ready_opponent.text = inviteeUsername
+			multiplayerMenuManager.screenparent_invite.visible = false
+			multiplayerMenuManager.screenparent_ready.visible = true
+		"busy":
+			multiplayerMenuManager.error_label_players.text = "ERROR: USER HAS PENDING INVITE, TRY AGAIN"
+		"deny":
+			multiplayerMenuManager.error_label_players.text = "ERROR: INVITE DECLINED"
