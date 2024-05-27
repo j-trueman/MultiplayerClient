@@ -4,7 +4,7 @@ var manager
 var interaction
 
 func _ready():
-	manager = get_tree().get_root().get_node("MultiplayerManager/multiplayer round manager")
+	manager = get_tree().get_root().get_node("MultiplayerManager/MultiplayerRoundManager")
 	interaction = GlobalVariables.get_current_scene_node().get_node("standalone managers/interaction manager")
 
 func Shoot(who : String):

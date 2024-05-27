@@ -4,9 +4,9 @@ var manager
 var dealerHasShot = false
 
 func _ready():
-	manager = get_tree().get_root().get_node("MultiplayerManager/multiplayer round manager")
+	manager = get_tree().get_root().get_node("MultiplayerManager/MultiplayerRoundManager")
 	manager.actionValidation.connect(PerformDealerAction)
-	manager.timeoutAdenaline.connect(Timeout)
+#	manager.timeoutAdenaline.connect(Timeout)
 
 func Timeout():
 	stealing = false
@@ -44,7 +44,7 @@ func PerformDealerAction(action, result):
 			"shoot opponent":
 				Shoot_New("player", result)
 			_:
-				var dealerIdx = 1 if manager.players[0].values()[0] == manager.get_parent().accountName else 0
+				var dealerIdx = 1 if manager.players[0] == multiplayer.get_unique_id() else 0
 				var action_temp = action
 				action = itemManager.itemsOnTable[dealerIdx][int(action)]
 				if dealerHoldingShotgun:

@@ -10,7 +10,7 @@ var badEnding = false
 signal newAction
 
 func _ready():
-	manager = get_tree().get_root().get_node("MultiplayerManager/multiplayer round manager")
+	manager = get_tree().get_root().get_node("MultiplayerManager/MultiplayerRoundManager")
 	manager.actionValidation.connect(actionValidation)
 	burnerPhone = GlobalVariables.get_current_scene_node().get_node("standalone managers/burner phone manager")
 
@@ -23,7 +23,7 @@ func actionValidation(action_var, result_var):
 func InteractWith(alias : String):
 	match alias:
 		"item":
-			var playerIdx = 0 if manager.players[0].values()[0] == manager.get_parent().accountName else 1
+			var playerIdx = 0 if manager.players[0] == multiplayer.get_unique_id() else 1
 			var idx = str(activeInteractionBranch.itemGridIndex)
 			actionValidation_flag = false
 			manager.receiveActionValidation.rpc(idx)

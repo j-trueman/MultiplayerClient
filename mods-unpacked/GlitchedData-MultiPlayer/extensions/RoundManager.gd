@@ -11,10 +11,9 @@ var score = 0
 signal setLoadInfo
 
 func _ready():
-	manager = get_tree().get_root().get_node("MultiplayerManager/multiplayer round manager")
+	manager = get_tree().get_root().get_node("MultiplayerManager/MultiplayerRoundManager")
 	manager.loadInfo.connect(loadInfo)
 	GlobalVariables.get_current_scene_node().get_node("standalone managers/endless mode").SetupEndless()
-	playerData.playername = manager.get_parent().accountName.to_upper()
 	playerData.hasSignedWaiver = true
 	super()
 	roundArray = []
@@ -199,7 +198,7 @@ func LoadShells():
 	await get_tree().create_timer(.8, false).timeout
 	shellLoader.animator_shotgun.play("enemy put down shotgun")
 	shellLoader.DealerHandsDropShotgun()
-	if (manager.players[currentPlayerTurn].values()[0] == manager.get_parent().accountName):
+	if (manager.players[currentPlayerTurn] == multiplayer.get_unique_id()):
 		camera.BeginLerp("home")
 		#ALLOW INTERACTION
 		playerCurrentTurnItemArray = []

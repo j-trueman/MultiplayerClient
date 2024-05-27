@@ -46,7 +46,7 @@ func _process(delta):
 		root.move_child(scene, root.get_child_count()-2)
 
 		var multiplayerRoundManager = MultiplayerRoundManager.new()
-		multiplayerRoundManager.name = "multiplayer round manager"
+		multiplayerRoundManager.name = "MultiplayerRoundManager"
 		manager.add_child(multiplayerRoundManager)
 		
 	if scene.name == "menu" && not scene.has_node("fixed"):
