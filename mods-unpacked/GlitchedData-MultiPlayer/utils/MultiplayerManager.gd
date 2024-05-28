@@ -10,13 +10,12 @@ var loggedIn = false
 var invitePendingIdx = null
 var peer
 var crtManager
-
-var incomingInvites = []
-var outgoingInvites = []
+var inviteMenu
 
 func _ready():
 	multiplayer.connection_failed.connect(_onConnectionFail)
 	multiplayer.server_disconnected.connect(_onServerDisconnected)
+	
 
 func connectToServer():
 	peer = ENetMultiplayerPeer.new()
@@ -92,12 +91,22 @@ func receivePlayerList(dict):
 
 @rpc("any_peer")
 func receiveInvite(fromUsername, fromID):
-	incomingInvites.append({"id": fromID,"username": fromUsername})
-	crtManager.OpenInvite(fromUsername, fromID)
+	inviteMenu.receiveInvite(fromUsername, fromID)
 
 @rpc("any_peer")
-func receiveInviteStatus(status):
-	crtManager.receiveInviteStatus(status)
+func receiveInviteStatus(username, status):
+	crtManager.processInviteStatus(username, status)
+
+@rpc("any_peer")
+func receiveInviteList(list):
+	inviteMenu.serverInviteList.emit(list)
+
+@rpc("any_peer", "call_local") 
+func acceptInvite(from): 
+	crtManager.Interaction("exit")
+	crtManager.intro.speaker_pillselect.play()
+	await get_tree().create_timer(2.5, false).timeout
+	crtManager.SetCRT(false)
 
 # GHOST FUNCTIONS
 @rpc("any_peer") func requestUserExistsStatus(username : String): pass
@@ -105,7 +114,7 @@ func receiveInviteStatus(status):
 @rpc("any_peer") func verifyUserCreds(keyFileData): pass
 @rpc("any_peer") func requestPlayerList(): pass
 @rpc("any_peer") func createInvite(to : int): pass
-@rpc("any_peer") func acceptInvite(from): pass
-@rpc("any_peer") func denyInvite(from): pass
 @rpc("any_peer") func retractInvite(to): pass
 @rpc("any_peer") func rectractAllInvites(): pass
+@rpc("any_peer") func getInvites(type): pass
+@rpc("any_peer") func denyInvite(from): pass

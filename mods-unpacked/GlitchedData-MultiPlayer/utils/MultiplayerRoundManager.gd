@@ -8,7 +8,7 @@ signal timeoutAdrenaline
 signal actionReady
 signal finished
 
-var players	
+var players
 
 @rpc("any_peer")
 func receivePlayerInfo(): pass

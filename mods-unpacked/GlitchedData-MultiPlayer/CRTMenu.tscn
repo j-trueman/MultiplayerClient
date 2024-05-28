@@ -1,6 +1,6 @@
 [gd_scene load_steps=6 format=3 uid="uid://bgoajj5urpdor"]
 
-[ext_resource type="FontFile" path="res://fonts/fake receipt.otf" id="1_xjdpu"]
+[ext_resource type="FontFile" uid="uid://bquox4twb507h" path="res://fonts/fake receipt.otf" id="1_xjdpu"]
 [ext_resource type="Script" path="res://mods-unpacked/GlitchedData-MultiPlayer/utils/InputBox.gd" id="2_1xaum"]
 [ext_resource type="Script" path="res://mods-unpacked/GlitchedData-MultiPlayer/utils/MultiplayerMenu.gd" id="2_2r4ws"]
 
@@ -13,6 +13,7 @@ fill_from = Vector2(0.513761, 1)
 fill_to = Vector2(0.518349, 0)
 
 [node name="crt screen_multiplayer" type="Node3D"]
+visible = false
 
 [node name="multiplayer title" type="Label3D" parent="."]
 transform = Transform3D(0.668599, -3.63216e-07, 6.10948e-07, -2.98023e-08, 1.04308e-07, 0.771329, -8.00937e-08, -0.87518, -6.85453e-07, -0.00273764, 0.621937, -1.28315)

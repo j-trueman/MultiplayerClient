@@ -7,8 +7,10 @@ var playerList
 var playerListPage = 0
 var maxListPages
 var inviteeUsername
+var inviteeID
 var refreshing
 var deniedUsers = []
+var inGame
 
 signal inviteStatus(username, status)
 
@@ -98,11 +100,11 @@ func DrawNewPage():
 		label.visible = true
 		multiplayerMenuManager.options_players_visible += 1
 		currentIndex += 1
-		if multiplayerManager.invitePendingIdx:
-			if i == multiplayerManager.invitePendingIdx[0] && playerListPage == multiplayerManager.invitePendingIdx[1]:
-				multiplayerMenuManager.options_players[multiplayerMenuManager.options_index].get_child(0).text = "PENDING"
-			else:
-				multiplayerMenuManager.options_players[multiplayerMenuManager.options_index].get_child(0).text = "INVITE"
+#		if multiplayerManager.invitePendingIdx:
+#			if i == multiplayerManager.invitePendingIdx[0] && playerListPage == multiplayerManager.invitePendingIdx[1]:
+#				multiplayerMenuManager.options_players[multiplayerMenuManager.options_index].get_child(0).text = "PENDING"
+#			else:
+#				multiplayerMenuManager.options_players[multiplayerMenuManager.options_index].get_child(0).text = "INVITE"
 
 func Interaction(alias : String):
 	speaker_buttonpress.pitch_scale = randf_range(.8, 1)
@@ -118,8 +120,6 @@ func Interaction(alias : String):
 			branch_window.get_parent().get_child(1).Press()
 			SelectOption()
 		"exit":
-			if multiplayerManager.invitePendingIdx != null:
-				multiplayerManager.closeSession()
 			refreshing = false
 			has_exited = true
 			branch_exit.get_parent().get_child(1).Press()
@@ -183,10 +183,11 @@ func SelectOption():
 			multiplayerManager.requestUserExistsStatus.rpc(multiplayerMenuManager.username_input.textField.text)
 			await multiplayerManager.loginStatus
 		1:
-			if multiplayerMenuManager.options_index == 0:
-				CloseInvite("accept")
-			else:
-				CloseInvite("decline")
+#			if multiplayerMenuManager.options_index == 0:
+#				CloseInvite("accept")
+#			else:
+#				CloseInvite("decline")
+			pass
 		2:
 			if !multiplayerMenuManager.options_players[multiplayerMenuManager.options_index].visible:
 				return
@@ -199,42 +200,36 @@ func SelectOption():
 			multiplayerManager.invitePendingIdx = [multiplayerMenuManager.options_index, playerListPage]
 			var playerID = playerList.values()[userIndex]
 			multiplayerManager.createInvite.rpc(playerID)
-			multiplayerManager.outgoingInvites.append(playerID)
 		3:
-			intro.roundManager.playerData.playername = multiplayerManager.accountName.to_upper()
-			intro.dealerName.text = inviteeUsername.to_upper()
-			Interaction("exit")
-			intro.speaker_pillselect.play()
-			await get_tree().create_timer(2.5, false).timeout
-			SetCRT(false)
-			inviteeUsername = null
+			multiplayerManager.acceptInvite.rpc(inviteeID)
+			
 
-func OpenInvite(senderUsername):
-	if senderUsername in deniedUsers:
-		return
-	multiplayerManager.invitePendingIdx = 0
-	multiplayerMenuManager.screenparent_invite.visible = true
-	multiplayerMenuManager.options_index = 0
-	multiplayerMenuManager.invitee_label.text = senderUsername
-	inviteeUsername = senderUsername
-	window_index = 1
-	HighlightOption("invite", 0)
-	
-func CloseInvite(action : String):
-	var roundManager = multiplayerManager.get_child(0)
-	multiplayerManager.invitePendingIdx = null
-	if action == "accept":
-		multiplayerManager.acceptInvite.rpc(inviteeID)
-		window_index = 3
-		multiplayerMenuManager.ready_username.text = multiplayerManager.accountName
-		multiplayerMenuManager.ready_opponent.text = inviteeUsername
-		multiplayerMenuManager.screenparent_invite.visible = false
-		multiplayerMenuManager.screenparent_ready.visible = true
-	else:
-		multiplayerManager.denyInvite.rpc(inviteeID)
-		deniedUsers.append(inviteeUsername)
-		MultiplayerStartup()
-		inviteeUsername = null
+#func OpenInvite(senderUsername, fromID):
+#	if senderUsername in deniedUsers:
+#		return
+#	multiplayerManager.invitePendingIdx = 0
+#	multiplayerMenuManager.screenparent_invite.visible = true
+#	multiplayerMenuManager.options_index = 0
+#	multiplayerMenuManager.invitee_label.text = senderUsername
+#	inviteeUsername = senderUsername
+#	inviteeID = fromID
+#	window_index = 1
+#	HighlightOption("invite", 0)
+#
+#func CloseInvite(action : String):
+#	var roundManager = multiplayerManager.get_child(0)
+#	multiplayerManager.invitePendingIdx = null
+#	if action == "accept":
+#		window_index = 3
+#		multiplayerMenuManager.ready_username.text = multiplayerManager.accountName
+#		multiplayerMenuManager.ready_opponent.text = inviteeUsername
+#		multiplayerMenuManager.screenparent_invite.visible = false
+#		multiplayerMenuManager.screenparent_ready.visible = true
+#	else:
+#		multiplayerManager.denyInvite.rpc(inviteeID)
+#		deniedUsers.append(inviteeUsername)
+#		MultiplayerStartup()
+#		inviteeUsername = null
 
 func HighlightOption(screen : String, optionIdx : int):
 	match screen:
@@ -289,11 +284,11 @@ func refreshPlayerList():
 			label.visible = true
 			multiplayerMenuManager.options_players_visible += 1
 			currentIndex += 1
-			if multiplayerManager.invitePendingIdx:
-				if i == multiplayerManager.invitePendingIdx[0] && playerListPage == multiplayerManager.invitePendingIdx[1]:
-					multiplayerMenuManager.options_players[i].get_child(0).text = "PENDING"
-				else:
-					multiplayerMenuManager.options_players[i].get_child(0).text = "INVITE"
+#			if multiplayerManager.invitePendingIdx:
+#				if i == multiplayerManager.invitePendingIdx[0] && playerListPage == multiplayerManager.invitePendingIdx[1]:
+#					multiplayerMenuManager.options_players[i].get_child(0).text = "PENDING"
+#				else:
+#					multiplayerMenuManager.options_players[i].get_child(0).text = "INVITE"
 		HighlightOption("players", multiplayerMenuManager.options_index)
 
 func clearError():
@@ -305,12 +300,20 @@ func processInviteStatus(username, status):
 	multiplayerManager.invitePendingIdx = null
 	match status:
 		"accept":
-			inviteeUsername = username
-			window_index = 3
-			multiplayerMenuManager.ready_username.text = multiplayerManager.accountName
-			multiplayerMenuManager.ready_opponent.text = inviteeUsername
-			multiplayerMenuManager.screenparent_invite.visible = false
-			multiplayerMenuManager.screenparent_ready.visible = true
+			if !inGame:
+				intro.roundManager.playerData.playername = multiplayerManager.accountName.to_upper()
+				intro.dealerName.text = username.to_upper()
+				Interaction("exit")
+				intro.speaker_pillselect.play()
+				await get_tree().create_timer(2.5, false).timeout
+				SetCRT(false)
+#			inviteeUsername = username
+#			window_index = 3
+#			multiplayerMenuManager.ready_username.text = multiplayerManager.accountName
+#			multiplayerMenuManager.ready_opponent.text = inviteeUsername
+#			multiplayerMenuManager.screenparent_invite.visible = false
+#			multiplayerMenuManager.screenparent_ready.visible = true
+#			multiplayerMenuManager.screenparent_ready.get_node("start").visbile = false
 		"busy":
 			multiplayerMenuManager.error_label_players.text = "ERROR: USER HAS PENDING INVITE, TRY AGAIN"
 			inviteeUsername = null
@@ -342,6 +345,6 @@ func receiveLoginStatus(statusFlag, reason):
 		return
 	else:
 		multiplayerMenuManager.error_label.text = "ERROR: %s" % reason
-		multiplayerManager.accountName = null
+#		multiplayerManager.accountName = null
 		clearError()
 		return

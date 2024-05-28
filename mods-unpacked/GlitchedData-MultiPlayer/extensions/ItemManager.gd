@@ -16,8 +16,9 @@ func _ready():
 func items(itemsForPlayers_var):
 	await get_tree().create_timer(1, false).timeout
 	itemsForPlayers = itemsForPlayers_var
-	var playerIdx = 0 if manager.players[0] == multiplayer.get_unique_id() else 1
-	roundManager.roundArray[roundManager.currentRound].numberOfItemsToGrab = itemsForPlayers[playerIdx].size()
+	if manager.players:
+		var playerIdx = 0 if manager.players[0] == multiplayer.get_unique_id() else 1
+		roundManager.roundArray[roundManager.currentRound].numberOfItemsToGrab = itemsForPlayers[playerIdx].size()
 
 func BeginItemGrabbing():
 	itemTableIdxArray.clear()

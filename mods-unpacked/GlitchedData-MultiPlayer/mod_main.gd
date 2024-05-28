@@ -3,6 +3,7 @@ extends Node
 const AUTHORNAME_MODNAME_DIR := "GlitchedData-MultiPlayer"
 const MultiplayerManager = preload("utils/MultiplayerManager.gd")
 const MultiplayerRoundManager = preload("utils/MultiplayerRoundManager.gd")
+const InviteMenu = preload("res://mods-unpacked/GlitchedData-MultiPlayer/InviteMenu.tscn")
 
 var mod_dir_path := ""
 var extensions_dir_path := ""
@@ -40,6 +41,7 @@ func _process(delta):
 	if not injected:
 		injected = true
 		var root = get_tree().root
+		
 		var manager = MultiplayerManager.new()
 		manager.name = "MultiplayerManager"
 		root.add_child(manager)
@@ -48,6 +50,15 @@ func _process(delta):
 		var multiplayerRoundManager = MultiplayerRoundManager.new()
 		multiplayerRoundManager.name = "MultiplayerRoundManager"
 		manager.add_child(multiplayerRoundManager)
+		
+	if scene.name == "main" && not scene.has_node("fixed"):
+		var fixed = Node.new()
+		fixed.name = "fixed"
+		scene.add_child(fixed)
+		
+		var inviteMenu = load("res://mods-unpacked/GlitchedData-MultiPlayer/InviteMenu.tscn").instantiate()
+		inviteMenu.name = "invite menu"
+		scene.get_node("Camera/dialogue UI").add_child(inviteMenu)
 		
 	if scene.name == "menu" && not scene.has_node("fixed"):
 		var fixed = Node.new()
