@@ -33,18 +33,12 @@ func _unhandled_input(event):
 		Interaction("right")
 
 func SetCRT(state : bool):
-	if (state):
-		bathroom_normal.set_layer_mask_value(1, false)
-		bathroom_broken.visible = true
-		for obj in objarray_normal: obj.visible = false
-		for obj in objarray_broken: obj.visible = true
-		mask.visible = true
-	else:
-		bathroom_normal.set_layer_mask_value(1, true)
-		bathroom_broken.visible = false
-		for obj in objarray_normal: obj.visible = true
-		for obj in objarray_broken: obj.visible = false
-		mask.visible = false
+	bathroom_normal.set_layer_mask_value(1, not state)
+	bathroom_broken.visible = state
+	for obj in objarray_normal: obj.visible = not state
+	for obj in objarray_broken: obj.visible = state
+	mask.visible = state
+	GlobalVariables.get_current_scene_node().get_node("intro parent/bathroom door/interaction branch_bathroom door").interactionInvalid = state
 
 func Bootup():
 	multiplayerMenuManager = screenparent_multiplayer.get_node("multiplayermenu")
@@ -301,12 +295,14 @@ func processInviteStatus(username, status):
 	match status:
 		"accept":
 			if !inGame:
+				GlobalVariables.get_current_scene_node().get_node("Camera/dialogue UI/invite menu").queue_free()
 				intro.roundManager.playerData.playername = multiplayerManager.accountName.to_upper()
 				intro.dealerName.text = username.to_upper()
 				Interaction("exit")
 				intro.speaker_pillselect.play()
 				await get_tree().create_timer(2.5, false).timeout
 				SetCRT(false)
+				
 #			inviteeUsername = username
 #			window_index = 3
 #			multiplayerMenuManager.ready_username.text = multiplayerManager.accountName

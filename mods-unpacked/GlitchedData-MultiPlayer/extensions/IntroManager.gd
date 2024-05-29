@@ -10,6 +10,7 @@ func _ready():
 	MainBathroomStart()
 	crtManager.SetCRT(true)
 	intbranch_crt.interactionAllowed = true
+	GlobalVariables.get_current_scene_node().get_node("intro parent/bathroom door/interaction branch_bathroom door").interactionInvalid = true
 	
 	var multiplayerMenu = load("res://mods-unpacked/GlitchedData-MultiPlayer/CRTMenu.tscn").instantiate()
 	multiplayerMenu.name = "crt screen_multiplayer"

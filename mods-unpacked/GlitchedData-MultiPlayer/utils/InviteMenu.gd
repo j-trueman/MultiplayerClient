@@ -14,6 +14,8 @@ signal serverInviteList(invites)
 
 var inviteShowQueue = []
 var multiplayerManager
+var cursorManager
+var interactionManager
 
 signal inviteFinished
 
@@ -23,9 +25,24 @@ func _ready():
 	menuButton.button_down.connect(toggleMenu)
 	incomingButton.button_down.connect(func(): updateInviteList("incoming"))
 	outgoingButton.button_down.connect(func(): updateInviteList("outgoing"))
-	
+
+	cursorManager = GlobalVariables.get_current_scene_node().get_node("standalone managers/cursor manager")
+	interactionManager = GlobalVariables.get_current_scene_node().get_node("standalone managers/interaction manager")
+	var buttons = [menuButton, incomingButton, outgoingButton]
+	for button_toConnect in buttons:
+		button_toConnect.focus_entered.connect(func(): setCursorImage("hover"))
+		button_toConnect.mouse_entered.connect(func(): setCursorImage("hover"))
+		button_toConnect.focus_exited.connect(func(): setCursorImage("point"))
+		button_toConnect.mouse_exited.connect(func(): setCursorImage("point"))
+
 	var menuTexture = ImageTexture.create_from_image(Image.load_from_file("res://mods-unpacked/GlitchedData-MultiPlayer/media/burger.png"))
 	menuButton.set_button_icon(menuTexture)
+
+func setCursorImage(alias):
+	match alias:
+		"hover": interactionManager.checking = false
+		"point": interactionManager.checking = true
+	cursorManager.SetCursorImage(alias)
 
 func toggleMenu():
 	if inviteContainer.visible:

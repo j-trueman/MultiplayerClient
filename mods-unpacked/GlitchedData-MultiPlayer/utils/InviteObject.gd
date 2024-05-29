@@ -10,6 +10,8 @@ var inviteFromUsername : String
 var inviteFromID : int
 var isInMenu = false
 var inviteMenu
+var cursorManager
+var interactionManager
 
 func _ready():
 	animationPlayer.animation_finished.connect(destroy)
@@ -25,6 +27,21 @@ func _ready():
 	var crossButton = get_node("decline")
 	var crossTexture = ImageTexture.create_from_image(Image.load_from_file("res://mods-unpacked/GlitchedData-MultiPlayer/media/cross.png"))
 	crossButton.set_button_icon(crossTexture)
+
+	cursorManager = GlobalVariables.get_current_scene_node().get_node("standalone managers/cursor manager")
+	interactionManager = GlobalVariables.get_current_scene_node().get_node("standalone managers/interaction manager")
+	var buttons = [acceptButton, denyButton]
+	for button_toConnect in buttons:
+		button_toConnect.focus_entered.connect(func(): setCursorImage("hover"))
+		button_toConnect.mouse_entered.connect(func(): setCursorImage("hover"))
+		button_toConnect.focus_exited.connect(func(): setCursorImage("point"))
+		button_toConnect.mouse_exited.connect(func(): setCursorImage("point"))
+
+func setCursorImage(alias):
+	match alias:
+		"hover": interactionManager.checking = false
+		"point": interactionManager.checking = true
+	cursorManager.SetCursorImage(alias)
 
 func setup(username, id, menu, isOutgoing = false):
 	inviteFromUsername = username
