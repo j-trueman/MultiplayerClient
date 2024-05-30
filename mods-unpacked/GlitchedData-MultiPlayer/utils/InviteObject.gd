@@ -18,13 +18,11 @@ func _ready():
 	var iconTexture = ImageTexture.create_from_image(Image.load_from_file("res://mods-unpacked/GlitchedData-MultiPlayer/media/profile.png"))
 	icon.set_texture(iconTexture)
 	
-	var tickButton = get_node("accept")
 	var tickTexture = ImageTexture.create_from_image(Image.load_from_file("res://mods-unpacked/GlitchedData-MultiPlayer/media/tick.png"))
-	tickButton.set_button_icon(tickTexture)
+	acceptButton.set_button_icon(tickTexture)
 	
-	var crossButton = get_node("decline")
 	var crossTexture = ImageTexture.create_from_image(Image.load_from_file("res://mods-unpacked/GlitchedData-MultiPlayer/media/cross.png"))
-	crossButton.set_button_icon(crossTexture)
+	denyButton.set_button_icon(crossTexture)
 
 func setup(username, id, menu, isOutgoing = false):
 	inviteFromUsername = username
@@ -46,10 +44,16 @@ func acceptPressed():
 	inviteMenu.multiplayerManager.acceptInvite.rpc(inviteFromID)
 	inviteMenu.multiplayerManager.crtManager.intro.roundManager.playerData.playername = inviteMenu.multiplayerManager.accountName.to_upper()
 	inviteMenu.multiplayerManager.crtManager.intro.dealerName.text = inviteFromUsername.to_upper()
+	inviteMenu.inviteShowQueue.erase(inviteFromID)
+	inviteMenu.inviteContainer.visible = false
+	inviteMenu.incomingButton.visible = false
+	inviteMenu.outgoingButton.visible = false
+	inviteMenu.buttonHighlightAnimator.get_parent().visible = false
 	self.queue_free()
 
 func denyPressed():
 	inviteMenu.multiplayerManager.denyInvite.rpc(inviteFromID)
+	inviteMenu.inviteShowQueue.erase(inviteFromID)
 	self.queue_free()
 	
 func cancelPressed():

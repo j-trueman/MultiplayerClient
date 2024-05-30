@@ -1,0 +1,440 @@
+[gd_scene load_steps=15 format=3 uid="uid://bx7fk0shftvp5"]
+
+[ext_resource type="Script" path="res://mods-unpacked/GlitchedData-MultiPlayer/utils/InviteMenu.gd" id="1_78ny8"]
+[ext_resource type="Texture2D" uid="uid://njbl1u3wf3yg" path="res://mods-unpacked/GlitchedData-MultiPlayer/media/burger.png" id="2_5o3ae"]
+[ext_resource type="FontFile" uid="uid://bquox4twb507h" path="res://fonts/fake receipt.otf" id="3_o4kq5"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_jvphg"]
+bg_color = Color(1, 1, 1, 0.121569)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_hk0tl"]
+bg_color = Color(0.6, 0.6, 0.6, 0)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_i21ws"]
+bg_color = Color(0.6, 0.6, 0.6, 0)
+
+[sub_resource type="Animation" id="Animation_l4vn6"]
+resource_name = "toggle"
+length = 0.2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(0.5, 0.5),
+"update": 0,
+"values": [Vector2(633, 14), Vector2(731.5, 14)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(0.5, 0.5),
+"update": 0,
+"values": [Vector2(1, 1), Vector2(1.02, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_rgobc"]
+_data = {
+"toggle": SubResource("Animation_l4vn6")
+}
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_0p0rh"]
+bg_color = Color(0, 0, 0, 0)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_dwma3"]
+content_margin_left = 4.0
+content_margin_top = 0.0
+content_margin_right = 0.0
+content_margin_bottom = 0.0
+bg_color = Color(0.6, 0.6, 0.6, 0)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.730469, 0.949219, 0.707031, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_wq0lo"]
+content_margin_left = 0.0
+content_margin_top = 0.0
+content_margin_right = 0.0
+content_margin_bottom = 0.0
+bg_color = Color(0.72549, 0.945098, 0.701961, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_yl8ua"]
+bg_color = Color(0.172549, 0.172549, 0.172549, 1)
+corner_radius_top_left = 6
+corner_radius_top_right = 6
+corner_radius_bottom_right = 6
+corner_radius_bottom_left = 6
+
+[sub_resource type="Animation" id="Animation_ke08f"]
+resource_name = "countdown"
+length = 5.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:text")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1, 2, 3, 4, 5),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": ["5
+", "4", "3", "2
+", "1
+", "0
+"]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_duf5e"]
+_data = {
+"countdown": SubResource("Animation_ke08f")
+}
+
+[node name="InviteMenu" type="Control" node_paths=PackedStringArray("inviteContainer", "inviteList", "popupSection", "playerListSection", "signupSection", "menuButton", "incomingButton", "outgoingButton", "buttonHighlightAnimator", "crtMenu", "userList", "usernameInput", "signupButton", "opponentUsernameLabel", "gameReadySection", "joiningGameSection", "timerAccept", "timerJoin")]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_78ny8")
+inviteContainer = NodePath("invite list")
+inviteList = NodePath("invite list/container")
+popupSection = NodePath("popup section")
+playerListSection = NodePath("crt menu/playerlist section")
+signupSection = NodePath("crt menu/signup section")
+menuButton = NodePath("menuButton")
+incomingButton = NodePath("incoming")
+outgoingButton = NodePath("outgoing")
+buttonHighlightAnimator = NodePath("ColorRect/AnimationPlayer")
+crtMenu = NodePath("crt menu")
+userList = NodePath("crt menu/playerlist section/ScrollContainer/userList")
+usernameInput = NodePath("crt menu/signup section/LineEdit")
+signupButton = NodePath("crt menu/signup section/Button")
+opponentUsernameLabel = NodePath("invite accepted/Panel/username")
+gameReadySection = NodePath("invite accepted")
+joiningGameSection = NodePath("joining game")
+timerAccept = NodePath("invite accepted/Panel/label3/AnimationPlayer")
+timerJoin = NodePath("joining game/Panel/label3/AnimationPlayer")
+
+[node name="invite list" type="ScrollContainer" parent="."]
+visible = false
+clip_children = 2
+layout_mode = 0
+offset_left = 631.0
+offset_top = 39.0
+offset_right = 949.0
+offset_bottom = 551.0
+scale = Vector2(1, 0.96)
+theme_override_styles/panel = SubResource("StyleBoxFlat_jvphg")
+follow_focus = true
+horizontal_scroll_mode = 0
+
+[node name="container" type="VBoxContainer" parent="invite list"]
+z_index = 1
+custom_minimum_size = Vector2(309.75, 505.105)
+layout_mode = 2
+size_flags_horizontal = 6
+size_flags_vertical = 0
+theme_override_constants/separation = 15
+
+[node name="popup section" type="Control" parent="."]
+anchors_preset = 0
+offset_left = 20.0
+offset_top = 478.0
+offset_right = 60.0
+offset_bottom = 518.0
+
+[node name="menuButton" type="Button" parent="."]
+layout_mode = 0
+offset_left = 920.0
+offset_top = 10.0
+offset_right = 949.0
+offset_bottom = 37.0
+focus_mode = 0
+theme_override_constants/outline_size = 0
+theme_override_constants/icon_max_width = 18
+icon = ExtResource("2_5o3ae")
+icon_alignment = 1
+
+[node name="incoming" type="Button" parent="."]
+visible = false
+layout_mode = 2
+offset_left = 630.0
+offset_top = 10.0
+offset_right = 722.0
+offset_bottom = 41.0
+focus_mode = 0
+theme_override_constants/outline_size = 0
+theme_override_fonts/font = ExtResource("3_o4kq5")
+theme_override_styles/normal = SubResource("StyleBoxFlat_hk0tl")
+text = "INCOMING"
+
+[node name="outgoing" type="Button" parent="."]
+visible = false
+layout_mode = 2
+offset_left = 729.0
+offset_top = 10.0
+offset_right = 824.0
+offset_bottom = 41.0
+focus_mode = 0
+theme_override_constants/outline_size = 0
+theme_override_fonts/font = ExtResource("3_o4kq5")
+theme_override_styles/normal = SubResource("StyleBoxFlat_i21ws")
+text = "OUTGOING"
+
+[node name="ColorRect" type="ColorRect" parent="."]
+visible = false
+z_index = -2
+layout_mode = 0
+offset_left = 633.0
+offset_top = 14.0
+offset_right = 720.0
+offset_bottom = 35.0
+color = Color(0.101961, 0.101961, 0.101961, 0.501961)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="ColorRect"]
+libraries = {
+"": SubResource("AnimationLibrary_rgobc")
+}
+
+[node name="crt menu" type="Panel" parent="."]
+visible = false
+layout_mode = 0
+offset_left = 320.0
+offset_top = 138.0
+offset_right = 598.0
+offset_bottom = 367.0
+rotation = -0.00523599
+theme_override_styles/panel = SubResource("StyleBoxFlat_0p0rh")
+
+[node name="title" type="Label" parent="crt menu"]
+layout_mode = 0
+offset_left = 95.0
+offset_top = 13.0
+offset_right = 185.0
+offset_bottom = 31.0
+theme_override_colors/font_color = Color(0.764706, 1, 0.741176, 1)
+theme_override_constants/shadow_outline_size = 0
+theme_override_fonts/font = ExtResource("3_o4kq5")
+theme_override_font_sizes/font_size = 12
+text = "MULTIPLAYER"
+
+[node name="underline" type="Label" parent="crt menu/title"]
+layout_mode = 0
+offset_top = 8.0
+offset_right = 90.0
+offset_bottom = 26.0
+theme_override_colors/font_color = Color(0.764706, 1, 0.741176, 1)
+theme_override_constants/shadow_outline_size = 0
+theme_override_fonts/font = ExtResource("3_o4kq5")
+theme_override_font_sizes/font_size = 12
+text = "-----------"
+
+[node name="playerlist section" type="Control" parent="crt menu"]
+visible = false
+anchors_preset = 0
+offset_top = 41.0
+offset_right = 278.0
+offset_bottom = 229.0
+
+[node name="online players" type="Label" parent="crt menu/playerlist section"]
+layout_mode = 2
+offset_left = 9.0
+offset_top = 7.0
+offset_right = 266.0
+offset_bottom = 23.0
+theme_override_colors/font_color = Color(0.764706, 1, 0.741176, 1)
+theme_override_constants/shadow_outline_size = 0
+theme_override_fonts/font = ExtResource("3_o4kq5")
+theme_override_font_sizes/font_size = 10
+text = "ONLINE PLAYERS"
+
+[node name="underline" type="Label" parent="crt menu/playerlist section/online players"]
+layout_mode = 0
+offset_top = 14.0
+offset_right = 258.0
+offset_bottom = 32.0
+theme_override_colors/font_color = Color(0.764706, 1, 0.741176, 1)
+theme_override_constants/shadow_outline_size = 0
+theme_override_fonts/font = ExtResource("3_o4kq5")
+theme_override_font_sizes/font_size = 10
+text = "--------------------------------------"
+
+[node name="ScrollContainer" type="ScrollContainer" parent="crt menu/playerlist section"]
+layout_mode = 2
+offset_left = 9.0
+offset_top = 35.0
+offset_right = 266.0
+offset_bottom = 180.0
+follow_focus = true
+vertical_scroll_mode = 3
+
+[node name="userList" type="VBoxContainer" parent="crt menu/playerlist section/ScrollContainer"]
+layout_mode = 2
+theme_override_constants/separation = 15
+
+[node name="signup section" type="Control" parent="crt menu"]
+visible = false
+anchors_preset = 0
+offset_top = 41.0
+offset_right = 278.0
+offset_bottom = 229.0
+
+[node name="LineEdit" type="LineEdit" parent="crt menu/signup section"]
+layout_mode = 0
+offset_left = 101.499
+offset_top = 54.9921
+offset_right = 178.499
+offset_bottom = 74.9921
+focus_mode = 1
+theme_override_colors/font_color = Color(0.72549, 0.945098, 0.701961, 1)
+theme_override_colors/font_selected_color = Color(0.72549, 0.945098, 0.701961, 1)
+theme_override_colors/font_uneditable_color = Color(0.72549, 0.945098, 0.701961, 1)
+theme_override_colors/font_placeholder_color = Color(0.65098, 0.921569, 0.623529, 0.560784)
+theme_override_colors/font_outline_color = Color(0.72549, 0.945098, 0.701961, 1)
+theme_override_colors/caret_color = Color(0.72549, 0.945098, 0.701961, 1)
+theme_override_colors/selection_color = Color(0.72549, 0.945098, 0.701961, 1)
+theme_override_colors/clear_button_color = Color(0.72549, 0.945098, 0.701961, 1)
+theme_override_colors/clear_button_color_pressed = Color(0.72549, 0.945098, 0.701961, 1)
+theme_override_constants/outline_size = 0
+theme_override_fonts/font = ExtResource("3_o4kq5")
+theme_override_font_sizes/font_size = 13
+theme_override_styles/normal = SubResource("StyleBoxFlat_dwma3")
+placeholder_text = "USERNAME"
+max_length = 8
+caret_blink = true
+
+[node name="Button" type="Button" parent="crt menu/signup section"]
+layout_mode = 0
+offset_left = 108.339
+offset_top = 85.5689
+offset_right = 170.339
+offset_bottom = 104.569
+focus_mode = 0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 0
+theme_override_fonts/font = ExtResource("3_o4kq5")
+theme_override_font_sizes/font_size = 12
+theme_override_styles/normal = SubResource("StyleBoxFlat_wq0lo")
+text = "SIGN UP"
+
+[node name="invite accepted" type="Control" parent="."]
+visible = false
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Panel" type="Panel" parent="invite accepted"]
+layout_mode = 0
+offset_left = 383.0
+offset_top = 217.0
+offset_right = 562.0
+offset_bottom = 322.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_yl8ua")
+
+[node name="username" type="Label" parent="invite accepted/Panel"]
+layout_mode = 0
+offset_left = 6.0
+offset_top = 9.0
+offset_right = 169.0
+offset_bottom = 32.0
+theme_override_colors/font_color = Color(0.662745, 1, 0.635294, 1)
+theme_override_fonts/font = ExtResource("3_o4kq5")
+theme_override_font_sizes/font_size = 12
+text = "username"
+horizontal_alignment = 1
+
+[node name="label" type="Label" parent="invite accepted/Panel"]
+layout_mode = 0
+offset_left = 5.0
+offset_top = 27.0
+offset_right = 176.0
+offset_bottom = 50.0
+theme_override_colors/font_color = Color(0.662745, 1, 0.635294, 1)
+theme_override_fonts/font = ExtResource("3_o4kq5")
+theme_override_font_sizes/font_size = 12
+text = "ACCEPTED YOUR INVITE!"
+horizontal_alignment = 1
+
+[node name="label2" type="Label" parent="invite accepted/Panel"]
+layout_mode = 0
+offset_left = 17.0
+offset_top = 62.0
+offset_right = 157.0
+offset_bottom = 85.0
+theme_override_colors/font_color = Color(0.662745, 1, 0.635294, 1)
+theme_override_fonts/font = ExtResource("3_o4kq5")
+theme_override_font_sizes/font_size = 12
+text = "STARTING GAME IN:"
+
+[node name="label3" type="Label" parent="invite accepted/Panel"]
+layout_mode = 0
+offset_left = 17.0
+offset_top = 78.0
+offset_right = 157.0
+offset_bottom = 101.0
+theme_override_colors/font_color = Color(0.662745, 1, 0.635294, 1)
+theme_override_fonts/font = ExtResource("3_o4kq5")
+theme_override_font_sizes/font_size = 16
+text = "0
+"
+horizontal_alignment = 1
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="invite accepted/Panel/label3"]
+libraries = {
+"": SubResource("AnimationLibrary_duf5e")
+}
+
+[node name="joining game" type="Control" parent="."]
+visible = false
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Panel" type="Panel" parent="joining game"]
+layout_mode = 0
+offset_left = 382.0
+offset_top = 236.0
+offset_right = 561.0
+offset_bottom = 293.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_yl8ua")
+
+[node name="label2" type="Label" parent="joining game/Panel"]
+layout_mode = 0
+offset_left = 17.0
+offset_top = 12.0
+offset_right = 157.0
+offset_bottom = 35.0
+theme_override_colors/font_color = Color(0.662745, 1, 0.635294, 1)
+theme_override_fonts/font = ExtResource("3_o4kq5")
+theme_override_font_sizes/font_size = 12
+text = "STARTING GAME IN:"
+
+[node name="label3" type="Label" parent="joining game/Panel"]
+layout_mode = 0
+offset_left = 17.0
+offset_top = 28.0
+offset_right = 157.0
+offset_bottom = 52.0
+theme_override_colors/font_color = Color(0.662745, 1, 0.635294, 1)
+theme_override_fonts/font = ExtResource("3_o4kq5")
+theme_override_font_sizes/font_size = 16
+text = "0
+"
+horizontal_alignment = 1
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="joining game/Panel/label3"]
+libraries = {
+"": SubResource("AnimationLibrary_duf5e")
+}

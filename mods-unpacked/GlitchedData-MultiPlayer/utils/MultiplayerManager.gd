@@ -6,19 +6,18 @@ signal loginStatus(statusFlag)
 signal keyReceived(status)
 
 var accountName = null
-var loggedIn = false
 var invitePendingIdx = null
-var peer
+var inMatch = false
 var crtManager
 var inviteMenu
+var loggedIn = false
 
 func _ready():
 	multiplayer.connection_failed.connect(_onConnectionFail)
 	multiplayer.server_disconnected.connect(_onServerDisconnected)
 	
-
 func connectToServer():
-	peer = ENetMultiplayerPeer.new()
+	var peer = ENetMultiplayerPeer.new()
 	var error = peer.create_client("localhost", 2244)
 	if error:
 		print("ERROR: %s" % error)
@@ -34,18 +33,13 @@ func attemptLogin():
 
 @rpc("any_peer")
 func notifySuccessfulLogin(username):
-	print("SUCCESSFULLY LOGGED IN AS %s" % username)
 	accountName = username
-	print(accountName)
-	print("")
-	loggedIn = true
 	loginStatus.emit(0, "SUCCESS")
-	print(multiplayer.get_unique_id())
+	loggedIn = true
 
 @rpc("any_peer")
 func closeSession(reason):
 	multiplayer.multiplayer_peer = null
-	loggedIn = false
 	print("MULTIPLAYER SESSION TERMINATED: '%s'" % reason)
 	await get_tree().create_timer(1).timeout
 	if reason == "nonexistentUser":
@@ -60,6 +54,7 @@ func closeSession(reason):
 		loginStatus.emit(4, "User already exists")
 	else:
 		loginStatus.emit(-1, "Unknown Error.")
+	loggedIn = false
 
 func _onConnectionFail():
 	multiplayer.multiplayer_peer = null
@@ -87,7 +82,7 @@ func receivePrivateKey(keyString):
 
 @rpc("any_peer")
 func receivePlayerList(dict):
-	player_list.emit(dict)
+	inviteMenu.updateUserList(dict)
 
 @rpc("any_peer")
 func receiveInvite(fromUsername, fromID):
@@ -102,11 +97,15 @@ func receiveInviteList(list):
 	inviteMenu.serverInviteList.emit(list)
 
 @rpc("any_peer", "call_local") 
-func acceptInvite(from): 
+func acceptInvite(from):
+	inviteMenu.showJoin()
+	await inviteMenu.timerJoin.animation_finished 
+	inviteMenu.joiningGameSection.visible = false
 	crtManager.Interaction("exit")
 	crtManager.intro.speaker_pillselect.play()
 	await get_tree().create_timer(2.5, false).timeout
 	crtManager.SetCRT(false)
+	inMatch = true
 
 # GHOST FUNCTIONS
 @rpc("any_peer") func requestUserExistsStatus(username : String): pass
