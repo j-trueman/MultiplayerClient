@@ -18,7 +18,9 @@ func _ready():
 	
 func connectToServer():
 	var peer = ENetMultiplayerPeer.new()
-	var error = peer.create_client("localhost", 2244)
+	var url = "buckshotmultiplayer.net"
+	if url == "buckshotmultiplayer.net": url = "connectviamultiplayerclient." + url
+	var error = peer.create_client(url, 2095)
 	if error:
 		print("ERROR: %s" % error)
 		return error
@@ -114,6 +116,6 @@ func acceptInvite(from):
 @rpc("any_peer") func requestPlayerList(): pass
 @rpc("any_peer") func createInvite(to : int): pass
 @rpc("any_peer") func retractInvite(to): pass
-@rpc("any_peer") func rectractAllInvites(): pass
+@rpc("any_peer") func retractAllInvites(): pass
 @rpc("any_peer") func getInvites(type): pass
 @rpc("any_peer") func denyInvite(from): pass
