@@ -1,9 +1,9 @@
 [gd_scene load_steps=17 format=3 uid="uid://og3pjcooy8c5"]
 
-[ext_resource type="Texture2D" uid="uid://bcm81pwd8tdj" path="res://mods-unpacked/GlitchedData-MultiPlayer/media/profile.png" id="1_2kotv"]
-[ext_resource type="Script" path="res://mods-unpacked/GlitchedData-MultiPlayer/utils/InviteObject.gd" id="1_24cbr"]
-[ext_resource type="FontFile" uid="uid://bquox4twb507h" path="res://fonts/fake receipt.otf" id="2_q14nk"]
-[ext_resource type="Texture2D" uid="uid://dhaps0btnj42d" path="res://mods-unpacked/GlitchedData-MultiPlayer/media/tick.png" id="3_gfb8x"]
+[ext_resource type="Script" path="res://mods-unpacked/GlitchedData-MultiPlayer/utils/InviteObject.gd" id="1_5jty6"]
+[ext_resource type="Texture2D" uid="uid://bcm81pwd8tdj" path="res://mods-unpacked/GlitchedData-MultiPlayer/media/profile.png" id="2_x4uab"]
+[ext_resource type="FontFile" uid="uid://bquox4twb507h" path="res://fonts/fake receipt.otf" id="3_8wfp5"]
+[ext_resource type="Texture2D" uid="uid://dhaps0btnj42d" path="res://mods-unpacked/GlitchedData-MultiPlayer/media/tick.png" id="4_2ufhe"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_uee5x"]
 bg_color = Color(0.0941176, 0.0941176, 0.0941176, 0.917647)
@@ -36,34 +36,6 @@ bg_color = Color(0.533333, 0.533333, 0.533333, 1)
 corner_radius_bottom_right = 7
 corner_radius_bottom_left = 7
 
-[sub_resource type="Animation" id="Animation_0wa0l"]
-resource_name = "progress"
-length = 8.0
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("ProgressBar:value")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 8),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [100.0, 0.0]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath(".:position")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.7),
-"transitions": PackedFloat32Array(0.153893, 0.176777),
-"update": 0,
-"values": [Vector2(0, 100), Vector2(0, 0)]
-}
-
 [sub_resource type="Animation" id="Animation_1nxg6"]
 resource_name = "leave"
 tracks/0/type = "value"
@@ -94,6 +66,34 @@ tracks/0/keys = {
 "values": [Vector2(450, 0), Vector2(0, 0)]
 }
 
+[sub_resource type="Animation" id="Animation_0wa0l"]
+resource_name = "progress"
+length = 8.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("ProgressBar:value")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 8),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [100.0, 0.0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.7),
+"transitions": PackedFloat32Array(0.153893, 0.176777),
+"update": 0,
+"values": [Vector2(0, 100), Vector2(0, 0)]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_ra7fg"]
 _data = {
 "leave": SubResource("Animation_1nxg6"),
@@ -106,7 +106,7 @@ custom_minimum_size = Vector2(0, 46.585)
 offset_right = 309.0
 offset_bottom = 47.0001
 theme_override_styles/panel = SubResource("StyleBoxFlat_uee5x")
-script = ExtResource("1_24cbr")
+script = ExtResource("1_5jty6")
 typeLabel = NodePath("New Invite")
 usernameLabel = NodePath("from/username")
 acceptButton = NodePath("accept")
@@ -116,7 +116,7 @@ animationPlayer = NodePath("AnimationPlayer")
 [node name="Sprite2D" type="Sprite2D" parent="."]
 position = Vector2(25, 23)
 scale = Vector2(0.0707569, 0.0707569)
-texture = ExtResource("1_2kotv")
+texture = ExtResource("2_x4uab")
 
 [node name="New Invite" type="Label" parent="."]
 layout_mode = 0
@@ -124,7 +124,7 @@ offset_left = 54.0
 offset_top = 5.0
 offset_right = 176.0
 offset_bottom = 32.0
-theme_override_fonts/font = ExtResource("2_q14nk")
+theme_override_fonts/font = ExtResource("3_8wfp5")
 theme_override_font_sizes/font_size = 18
 text = "NEW INVITE"
 
@@ -135,7 +135,7 @@ offset_top = 23.0
 offset_right = 163.0
 offset_bottom = 47.0
 theme_override_colors/font_color = Color(0.745098, 0.745098, 0.745098, 1)
-theme_override_fonts/font = ExtResource("2_q14nk")
+theme_override_fonts/font = ExtResource("3_8wfp5")
 theme_override_font_sizes/font_size = 14
 text = "FROM: "
 
@@ -145,7 +145,7 @@ offset_left = 51.0
 offset_right = 160.0
 offset_bottom = 24.0
 theme_override_colors/font_color = Color(0.745098, 0.745098, 0.745098, 1)
-theme_override_fonts/font = ExtResource("2_q14nk")
+theme_override_fonts/font = ExtResource("3_8wfp5")
 theme_override_font_sizes/font_size = 14
 text = "username"
 
@@ -154,10 +154,11 @@ layout_mode = 0
 offset_left = 228.0
 offset_right = 269.0
 offset_bottom = 47.0
+focus_mode = 0
 theme_override_constants/icon_max_width = 20
 theme_override_styles/normal = SubResource("StyleBoxFlat_ijom1")
 theme_override_styles/hover = SubResource("StyleBoxFlat_k1xw2")
-icon = ExtResource("3_gfb8x")
+icon = ExtResource("4_2ufhe")
 icon_alignment = 1
 
 [node name="decline" type="Button" parent="."]
@@ -165,6 +166,7 @@ layout_mode = 0
 offset_left = 269.0
 offset_right = 309.0
 offset_bottom = 47.0
+focus_mode = 0
 theme_override_constants/icon_max_width = 16
 theme_override_styles/normal = SubResource("StyleBoxFlat_wh4t2")
 theme_override_styles/hover = SubResource("StyleBoxFlat_1t4bv")

@@ -3,7 +3,6 @@ extends Node
 const AUTHORNAME_MODNAME_DIR := "GlitchedData-MultiPlayer"
 const MultiplayerManager = preload("utils/MultiplayerManager.gd")
 const MultiplayerRoundManager = preload("utils/MultiplayerRoundManager.gd")
-const InviteMenu = preload("res://mods-unpacked/GlitchedData-MultiPlayer/InviteMenu.tscn")
 
 var mod_dir_path := ""
 var extensions_dir_path := ""
@@ -56,7 +55,7 @@ func _process(delta):
 		fixed.name = "fixed"
 		scene.add_child(fixed)
 		
-		var inviteMenu = load("res://mods-unpacked/GlitchedData-MultiPlayer/InviteMenu.tscn").instantiate()
+		var inviteMenu = load("res://mods-unpacked/GlitchedData-MultiPlayer/components/InviteMenu.tscn").instantiate()
 		inviteMenu.name = "invite menu"
 		scene.get_node("Camera/dialogue UI").add_child(inviteMenu)
 		

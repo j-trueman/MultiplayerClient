@@ -1,0 +1,75 @@
+[gd_scene load_steps=8 format=3 uid="uid://detw7u3rcgms5"]
+
+[ext_resource type="FontFile" uid="uid://bquox4twb507h" path="res://fonts/fake receipt.otf" id="1_tswvb"]
+[ext_resource type="Script" path="res://mods-unpacked/GlitchedData-MultiPlayer/utils/UserObject.gd" id="1_umd4f"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_d6ggp"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_rr0qd"]
+content_margin_left = 0.0
+content_margin_top = 0.0
+content_margin_right = 0.0
+content_margin_bottom = 0.0
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_7kucy"]
+content_margin_left = 0.0
+content_margin_top = 0.0
+content_margin_right = 0.0
+content_margin_bottom = 0.0
+
+[sub_resource type="Animation" id="Animation_ogqfy"]
+resource_name = "invitehover"
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Button:text")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5, 1),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": ["INVITE", "[INVITE]", "INVITE"]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_7yhvj"]
+_data = {
+"invitehover": SubResource("Animation_ogqfy")
+}
+
+[node name="user" type="Panel" node_paths=PackedStringArray("usernameLabel", "inviteButton", "animationPlayer")]
+theme_override_styles/panel = SubResource("StyleBoxEmpty_d6ggp")
+script = ExtResource("1_umd4f")
+usernameLabel = NodePath("Label")
+inviteButton = NodePath("Button")
+animationPlayer = NodePath("AnimationPlayer")
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 2
+offset_right = 88.0
+offset_bottom = 16.0
+theme_override_colors/font_color = Color(0.679688, 0.878906, 0.660156, 1)
+theme_override_fonts/font = ExtResource("1_tswvb")
+theme_override_font_sizes/font_size = 10
+text = "USERNAME HERE"
+
+[node name="Button" type="Button" parent="."]
+layout_mode = 0
+offset_left = 199.0
+offset_top = -1.0
+offset_right = 258.0
+offset_bottom = 14.0
+focus_mode = 0
+theme_override_colors/font_color = Color(0.643137, 0.823529, 0.623529, 1)
+theme_override_fonts/font = ExtResource("1_tswvb")
+theme_override_font_sizes/font_size = 10
+theme_override_styles/normal = SubResource("StyleBoxEmpty_rr0qd")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_7kucy")
+text = "INVITE"
+clip_text = true
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_7yhvj")
+}
