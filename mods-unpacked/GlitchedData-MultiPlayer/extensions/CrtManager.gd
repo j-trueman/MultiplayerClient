@@ -2,16 +2,11 @@ extends "res://scripts/CrtManager.gd"
 
 var screenparent_multiplayer : Node3D
 var multiplayerManager
-var inviteeUsername
 var inviteeID
 var deniedUsers = []
 
-signal inviteStatus(username, status)
-
 func _ready():
 	multiplayerManager = get_tree().root.get_node("MultiplayerManager")	
-	inviteStatus.connect(processInviteStatus)
-	multiplayerManager.loginStatus.connect(processLoginStatus)
 	multiplayerManager.crtManager = self
 
 func _unhandled_input(event):
@@ -36,6 +31,8 @@ func Interaction(alias : String):
 			branch_window.get_parent().get_child(1).Press()
 		"exit":
 			multiplayerManager.inviteMenu.crtMenu.visible = false
+			multiplayerManager.inviteMenu.get_node("connecting").visible = false
+			multiplayerManager.inviteMenu.get_node("connectFail").visible = false
 			branch_exit.get_parent().get_child(1).Press()
 			viewing = false
 			board.TurnOffDisplay()
@@ -45,55 +42,29 @@ func Interaction(alias : String):
 			exit.exitAllowed = true
 
 func Bootup():
+	exit.exitAllowed = false
 	viewing = true
+	await get_tree().create_timer(0.5, false).timeout
 	if !multiplayerManager.loggedIn:
 		multiplayerManager.connectToServer()
 		await multiplayer.connected_to_server
-		if multiplayerManager.attemptLogin() == false:
-			multiplayerManager.inviteMenu.signupSection.visible = true
-		else:
-			multiplayerManager.inviteMenu.playerListSection.visible = true
-	await get_tree().create_timer(0.5, false).timeout
-	multiplayerManager.inviteMenu.crtMenu.visible = true
-	intro.EnabledInteractionCRT()
-	exit.exitAllowed = false
-
-func processLoginStatus(statusFlag, reason):
-	if statusFlag == 0:
-		multiplayerManager.inviteMenu.playerListSection.visible = true
-		multiplayerManager.inviteMenu.signupSection.visible = false
-		multiplayerManager.requestPlayerList.rpc()
-	if statusFlag == 1:
-		multiplayerManager.connectToServer()
-		await multiplayer.connected_to_server
-		multiplayerManager.requestNewUser.rpc(multiplayerManager.inviteMenu.usernameInput.text)
-		var success = await multiplayerManager.keyReceived
-		if !success:
-			print("could not create user")
-			return false
 		multiplayerManager.attemptLogin()
-		return
 	else:
-		return
+		multiplayerManager.inviteMenu.processLoginStatus("success")
+	intro.EnabledInteractionCRT()
 
 func SetCRT(state : bool):
-	if (state):
-		bathroom_normal.set_layer_mask_value(1, false)
-		bathroom_broken.visible = true
-		for obj in objarray_normal: obj.visible = false
-		for obj in objarray_broken: obj.visible = true
-		mask.visible = true
-	else:
-		bathroom_normal.set_layer_mask_value(1, true)
-		bathroom_broken.visible = false
-		for obj in objarray_normal: obj.visible = true
-		for obj in objarray_broken: obj.visible = false
-		mask.visible = false
-		
+	bathroom_normal.set_layer_mask_value(1, not state)
+	bathroom_broken.visible = state
+	for obj in objarray_normal: obj.visible = not state
+	for obj in objarray_broken: obj.visible = state
+	mask.visible = state
+	GlobalVariables.get_current_scene_node().get_node("intro parent/bathroom door/interaction branch_bathroom door").interactionInvalid = state
+
 func _input(event):
 	if Input.is_key_pressed(KEY_ESCAPE) && viewing:
 		Interaction("exit")
-	
+
 func processInviteStatus(username, status):
 	multiplayerManager.invitePendingIdx = null
 	match status:
@@ -101,6 +72,7 @@ func processInviteStatus(username, status):
 			if !multiplayerManager.inMatch:
 				multiplayerManager.inMatch = true
 				intro.roundManager.playerData.playername = multiplayerManager.accountName.to_upper()
+				print(username)
 				intro.dealerName.text = username.to_upper()
 				multiplayerManager.inviteMenu.showReady(username)
 				await multiplayerManager.inviteMenu.timerAccept.animation_finished
@@ -111,13 +83,13 @@ func processInviteStatus(username, status):
 				SetCRT(false)
 		"busy":
 #			multiplayerMenuManager.error_label_players.text = "ERROR: USER HAS PENDING INVITE, TRY AGAIN"
-			inviteeUsername = null
+			pass
 		"deny":
 #			multiplayerMenuManager.error_label_players.text = "ERROR: INVITE DECLINED"
-			inviteeUsername = null
+			pass
 		_:
 #			multiplayerMenuManager.error_label_players.text = "INVITE RETRACTED"
-			inviteeUsername = null
+			pass
 	inviteeID = null
-		
+
 

@@ -18,8 +18,11 @@ extends Control
 @export var joiningGameSection : Control
 @export var timerAccept : AnimationPlayer
 @export var timerJoin : AnimationPlayer
+@export var errorLabel : Label
+@export var leaveMatchButton : Button
 
 signal serverInviteList(invites)
+signal connectionSuccess
 
 var inviteShowQueue = []
 var multiplayerManager
@@ -32,8 +35,13 @@ func _ready():
 	cursorManager = GlobalVariables.get_current_scene_node().get_node("standalone managers/cursor manager")
 	multiplayerManager = get_tree().root.get_node("MultiplayerManager")
 	multiplayerManager.inviteMenu = self
+	multiplayerManager.loginStatus.connect(processLoginStatus)
 	menuButton.button_down.connect(toggleMenu)
-	signupButton.button_down.connect(func(): multiplayerManager.requestUserExistsStatus.rpc(usernameInput.text))
+	signupButton.button_down.connect(func(): 
+		multiplayerManager.connectToServer()
+		await multiplayer.connected_to_server
+		multiplayerManager.requestNewUser.rpc(usernameInput.text))
+	leaveMatchButton.button_down.connect(multiplayerManager.leaveMatch)
 	incomingButton.button_down.connect(func(): updateInviteList("incoming"))
 	outgoingButton.button_down.connect(func(): updateInviteList("outgoing"))
 
@@ -52,8 +60,12 @@ func _ready():
 func _process(delta):
 	if Input.get_mouse_mode() == Input.MOUSE_MODE_VISIBLE && !multiplayerManager.inMatch:
 		menuButton.visible = true
-		return
-	menuButton.visible = false
+	else:
+		menuButton.visible = false
+	if Input.get_mouse_mode() == Input.MOUSE_MODE_VISIBLE && multiplayerManager.inMatch:
+		leaveMatchButton.visible = true
+	else:
+		leaveMatchButton.visible = false
   
 func setCursorImage(alias):
 	match alias:
@@ -147,3 +159,43 @@ func updateUserList(list):
 		newUserItem.setup(username, id, multiplayerManager, false)
 		userList.add_child(newUserItem)
 		
+func processLoginStatus(reason):
+	if reason == "success":
+		crtMenu.visible = true
+		playerListSection.visible = true
+		signupSection.visible = false
+		multiplayerManager.requestPlayerList.rpc()
+		return
+	else:
+		crtMenu.visible = true
+		playerListSection.visible = false
+		signupSection.visible = true
+		match reason:
+			"invalidUsername":
+				errorLabel.text = "THAT USERNAME IS INVALID"
+				print("THAT USERNAME IS INVALID")
+			"userAlreadyExists":
+				errorLabel.text = "THAT USER ALREADY EXISTS"
+				print("THAT USER ALREADY EXISTS")
+			"nonExistentUser":
+				errorLabel.text = "CAN'T LOGIN TO A \nNONEXISTENT USER"
+				print("CAN'T LOGIN TO A \nNONEXISTENT USER")
+			"databaseError":
+				errorLabel.text = "THERE WAS AN ERROR \nWITH OUR DATABASE"
+				print("THERE WAS AN ERROR \nWITH OUR DATABASE")
+			"malformedKey":
+				errorLabel.text = "YOUR USER KEY IS CORRUPTED"
+				print("YOUR USER KEY IS CORRUPTED")
+			"invalidCreds":
+				errorLabel.text = "PROVIDED KEY DOESN'T MATCH ACCOUNT"
+				print("PROVIDED KEY DOESN'T MATCH ACCOUNT")
+			"noKey":
+				errorLabel.text = "NO USER KEY FOUND"
+				print("NO USER KEY FOUND")
+	errorClear()
+	signupSection.visible = true
+
+func errorClear():
+	if errorLabel.text != "":
+		await get_tree().create_timer(10, false).timeout
+		errorLabel.text = ""

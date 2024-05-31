@@ -1,8 +1,7 @@
 extends Node
 
-signal server_disconnected
 signal player_list(playerDict)
-signal loginStatus(statusFlag)
+signal loginStatus(status)
 signal keyReceived(status)
 
 var accountName = null
@@ -11,12 +10,27 @@ var inMatch = false
 var crtManager
 var inviteMenu
 var loggedIn = false
+var timer : Timer
 
 func _ready():
-	multiplayer.connection_failed.connect(_onConnectionFail)
+	multiplayer.connected_to_server.connect(func(): connectionTimer("stop"))
 	multiplayer.server_disconnected.connect(_onServerDisconnected)
-	
+
+func connectionTimer(action):
+	if action == "start":
+		timer = Timer.new()
+		GlobalVariables.get_current_scene_node().add_child(timer)
+		inviteMenu.get_node("connecting").visible = true
+		inviteMenu.get_node("connecting/AnimationPlayer").play("connecting")
+		timer.timeout.connect(_onConnectionFail)
+		timer.start(10)
+	else:
+		inviteMenu.get_node("connecting").visible = false
+		inviteMenu.get_node("connecting/AnimationPlayer").stop()
+		timer.queue_free()
+
 func connectToServer():
+	connectionTimer("start")
 	var peer = ENetMultiplayerPeer.new()
 	var url = "buckshotmultiplayer.net"
 	if url == "buckshotmultiplayer.net": url = "connectviamultiplayerclient." + url
@@ -30,41 +44,45 @@ func attemptLogin():
 	var keyFile = FileAccess.open("res://privatekey.key", FileAccess.READ)
 	if !keyFile: 
 		closeSession("noKey")
+		multiplayer.multiplayer_peer = null
 		return false
 	verifyUserCreds.rpc(keyFile.get_buffer(keyFile.get_length()))
 
 @rpc("any_peer")
 func notifySuccessfulLogin(username):
 	accountName = username
-	loginStatus.emit(0, "SUCCESS")
+	inviteMenu.processLoginStatus("success")
+	print("logged in as %s" % username)
 	loggedIn = true
 
 @rpc("any_peer")
 func closeSession(reason):
-	multiplayer.multiplayer_peer = null
-	print("MULTIPLAYER SESSION TERMINATED: '%s'" % reason)
-	await get_tree().create_timer(1).timeout
-	if reason == "nonexistentUser":
-		loginStatus.emit(1, "User Does Not Exist.")
-	elif reason == "incorrectCreds":
-		loginStatus.emit(2, "Incorrect Credentials.")
-	elif reason == "noKey":
-		loginStatus.emit(3, "No User Key Detected.")
-	elif reason == "noUsername":
-		loginStatus.emit(3, "You didn't set a username.")
-	elif reason == "userExists":
-		loginStatus.emit(4, "User already exists")
-	else:
-		loginStatus.emit(-1, "Unknown Error.")
+	print("SESSION TERMINATED\nReason: %s" % reason)
+	loginStatus.emit(reason)
 	loggedIn = false
 
 func _onConnectionFail():
+	inviteMenu.get_node("connecting").visible = false
+	inviteMenu.get_node("connecting/AnimationPlayer").stop()
+	inviteMenu.get_node("connectFail").visible = true
 	multiplayer.multiplayer_peer = null
 
 func _onServerDisconnected():
 	multiplayer.multiplayer_peer = null
-	server_disconnected.emit()
 	print("Server Disconected")
+	loggedIn = false
+	if !inMatch && !inviteMenu.crtMenu.visible:
+		inviteMenu.get_node("disconnected").visible = true
+		await get_tree().create_timer(8).timeout
+		inviteMenu.get_node("disconnected").visible = false
+	elif !inMatch:
+		return
+	else:
+		inMatch = false
+		inviteMenu.get_node("disconnectedInGame").visible = true
+		Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
+		await get_tree().create_timer(5).timeout
+		await get_tree().reload_current_scene()
 
 @rpc("any_peer")
 func receiveUserCreationStatus(return_value: bool): 
@@ -73,14 +91,14 @@ func receiveUserCreationStatus(return_value: bool):
 		closeSession("userExists")
 	else:
 		print("CREATED USER SUCCESSFULLY")
-		loginStatus.emit(5) 
+		loginStatus.emit() 
 	
 @rpc("any_peer")
 func receivePrivateKey(keyString):
 	var keyFile = FileAccess.open("res://privatekey.key", FileAccess.WRITE)
 	keyFile.store_string(keyString)
 	keyFile.close()
-	keyReceived.emit(true)
+	attemptLogin()
 
 @rpc("any_peer")
 func receivePlayerList(dict):
@@ -109,8 +127,28 @@ func acceptInvite(from):
 	crtManager.SetCRT(false)
 	inMatch = true
 
+@rpc("any_peer") 
+func opponentDisconnect(): 
+	inMatch = false
+	loggedIn = false
+	inviteMenu.get_node("opponentDisconnected").visible = true
+	Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
+	await get_tree().create_timer(5).timeout
+	await get_tree().reload_current_scene()
+	pass
+
+func leaveMatch():
+	inMatch = false
+	loggedIn = false
+	multiplayer.multiplayer_peer = null
+	inviteMenu.get_node("leavingMatch").visible = true
+	Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
+	await get_tree().create_timer(5).timeout
+	await get_tree().reload_current_scene()
+	pass
+
 # GHOST FUNCTIONS
-@rpc("any_peer") func requestUserExistsStatus(username : String): pass
+#@rpc("any_peer") func requestUserExistsStatus(username : String): pass
 @rpc("any_peer", "reliable") func requestNewUser(username: String) : pass
 @rpc("any_peer") func verifyUserCreds(keyFileData): pass
 @rpc("any_peer") func requestPlayerList(): pass

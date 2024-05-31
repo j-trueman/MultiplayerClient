@@ -10,6 +10,7 @@ func _ready():
 	MainBathroomStart()
 	crtManager.SetCRT(true)
 	intbranch_crt.interactionAllowed = true
+	GlobalVariables.get_current_scene_node().get_node("intro parent/bathroom door/interaction branch_bathroom door").interactionInvalid = true
 
 	var healthCounterUI = GlobalVariables.get_current_scene_node().get_node("tabletop parent/main tabletop/health counter/health counter ui parent")
 	healthCounterUI.get_node("health UI_dealer side/lines2").position.x = 0

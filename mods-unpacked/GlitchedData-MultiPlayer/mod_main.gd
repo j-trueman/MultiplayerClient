@@ -28,6 +28,7 @@ func install_script_extensions() -> void:
 		'MedicineManager',
 		'RoundManager',
 		'ShotgunShooting',
+		'UserExit'
 	]
 	for extension in extensions:
 		ModLoaderMod.install_script_extension(extensions_dir_path+extension+".gd")

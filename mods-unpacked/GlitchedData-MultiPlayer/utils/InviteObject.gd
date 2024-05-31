@@ -57,10 +57,9 @@ func setup(username, id, menu, isOutgoing = false):
 	denyButton.button_down.connect(denyPressed)
 
 func acceptPressed():
-	print(inviteMenu.get_children())
 	inviteMenu.multiplayerManager.acceptInvite.rpc(inviteFromID)
 	inviteMenu.multiplayerManager.crtManager.intro.roundManager.playerData.playername = inviteMenu.multiplayerManager.accountName.to_upper()
-	inviteMenu.multiplayerManager.crtManager.intro.dealerName.text = inviteFromUsername.to_upper()
+	inviteMenu.multiplayerManager.crtManager.intro.dealerName.text = usernameLabel.text.to_upper()
 	inviteMenu.inviteShowQueue.erase(inviteFromID)
 	inviteMenu.inviteContainer.visible = false
 	inviteMenu.incomingButton.visible = false

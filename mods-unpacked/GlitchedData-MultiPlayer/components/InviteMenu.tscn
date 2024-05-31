@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://bx7fk0shftvp5"]
+[gd_scene load_steps=19 format=3 uid="uid://bx7fk0shftvp5"]
 
 [ext_resource type="Script" path="res://mods-unpacked/GlitchedData-MultiPlayer/utils/InviteMenu.gd" id="1_78ny8"]
 [ext_resource type="Texture2D" uid="uid://njbl1u3wf3yg" path="res://mods-unpacked/GlitchedData-MultiPlayer/media/burger.png" id="2_5o3ae"]
@@ -46,6 +46,35 @@ _data = {
 "toggle": SubResource("Animation_l4vn6")
 }
 
+[sub_resource type="Animation" id="Animation_ctpmb"]
+resource_name = "connecting"
+length = 2.6
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:text")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.8, 1.7, 2.6),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": ["Connecting To Server.", "Connecting To Server..", "Connecting To Server...", "Connecting To Server."]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_214l3"]
+_data = {
+"connecting": SubResource("Animation_ctpmb")
+}
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_7lnrk"]
+bg_color = Color(0.117647, 0.117647, 0.117647, 1)
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_0p0rh"]
 bg_color = Color(0, 0, 0, 0)
 
@@ -59,7 +88,19 @@ border_width_left = 1
 border_width_top = 1
 border_width_right = 1
 border_width_bottom = 1
-border_color = Color(0.730469, 0.949219, 0.707031, 1)
+border_color = Color(0.729412, 0.94902, 0.705882, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ugsc6"]
+content_margin_left = 4.0
+content_margin_top = 0.0
+content_margin_right = 0.0
+content_margin_bottom = 0.0
+bg_color = Color(0.6, 0.6, 0.6, 0)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.729412, 0.94902, 0.705882, 1)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_wq0lo"]
 content_margin_left = 0.0
@@ -100,7 +141,7 @@ _data = {
 "countdown": SubResource("Animation_ke08f")
 }
 
-[node name="InviteMenu" type="Control" node_paths=PackedStringArray("inviteContainer", "inviteList", "popupSection", "playerListSection", "signupSection", "menuButton", "incomingButton", "outgoingButton", "buttonHighlightAnimator", "crtMenu", "userList", "usernameInput", "signupButton", "opponentUsernameLabel", "gameReadySection", "joiningGameSection", "timerAccept", "timerJoin")]
+[node name="InviteMenu" type="Control" node_paths=PackedStringArray("inviteContainer", "inviteList", "popupSection", "playerListSection", "signupSection", "menuButton", "incomingButton", "outgoingButton", "buttonHighlightAnimator", "crtMenu", "userList", "usernameInput", "signupButton", "opponentUsernameLabel", "gameReadySection", "joiningGameSection", "timerAccept", "timerJoin", "errorLabel", "leaveMatchButton")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -126,6 +167,8 @@ gameReadySection = NodePath("invite accepted")
 joiningGameSection = NodePath("joining game")
 timerAccept = NodePath("invite accepted/Panel/label3/AnimationPlayer")
 timerJoin = NodePath("joining game/Panel/label3/AnimationPlayer")
+errorLabel = NodePath("crt menu/signup section/error")
+leaveMatchButton = NodePath("leaveMatch")
 
 [node name="invite list" type="ScrollContainer" parent="."]
 visible = false
@@ -207,6 +250,146 @@ color = Color(0.101961, 0.101961, 0.101961, 0.501961)
 libraries = {
 "": SubResource("AnimationLibrary_rgobc")
 }
+
+[node name="connecting" type="Label" parent="."]
+visible = false
+layout_mode = 0
+offset_left = 352.0
+offset_top = 244.0
+offset_right = 570.0
+offset_bottom = 266.0
+theme_override_colors/font_color = Color(0.648438, 0.832031, 0.632813, 1)
+theme_override_fonts/font = ExtResource("3_o4kq5")
+theme_override_font_sizes/font_size = 14
+text = "Connecting To Server..."
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="connecting"]
+libraries = {
+"": SubResource("AnimationLibrary_214l3")
+}
+
+[node name="Panel" type="Panel" parent="connecting"]
+z_index = -1
+layout_mode = 0
+offset_left = -6.0
+offset_top = -10.0
+offset_right = 224.0
+offset_bottom = 30.0
+
+[node name="connectFail" type="Label" parent="."]
+visible = false
+layout_mode = 0
+offset_left = 342.0
+offset_top = 232.0
+offset_right = 579.0
+offset_bottom = 274.0
+theme_override_colors/font_color = Color(0.648438, 0.832031, 0.632813, 1)
+theme_override_fonts/font = ExtResource("3_o4kq5")
+theme_override_font_sizes/font_size = 14
+text = "COULD NOT CONTACT SERVER,
+PLEASE TRY AGAIN LATER"
+horizontal_alignment = 1
+
+[node name="Panel" type="Panel" parent="connectFail"]
+z_index = -1
+layout_mode = 0
+offset_left = -7.0
+offset_top = -6.0
+offset_right = 242.0
+offset_bottom = 45.0
+
+[node name="disconnected" type="Label" parent="."]
+visible = false
+layout_mode = 0
+offset_left = 370.0
+offset_top = 241.0
+offset_right = 617.0
+offset_bottom = 283.0
+theme_override_colors/font_color = Color(0.648438, 0.832031, 0.632813, 1)
+theme_override_fonts/font = ExtResource("3_o4kq5")
+theme_override_font_sizes/font_size = 14
+text = "Lost connection to server.
+open crt menu to reconnect"
+horizontal_alignment = 1
+
+[node name="Panel" type="Panel" parent="disconnected"]
+z_index = -1
+layout_mode = 0
+offset_left = -10.0
+offset_top = -7.0
+offset_right = 257.0
+offset_bottom = 47.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_7lnrk")
+
+[node name="disconnectedInGame" type="Label" parent="."]
+visible = false
+layout_mode = 0
+offset_left = 370.0
+offset_top = 222.0
+offset_right = 617.0
+offset_bottom = 306.0
+theme_override_colors/font_color = Color(0.648438, 0.832031, 0.632813, 1)
+theme_override_fonts/font = ExtResource("3_o4kq5")
+theme_override_font_sizes/font_size = 14
+text = "Lost connection to server.
+open crt menu to reconnect
+
+returning to lobby..."
+horizontal_alignment = 1
+
+[node name="Panel" type="Panel" parent="disconnectedInGame"]
+z_index = -1
+layout_mode = 0
+offset_left = -10.0
+offset_top = -7.0
+offset_right = 257.0
+offset_bottom = 87.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_7lnrk")
+
+[node name="leavingMatch" type="Label" parent="."]
+visible = false
+layout_mode = 0
+offset_left = 360.0
+offset_top = 251.0
+offset_right = 607.0
+offset_bottom = 335.0
+theme_override_colors/font_color = Color(0.648438, 0.832031, 0.632813, 1)
+theme_override_fonts/font = ExtResource("3_o4kq5")
+theme_override_font_sizes/font_size = 14
+text = "LEAVING MATCH..."
+horizontal_alignment = 1
+
+[node name="Panel" type="Panel" parent="leavingMatch"]
+z_index = -1
+layout_mode = 0
+offset_left = 36.0
+offset_top = -7.0
+offset_right = 211.0
+offset_bottom = 28.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_7lnrk")
+
+[node name="opponentDisconnected" type="Label" parent="."]
+visible = false
+layout_mode = 0
+offset_left = 360.0
+offset_top = 240.0
+offset_right = 607.0
+offset_bottom = 324.0
+theme_override_colors/font_color = Color(0.648438, 0.832031, 0.632813, 1)
+theme_override_fonts/font = ExtResource("3_o4kq5")
+theme_override_font_sizes/font_size = 14
+text = "Opponent disconnected
+returning to lobby..."
+horizontal_alignment = 1
+
+[node name="Panel" type="Panel" parent="opponentDisconnected"]
+z_index = -1
+layout_mode = 0
+offset_left = 9.0
+offset_top = -7.0
+offset_right = 236.0
+offset_bottom = 46.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_7lnrk")
 
 [node name="crt menu" type="Panel" parent="."]
 visible = false
@@ -297,7 +480,6 @@ offset_left = 101.499
 offset_top = 54.9921
 offset_right = 178.499
 offset_bottom = 74.9921
-focus_mode = 1
 theme_override_colors/font_color = Color(0.72549, 0.945098, 0.701961, 1)
 theme_override_colors/font_selected_color = Color(0.72549, 0.945098, 0.701961, 1)
 theme_override_colors/font_uneditable_color = Color(0.72549, 0.945098, 0.701961, 1)
@@ -311,6 +493,7 @@ theme_override_constants/outline_size = 0
 theme_override_fonts/font = ExtResource("3_o4kq5")
 theme_override_font_sizes/font_size = 13
 theme_override_styles/normal = SubResource("StyleBoxFlat_dwma3")
+theme_override_styles/focus = SubResource("StyleBoxFlat_ugsc6")
 placeholder_text = "USERNAME"
 max_length = 8
 caret_blink = true
@@ -328,6 +511,16 @@ theme_override_fonts/font = ExtResource("3_o4kq5")
 theme_override_font_sizes/font_size = 12
 theme_override_styles/normal = SubResource("StyleBoxFlat_wq0lo")
 text = "SIGN UP"
+
+[node name="error" type="Label" parent="crt menu/signup section"]
+layout_mode = 0
+offset_top = 163.0
+offset_right = 277.0
+offset_bottom = 178.0
+theme_override_colors/font_color = Color(0.722656, 0.941406, 0.699219, 1)
+theme_override_fonts/font = ExtResource("3_o4kq5")
+theme_override_font_sizes/font_size = 9
+horizontal_alignment = 1
 
 [node name="invite accepted" type="Control" parent="."]
 visible = false
@@ -438,3 +631,15 @@ horizontal_alignment = 1
 libraries = {
 "": SubResource("AnimationLibrary_duf5e")
 }
+
+[node name="leaveMatch" type="Button" parent="."]
+visible = false
+layout_mode = 0
+offset_left = 830.0
+offset_top = 500.0
+offset_right = 950.0
+offset_bottom = 530.0
+focus_mode = 0
+theme_override_fonts/font = ExtResource("3_o4kq5")
+theme_override_font_sizes/font_size = 14
+text = "LEAVE MATCH"
