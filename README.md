@@ -17,6 +17,8 @@ Although based off of my (Josh's) [original](https://github.com/j-trueman/Bucksh
   - [Creating an account](#creating-an-account)
 - [Fancy menus](#fancy-menus)
 - [Invite system](#invite-system)
+- [Compatibility](#compatibility)
+- [What's Next?](#future-plans)
 
 ## Dedicated Servers
 
@@ -24,7 +26,7 @@ First and foremost, we now have a dedicated server framework for managing all th
 
 ## User Accounts
 
-We thought it would be a helpful if you could actually tell who you're playing against. That's why we implemented user accounts! You'll need to create one before you can play online with your friends (Don't worry, you don't need any personal information. And, you can do it in-game!)
+We thought it would be helpful if you could actually tell who you're playing against. That's why we implemented user accounts! You'll need to create one before you can play online with your friends (Don't worry, you don't need any personal information. And, you can do it in-game!)
 
 ### Authentication
 
@@ -34,15 +36,15 @@ User authentication is fairly simple process. When a new user account is created
 
 When you run the game for the first time with MultiPlayer installed you will be prompted (When you interact with the crt) to enter a username. After pressing the signup button the server will check if the user already exists and if not will automatically generate and send you a private key and log the user in. 
 
-**NOTE: IF YOU DELETE YOUR PRIVATE KEYn YOU WILL NOT BE ABLE TO ACCESS YOUR ACCOUNT**
+**NOTE: IF YOU DELETE OR MODIFY YOUR PRIVATE KEY YOU WILL NOT BE ABLE TO ACCESS YOUR ACCOUNT**
 
 ## Fancy Menus
 
-Technically, no interacttions a ever performed on the crt anymore, the crt menus and menu systms are all part of a menu UI scene with some very strategically placed elements that gets instatnitated when the mod loads. This makes it easier for you to interact with and makes it easier to work with behind the scenes. And hey, it looks pretty darn cool too!
+Technically, no interactions a ever performed on the crt anymore, the crt menus and menu systms are all part of a menu UI scene with some very strategically placed elements that gets instantiated when the mod loads. This makes it easier for you to interact with and makes it easier to work with behind the scenes. And hey, it looks pretty darn cool too!
 
 ## Invite System
 
-The invite system is my baby. When you open the crt menu you are greeted with a list of online players ( prvided you were successfully logged in). When you press the invite button located next to any of the usernames it will send a new inivite over the servver to the player it is for. On the receiving end a popup will appear showing the new incoming invite and you can view all your ingcoming (and outoing) invites via the hamburger menu in hte top right of the screen
+The invite system is my baby. When you open the crt menu you are greeted with a list of online players ( prvided you were successfully logged in). When you press the invite button located next to any of the usernames it will send a new inivite over the server to the player it is addressed to. On the receiving end, a popup will appear showing the new incoming invite and you can view all your incoming (and outoing) invites via the hamburger menu in the top right of the screen
 
 ## Compatibility
 
