@@ -10,15 +10,39 @@ We know many of you have been anxiously awaiting the release of official multipl
 
 Although based off of my (Josh's) [original](https://github.com/j-trueman/BuckshotRouletteMultiplayer) multiplayer mod for the itch.io version of the game, _MultiPlayer_ is better in almost every way. Let's take a look at a couple of things.
 
-## Matchmaking
+### Contents:
+- [Dedicated Servers](#dedicated-servers)
+- [User accounts](#user-accounts)
+  - [Authentication](#authentication)
+  - [Creating an account](#creating-an-account)
+- [Fancy menus](#fancy-menus)
+- [Invite system](#invite-system)
 
-The biggest, and arguably best, improvement over the original multiplayer mod is that we now have a dedicated server for hosting matches! No longer do you have to faff around with port forwarding, ip addresses and the possiblity of accidentally doxxing yourself. Now, you can simply; [create an account](#creating-an-account), open the CRT, and peruse the server to find your next opponent (if they're online, of course).
+## Dedicated Servers
 
-## Creating An Account
+First and foremost, we now have a dedicated server framework for managing all things MultiPlayer! No longer will you have to mess about with port forwarding and other such shenanigans, it's a much more streamlined system (And it looks much nicer too!). And here's the best part, you can host your own instance! You can read more about how to do that over on the [MultiPlayer Server](https://www.github.com/j-trueman/MultiplayerServer) repo!
 
-Before you can play Buckshot Roulette with your friends, you will need to create a _MultiPlayer account_! This is very simple. Once you've entered the game, go to the CRT (it will always appear when you have MultiPlayer installed) and you will be greeted with a login page. Simply put in a username and hit enter or the window cycle button (the one next to the exit button). If your chosen username is not already in use then your new account will be created and you will recieve your _private authentication key_. This key is located at `C:\path\to\buckshot\roulette\privatekey.key` and is **very important** to authenticating your account. 
+## User Accounts
 
-**NOTE: BE CAREFUL, IF YOU CREATE A NEW ACCOUNT THEN YOUR PRIVATE KEY WILL BE OVERWRITTEN AND YOU WILL LOSE ACCESS TO YOUR ORIGINAL ACCOUNT**
+We thought it would be a helpful if you could actually tell who you're playing against. That's why we implemented user accounts! You'll need to create one before you can play online with your friends (Don't worry, you don't need any personal information. And, you can do it in-game!)
+
+### Authentication
+
+User authentication is fairly simple process. When a new user account is created, an RSA private key file is generated. A copy of this is stored on the server in a database alongside their username and a copy is sent to the user themselves. Then, when a user tries to login the next time, the server checks if the user's key matches the one in the database for the specified username. If they do then the user is logged in (this process is entirely automated)
+
+### Creating An Account
+
+When you run the game for the first time with MultiPlayer installed you will be prompted (When you interact with the crt) to enter a username. After pressing the signup button the server will check if the user already exists and if not will automatically generate and send you a private key and log the user in. 
+
+**NOTE: IF YOU DELETE YOUR PRIVATE KEYn YOU WILL NOT BE ABLE TO ACCESS YOUR ACCOUNT**
+
+## Fancy Menus
+
+Technically, no interacttions a ever performed on the crt anymore, the crt menus and menu systms are all part of a menu UI scene with some very strategically placed elements that gets instatnitated when the mod loads. This makes it easier for you to interact with and makes it easier to work with behind the scenes. And hey, it looks pretty darn cool too!
+
+## Invite System
+
+The invite system is my baby. When you open the crt menu you are greeted with a list of online players ( prvided you were successfully logged in). When you press the invite button located next to any of the usernames it will send a new inivite over the servver to the player it is for. On the receiving end a popup will appear showing the new incoming invite and you can view all your ingcoming (and outoing) invites via the hamburger menu in hte top right of the screen
 
 ## Compatibility
 
