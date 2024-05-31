@@ -504,7 +504,6 @@ offset_left = 108.339
 offset_top = 85.5689
 offset_right = 170.339
 offset_bottom = 104.569
-focus_mode = 0
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_constants/outline_size = 0
 theme_override_fonts/font = ExtResource("3_o4kq5")
