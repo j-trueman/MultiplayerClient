@@ -33,6 +33,7 @@ func Interaction(alias : String):
 			multiplayerManager.inviteMenu.crtMenu.visible = false
 			multiplayerManager.inviteMenu.get_node("connecting").visible = false
 			multiplayerManager.inviteMenu.get_node("connectFail").visible = false
+			multiplayerManager.inviteMenu.usernameInput.text = ""
 			branch_exit.get_parent().get_child(1).Press()
 			viewing = false
 			board.TurnOffDisplay()
@@ -64,6 +65,8 @@ func SetCRT(state : bool):
 func _input(event):
 	if Input.is_key_pressed(KEY_ESCAPE) && viewing:
 		Interaction("exit")
+	if Input.is_key_pressed(KEY_BACKSPACE) && not event.is_echo():
+		multiplayerManager.inviteMenu.usernameInput.text = multiplayerManager.inviteMenu.usernameInput.text.erase(len(multiplayerManager.inviteMenu.usernameInput.text) -1, 1)
 
 func processInviteStatus(username, status):
 	multiplayerManager.invitePendingIdx = null

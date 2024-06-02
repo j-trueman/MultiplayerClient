@@ -66,7 +66,7 @@ func _process(delta):
 		leaveMatchButton.visible = true
 	else:
 		leaveMatchButton.visible = false
-  
+		
 func setCursorImage(alias):
 	match alias:
 		"hover": interactionManager.checking = false

@@ -11,10 +11,17 @@ var crtManager
 var inviteMenu
 var loggedIn = false
 var timer : Timer
+var inCredits
 
 func _ready():
 	multiplayer.connected_to_server.connect(func(): connectionTimer("stop"))
 	multiplayer.server_disconnected.connect(_onServerDisconnected)
+	
+	if inMatch:
+		inMatch = false
+		loggedIn = false
+		inCredits = false
+		multiplayer.multiplayer_peer = null
 
 func connectionTimer(action):
 	if action == "start":
@@ -27,6 +34,8 @@ func connectionTimer(action):
 	else:
 		inviteMenu.get_node("connecting").visible = false
 		inviteMenu.get_node("connecting/AnimationPlayer").stop()
+		inviteMenu.get_node("connectFail").visible = false
+		loggedIn = false
 		timer.queue_free()
 
 func connectToServer():
@@ -129,13 +138,14 @@ func acceptInvite(from):
 
 @rpc("any_peer") 
 func opponentDisconnect(): 
-	inMatch = false
-	loggedIn = false
-	inviteMenu.get_node("opponentDisconnected").visible = true
-	Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
-	await get_tree().create_timer(5).timeout
-	await get_tree().reload_current_scene()
-	pass
+	if !inCredits:
+		inMatch = false
+		loggedIn = false
+		inviteMenu.get_node("opponentDisconnected").visible = true
+		Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
+		await get_tree().create_timer(5).timeout
+		await get_tree().reload_current_scene()
+		pass
 
 func leaveMatch():
 	inMatch = false
