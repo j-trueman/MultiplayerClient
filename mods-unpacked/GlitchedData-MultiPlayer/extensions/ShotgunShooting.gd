@@ -1,10 +1,13 @@
 extends "res://scripts/ShotgunShooting.gd"
 
 var manager
+var multiplayermanager
 var interaction
+var dealerHasBeenShot = false
 
 func _ready():
 	manager = get_tree().get_root().get_node("MultiplayerManager/MultiplayerRoundManager")
+	multiplayermanager = get_tree().get_root().get_node("MultiplayerManager")
 	interaction = GlobalVariables.get_current_scene_node().get_node("standalone managers/interaction manager")
 
 func Shoot(who : String):
@@ -108,3 +111,8 @@ func GrabShotgun():
 	if (cursorManager.controller_active): btn_you.grab_focus()
 	controller.previousFocus = btn_you
 	await get_tree().create_timer(.5, false).timeout
+
+func MainSlowDownRoutine(whoCopy : String, fromDealer : bool):
+	if dealerHasBeenShot: multiplayermanager.inCredits = true
+	else: dealerHasBeenShot = true
+	super(whoCopy, fromDealer)
