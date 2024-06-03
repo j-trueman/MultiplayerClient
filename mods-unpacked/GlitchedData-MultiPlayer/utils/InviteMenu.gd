@@ -60,7 +60,7 @@ func _process(delta):
 		menuButton.visible = true
 	else:
 		menuButton.visible = false
-  
+
 func setCursorImage(alias):
 	match alias:
 		"hover": interactionManager.checking = false

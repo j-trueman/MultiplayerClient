@@ -13,10 +13,17 @@ var loggedIn = false
 var timer : Timer
 var url = "buckshotmultiplayer.net"
 var resetManager
+var inCredits
 
 func _ready():
 	multiplayer.connected_to_server.connect(func(): connectionTimer("stop"))
 	multiplayer.server_disconnected.connect(_onServerDisconnected)
+	
+	if inMatch:
+		inMatch = false
+		loggedIn = false
+		inCredits = false
+		multiplayer.multiplayer_peer = null
 
 func connectionTimer(action):
 	if action == "start":
@@ -29,6 +36,8 @@ func connectionTimer(action):
 	else:
 		inviteMenu.get_node("connecting").visible = false
 		inviteMenu.get_node("connecting/AnimationPlayer").stop()
+		inviteMenu.get_node("connectFail").visible = false
+		loggedIn = false
 		timer.queue_free()
 
 func connectToServer():
@@ -129,13 +138,15 @@ func acceptInvite(from):
 	inMatch = true
 
 @rpc("any_peer", "reliable") 
-func opponentDisconnect(): 
-	inMatch = false
-	loggedIn = false
-	inviteMenu.get_node("opponentDisconnected").visible = true
-	Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
-	await get_tree().create_timer(5).timeout
-	resetManager.Reset()
+func opponentDisconnect():
+	if !inCredits:
+		inMatch = false
+		loggedIn = false
+		inviteMenu.get_node("opponentDisconnected").visible = true
+		Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
+		await get_tree().create_timer(5).timeout
+		resetManager.Reset()
+		pass
 
 # GHOST FUNCTIONS
 #@rpc("any_peer", "reliable") func requestUserExistsStatus(username : String): pass
