@@ -72,8 +72,10 @@ func _input(event):
 	if Input.is_key_pressed(KEY_ESCAPE) && viewing:
 		Interaction("exit")
 	if Input.is_key_pressed(KEY_BACKSPACE) && not event.is_echo():
+		var col = multiplayerManager.inviteMenu.usernameInput.get_caret_column()
 		multiplayerManager.inviteMenu.usernameInput.text = multiplayerManager.inviteMenu.usernameInput.text.erase(len(multiplayerManager.inviteMenu.usernameInput.text) -1, 1)
-
+		multiplayerManager.inviteMenu.usernameInput.set_caret_column(col)
+		
 func processInviteStatus(username, status):
 	multiplayerManager.invitePendingIdx = null
 	match status:
