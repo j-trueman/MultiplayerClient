@@ -18,3 +18,6 @@ func _ready():
 	dealerName = healthCounterUI.get_node("health UI_dealer side/text_dealer")
 	dealerName.scale = Vector3(0.334,0.331,0.374)
 	dealerName.position.y = 0.676
+
+	var multiplayerManager = get_tree().get_root().get_node("MultiplayerManager")
+	multiplayerManager.resetManager = GlobalVariables.get_current_scene_node().get_node("standalone managers/reset manager")

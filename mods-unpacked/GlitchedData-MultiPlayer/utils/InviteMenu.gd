@@ -19,7 +19,6 @@ extends Control
 @export var timerAccept : AnimationPlayer
 @export var timerJoin : AnimationPlayer
 @export var errorLabel : Label
-@export var leaveMatchButton : Button
 
 signal serverInviteList(invites)
 signal connectionSuccess
@@ -41,7 +40,6 @@ func _ready():
 		multiplayerManager.connectToServer()
 		await multiplayer.connected_to_server
 		multiplayerManager.requestNewUser.rpc(usernameInput.text))
-	leaveMatchButton.button_down.connect(multiplayerManager.leaveMatch)
 	incomingButton.button_down.connect(func(): updateInviteList("incoming"))
 	outgoingButton.button_down.connect(func(): updateInviteList("outgoing"))
 
@@ -62,10 +60,6 @@ func _process(delta):
 		menuButton.visible = true
 	else:
 		menuButton.visible = false
-	if Input.get_mouse_mode() == Input.MOUSE_MODE_VISIBLE && multiplayerManager.inMatch:
-		leaveMatchButton.visible = true
-	else:
-		leaveMatchButton.visible = false
   
 func setCursorImage(alias):
 	match alias:

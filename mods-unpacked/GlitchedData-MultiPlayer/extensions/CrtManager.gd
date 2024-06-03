@@ -9,6 +9,12 @@ func _ready():
 	multiplayerManager = get_tree().root.get_node("MultiplayerManager")	
 	multiplayerManager.crtManager = self
 
+	var file = FileAccess.open("res://mods-unpacked/GlitchedData-MultiPlayer/media/crt_bootup_fix.mp3", FileAccess.READ)
+	var buffer = file.get_buffer(file.get_length())
+	var stream = AudioStreamMP3.new()
+	stream.data = buffer
+	speaker_bootuploop.stream = stream
+
 func _unhandled_input(event):
 	if (event.is_action_pressed("ui_accept") && viewing):
 		Interaction("window")

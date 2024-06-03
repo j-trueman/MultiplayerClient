@@ -26,6 +26,8 @@ func install_script_extensions() -> void:
 		'ItemInteraction',
 		'ItemManager',
 		'MedicineManager',
+		'MenuManager',
+		'ResetManager',
 		'RoundManager',
 		'ShotgunShooting',
 		'UserExit'
@@ -45,7 +47,7 @@ func _process(delta):
 		var manager = MultiplayerManager.new()
 		manager.name = "MultiplayerManager"
 		root.add_child(manager)
-		root.move_child(scene, root.get_child_count()-2)
+		root.move_child(scene, root.get_child_count()-1)
 
 		var multiplayerRoundManager = MultiplayerRoundManager.new()
 		multiplayerRoundManager.name = "MultiplayerRoundManager"

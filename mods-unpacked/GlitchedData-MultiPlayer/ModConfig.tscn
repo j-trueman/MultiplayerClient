@@ -1,0 +1,66 @@
+[gd_scene load_steps=6 format=3 uid="uid://4f7ulnrkgpqs"]
+
+[ext_resource type="FontFile" uid="uid://bquox4twb507h" path="res://fonts/fake receipt.otf" id="1"]
+[ext_resource type="Script" path="res://mods-unpacked/GlitchedData-MultiPlayer/MPConfig.gd" id="2"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_cd7nw"]
+content_margin_left = 6.0
+content_margin_bottom = 3.0
+bg_color = Color(1, 1, 1, 0.572549)
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+shadow_color = Color(0, 0, 0, 0.192157)
+shadow_size = 3
+shadow_offset = Vector2(0, 1.605)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_hhxn8"]
+bg_color = Color(0.670588, 0.0745098, 0.117647, 1)
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+expand_margin_left = 5.0
+expand_margin_right = 5.0
+shadow_color = Color(0, 0, 0, 0.411765)
+shadow_offset = Vector2(0, 1.74)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_y4nth"]
+bg_color = Color(0.670588, 0.0745098, 0.117647, 1)
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+
+[node name="MultiplayerConfig" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="multiplayer url" type="LineEdit" parent="."]
+layout_mode = 0
+offset_left = 316.0
+offset_top = 149.0
+offset_right = 631.0
+offset_bottom = 180.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("1")
+theme_override_styles/normal = SubResource("StyleBoxFlat_cd7nw")
+
+[node name="url_none" type="Label" parent="multiplayer url"]
+layout_mode = 0
+offset_left = -53.0
+offset_top = 5.0
+offset_right = -5.0
+offset_bottom = 31.0
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("1")
+text = "URL:"
+
+[node name="Config" type="Node" parent="." node_paths=PackedStringArray("url")]
+script = ExtResource("2")
+url = NodePath("../multiplayer url")

@@ -11,6 +11,8 @@ var crtManager
 var inviteMenu
 var loggedIn = false
 var timer : Timer
+var url = "buckshotmultiplayer.net"
+var resetManager
 
 func _ready():
 	multiplayer.connected_to_server.connect(func(): connectionTimer("stop"))
@@ -32,7 +34,6 @@ func connectionTimer(action):
 func connectToServer():
 	connectionTimer("start")
 	var peer = ENetMultiplayerPeer.new()
-	var url = "buckshotmultiplayer.net"
 	if url == "buckshotmultiplayer.net": url = "connectviamultiplayerclient." + url
 	var error = peer.create_client(url, 2095)
 	if error:
@@ -48,14 +49,14 @@ func attemptLogin():
 		return false
 	verifyUserCreds.rpc(keyFile.get_buffer(keyFile.get_length()))
 
-@rpc("any_peer")
+@rpc("any_peer", "reliable")
 func notifySuccessfulLogin(username):
 	accountName = username
 	inviteMenu.processLoginStatus("success")
 	print("logged in as %s" % username)
 	loggedIn = true
 
-@rpc("any_peer")
+@rpc("any_peer", "reliable")
 func closeSession(reason):
 	print("SESSION TERMINATED\nReason: %s" % reason)
 	loginStatus.emit(reason)
@@ -84,7 +85,7 @@ func _onServerDisconnected():
 		await get_tree().create_timer(5).timeout
 		await get_tree().reload_current_scene()
 
-@rpc("any_peer")
+@rpc("any_peer", "reliable")
 func receiveUserCreationStatus(return_value: bool): 
 	if return_value == false:
 		print("USER ALREADY EXISTS")
@@ -93,30 +94,30 @@ func receiveUserCreationStatus(return_value: bool):
 		print("CREATED USER SUCCESSFULLY")
 		loginStatus.emit() 
 	
-@rpc("any_peer")
+@rpc("any_peer", "reliable")
 func receivePrivateKey(keyString):
 	var keyFile = FileAccess.open("res://privatekey.key", FileAccess.WRITE)
 	keyFile.store_string(keyString)
 	keyFile.close()
 	attemptLogin()
 
-@rpc("any_peer")
+@rpc("any_peer", "reliable")
 func receivePlayerList(dict):
 	inviteMenu.updateUserList(dict)
 
-@rpc("any_peer")
+@rpc("any_peer", "reliable")
 func receiveInvite(fromUsername, fromID):
 	inviteMenu.receiveInvite(fromUsername, fromID)
 
-@rpc("any_peer")
+@rpc("any_peer", "reliable")
 func receiveInviteStatus(username, status):
 	crtManager.processInviteStatus(username, status)
 
-@rpc("any_peer")
+@rpc("any_peer", "reliable")
 func receiveInviteList(list):
 	inviteMenu.serverInviteList.emit(list)
 
-@rpc("any_peer", "call_local") 
+@rpc("any_peer", "call_local", "reliable") 
 func acceptInvite(from):
 	inviteMenu.showJoin()
 	await inviteMenu.timerJoin.animation_finished 
@@ -127,33 +128,22 @@ func acceptInvite(from):
 	crtManager.SetCRT(false)
 	inMatch = true
 
-@rpc("any_peer") 
+@rpc("any_peer", "reliable") 
 func opponentDisconnect(): 
 	inMatch = false
 	loggedIn = false
 	inviteMenu.get_node("opponentDisconnected").visible = true
 	Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
 	await get_tree().create_timer(5).timeout
-	await get_tree().reload_current_scene()
-	pass
-
-func leaveMatch():
-	inMatch = false
-	loggedIn = false
-	multiplayer.multiplayer_peer = null
-	inviteMenu.get_node("leavingMatch").visible = true
-	Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
-	await get_tree().create_timer(5).timeout
-	await get_tree().reload_current_scene()
-	pass
+	resetManager.Reset()
 
 # GHOST FUNCTIONS
-#@rpc("any_peer") func requestUserExistsStatus(username : String): pass
+#@rpc("any_peer", "reliable") func requestUserExistsStatus(username : String): pass
 @rpc("any_peer", "reliable") func requestNewUser(username: String) : pass
-@rpc("any_peer") func verifyUserCreds(keyFileData): pass
-@rpc("any_peer") func requestPlayerList(): pass
-@rpc("any_peer") func createInvite(to : int): pass
-@rpc("any_peer") func retractInvite(to): pass
-@rpc("any_peer") func retractAllInvites(): pass
-@rpc("any_peer") func getInvites(type): pass
-@rpc("any_peer") func denyInvite(from): pass
+@rpc("any_peer", "reliable") func verifyUserCreds(keyFileData): pass
+@rpc("any_peer", "reliable") func requestPlayerList(): pass
+@rpc("any_peer", "reliable") func createInvite(to : int): pass
+@rpc("any_peer", "reliable") func retractInvite(to): pass
+@rpc("any_peer", "reliable") func retractAllInvites(): pass
+@rpc("any_peer", "reliable") func getInvites(type): pass
+@rpc("any_peer", "reliable") func denyInvite(from): pass

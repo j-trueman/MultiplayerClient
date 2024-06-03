@@ -1,7 +1,7 @@
 [gd_scene load_steps=19 format=3 uid="uid://bx7fk0shftvp5"]
 
 [ext_resource type="Script" path="res://mods-unpacked/GlitchedData-MultiPlayer/utils/InviteMenu.gd" id="1_78ny8"]
-[ext_resource type="Texture2D" uid="uid://njbl1u3wf3yg" path="res://mods-unpacked/GlitchedData-MultiPlayer/media/burger.png" id="2_5o3ae"]
+[ext_resource type="Texture2D" path="res://mods-unpacked/GlitchedData-MultiPlayer/media/burger.png" id="2_5o3ae"]
 [ext_resource type="FontFile" uid="uid://bquox4twb507h" path="res://fonts/fake receipt.otf" id="3_o4kq5"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_jvphg"]
@@ -141,7 +141,7 @@ _data = {
 "countdown": SubResource("Animation_ke08f")
 }
 
-[node name="InviteMenu" type="Control" node_paths=PackedStringArray("inviteContainer", "inviteList", "popupSection", "playerListSection", "signupSection", "menuButton", "incomingButton", "outgoingButton", "buttonHighlightAnimator", "crtMenu", "userList", "usernameInput", "signupButton", "opponentUsernameLabel", "gameReadySection", "joiningGameSection", "timerAccept", "timerJoin", "errorLabel", "leaveMatchButton")]
+[node name="InviteMenu" type="Control" node_paths=PackedStringArray("inviteContainer", "inviteList", "popupSection", "playerListSection", "signupSection", "menuButton", "incomingButton", "outgoingButton", "buttonHighlightAnimator", "crtMenu", "userList", "usernameInput", "signupButton", "opponentUsernameLabel", "gameReadySection", "joiningGameSection", "timerAccept", "timerJoin", "errorLabel")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -168,7 +168,6 @@ joiningGameSection = NodePath("joining game")
 timerAccept = NodePath("invite accepted/Panel/label3/AnimationPlayer")
 timerJoin = NodePath("joining game/Panel/label3/AnimationPlayer")
 errorLabel = NodePath("crt menu/signup section/error")
-leaveMatchButton = NodePath("leaveMatch")
 
 [node name="invite list" type="ScrollContainer" parent="."]
 visible = false
@@ -344,28 +343,6 @@ offset_left = -10.0
 offset_top = -7.0
 offset_right = 257.0
 offset_bottom = 87.0
-theme_override_styles/panel = SubResource("StyleBoxFlat_7lnrk")
-
-[node name="leavingMatch" type="Label" parent="."]
-visible = false
-layout_mode = 0
-offset_left = 360.0
-offset_top = 251.0
-offset_right = 607.0
-offset_bottom = 335.0
-theme_override_colors/font_color = Color(0.648438, 0.832031, 0.632813, 1)
-theme_override_fonts/font = ExtResource("3_o4kq5")
-theme_override_font_sizes/font_size = 14
-text = "LEAVING MATCH..."
-horizontal_alignment = 1
-
-[node name="Panel" type="Panel" parent="leavingMatch"]
-z_index = -1
-layout_mode = 0
-offset_left = 36.0
-offset_top = -7.0
-offset_right = 211.0
-offset_bottom = 28.0
 theme_override_styles/panel = SubResource("StyleBoxFlat_7lnrk")
 
 [node name="opponentDisconnected" type="Label" parent="."]
@@ -630,15 +607,3 @@ horizontal_alignment = 1
 libraries = {
 "": SubResource("AnimationLibrary_duf5e")
 }
-
-[node name="leaveMatch" type="Button" parent="."]
-visible = false
-layout_mode = 0
-offset_left = 830.0
-offset_top = 500.0
-offset_right = 950.0
-offset_bottom = 530.0
-focus_mode = 0
-theme_override_fonts/font = ExtResource("3_o4kq5")
-theme_override_font_sizes/font_size = 14
-text = "LEAVE MATCH"
