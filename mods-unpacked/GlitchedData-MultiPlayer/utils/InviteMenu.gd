@@ -45,10 +45,7 @@ func _ready():
 	multiplayerManager.inviteMenu = self
 	multiplayerManager.loginStatus.connect(processLoginStatus)
 	menuButton.button_down.connect(toggleMenu)
-	signupButton.button_down.connect(func(): 
-		multiplayerManager.connectToServer()
-		await multiplayer.connected_to_server
-		multiplayerManager.requestNewUser.rpc(usernameInput.text))
+	signupButton.button_down.connect(requestUsername)
 	incomingButton.button_down.connect(func(): updateInviteList("incoming", false))
 	outgoingButton.button_down.connect(func(): updateInviteList("outgoing", false))
 
@@ -138,6 +135,11 @@ func _input(event):
 			moveTimer = 0.0
 			righting = false
 
+func requestUsername():
+	multiplayerManager.connectToServer()
+	await multiplayer.connected_to_server
+	multiplayerManager.requestNewUser.rpc(usernameInput.text)
+
 func setCursorImage(alias):
 	match alias:
 		"hover": interactionManager.checking = false
@@ -185,6 +187,7 @@ func removeInvite(from):
 			popupSection.remove_child(invite)
 
 func showReady(username):
+	multiplayerManager.crtManager.intro.dealerName.text = username.to_upper()
 	Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
 	gameReadySection.visible = true
 	opponentUsernameLabel.text = username
@@ -241,6 +244,7 @@ func processLoginStatus(reason):
 		crtMenu.visible = true
 		playerListSection.visible = true
 		signupSection.visible = false
+		usernameInput.release_focus()
 		multiplayerManager.requestPlayerList.rpc()
 		return
 	else:

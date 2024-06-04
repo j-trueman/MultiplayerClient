@@ -77,6 +77,8 @@ func Interaction(alias : String):
 			if multiplayerManager.inviteMenu.signupSection.visible and multiplayerManager.inviteMenu.usernameInput.caret_column > 0:
 				multiplayerManager.inviteMenu.usernameInput.caret_column -= 1
 		"window":
+			if multiplayerManager.inviteMenu.usernameInput.has_focus():
+				multiplayerManager.inviteMenu.requestUsername()
 			branch_window.get_parent().get_child(1).Press()
 		"exit":
 			if multiplayerManager.timerRunning: multiplayerManager.timer.queue_free()
@@ -144,7 +146,6 @@ func processInviteStatus(username, status):
 			if !multiplayerManager.inMatch:
 				multiplayerManager.inMatch = true
 				intro.roundManager.playerData.playername = multiplayerManager.accountName.to_upper()
-				print(username)
 				intro.dealerName.text = username.to_upper()
 				multiplayerManager.inviteMenu.showReady(username)
 				await multiplayerManager.inviteMenu.timerAccept.animation_finished

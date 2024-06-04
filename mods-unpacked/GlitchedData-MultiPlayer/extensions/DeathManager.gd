@@ -78,7 +78,6 @@ func Kill(who : String, trueDeath : bool, returningShotgun : bool):
 				viewblocker.visible = true
 				shotgunShooting.shotgunshaker.StopShaking()
 				if (not shotgunShooting.roundManager.playerTurn and shotgunShooting.roundManager.health_player == 0):
-					animator_shotgun.play("RESET")
 					animator_dealerHands.play("RESET")
 					shellLoader.DealerHandsDropShotgun()
 				if (returningShotgun):
@@ -109,6 +108,9 @@ func Kill(who : String, trueDeath : bool, returningShotgun : bool):
 					defibParent.visible = false
 				else:
 					await get_tree().create_timer(1, false).timeout
+					animator_shotgun.play("RESET")
+					shotgunShooting.shotgunIndicator.Revert()	# Refactor this later
+					shotgunShooting.ShotgunCollider(true)
 					healthCounter.DisableCounter()
 					speaker_revive_truedeath.play()
 					await get_tree().create_timer(1, false).timeout

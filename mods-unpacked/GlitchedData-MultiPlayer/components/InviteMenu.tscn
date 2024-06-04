@@ -384,8 +384,7 @@ offset_bottom = 324.0
 theme_override_colors/font_color = Color(0.648438, 0.832031, 0.632813, 1)
 theme_override_fonts/font = ExtResource("2")
 theme_override_font_sizes/font_size = 14
-text = "Opponent disconnected
-returning to lobby..."
+text = "Opponent disconnected\nreturning to lobby..."
 horizontal_alignment = 1
 
 [node name="Panel" type="Panel" parent="opponentDisconnected"]

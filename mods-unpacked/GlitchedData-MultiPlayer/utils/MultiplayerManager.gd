@@ -35,13 +35,14 @@ func connectionTimer(action):
 	if action == "start":
 		timer = Timer.new()
 		GlobalVariables.get_current_scene_node().add_child(timer)
-		inviteMenu.get_node("connecting").visible = true
+		if not inviteMenu.signupSection.visible: inviteMenu.get_node("connecting").visible = true
 		inviteMenu.get_node("connecting/AnimationPlayer").play("connecting")
 		timer.timeout.connect(_onConnectionFail)
 		timer.start(10)
 		timerRunning = true
 	else:
 		timerRunning = false
+		inviteMenu.signupSection.visible = false
 		inviteMenu.get_node("connecting").visible = false
 		inviteMenu.get_node("connecting/AnimationPlayer").stop()
 		inviteMenu.get_node("connectFail").visible = false
@@ -59,7 +60,7 @@ func connectToServer():
 	multiplayer.set_multiplayer_peer(peer)
 
 func attemptLogin():
-	var keyFile = FileAccess.open("res://privatekey.key", FileAccess.READ)
+	var keyFile = FileAccess.open("user://privatekey.key", FileAccess.READ)
 	if !keyFile: 
 		closeSession("noKey")
 		multiplayer.multiplayer_peer = null
@@ -113,7 +114,7 @@ func receiveUserCreationStatus(return_value: bool):
 	
 @rpc("any_peer", "reliable")
 func receivePrivateKey(keyString):
-	var keyFile = FileAccess.open("res://privatekey.key", FileAccess.WRITE)
+	var keyFile = FileAccess.open("user://privatekey.key", FileAccess.WRITE)
 	keyFile.store_string(keyString)
 	keyFile.close()
 	attemptLogin()

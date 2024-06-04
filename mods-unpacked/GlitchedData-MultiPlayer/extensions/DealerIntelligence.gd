@@ -135,5 +135,10 @@ func Shoot_New(who : String, shell : int):
 		if (who == "self"): animator_shotgun.play("enemy eject shell_from self")
 		await get_tree().create_timer(1.7, false).timeout
 	#shellSpawner.sequenceArray.remove_at(0)
+	if (currentRoundInChamber == "blank" and who == "self" and roundManager.barrelSawedOff):
+		animator_shotgun.play("enemy put down shotgun")
+		shellLoader.DealerHandsDropShotgun()
+		dealerHoldingShotgun = false
+		await(roundManager.segmentManager.GrowBarrel())
 	EndDealerTurn(dealerCanGoAgain)
 
