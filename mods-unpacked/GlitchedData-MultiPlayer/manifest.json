@@ -1,9 +1,9 @@
 {
   "name": "MultiPlayer",
   "namespace": "GlitchedData",
-  "version_number": "1.0.0",
+  "version_number": "0.1.0",
   "description": "Want to enjoy Buckshot Roulette with your friends? Now you can!",
-  "website_url": "https://github.com/j-trueman/BuckshotRouletteMultiplayer",
+  "website_url": "https://github.com/j-trueman/MultiplayerClient",
   "dependencies": [],
   "extra": {
 	"godot": {
