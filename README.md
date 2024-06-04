@@ -1,5 +1,8 @@
 <p align="center">
-  <img src="https://github.com/j-trueman/MultiPlayer/assets/82833724/efa40489-11e3-41ca-bc73-731a4bb3007e" width="400px" align="center">
+  <picture>
+    <source media="(prefers-color-scheme: dark)" srcset="https://github.com/j-trueman/MultiPlayer/assets/82833724/efa40489-11e3-41ca-bc73-731a4bb3007e" width='400px'>
+    <img alt="Shows an illustrated sun in light color mode and a moon with stars in dark color mode." src="https://github.com/j-trueman/MultiplayerClient/assets/82833724/4d29ab28-9e70-49d6-8963-bcfc532ace9c" width='400px'>
+  </picture>
 </p>
 
 ---
