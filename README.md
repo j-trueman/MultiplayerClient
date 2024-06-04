@@ -70,3 +70,4 @@ We plan on continuing to update MultiPlayer, even after the official release of 
 * MPB001: Errors in console when receiving an invite
 * MPB002: Shotgun segment stays on table when opponent shoots himself with a sawed shotgun
 * MPB003: Incorrect name displayed on health counter when losing a round
+* MPB004: Plays dealer return animation after losing a round
