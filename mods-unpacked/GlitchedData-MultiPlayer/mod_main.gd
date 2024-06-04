@@ -71,4 +71,8 @@ func _process(delta):
 		var image = Image.load_from_file("res://mods-unpacked/GlitchedData-MultiPlayer/media/MultiPlayer.png")
 		var texture = ImageTexture.create_from_image(image)
 		logoMat.albedo_texture = texture
+		logoMat.texture_repeat = false
 		logo.mesh.surface_set_material(0,logoMat)
+		logo.position.z = 12.127
+		logo.scale.x = 0.66
+		logo.scale.z = 0.388

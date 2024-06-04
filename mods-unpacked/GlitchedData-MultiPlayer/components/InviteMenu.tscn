@@ -1,8 +1,7 @@
 [gd_scene load_steps=19 format=3 uid="uid://bx7fk0shftvp5"]
 
-[ext_resource type="Script" path="res://mods-unpacked/GlitchedData-MultiPlayer/utils/InviteMenu.gd" id="1_78ny8"]
-[ext_resource type="Texture2D" path="res://mods-unpacked/GlitchedData-MultiPlayer/media/burger.png" id="2_5o3ae"]
-[ext_resource type="FontFile" uid="uid://bquox4twb507h" path="res://fonts/fake receipt.otf" id="3_o4kq5"]
+[ext_resource type="Script" path="res://mods-unpacked/GlitchedData-MultiPlayer/utils/InviteMenu.gd" id="1"]
+[ext_resource type="FontFile" uid="uid://bquox4twb507h" path="res://fonts/fake receipt.otf" id="2"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_jvphg"]
 bg_color = Color(1, 1, 1, 0.121569)
@@ -12,6 +11,34 @@ bg_color = Color(0.6, 0.6, 0.6, 0)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_i21ws"]
 bg_color = Color(0.6, 0.6, 0.6, 0)
+
+[sub_resource type="Animation" id="Animation_godotIsFun"]
+resource_name = "RESET"
+length = 0.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(0.5),
+"update": 0,
+"values": [Vector2(633, 14)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(0.5),
+"update": 0,
+"values": [Vector2(1, 1)]
+}
 
 [sub_resource type="Animation" id="Animation_l4vn6"]
 resource_name = "toggle"
@@ -43,12 +70,13 @@ tracks/1/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_rgobc"]
 _data = {
+"RESET": SubResource("Animation_godotIsFun"),
 "toggle": SubResource("Animation_l4vn6")
 }
 
 [sub_resource type="Animation" id="Animation_ctpmb"]
 resource_name = "connecting"
-length = 2.6
+length = 1.5
 loop_mode = 1
 tracks/0/type = "value"
 tracks/0/imported = false
@@ -57,10 +85,10 @@ tracks/0/path = NodePath(".:text")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.8, 1.7, 2.6),
+"times": PackedFloat32Array(0, 0.5, 1.0, 1.5),
 "transitions": PackedFloat32Array(1, 1, 1, 1),
 "update": 1,
-"values": ["Connecting To Server.", "Connecting To Server..", "Connecting To Server...", "Connecting To Server."]
+"values": ["Connecting To Server...", "Connecting To Server.", "Connecting To Server..", "Connecting To Server..."]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_214l3"]
@@ -141,14 +169,14 @@ _data = {
 "countdown": SubResource("Animation_ke08f")
 }
 
-[node name="InviteMenu" type="Control" node_paths=PackedStringArray("inviteContainer", "inviteList", "popupSection", "playerListSection", "signupSection", "menuButton", "incomingButton", "outgoingButton", "buttonHighlightAnimator", "crtMenu", "userList", "usernameInput", "signupButton", "opponentUsernameLabel", "gameReadySection", "joiningGameSection", "timerAccept", "timerJoin", "errorLabel")]
+[node name="InviteMenu" type="Control" node_paths=PackedStringArray("inviteContainer", "inviteList", "popupSection", "playerListSection", "signupSection", "menuButton", "incomingButton", "outgoingButton", "buttonHighlightAnimator", "crtMenu", "userList", "usernameInput", "signupButton", "opponentUsernameLabel", "gameReadySection", "joiningGameSection", "timerAccept", "timerJoin", "errorLabel", "title", "underline")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-script = ExtResource("1_78ny8")
+script = ExtResource("1")
 inviteContainer = NodePath("invite list")
 inviteList = NodePath("invite list/container")
 popupSection = NodePath("popup section")
@@ -168,6 +196,8 @@ joiningGameSection = NodePath("joining game")
 timerAccept = NodePath("invite accepted/Panel/label3/AnimationPlayer")
 timerJoin = NodePath("joining game/Panel/label3/AnimationPlayer")
 errorLabel = NodePath("crt menu/signup section/error")
+title = NodePath("crt menu/title")
+underline = NodePath("crt menu/underline")
 
 [node name="invite list" type="ScrollContainer" parent="."]
 visible = false
@@ -206,7 +236,6 @@ offset_bottom = 37.0
 focus_mode = 0
 theme_override_constants/outline_size = 0
 theme_override_constants/icon_max_width = 18
-icon = ExtResource("2_5o3ae")
 icon_alignment = 1
 
 [node name="incoming" type="Button" parent="."]
@@ -218,7 +247,7 @@ offset_right = 722.0
 offset_bottom = 41.0
 focus_mode = 0
 theme_override_constants/outline_size = 0
-theme_override_fonts/font = ExtResource("3_o4kq5")
+theme_override_fonts/font = ExtResource("2")
 theme_override_styles/normal = SubResource("StyleBoxFlat_hk0tl")
 text = "INCOMING"
 
@@ -231,7 +260,7 @@ offset_right = 824.0
 offset_bottom = 41.0
 focus_mode = 0
 theme_override_constants/outline_size = 0
-theme_override_fonts/font = ExtResource("3_o4kq5")
+theme_override_fonts/font = ExtResource("2")
 theme_override_styles/normal = SubResource("StyleBoxFlat_i21ws")
 text = "OUTGOING"
 
@@ -258,7 +287,7 @@ offset_top = 244.0
 offset_right = 570.0
 offset_bottom = 266.0
 theme_override_colors/font_color = Color(0.648438, 0.832031, 0.632813, 1)
-theme_override_fonts/font = ExtResource("3_o4kq5")
+theme_override_fonts/font = ExtResource("2")
 theme_override_font_sizes/font_size = 14
 text = "Connecting To Server..."
 
@@ -283,10 +312,10 @@ offset_top = 232.0
 offset_right = 579.0
 offset_bottom = 274.0
 theme_override_colors/font_color = Color(0.648438, 0.832031, 0.632813, 1)
-theme_override_fonts/font = ExtResource("3_o4kq5")
+theme_override_fonts/font = ExtResource("2")
 theme_override_font_sizes/font_size = 14
-text = "COULD NOT CONTACT SERVER,
-PLEASE TRY AGAIN LATER"
+text = "COULD NOT CONTACT SERVER.
+PLEASE TRY AGAIN LATER."
 horizontal_alignment = 1
 
 [node name="Panel" type="Panel" parent="connectFail"]
@@ -305,7 +334,7 @@ offset_top = 241.0
 offset_right = 617.0
 offset_bottom = 283.0
 theme_override_colors/font_color = Color(0.648438, 0.832031, 0.632813, 1)
-theme_override_fonts/font = ExtResource("3_o4kq5")
+theme_override_fonts/font = ExtResource("2")
 theme_override_font_sizes/font_size = 14
 text = "Lost connection to server.
 open crt menu to reconnect"
@@ -328,7 +357,7 @@ offset_top = 222.0
 offset_right = 617.0
 offset_bottom = 306.0
 theme_override_colors/font_color = Color(0.648438, 0.832031, 0.632813, 1)
-theme_override_fonts/font = ExtResource("3_o4kq5")
+theme_override_fonts/font = ExtResource("2")
 theme_override_font_sizes/font_size = 14
 text = "Lost connection to server.
 open crt menu to reconnect
@@ -353,7 +382,7 @@ offset_top = 240.0
 offset_right = 607.0
 offset_bottom = 324.0
 theme_override_colors/font_color = Color(0.648438, 0.832031, 0.632813, 1)
-theme_override_fonts/font = ExtResource("3_o4kq5")
+theme_override_fonts/font = ExtResource("2")
 theme_override_font_sizes/font_size = 14
 text = "Opponent disconnected
 returning to lobby..."
@@ -380,24 +409,25 @@ theme_override_styles/panel = SubResource("StyleBoxFlat_0p0rh")
 
 [node name="title" type="Label" parent="crt menu"]
 layout_mode = 0
-offset_left = 95.0
 offset_top = 13.0
-offset_right = 185.0
 offset_bottom = 31.0
+offset_right = 278.0
+horizontal_alignment = 1
 theme_override_colors/font_color = Color(0.764706, 1, 0.741176, 1)
 theme_override_constants/shadow_outline_size = 0
-theme_override_fonts/font = ExtResource("3_o4kq5")
+theme_override_fonts/font = ExtResource("2")
 theme_override_font_sizes/font_size = 12
 text = "MULTIPLAYER"
 
-[node name="underline" type="Label" parent="crt menu/title"]
+[node name="underline" type="Label" parent="crt menu"]
 layout_mode = 0
-offset_top = 8.0
-offset_right = 90.0
-offset_bottom = 26.0
+offset_top = 21.0
+offset_bottom = 39.0
+offset_right = 278.0
+horizontal_alignment = 1
 theme_override_colors/font_color = Color(0.764706, 1, 0.741176, 1)
 theme_override_constants/shadow_outline_size = 0
-theme_override_fonts/font = ExtResource("3_o4kq5")
+theme_override_fonts/font = ExtResource("2")
 theme_override_font_sizes/font_size = 12
 text = "-----------"
 
@@ -416,7 +446,7 @@ offset_right = 266.0
 offset_bottom = 23.0
 theme_override_colors/font_color = Color(0.764706, 1, 0.741176, 1)
 theme_override_constants/shadow_outline_size = 0
-theme_override_fonts/font = ExtResource("3_o4kq5")
+theme_override_fonts/font = ExtResource("2")
 theme_override_font_sizes/font_size = 10
 text = "ONLINE PLAYERS"
 
@@ -427,7 +457,7 @@ offset_right = 258.0
 offset_bottom = 32.0
 theme_override_colors/font_color = Color(0.764706, 1, 0.741176, 1)
 theme_override_constants/shadow_outline_size = 0
-theme_override_fonts/font = ExtResource("3_o4kq5")
+theme_override_fonts/font = ExtResource("2")
 theme_override_font_sizes/font_size = 10
 text = "--------------------------------------"
 
@@ -453,9 +483,9 @@ offset_bottom = 229.0
 
 [node name="LineEdit" type="LineEdit" parent="crt menu/signup section"]
 layout_mode = 0
-offset_left = 101.499
+offset_left = 91.499
 offset_top = 54.9921
-offset_right = 178.499
+offset_right = 188.499
 offset_bottom = 74.9921
 theme_override_colors/font_color = Color(0.72549, 0.945098, 0.701961, 1)
 theme_override_colors/font_selected_color = Color(0.72549, 0.945098, 0.701961, 1)
@@ -467,12 +497,12 @@ theme_override_colors/selection_color = Color(0.72549, 0.945098, 0.701961, 1)
 theme_override_colors/clear_button_color = Color(0.72549, 0.945098, 0.701961, 1)
 theme_override_colors/clear_button_color_pressed = Color(0.72549, 0.945098, 0.701961, 1)
 theme_override_constants/outline_size = 0
-theme_override_fonts/font = ExtResource("3_o4kq5")
+theme_override_fonts/font = ExtResource("2")
 theme_override_font_sizes/font_size = 13
 theme_override_styles/normal = SubResource("StyleBoxFlat_dwma3")
 theme_override_styles/focus = SubResource("StyleBoxFlat_ugsc6")
-placeholder_text = "USERNAME"
-max_length = 8
+placeholder_text = " USERNAME "
+max_length = 10
 caret_blink = true
 
 [node name="Button" type="Button" parent="crt menu/signup section"]
@@ -483,7 +513,7 @@ offset_right = 170.339
 offset_bottom = 104.569
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_constants/outline_size = 0
-theme_override_fonts/font = ExtResource("3_o4kq5")
+theme_override_fonts/font = ExtResource("2")
 theme_override_font_sizes/font_size = 12
 theme_override_styles/normal = SubResource("StyleBoxFlat_wq0lo")
 text = "SIGN UP"
@@ -494,7 +524,7 @@ offset_top = 163.0
 offset_right = 277.0
 offset_bottom = 178.0
 theme_override_colors/font_color = Color(0.722656, 0.941406, 0.699219, 1)
-theme_override_fonts/font = ExtResource("3_o4kq5")
+theme_override_fonts/font = ExtResource("2")
 theme_override_font_sizes/font_size = 9
 horizontal_alignment = 1
 
@@ -519,7 +549,7 @@ offset_top = 9.0
 offset_right = 169.0
 offset_bottom = 32.0
 theme_override_colors/font_color = Color(0.662745, 1, 0.635294, 1)
-theme_override_fonts/font = ExtResource("3_o4kq5")
+theme_override_fonts/font = ExtResource("2")
 theme_override_font_sizes/font_size = 12
 text = "username"
 horizontal_alignment = 1
@@ -531,7 +561,7 @@ offset_top = 27.0
 offset_right = 176.0
 offset_bottom = 50.0
 theme_override_colors/font_color = Color(0.662745, 1, 0.635294, 1)
-theme_override_fonts/font = ExtResource("3_o4kq5")
+theme_override_fonts/font = ExtResource("2")
 theme_override_font_sizes/font_size = 12
 text = "ACCEPTED YOUR INVITE!"
 horizontal_alignment = 1
@@ -543,7 +573,7 @@ offset_top = 62.0
 offset_right = 157.0
 offset_bottom = 85.0
 theme_override_colors/font_color = Color(0.662745, 1, 0.635294, 1)
-theme_override_fonts/font = ExtResource("3_o4kq5")
+theme_override_fonts/font = ExtResource("2")
 theme_override_font_sizes/font_size = 12
 text = "STARTING GAME IN:"
 
@@ -554,7 +584,7 @@ offset_top = 78.0
 offset_right = 157.0
 offset_bottom = 101.0
 theme_override_colors/font_color = Color(0.662745, 1, 0.635294, 1)
-theme_override_fonts/font = ExtResource("3_o4kq5")
+theme_override_fonts/font = ExtResource("2")
 theme_override_font_sizes/font_size = 16
 text = "0
 "
@@ -586,7 +616,7 @@ offset_top = 12.0
 offset_right = 157.0
 offset_bottom = 35.0
 theme_override_colors/font_color = Color(0.662745, 1, 0.635294, 1)
-theme_override_fonts/font = ExtResource("3_o4kq5")
+theme_override_fonts/font = ExtResource("2")
 theme_override_font_sizes/font_size = 12
 text = "STARTING GAME IN:"
 
@@ -597,7 +627,7 @@ offset_top = 28.0
 offset_right = 157.0
 offset_bottom = 52.0
 theme_override_colors/font_color = Color(0.662745, 1, 0.635294, 1)
-theme_override_fonts/font = ExtResource("3_o4kq5")
+theme_override_fonts/font = ExtResource("2")
 theme_override_font_sizes/font_size = 16
 text = "0
 "

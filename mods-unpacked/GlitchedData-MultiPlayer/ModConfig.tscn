@@ -1,7 +1,7 @@
 [gd_scene load_steps=6 format=3 uid="uid://4f7ulnrkgpqs"]
 
 [ext_resource type="FontFile" uid="uid://bquox4twb507h" path="res://fonts/fake receipt.otf" id="1"]
-[ext_resource type="Script" path="res://mods-unpacked/GlitchedData-MultiPlayer/MPConfig.gd" id="2"]
+[ext_resource type="Script" path="res://mods-unpacked/GlitchedData-MultiPlayer/utils/Config.gd" id="2"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_cd7nw"]
 content_margin_left = 6.0

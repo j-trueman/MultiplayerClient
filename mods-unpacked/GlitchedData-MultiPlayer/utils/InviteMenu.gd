@@ -19,6 +19,8 @@ extends Control
 @export var timerAccept : AnimationPlayer
 @export var timerJoin : AnimationPlayer
 @export var errorLabel : Label
+@export var title : Label
+@export var underline : Label
 
 signal serverInviteList(invites)
 signal connectionSuccess
@@ -27,6 +29,13 @@ var inviteShowQueue = []
 var multiplayerManager
 var cursorManager
 var interactionManager
+var menuIsVisible = false
+var lefting = false
+var righting = false
+var backspacing = false
+var deleting = false
+var moveTimer
+var canMove = true
 
 signal inviteFinished
 
@@ -40,8 +49,8 @@ func _ready():
 		multiplayerManager.connectToServer()
 		await multiplayer.connected_to_server
 		multiplayerManager.requestNewUser.rpc(usernameInput.text))
-	incomingButton.button_down.connect(func(): updateInviteList("incoming"))
-	outgoingButton.button_down.connect(func(): updateInviteList("outgoing"))
+	incomingButton.button_down.connect(func(): updateInviteList("incoming", false))
+	outgoingButton.button_down.connect(func(): updateInviteList("outgoing", false))
 
 	cursorManager = GlobalVariables.get_current_scene_node().get_node("standalone managers/cursor manager")
 	interactionManager = GlobalVariables.get_current_scene_node().get_node("standalone managers/interaction manager")
@@ -56,10 +65,78 @@ func _ready():
 	menuButton.set_button_icon(menuTexture)
 
 func _process(delta):
-	if Input.get_mouse_mode() == Input.MOUSE_MODE_VISIBLE && !multiplayerManager.inMatch:
+	if Input.get_mouse_mode() == Input.MOUSE_MODE_VISIBLE and multiplayerManager.loggedIn and not multiplayerManager.inMatch:
 		menuButton.visible = true
+		if menuIsVisible:
+			inviteContainer.visible = true
+			incomingButton.visible = true
+			outgoingButton.visible = true
+			buttonHighlightAnimator.get_parent().visible = true
 	else:
 		menuButton.visible = false
+		inviteContainer.visible = false
+		incomingButton.visible = false
+		outgoingButton.visible = false
+		buttonHighlightAnimator.get_parent().visible = false
+
+	if canMove and moveTimer > 0.45 and lefting and usernameInput.caret_column > 0:
+		usernameInput.caret_column -= 1
+	if canMove and moveTimer > 0.45 and righting and usernameInput.caret_column < usernameInput.text.length():
+		usernameInput.caret_column += 1
+	if canMove and backspacing and usernameInput.caret_column > 0:
+		usernameInput.delete_char_at_caret()
+	if canMove and deleting and usernameInput.caret_column < usernameInput.text.length():
+		usernameInput.caret_column += 1
+		usernameInput.delete_char_at_caret()
+	if lefting or righting or backspacing or deleting:
+		moveTimer += get_process_delta_time()
+	if moveTimer > 0 and moveTimer <= 0.45:
+		canMove = false
+	if moveTimer > 0.45:
+		canMove = !canMove
+
+func _input(event):
+	if signupSection.visible:
+		if (event.is_action_pressed("ui_cancel")):
+			canMove = true
+			moveTimer = 0.0
+			lefting = false
+			righting = false
+			deleting = false
+			backspacing = true
+		if (event.is_action_released("ui_cancel")):
+			moveTimer = 0.0
+			backspacing = false
+		if (event.is_action_pressed("mp_delete")):
+			canMove = true
+			moveTimer = 0.0
+			lefting = false
+			righting = false
+			backspacing = false
+			deleting = true
+		if (event.is_action_released("mp_delete")):
+			moveTimer = 0.0
+			deleting = false
+		if (event.is_action_pressed("ui_left")):
+			canMove = true
+			moveTimer = 0.0
+			righting = false
+			backspacing = false
+			deleting = false
+			lefting = true
+		if (event.is_action_released("ui_left")):
+			moveTimer = 0.0
+			lefting = false
+		if (event.is_action_pressed("ui_right")):
+			canMove = true
+			moveTimer = 0.0
+			lefting = false
+			backspacing = false
+			deleting = false
+			righting = true
+		if (event.is_action_released("ui_right")):
+			moveTimer = 0.0
+			righting = false
 
 func setCursorImage(alias):
 	match alias:
@@ -68,17 +145,20 @@ func setCursorImage(alias):
 	cursorManager.SetCursorImage(alias)
 
 func toggleMenu():
-	if inviteContainer.visible:
+	if menuIsVisible:
+		menuIsVisible = false
 		inviteContainer.visible = false
 		incomingButton.visible = false
 		outgoingButton.visible = false
 		buttonHighlightAnimator.get_parent().visible = false
-	else: 
+	else:
+		menuIsVisible = true
 		inviteContainer.visible = true
 		incomingButton.visible = true
 		outgoingButton.visible = true
 		buttonHighlightAnimator.get_parent().visible = true
-		updateInviteList("incoming")
+		buttonHighlightAnimator.play("RESET")
+		updateInviteList("incoming", true)
 
 func receiveInvite(fromUsername, fromID):
 	inviteShowQueue.push_back(fromID)
@@ -115,13 +195,13 @@ func showJoin():
 	joiningGameSection.visible = true
 	timerJoin.play("countdown")
 
-func updateInviteList(type):
+func updateInviteList(type, reset):
 	for invite in inviteList.get_children():
 		invite.queue_free()
 	var isOutgoing = false
 	match type:
 		"incoming":
-			buttonHighlightAnimator.play_backwards("toggle")
+			if not reset: buttonHighlightAnimator.play_backwards("toggle")
 			multiplayerManager.getInvites.rpc("incoming")
 		"outgoing":
 			buttonHighlightAnimator.play("toggle")
@@ -155,6 +235,9 @@ func updateUserList(list):
 		
 func processLoginStatus(reason):
 	if reason == "success":
+		title.text = "WELCOME, " + multiplayerManager.accountName.to_upper()
+		underline.text = "-------- "
+		for i in range(multiplayerManager.accountName.length()): underline.text = underline.text + "-"
 		crtMenu.visible = true
 		playerListSection.visible = true
 		signupSection.visible = false
@@ -186,6 +269,7 @@ func processLoginStatus(reason):
 			"noKey":
 				errorLabel.text = "NO USER KEY FOUND"
 				print("NO USER KEY FOUND")
+		usernameInput.grab_focus()
 	errorClear()
 	signupSection.visible = true
 

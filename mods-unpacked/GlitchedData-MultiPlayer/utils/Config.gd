@@ -1,0 +1,85 @@
+extends Node
+@export var url : LineEdit
+var multiplayermanager
+var lefting = false
+var righting = false
+var backspacing = false
+var deleting = false
+var moveTimer
+var canMove = true
+var returnButton
+
+func _ready():
+	multiplayermanager = get_tree().get_root().get_node("MultiplayerManager")
+	url.text_changed.connect(updateURL)
+	url.text = multiplayermanager.url
+	url.caret_column = url.text.length()
+	returnButton = GlobalVariables.get_current_scene_node().get_node("Camera/dialogue UI/menu ui/mods/true button_mods return")
+	returnButton.focus_mode = 0
+	url.grab_focus()
+
+func _exit_tree():
+	returnButton.focus_mode = 2
+
+func _process(delta):
+	if canMove and lefting and url.caret_column > 0:
+		url.caret_column -= 1
+	if canMove and righting and url.caret_column < url.text.length():
+		url.caret_column += 1
+	if canMove and backspacing and url.caret_column > 0:
+		url.delete_char_at_caret()
+	if canMove and deleting and url.caret_column < url.text.length():
+		url.caret_column += 1
+		url.delete_char_at_caret()
+	if lefting or righting or backspacing or deleting:
+		moveTimer += get_process_delta_time()
+	if moveTimer > 0 and moveTimer <= 0.45:
+		canMove = false
+	if moveTimer > 0.45:
+		canMove = !canMove
+
+func _input(event):
+	if (event.is_action_pressed("ui_left")):
+		canMove = true
+		moveTimer = 0.0
+		righting = false
+		backspacing = false
+		deleting = false
+		lefting = true
+	if (event.is_action_released("ui_left")):
+		moveTimer = 0.0
+		lefting = false
+	if (event.is_action_pressed("ui_right")):
+		canMove = true
+		moveTimer = 0.0
+		lefting = false
+		backspacing = false
+		deleting = false
+		righting = true
+	if (event.is_action_released("ui_right")):
+		moveTimer = 0.0
+		righting = false
+	if (event.is_action_pressed("ui_cancel")):
+		canMove = true
+		moveTimer = 0.0
+		lefting = false
+		righting = false
+		deleting = false
+		backspacing = true
+	if (event.is_action_released("ui_cancel")):
+		moveTimer = 0.0
+		backspacing = false
+	if (event.is_action_pressed("mp_delete")):
+		canMove = true
+		moveTimer = 0.0
+		lefting = false
+		righting = false
+		backspacing = false
+		deleting = true
+	if (event.is_action_released("mp_delete")):
+		moveTimer = 0.0
+		deleting = false
+
+func updateURL(text):
+	multiplayermanager.url = text.to_lower()
+	

@@ -11,6 +11,7 @@ var crtManager
 var inviteMenu
 var loggedIn = false
 var timer : Timer
+var timerRunning = false
 var url = "buckshotmultiplayer.net"
 var resetManager
 var inCredits
@@ -18,6 +19,11 @@ var inCredits
 func _ready():
 	multiplayer.connected_to_server.connect(func(): connectionTimer("stop"))
 	multiplayer.server_disconnected.connect(_onServerDisconnected)
+
+	InputMap.add_action("mp_delete")
+	var ev = InputEventKey.new()
+	ev.keycode = KEY_DELETE
+	InputMap.action_add_event("mp_delete", ev)
 	
 	if inMatch:
 		inMatch = false
@@ -33,7 +39,9 @@ func connectionTimer(action):
 		inviteMenu.get_node("connecting/AnimationPlayer").play("connecting")
 		timer.timeout.connect(_onConnectionFail)
 		timer.start(10)
+		timerRunning = true
 	else:
+		timerRunning = false
 		inviteMenu.get_node("connecting").visible = false
 		inviteMenu.get_node("connecting/AnimationPlayer").stop()
 		inviteMenu.get_node("connectFail").visible = false
