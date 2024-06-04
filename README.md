@@ -72,3 +72,4 @@ We plan on continuing to update MultiPlayer, even after the official release of 
 * MPB003: Incorrect name displayed on health counter when losing a round
 * MPB004: Plays dealer return animation after losing a round
 * MPB005: Issues with seeing the invite menu after finishing a match
+* MPB006: Issues related to using handcuffs at the end of a load
