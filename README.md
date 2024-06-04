@@ -14,6 +14,7 @@ We know many of you have been anxiously awaiting the release of official multipl
 Although based off of my (Josh's) [original](https://github.com/j-trueman/BuckshotRouletteMultiplayer) multiplayer mod for the itch.io version of the game, _MultiPlayer_ is better in almost every way. Let's take a look at a couple of things.
 
 ### Contents:
+- [Setup](#setup)
 - [Dedicated Servers](#dedicated-servers)
 - [User accounts](#user-accounts)
   - [Authentication](#authentication)
@@ -22,6 +23,14 @@ Although based off of my (Josh's) [original](https://github.com/j-trueman/Bucksh
 - [Invite system](#invite-system)
 - [Compatibility](#compatibility)
 - [What's Next?](#future-plans)
+- [Known Bugs](#known-bugs)
+
+## Setup
+
+* Download and install the [BRML](https://github.com/AGO061/BuckshotRouletteModLoader) using `BRML_setup.exe` from [this link](https://github.com/AGO061/BuckshotRouletteModLoader/releases/latest).
+* Download `GlitchedData-MultiPlayer-0.1.0.zip` from [this repository's releases](https://github.com/j-trueman/MultiplayerClient/releases/latest).
+* Place the .zip file inside your `mods` folder created when you installed the BRML. This folder is usually located at `Documents\Buckshot Roulette\mods`.
+* Start the game! Pick a username when prompted.
 
 ## Dedicated Servers
 
@@ -56,3 +65,8 @@ I released the original mod as a _patch_ meaning that it was standalone and not 
 ## Future Plans
 
 We plan on continuing to update MultiPlayer, even after the official release of multiplayer as I'm sure there will be features that will not be implemented into official multiplayer but people will still want to see.
+
+## Known Bugs
+* MPB001: Errors in console when receiving an invite
+* MPB002: Shotgun segment stays on table when opponent shoots himself with a sawed shotgun
+* MPB003: Incorrect name displayed on health counter when losing a round
