@@ -74,3 +74,4 @@ We plan on continuing to update MultiPlayer, even after the official release of 
 * MPB005: Issues with seeing the invite menu after finishing a match
 * MPB006: Issues related to using handcuffs at the end of a load
 * MPB007: Dealer holding shotgun not properly reset after losing a round
+* MPB008: Sound effects after losing a match are incorrect
