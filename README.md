@@ -28,7 +28,7 @@ Although based off of my (Josh's) [original](https://github.com/j-trueman/Bucksh
 ## Setup
 
 * Download and install the [BRML](https://github.com/AGO061/BuckshotRouletteModLoader) using `BRML_setup.exe` from [this link](https://github.com/AGO061/BuckshotRouletteModLoader/releases/latest).
-* Download `GlitchedData-MultiPlayer-0.1.0.zip` from [this repository's releases](https://github.com/j-trueman/MultiplayerClient/releases/latest).
+* Download `GlitchedData-MultiPlayer.zip` from [this repository's releases](https://github.com/j-trueman/MultiplayerClient/releases/latest).
 * Place the .zip file inside your `mods` folder created when you installed the BRML. This folder is usually located at `Documents\Buckshot Roulette\mods`.
 * Start the game! Pick a username when prompted.
 
