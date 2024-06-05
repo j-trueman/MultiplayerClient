@@ -4,7 +4,7 @@ signal player_list(playerDict)
 signal loginStatus(status)
 signal keyReceived(status)
 
-var debug_mode = true
+var debug_mode = false
 
 var version = "0.1.1"
 
