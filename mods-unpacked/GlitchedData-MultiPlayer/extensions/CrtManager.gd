@@ -5,6 +5,7 @@ var data = {}
 
 var screenparent_multiplayer : Node3D
 var multiplayerManager
+var mrm
 var inviteeID
 var deniedUsers = []
 var ascii = [	  "%%%%%%%*   =%%#%## #%%##     %%%%%%*  #%%#%#%%%%#   #%%%%   #%%%%% +%%%%%%     #%%%%#     ##%######%" +
@@ -35,7 +36,8 @@ var ascii = [	  "%%%%%%%*   =%%#%## #%%##     %%%%%%*  #%%#%#%%%%#   #%%%%   #%%
 var logo_z_positions = [-1.074, -0.924, -0.776, -0.625, -0.477, -0.325, -0.155, -0.009]
 
 func _ready():
-	multiplayerManager = get_tree().root.get_node("MultiplayerManager")	
+	multiplayerManager = get_tree().root.get_node("MultiplayerManager")
+	mrm = get_tree().root.get_node("MultiplayerManager/MultiplayerRoundManager")
 	multiplayerManager.crtManager = self
 
 	var file = FileAccess.open("res://mods-unpacked/GlitchedData-MultiPlayer/media/crt_bootup_fix.mp3", FileAccess.READ)
@@ -147,6 +149,7 @@ func processInviteStatus(username, status):
 				multiplayerManager.inMatch = true
 				intro.roundManager.playerData.playername = multiplayerManager.accountName.to_upper()
 				intro.dealerName.text = username.to_upper()
+				mrm.opponent = username.to_upper()
 				multiplayerManager.inviteMenu.showReady(username)
 				await multiplayerManager.inviteMenu.timerAccept.animation_finished
 				multiplayerManager.inviteMenu.gameReadySection.visible = false

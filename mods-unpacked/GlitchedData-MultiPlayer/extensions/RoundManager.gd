@@ -33,12 +33,11 @@ func EndMainBatch():
 		await get_tree().create_timer(.4, false).timeout
 		camera.BeginLerp("enemy")
 		await get_tree().create_timer(.7, false).timeout
-		get_node("/root/MultiplayerManager").inCredits = true
 		brief.MainRoutine()
 		return
 	elif (score < -1):
 		# GET SCREWED ENDING
-		camera.BeginLerp("enemy")
+		defibCutter.BlipError_Both()
 		await get_tree().create_timer(.8, false).timeout
 		await(shellLoader.DealerHandsGrabShotgun())
 		await get_tree().create_timer(.2, false).timeout
@@ -61,6 +60,7 @@ func EndMainBatch():
 		death.viewblocker.visible = true
 		death.DisableSpeakers()
 		death.MainDeathRoutine()
+		return
 	healthCounter.DisableCounter()
 	speaker_roundShutDown.play()
 	await get_tree().create_timer(1, false).timeout

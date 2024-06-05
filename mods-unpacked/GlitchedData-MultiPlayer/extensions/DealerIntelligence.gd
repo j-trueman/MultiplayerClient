@@ -112,7 +112,8 @@ func Shoot_New(who : String, shell : int):
 			shotgunShooting.PlayShootingSound_New(currentRoundInChamber)
 			pass
 	#SUBTRACT HEALTH. ASSIGN DEALER CAN GO AGAIN. RETURN IF DEAD
-	if (currentRoundInChamber == "live" && who == "self"): 
+	if (currentRoundInChamber == "live" && who == "self"):
+		if roundManager.barrelSawedOff: roundManager.segmentManager.HideSegment()
 		roundManager.health_opponent -= roundManager.currentShotgunDamage
 		if (roundManager.health_opponent < 0): roundManager.health_opponent = 0
 		smoke.SpawnSmoke("barrel")

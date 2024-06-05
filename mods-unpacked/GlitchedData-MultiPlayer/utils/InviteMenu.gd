@@ -27,6 +27,7 @@ signal connectionSuccess
 
 var inviteShowQueue = []
 var multiplayerManager
+var mrm
 var cursorManager
 var interactionManager
 var menuIsVisible = false
@@ -42,6 +43,7 @@ signal inviteFinished
 func _ready():
 	cursorManager = GlobalVariables.get_current_scene_node().get_node("standalone managers/cursor manager")
 	multiplayerManager = get_tree().root.get_node("MultiplayerManager")
+	mrm = get_tree().root.get_node("MultiplayerManager/MultiplayerRoundManager")
 	multiplayerManager.inviteMenu = self
 	multiplayerManager.loginStatus.connect(processLoginStatus)
 	menuButton.button_down.connect(toggleMenu)
@@ -187,13 +189,18 @@ func removeInvite(from):
 			popupSection.remove_child(invite)
 
 func showReady(username):
+	multiplayerManager.crtManager.viewing = false
+	multiplayerManager.crtManager.branch_exit.interactionAllowed = false
 	multiplayerManager.crtManager.intro.dealerName.text = username.to_upper()
+	mrm.opponent = username.to_upper()
 	Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
 	gameReadySection.visible = true
 	opponentUsernameLabel.text = username
 	timerAccept.play("countdown")
 	
 func showJoin():
+	multiplayerManager.crtManager.viewing = false
+	multiplayerManager.crtManager.branch_exit.interactionAllowed = false
 	Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
 	joiningGameSection.visible = true
 	timerJoin.play("countdown")

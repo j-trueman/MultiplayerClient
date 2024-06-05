@@ -1,9 +1,7 @@
 [gd_scene load_steps=17 format=3 uid="uid://og3pjcooy8c5"]
 
-[ext_resource type="Script" path="res://mods-unpacked/GlitchedData-MultiPlayer/utils/InviteObject.gd" id="1_5jty6"]
-[ext_resource type="Texture2D" uid="uid://bcm81pwd8tdj" path="res://mods-unpacked/GlitchedData-MultiPlayer/media/profile.png" id="2_x4uab"]
-[ext_resource type="FontFile" uid="uid://bquox4twb507h" path="res://fonts/fake receipt.otf" id="3_8wfp5"]
-[ext_resource type="Texture2D" uid="uid://dhaps0btnj42d" path="res://mods-unpacked/GlitchedData-MultiPlayer/media/tick.png" id="4_2ufhe"]
+[ext_resource type="Script" path="res://mods-unpacked/GlitchedData-MultiPlayer/utils/InviteObject.gd" id="1"]
+[ext_resource type="FontFile" uid="uid://bquox4twb507h" path="res://fonts/fake receipt.otf" id="2"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_uee5x"]
 bg_color = Color(0.0941176, 0.0941176, 0.0941176, 0.917647)
@@ -24,9 +22,6 @@ corner_radius_top_right = 7
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_1t4bv"]
 bg_color = Color(0.843137, 0.101961, 0.152941, 0.917647)
 corner_radius_top_right = 7
-
-[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_8b142"]
-load_path = "res://.godot/imported/cross.png-58c4f1840460e1dbc98b664a0b27e8e3.ctex"
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ge1un"]
 bg_color = Color(0.137255, 0.137255, 0.137255, 0)
@@ -106,7 +101,7 @@ custom_minimum_size = Vector2(0, 46.585)
 offset_right = 309.0
 offset_bottom = 47.0001
 theme_override_styles/panel = SubResource("StyleBoxFlat_uee5x")
-script = ExtResource("1_5jty6")
+script = ExtResource("1")
 typeLabel = NodePath("New Invite")
 usernameLabel = NodePath("from/username")
 acceptButton = NodePath("accept")
@@ -116,7 +111,6 @@ animationPlayer = NodePath("AnimationPlayer")
 [node name="Sprite2D" type="Sprite2D" parent="."]
 position = Vector2(25, 23)
 scale = Vector2(0.0707569, 0.0707569)
-texture = ExtResource("2_x4uab")
 
 [node name="New Invite" type="Label" parent="."]
 layout_mode = 0
@@ -124,7 +118,7 @@ offset_left = 54.0
 offset_top = 5.0
 offset_right = 176.0
 offset_bottom = 32.0
-theme_override_fonts/font = ExtResource("3_8wfp5")
+theme_override_fonts/font = ExtResource("2")
 theme_override_font_sizes/font_size = 18
 text = "NEW INVITE"
 
@@ -135,7 +129,7 @@ offset_top = 23.0
 offset_right = 163.0
 offset_bottom = 47.0
 theme_override_colors/font_color = Color(0.745098, 0.745098, 0.745098, 1)
-theme_override_fonts/font = ExtResource("3_8wfp5")
+theme_override_fonts/font = ExtResource("2")
 theme_override_font_sizes/font_size = 14
 text = "FROM: "
 
@@ -145,7 +139,7 @@ offset_left = 51.0
 offset_right = 160.0
 offset_bottom = 24.0
 theme_override_colors/font_color = Color(0.745098, 0.745098, 0.745098, 1)
-theme_override_fonts/font = ExtResource("3_8wfp5")
+theme_override_fonts/font = ExtResource("2")
 theme_override_font_sizes/font_size = 14
 text = "username"
 
@@ -158,7 +152,6 @@ focus_mode = 0
 theme_override_constants/icon_max_width = 20
 theme_override_styles/normal = SubResource("StyleBoxFlat_ijom1")
 theme_override_styles/hover = SubResource("StyleBoxFlat_k1xw2")
-icon = ExtResource("4_2ufhe")
 icon_alignment = 1
 
 [node name="decline" type="Button" parent="."]
@@ -170,7 +163,6 @@ focus_mode = 0
 theme_override_constants/icon_max_width = 16
 theme_override_styles/normal = SubResource("StyleBoxFlat_wh4t2")
 theme_override_styles/hover = SubResource("StyleBoxFlat_1t4bv")
-icon = SubResource("CompressedTexture2D_8b142")
 icon_alignment = 1
 
 [node name="ProgressBar" type="ProgressBar" parent="."]

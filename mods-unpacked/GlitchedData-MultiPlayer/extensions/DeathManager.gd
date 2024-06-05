@@ -1,5 +1,6 @@
 extends "res://scripts/DeathManager.gd"
 
+var multiManager
 var manager
 var environment
 var splatter
@@ -9,6 +10,7 @@ var elapsed_time = 0.0
 var brightness = 0.0
 
 func _ready():
+	multiManager = get_tree().get_root().get_node("MultiplayerManager")
 	manager = get_tree().get_root().get_node("MultiplayerManager/MultiplayerRoundManager")
 	environment = GlobalVariables.get_current_scene_node().get_node("WorldEnvironment").environment
 	splatter = GlobalVariables.get_current_scene_node().get_node("Camera/blood splatter plane")
@@ -33,6 +35,10 @@ func _process(delta):
 			brightness = 1.49
 			lerping = false
 		environment.adjustment_brightness = brightness
+
+func MainDeathRoutine():
+	multiManager.inMatch = false
+	super()
 
 func MedicineDeath():
 	viewblocker.visible = true
@@ -108,8 +114,9 @@ func Kill(who : String, trueDeath : bool, returningShotgun : bool):
 					defibParent.visible = false
 				else:
 					await get_tree().create_timer(1, false).timeout
+					dealerAI.dealerHoldingShotgun = false
 					animator_shotgun.play("RESET")
-					shotgunShooting.shotgunIndicator.Revert()	# Refactor this later
+					shotgunShooting.shotgunIndicator.Revert()
 					shotgunShooting.ShotgunCollider(true)
 					healthCounter.DisableCounter()
 					speaker_revive_truedeath.play()
@@ -121,7 +128,9 @@ func Kill(who : String, trueDeath : bool, returningShotgun : bool):
 					lerping = true
 					environment.adjustment_brightness = 0.0
 					viewblocker.visible = false
+					dealerAI.roundManager.musicManager.EndTrack()
 					await get_tree().create_timer(3.7, false).timeout
+					FadeInSpeakers()
 					shotgunShooting.anim_splatter.play("fade out")
 					shotgunShooting.roundManager.OutOfHealth("player")
 		"dealer":

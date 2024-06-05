@@ -4,6 +4,8 @@ signal player_list(playerDict)
 signal loginStatus(status)
 signal keyReceived(status)
 
+var debug_mode = true
+
 var accountName = null
 var invitePendingIdx = null
 var inMatch = false
@@ -13,10 +15,15 @@ var loggedIn = false
 var timer : Timer
 var timerRunning = false
 var url = "buckshotmultiplayer.net"
+var keyLocation = "user"
 var resetManager
 var inCredits
 
 func _ready():
+	if debug_mode:
+		url = "localhost"
+		keyLocation = "res"
+
 	multiplayer.connected_to_server.connect(func(): connectionTimer("stop"))
 	multiplayer.server_disconnected.connect(_onServerDisconnected)
 
@@ -60,7 +67,7 @@ func connectToServer():
 	multiplayer.set_multiplayer_peer(peer)
 
 func attemptLogin():
-	var keyFile = FileAccess.open("user://privatekey.key", FileAccess.READ)
+	var keyFile = FileAccess.open(keyLocation + "://privatekey.key", FileAccess.READ)
 	if !keyFile: 
 		closeSession("noKey")
 		multiplayer.multiplayer_peer = null
@@ -114,7 +121,7 @@ func receiveUserCreationStatus(return_value: bool):
 	
 @rpc("any_peer", "reliable")
 func receivePrivateKey(keyString):
-	var keyFile = FileAccess.open("user://privatekey.key", FileAccess.WRITE)
+	var keyFile = FileAccess.open(keyLocation + "://privatekey.key", FileAccess.WRITE)
 	keyFile.store_string(keyString)
 	keyFile.close()
 	attemptLogin()

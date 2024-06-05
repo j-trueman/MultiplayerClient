@@ -20,6 +20,7 @@ func install_script_extensions() -> void:
 		'DealerIntelligence',
 		'DeathManager',
 		'DialogueManager',
+		'EndingManager',
 		'HandManager',
 		'InteractionManager',
 		'IntroManager',
