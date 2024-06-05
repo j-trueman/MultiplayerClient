@@ -53,7 +53,7 @@ func _ready():
 		array_bootuplogo[i].position.x = -1.5
 		array_bootuplogo[i].position.z = logo_z_positions[i]
 		array_bootuplogo[i].text = ascii[i]
-	array_bootuplogo[8].text = "VERSION 0.1.0 (PUBLIC BETA)"
+	array_bootuplogo[8].text = "VERSION " + multiplayerManager.version + " (PUBLIC BETA)"
 	array_bootuplogo[9].text = "Any created user accounts\nmay be suject to deletion\nfor any reason at any time."
 
 func _unhandled_input(event):
@@ -114,7 +114,7 @@ func Bootup_FirstWelcome():
 		var file_load = FileAccess.open(savePath, FileAccess.READ)
 		data = file_load.get_var()
 		file_load.close()
-		if data.version == "0.1.0": return
+		if data.version == multiplayerManager.version: return
 	speaker_melody.pitch_scale = 1.6
 	speaker_melody.play()
 	for line in array_bootuplogo: 
@@ -124,7 +124,7 @@ func Bootup_FirstWelcome():
 	for line in array_bootuplogo: line.visible = false
 	speaker_melody.stop()
 	speaker_melodyhide.play()
-	data.version = "0.1.0"
+	data.version = multiplayerManager.version
 	var file_save = FileAccess.open(savePath, FileAccess.WRITE)
 	file_save.store_var(data)
 	file_save.close()

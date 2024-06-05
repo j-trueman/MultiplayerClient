@@ -6,6 +6,8 @@ signal keyReceived(status)
 
 var debug_mode = true
 
+var version = "0.1.1"
+
 var accountName = null
 var invitePendingIdx = null
 var inMatch = false
