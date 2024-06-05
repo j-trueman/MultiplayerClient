@@ -34,11 +34,11 @@ Although based off of my (Josh's) [original](https://github.com/j-trueman/Bucksh
 
 ## Dedicated Servers
 
-First and foremost, we now have a dedicated server framework for managing all things MultiPlayer! No longer will you have to mess about with port forwarding and other such shenanigans, it's a much more streamlined system (And it looks much nicer too!). And here's the best part, you can host your own instance! You can read more about how to do that over on the [MultiPlayer Server](https://www.github.com/j-trueman/MultiplayerServer) repo!
+First and foremost, we now have a dedicated server framework for managing all things MultiPlayer! No longer will you have to mess about with port forwarding and other such shenanigans, it's a much more streamlined system. (And it looks much nicer too!) And here's the best part, you can host your own instance! You can read more about how to do that over on the [MultiPlayer Server](https://www.github.com/j-trueman/MultiplayerServer) repo!
 
 ## User Accounts
 
-We thought it would be helpful if you could actually tell who you're playing against. That's why we implemented user accounts! You'll need to create one before you can play online with your friends (Don't worry, you don't need any personal information. And, you can do it in-game!)
+We thought it would be helpful if you could actually tell who you're playing against. That's why we implemented user accounts! You'll need to create one before you can play online with your friends. (Don't worry, you don't need any personal information. And, you can do it in-game!)
 
 ### Authentication
 
@@ -56,22 +56,15 @@ Technically, no interactions a ever performed on the crt anymore, the crt menus 
 
 ## Invite System
 
-The invite system is my baby. When you open the crt menu you are greeted with a list of online players ( prvided you were successfully logged in). When you press the invite button located next to any of the usernames it will send a new inivite over the server to the player it is addressed to. On the receiving end, a popup will appear showing the new incoming invite and you can view all your incoming (and outoing) invites via the hamburger menu in the top right of the screen
+The invite system is my baby. When you open the crt menu you are greeted with a list of online players (provided you were successfully logged in). When you press the invite button located next to any of the usernames it will send a new inivite over the server to the player it is addressed to. On the receiving end, a popup will appear showing the new incoming invite and you can view all your incoming (and outoing) invites via the hamburger menu in the top right of the screen
 
 ## Compatibility
 
-I released the original mod as a _patch_ meaning that it was standalone and not able to be used with [BRML](https://github.com/AGO061/BuckshotRouletteModLoader/) (which Michael also contributes to. He's so talented 😊). _MultiPlayer_, on the other hand, has been built from the ground up to be compatible with BRML, so there's no need to install a whole new version of the game just to use the mod! As for compatibility with other mods, _MultiPlayer_ is likely compatible with any mods that do not affect the gameplay (So, things like [EmK530's NativeResolution](https://github.com/EmK530/BRMods/tree/main/BRML/NativeResolution) should be okay. However, we haven't tested compatibility with _any_ mods as of yet.) As for mods like [Starpanda's ChallengePack](https://github.com/StarPandaBeg/ChallengePack), MultiPlayer_ is not currently compatible with such mods but _may_ be in the future. This would, however, be a _very big_ and _very manual_ undertaking.
+I released the original mod as a _patch_ meaning that it was standalone and not able to be used with [BRML](https://github.com/AGO061/BuckshotRouletteModLoader/) (which Michael also contributes to. He's so talented 😊). _MultiPlayer_, on the other hand, has been built from the ground up to be compatible with BRML, so there's no need to install a whole new version of the game just to use the mod! As for compatibility with other mods, _MultiPlayer_ is likely compatible with any mods that do not affect the gameplay (So, things like [EmK530's NativeResolution](https://github.com/EmK530/BRMods/tree/main/BRML/NativeResolution) should be okay. However, we haven't tested compatibility with _any_ mods as of yet.) As for mods like [Starpanda's ChallengePack](https://github.com/StarPandaBeg/ChallengePack), _MultiPlayer_ is not currently compatible with such mods but _may_ be in the future. This would, however, be a _very big_ and _very manual_ undertaking.
 
 ## Future Plans
 
 We plan on continuing to update MultiPlayer, even after the official release of multiplayer as I'm sure there will be features that will not be implemented into official multiplayer but people will still want to see.
 
 ## Known Bugs
-* MPB001: Errors in console when receiving an invite
-* MPB002: Shotgun segment stays on table when opponent shoots himself with a sawed shotgun
-* MPB003: Incorrect name displayed on health counter when losing a round
-* MPB004: Plays dealer return animation after losing a round
-* MPB005: Issues with seeing the invite menu after finishing a match
-* MPB006: Issues related to using handcuffs at the end of a load
-* MPB007: Dealer holding shotgun not properly reset after losing a round
-* MPB008: Sound effects after losing a match are incorrect
+* Nothing to report :)
