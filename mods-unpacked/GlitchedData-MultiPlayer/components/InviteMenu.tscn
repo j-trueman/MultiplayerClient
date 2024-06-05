@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" path="res://mods-unpacked/GlitchedData-MultiPlayer/utils/InviteMenu.gd" id="1"]
 [ext_resource type="FontFile" uid="uid://bquox4twb507h" path="res://fonts/fake receipt.otf" id="2"]
+[ext_resource type="FontFile" uid="uid://cjt600vs5hbut" path="res://fonts/DOTMATRI.TTF" id="3"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_jvphg"]
 bg_color = Color(1, 1, 1, 0.121569)
@@ -169,7 +170,17 @@ _data = {
 "countdown": SubResource("Animation_ke08f")
 }
 
-[node name="InviteMenu" type="Control" node_paths=PackedStringArray("inviteContainer", "inviteList", "popupSection", "playerListSection", "signupSection", "menuButton", "incomingButton", "outgoingButton", "buttonHighlightAnimator", "crtMenu", "userList", "usernameInput", "signupButton", "opponentUsernameLabel", "gameReadySection", "joiningGameSection", "timerAccept", "timerJoin", "errorLabel", "title", "underline")]
+[sub_resource type="LabelSettings" id="LabelSettings_r6o12"]
+font = ExtResource("3")
+font_size = 13
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_771gu"]
+bg_color = Color(0.261113, 0.261113, 0.261112, 0)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_tmgcm"]
+bg_color = Color(0.6, 0.6, 0.6, 0)
+
+[node name="InviteMenu" type="Control" node_paths=PackedStringArray("inviteContainer", "inviteList", "popupSection", "playerListSection", "signupSection", "menuButton", "incomingButton", "outgoingButton", "buttonHighlightAnimator", "crtMenu", "userList", "usernameInput", "signupButton", "opponentUsernameLabel", "gameReadySection", "joiningGameSection", "timerAccept", "timerJoin", "errorLabel", "title", "underline", "chat_parent", "chat_array", "chat_background", "chat_input")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -198,6 +209,10 @@ timerJoin = NodePath("joining game/Panel/label3/AnimationPlayer")
 errorLabel = NodePath("crt menu/signup section/error")
 title = NodePath("crt menu/title")
 underline = NodePath("crt menu/underline")
+chat_parent = NodePath("chat")
+chat_array = [NodePath("chat/chat1"), NodePath("chat/chat2"), NodePath("chat/chat3"), NodePath("chat/chat4"), NodePath("chat/chat5"), NodePath("chat/chat6"), NodePath("chat/chat7"), NodePath("chat/chat8"), NodePath("chat/chat9"), NodePath("chat/chat10")]
+chat_background = NodePath("chat/chat input background")
+chat_input = NodePath("chat/chat input")
 
 [node name="invite list" type="ScrollContainer" parent="."]
 visible = false
@@ -636,3 +651,112 @@ horizontal_alignment = 1
 libraries = {
 "": SubResource("AnimationLibrary_duf5e")
 }
+
+[node name="chat" type="Control" parent="."]
+anchors_preset = 0
+offset_left = 3.0
+offset_top = 289.0
+offset_right = 631.0
+offset_bottom = 478.0
+
+[node name="chat1" type="Label" parent="chat"]
+offset_left = 2.33
+offset_top = 3.0
+offset_right = 628.33
+offset_bottom = 23.0
+label_settings = SubResource("LabelSettings_r6o12")
+clip_text = true
+
+[node name="chat2" type="Label" parent="chat"]
+offset_left = 2.33
+offset_top = 20.0
+offset_right = 628.33
+offset_bottom = 40.0
+label_settings = SubResource("LabelSettings_r6o12")
+clip_text = true
+
+[node name="chat3" type="Label" parent="chat"]
+offset_left = 2.33
+offset_top = 37.0
+offset_right = 628.33
+offset_bottom = 57.0
+label_settings = SubResource("LabelSettings_r6o12")
+clip_text = true
+
+[node name="chat4" type="Label" parent="chat"]
+offset_left = 2.33
+offset_top = 54.0
+offset_right = 628.33
+offset_bottom = 74.0
+label_settings = SubResource("LabelSettings_r6o12")
+clip_text = true
+
+[node name="chat5" type="Label" parent="chat"]
+offset_left = 2.33
+offset_top = 71.0
+offset_right = 628.33
+offset_bottom = 91.0
+label_settings = SubResource("LabelSettings_r6o12")
+clip_text = true
+
+[node name="chat6" type="Label" parent="chat"]
+offset_left = 2.33
+offset_top = 88.0
+offset_right = 628.33
+offset_bottom = 108.0
+label_settings = SubResource("LabelSettings_r6o12")
+clip_text = true
+
+[node name="chat7" type="Label" parent="chat"]
+offset_left = 2.33
+offset_top = 105.0
+offset_right = 628.33
+offset_bottom = 125.0
+label_settings = SubResource("LabelSettings_r6o12")
+clip_text = true
+
+[node name="chat8" type="Label" parent="chat"]
+offset_left = 2.33
+offset_top = 122.0
+offset_right = 628.33
+offset_bottom = 142.0
+label_settings = SubResource("LabelSettings_r6o12")
+clip_text = true
+
+[node name="chat9" type="Label" parent="chat"]
+offset_left = 2.33
+offset_top = 139.0
+offset_right = 628.33
+offset_bottom = 159.0
+label_settings = SubResource("LabelSettings_r6o12")
+clip_text = true
+
+[node name="chat10" type="Label" parent="chat"]
+offset_left = 2.33
+offset_top = 156.0
+offset_right = 628.33
+offset_bottom = 176.0
+label_settings = SubResource("LabelSettings_r6o12")
+clip_text = true
+
+[node name="chat input background" type="ColorRect" parent="chat"]
+offset_left = 0.33
+offset_top = 171.0
+offset_right = 533.33
+offset_bottom = 189.0
+color = Color(0.227451, 0.227451, 0.227451, 0.529412)
+visible = false
+
+[node name="chat input" type="LineEdit" parent="chat"]
+offset_left = 2.33
+offset_top = 165.0
+offset_right = 33.1875
+offset_bottom = 196.0
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_fonts/font = ExtResource("3")
+theme_override_font_sizes/font_size = 13
+theme_override_styles/normal = SubResource("StyleBoxFlat_771gu")
+theme_override_styles/focus = SubResource("StyleBoxFlat_tmgcm")
+expand_to_text_length = true
+caret_blink = true
+visible = false

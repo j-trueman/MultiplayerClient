@@ -1,5 +1,6 @@
 extends "res://scripts/InteractionManager.gd"
 
+var multiManager
 var manager
 var burnerPhone
 var action = ""
@@ -10,6 +11,7 @@ var badEnding = false
 signal newAction
 
 func _ready():
+	multiManager = get_tree().get_root().get_node("MultiplayerManager")
 	manager = get_tree().get_root().get_node("MultiplayerManager/MultiplayerRoundManager")
 	manager.actionValidation.connect(actionValidation)
 	burnerPhone = GlobalVariables.get_current_scene_node().get_node("standalone managers/burner phone manager")
@@ -46,10 +48,18 @@ func InteractWith(alias : String):
 			manager.receiveActionValidation.rpc("shoot self")
 		"latch left", "latch right":
 			if not badEnding:
-				manager.receiveActionReady.rpc()
-				await manager.smartAwait("action ready")
+				if multiManager.opponentActive:
+					manager.receiveActionReady.rpc()
+					await manager.smartAwait("action ready")
 				badEnding = true
 		"briefcase lid":
-			manager.receiveActionReady.rpc()
-			await manager.smartAwait("action ready")
+			if multiManager.opponentActive:
+				manager.receiveActionReady.rpc()
+				await manager.smartAwait("action ready")
+			multiManager.openedBriefcase = true
+		"crt button":
+			if (activeInteractionBranch.crtButton_alias != "" ):
+				if ((activeInteractionBranch.crtButton_alias == "right" or activeInteractionBranch.crtButton_alias == "left") \
+					and multiManager.inviteMenu.popupVisible): return
+				else: crt.Interaction(activeInteractionBranch.crtButton_alias)
 	super(alias)

@@ -9,6 +9,7 @@ signal actionReady
 signal finished
 
 var players
+var opponent
 
 @rpc("any_peer", "reliable")
 func receivePlayerInfo(): pass

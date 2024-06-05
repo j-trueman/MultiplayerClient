@@ -4,9 +4,12 @@ signal player_list(playerDict)
 signal loginStatus(status)
 signal keyReceived(status)
 
-var debug_mode = false
+var debug_mode = true
 
-var version = "0.1.1"
+var version = "0.2.0"
+
+var chat_enabled = true
+var voice_enabled = true
 
 var accountName = null
 var invitePendingIdx = null
@@ -20,6 +23,8 @@ var url = "buckshotmultiplayer.net"
 var keyLocation = "user"
 var resetManager
 var inCredits
+var openedBriefcase
+var opponentActive
 
 func _ready():
 	if debug_mode:
@@ -29,16 +34,20 @@ func _ready():
 	multiplayer.connected_to_server.connect(func(): connectionTimer("stop"))
 	multiplayer.server_disconnected.connect(_onServerDisconnected)
 
-	InputMap.add_action("mp_delete")
-	var ev = InputEventKey.new()
-	ev.keycode = KEY_DELETE
-	InputMap.action_add_event("mp_delete", ev)
+	AddKey("mp_delete", KEY_DELETE)
+	AddKey("mp_chat", KEY_T)
 	
 	if inMatch:
 		inMatch = false
 		loggedIn = false
 		inCredits = false
 		multiplayer.multiplayer_peer = null
+
+func AddKey(action, key):
+	InputMap.add_action(action)
+	var ev = InputEventKey.new()
+	ev.keycode = key
+	InputMap.action_add_event(action, ev)
 
 func connectionTimer(action):
 	if action == "start":
@@ -74,7 +83,7 @@ func attemptLogin():
 		closeSession("noKey")
 		multiplayer.multiplayer_peer = null
 		return false
-	verifyUserCreds.rpc(keyFile.get_buffer(keyFile.get_length()))
+	verifyUserCreds.rpc(keyFile.get_buffer(keyFile.get_length()), version)
 
 @rpc("any_peer", "reliable")
 func notifySuccessfulLogin(username):
@@ -157,6 +166,7 @@ func acceptInvite(from):
 
 @rpc("any_peer", "reliable") 
 func opponentDisconnect():
+	opponentActive = false
 	if !inCredits:
 		inMatch = false
 		loggedIn = false
@@ -166,13 +176,18 @@ func opponentDisconnect():
 		resetManager.Reset()
 		pass
 
+@rpc("any_peer", "reliable") 
+func receiveChat(message):
+	inviteMenu.addChatMessage(message, false)
+
 # GHOST FUNCTIONS
 #@rpc("any_peer", "reliable") func requestUserExistsStatus(username : String): pass
 @rpc("any_peer", "reliable") func requestNewUser(username: String) : pass
-@rpc("any_peer", "reliable") func verifyUserCreds(keyFileData): pass
+@rpc("any_peer", "reliable") func verifyUserCreds(keyFileData, version): pass
 @rpc("any_peer", "reliable") func requestPlayerList(): pass
 @rpc("any_peer", "reliable") func createInvite(to : int): pass
 @rpc("any_peer", "reliable") func retractInvite(to): pass
 @rpc("any_peer", "reliable") func retractAllInvites(): pass
 @rpc("any_peer", "reliable") func getInvites(type): pass
 @rpc("any_peer", "reliable") func denyInvite(from): pass
+@rpc("any_peer", "reliable") func sendChat(message): pass

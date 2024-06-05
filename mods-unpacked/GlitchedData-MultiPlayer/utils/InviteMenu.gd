@@ -21,6 +21,10 @@ extends Control
 @export var errorLabel : Label
 @export var title : Label
 @export var underline : Label
+@export var chat_parent : Control
+@export var chat_array : Array[Label]
+@export var chat_background : ColorRect
+@export var chat_input : LineEdit
 
 signal serverInviteList(invites)
 signal connectionSuccess
@@ -31,12 +35,17 @@ var mrm
 var cursorManager
 var interactionManager
 var menuIsVisible = false
+var selectedInput
 var lefting = false
 var righting = false
 var backspacing = false
 var deleting = false
 var moveTimer
 var canMove = true
+var chatTimer_array = [10.0,10.0,10.0,10.0,10.0,10.0,10.0,10.0,10.0,10.0]
+var chatTimer = true
+var markForFocus = false
+var popupVisible = false
 
 signal inviteFinished
 
@@ -63,6 +72,10 @@ func _ready():
 	var menuTexture = ImageTexture.create_from_image(Image.load_from_file("res://mods-unpacked/GlitchedData-MultiPlayer/media/burger.png"))
 	menuButton.set_button_icon(menuTexture)
 
+	chat_parent.visible = multiplayerManager.chat_enabled
+	selectedInput = usernameInput
+	chat_input.text_changed.connect(onChatEdit)
+
 func _process(delta):
 	if Input.get_mouse_mode() == Input.MOUSE_MODE_VISIBLE and multiplayerManager.loggedIn and not multiplayerManager.inMatch:
 		menuButton.visible = true
@@ -78,24 +91,52 @@ func _process(delta):
 		outgoingButton.visible = false
 		buttonHighlightAnimator.get_parent().visible = false
 
-	if canMove and moveTimer > 0.45 and lefting and usernameInput.caret_column > 0:
-		usernameInput.caret_column -= 1
-	if canMove and moveTimer > 0.45 and righting and usernameInput.caret_column < usernameInput.text.length():
-		usernameInput.caret_column += 1
-	if canMove and backspacing and usernameInput.caret_column > 0:
-		usernameInput.delete_char_at_caret()
-	if canMove and deleting and usernameInput.caret_column < usernameInput.text.length():
-		usernameInput.caret_column += 1
-		usernameInput.delete_char_at_caret()
+	if canMove and moveTimer > 0.45 and lefting and selectedInput.caret_column > 0:
+		selectedInput.caret_column -= 1
+	if canMove and moveTimer > 0.45 and righting and selectedInput.caret_column < selectedInput.text.length():
+		selectedInput.caret_column += 1
+	if canMove and backspacing and selectedInput.caret_column > 0:
+		selectedInput.delete_char_at_caret()
+	if canMove and deleting and selectedInput.caret_column < selectedInput.text.length():
+		selectedInput.caret_column += 1
+		selectedInput.delete_char_at_caret()
 	if lefting or righting or backspacing or deleting:
 		moveTimer += get_process_delta_time()
 	if moveTimer > 0 and moveTimer <= 0.45:
 		canMove = false
 	if moveTimer > 0.45:
 		canMove = !canMove
-
+	if chatTimer:
+		for i in range(10):
+			if chatTimer_array[i] < 10.0: chatTimer_array[i] += get_process_delta_time()
+			if chatTimer_array[i] > 10.0: chatTimer_array[i] = 10.0
+			if chatTimer_array[i] >= 7.0: chat_array[i].modulate.a = (10.0 - chatTimer_array[i])/3.0
+	if markForFocus:
+		markForFocus = false
+		chat_input.grab_focus()
+	
 func _input(event):
-	if signupSection.visible:
+	if multiplayerManager.chat_enabled and multiplayerManager.opponentActive and not multiplayerManager.openedBriefcase:
+		if (event.is_action_pressed("mp_chat") and chatTimer):
+			chatTimer = false
+			chat_background.visible = multiplayerManager.chat_enabled
+			chat_input.visible = multiplayerManager.chat_enabled
+			for i in range(10):
+				if chatTimer_array[i] > 7.0: chatTimer_array[i] = 7.0
+				chat_array[i].modulate.a = 1.0
+			markForFocus = true
+		if (event.is_action_pressed("ui_accept") and not chatTimer):
+			sendChat(chat_input.text)
+			chat_input.text = ""
+			chatTimer = true
+			chat_background.visible = false
+			chat_input.visible = false
+		if (event.is_action_pressed("exit game") and not chatTimer):
+			chat_input.text = ""
+			chatTimer = true
+			chat_background.visible = false
+			chat_input.visible = false
+	if signupSection.visible or not chatTimer:
 		if (event.is_action_pressed("ui_cancel")):
 			canMove = true
 			moveTimer = 0.0
@@ -123,6 +164,8 @@ func _input(event):
 			backspacing = false
 			deleting = false
 			lefting = true
+			if not chatTimer and chat_input.caret_column > 0:
+				chat_input.caret_column -= 1
 		if (event.is_action_released("ui_left")):
 			moveTimer = 0.0
 			lefting = false
@@ -133,6 +176,8 @@ func _input(event):
 			backspacing = false
 			deleting = false
 			righting = true
+			if not chatTimer and chat_input.caret_column < chat_input.text.length():
+				chat_input.caret_column += 1
 		if (event.is_action_released("ui_right")):
 			moveTimer = 0.0
 			righting = false
@@ -179,6 +224,7 @@ func receiveInvite(fromUsername, fromID):
 		popupInvite.denyButton.visible = false
 	print(popupInvite)
 	popupInvite.animationPlayer.play("progress")
+	popupVisible = true
 
 func removeInvite(from):
 	for invite in inviteList.get_children():
@@ -189,21 +235,25 @@ func removeInvite(from):
 			popupSection.remove_child(invite)
 
 func showReady(username):
-	multiplayerManager.crtManager.viewing = false
-	multiplayerManager.crtManager.branch_exit.interactionAllowed = false
+	setupMatch()
 	multiplayerManager.crtManager.intro.dealerName.text = username.to_upper()
 	mrm.opponent = username.to_upper()
-	Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
 	gameReadySection.visible = true
 	opponentUsernameLabel.text = username
 	timerAccept.play("countdown")
 	
 func showJoin():
-	multiplayerManager.crtManager.viewing = false
-	multiplayerManager.crtManager.branch_exit.interactionAllowed = false
-	Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
+	setupMatch()
 	joiningGameSection.visible = true
 	timerJoin.play("countdown")
+
+func setupMatch():
+	multiplayerManager.opponentActive = true
+	multiplayerManager.openedBriefcase = false
+	multiplayerManager.crtManager.viewing = false
+	multiplayerManager.crtManager.branch_exit.interactionAllowed = false
+	selectedInput = chat_input
+	Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
 
 func updateInviteList(type, reset):
 	for invite in inviteList.get_children():
@@ -280,6 +330,9 @@ func processLoginStatus(reason):
 			"noKey":
 				errorLabel.text = "NO USER KEY FOUND"
 				print("NO USER KEY FOUND")
+			"outdatedClient":
+				errorLabel.text = "OUTDATED CLIENT! PLEASE UPDATE\nAT BUCKSHOTMULTIPLAYER.NET"
+				print("OUTDATED CLIENT")
 		usernameInput.grab_focus()
 	errorClear()
 	signupSection.visible = true
@@ -288,3 +341,26 @@ func errorClear():
 	if errorLabel.text != "":
 		await get_tree().create_timer(10, false).timeout
 		errorLabel.text = ""
+
+func sendChat(message):
+	multiplayerManager.sendChat.rpc(message)
+	addChatMessage(message, true)
+
+func addChatMessage(message, isPlayer):
+	for i in range(9):
+		chat_array[i].text = chat_array[i + 1].text
+		chat_array[i].modulate.a = chat_array[i + 1].modulate.a
+		chatTimer_array[i] = chatTimer_array[i + 1]
+	var sender = multiplayerManager.accountName.to_upper() if isPlayer else mrm.opponent
+	chat_array[9].text = "<" + sender + "> " + message
+	chat_array[9].modulate.a = 1.0
+	chatTimer_array[9] = 0.0
+
+func onChatEdit(text):
+	var column = chat_input.caret_column
+	chat_input.size.x = 0
+	if chat_input.size.x >= 523:
+		chat_input.max_length = chat_input.text.length()
+	else:
+		chat_input.max_length = 0
+	chat_input.caret_column = column

@@ -148,8 +148,6 @@ func processInviteStatus(username, status):
 			if !multiplayerManager.inMatch:
 				multiplayerManager.inMatch = true
 				intro.roundManager.playerData.playername = multiplayerManager.accountName.to_upper()
-				intro.dealerName.text = username.to_upper()
-				mrm.opponent = username.to_upper()
 				multiplayerManager.inviteMenu.showReady(username)
 				await multiplayerManager.inviteMenu.timerAccept.animation_finished
 				multiplayerManager.inviteMenu.gameReadySection.visible = false
@@ -167,5 +165,3 @@ func processInviteStatus(username, status):
 #			multiplayerMenuManager.error_label_players.text = "INVITE RETRACTED"
 			pass
 	inviteeID = null
-
-

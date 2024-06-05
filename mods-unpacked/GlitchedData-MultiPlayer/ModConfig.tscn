@@ -51,7 +51,7 @@ theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_fonts/font = ExtResource("1")
 theme_override_styles/normal = SubResource("StyleBoxFlat_cd7nw")
 
-[node name="url_none" type="Label" parent="multiplayer url"]
+[node name="url_label" type="Label" parent="multiplayer url"]
 layout_mode = 0
 offset_left = -53.0
 offset_top = 5.0
@@ -61,6 +61,42 @@ theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
 theme_override_fonts/font = ExtResource("1")
 text = "URL:"
 
-[node name="Config" type="Node" parent="." node_paths=PackedStringArray("url")]
+[node name="chat" type="CheckBox" parent="."]
+layout_mode = 0
+offset_left = 408.0
+offset_top = 198.0
+offset_right = 432.0
+offset_bottom = 229.0
+
+[node name="chat_label" type="Label" parent="chat"]
+offset_left = -145.0
+offset_top = 5.0
+offset_right = -4.0
+offset_bottom = 31.0
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("1")
+text = "CHAT ENABLED:"
+
+[node name="voice" type="CheckBox" parent="."]
+layout_mode = 0
+offset_left = 610.0
+offset_top = 198.0
+offset_right = 634.0
+offset_bottom = 229.0
+visible = false
+
+[node name="voice_label" type="Label" parent="voice"]
+offset_left = -156.0
+offset_top = 5.0
+offset_right = -4.0
+offset_bottom = 31.0
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("1")
+text = "VOICE ENABLED:"
+visible = false
+
+[node name="Config" type="Node" parent="." node_paths=PackedStringArray("url", "chat", "voice")]
 script = ExtResource("2")
 url = NodePath("../multiplayer url")
+chat = NodePath("../chat")
+voice = NodePath("../voice")

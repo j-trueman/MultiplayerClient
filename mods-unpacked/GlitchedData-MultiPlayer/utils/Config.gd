@@ -1,5 +1,9 @@
 extends Node
+
 @export var url : LineEdit
+@export var chat : CheckBox
+@export var voice : CheckBox
+
 var multiplayermanager
 var lefting = false
 var righting = false
@@ -14,23 +18,29 @@ func _ready():
 	url.text_changed.connect(updateURL)
 	url.text = multiplayermanager.url
 	url.caret_column = url.text.length()
+	chat.button_pressed = multiplayermanager.chat_enabled
+	voice.button_pressed = multiplayermanager.voice_enabled
+
 	returnButton = GlobalVariables.get_current_scene_node().get_node("Camera/dialogue UI/menu ui/mods/true button_mods return")
 	returnButton.focus_mode = 0
 	url.grab_focus()
 
 func _exit_tree():
 	returnButton.focus_mode = 2
+	multiplayermanager.chat_enabled = chat.button_pressed
+	multiplayermanager.voice_enabled = voice.button_pressed
 
 func _process(delta):
-	if canMove and lefting and url.caret_column > 0:
-		url.caret_column -= 1
-	if canMove and righting and url.caret_column < url.text.length():
-		url.caret_column += 1
-	if canMove and backspacing and url.caret_column > 0:
-		url.delete_char_at_caret()
-	if canMove and deleting and url.caret_column < url.text.length():
-		url.caret_column += 1
-		url.delete_char_at_caret()
+	if url.has_focus() and canMove:
+		if lefting and url.caret_column > 0:
+			url.caret_column -= 1
+		if righting and url.caret_column < url.text.length():
+			url.caret_column += 1
+		if backspacing and url.caret_column > 0:
+			url.delete_char_at_caret()
+		if deleting and url.caret_column < url.text.length():
+			url.caret_column += 1
+			url.delete_char_at_caret()
 	if lefting or righting or backspacing or deleting:
 		moveTimer += get_process_delta_time()
 	if moveTimer > 0 and moveTimer <= 0.45:
