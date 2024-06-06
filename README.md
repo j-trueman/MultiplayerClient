@@ -11,7 +11,7 @@
 
 We know many of you have been anxiously awaiting the release of official multiplayer for Buckshot Roulette. Since there is no ETA, [MSLaFaver](https://github.com/MSLaFaver/) and I decided to take matters into our own hands. And now, a mere two months after the Steam release, we are proud to present to you _MultiPlayer_, a 1v1 mod for Buckshot Roulette.
 
-<p align="center"><strong>LATEST VERSION: v0.2.0</strong><br>Please check your version before connecting online.</p>
+<p align="center"><strong>LATEST VERSION: 0.2.1</strong><br>Please check your version before connecting online.</p>
 
 Although based off of my (Josh's) [original](https://github.com/j-trueman/BuckshotRouletteMultiplayer) multiplayer mod for the itch.io version of the game, _MultiPlayer_ is better in almost every way. Let's take a look at a couple of things.
 
@@ -69,13 +69,4 @@ I released the original mod as a _patch_ meaning that it was standalone and not 
 We plan on continuing to update MultiPlayer, even after the official release of multiplayer as I'm sure there will be features that will not be implemented into official multiplayer but people will still want to see.
 
 ## Known Bugs
-* MPB004: Plays dealer return animation after losing a round
-* MPB009: Match not deleted server-side after round completed
-* MPB010: Dealer hand animation issues after using cigarettes
-* MPB011: Chat visibility issues
 * MPB012: Unclear status of players currently in matches
-* MPB013: Possible duplicate matches created and not erased server-side
-* MPB014: Player can accept invites after one of their invites is accepted
-* MPB015: Issues related to clicking multiple times on an item or the shotgun
-* MPB016: Player can still receive invites from rejected users
-* MPB017: Issues relating to item placement
