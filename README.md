@@ -77,3 +77,4 @@ We plan on continuing to update MultiPlayer, even after the official release of 
 * MPB013: Possible duplicate matches created and not erased server-side
 * MPB014: Player can accept invites after one of their invites is accepted
 * MPB015: Issues related to clicking multiple times on an item or the shotgun
+* MPB016: Player can still receive invites from rejected users
