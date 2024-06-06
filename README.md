@@ -78,3 +78,4 @@ We plan on continuing to update MultiPlayer, even after the official release of 
 * MPB014: Player can accept invites after one of their invites is accepted
 * MPB015: Issues related to clicking multiple times on an item or the shotgun
 * MPB016: Player can still receive invites from rejected users
+* MPB017: Issues relating to item placement
