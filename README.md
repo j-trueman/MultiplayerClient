@@ -70,3 +70,4 @@ We plan on continuing to update MultiPlayer, even after the official release of 
 
 ## Known Bugs
 * MPB012: Unclear status of players currently in matches
+* MPB017: Dealer face changes too quickly between rounds
