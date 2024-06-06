@@ -69,4 +69,11 @@ I released the original mod as a _patch_ meaning that it was standalone and not 
 We plan on continuing to update MultiPlayer, even after the official release of multiplayer as I'm sure there will be features that will not be implemented into official multiplayer but people will still want to see.
 
 ## Known Bugs
-* Nothing to report :)
+* MPB004: Plays dealer return animation after losing a round
+* MPB009: Match not deleted server-side after round completed
+* MPB010: Dealer hand animation issues after using cigarettes
+* MPB011: Chat visibility issues
+* MPB012: Unclear status of players currently in matches
+* MPB013: Possible duplicate matches created and not erased server-side
+* MPB014: Player can accept invites after one of their invites is accepted
+* MPB015: Issues related to clicking multiple times on an item or the shotgun
