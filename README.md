@@ -71,3 +71,5 @@ We plan on continuing to update MultiPlayer, even after the official release of 
 ## Known Bugs
 * MPB012: Unclear status of players currently in matches
 * MPB017: Dealer face changes too quickly between rounds
+* MPB018: Player can send messages when not in a match
+* MPB019: Action validation for picking up shotgun not received by opponent after returning from handcuff check
