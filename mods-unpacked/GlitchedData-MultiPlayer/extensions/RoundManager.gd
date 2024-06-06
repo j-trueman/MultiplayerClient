@@ -3,6 +3,7 @@ extends "res://scripts/RoundManager.gd"
 const RoundBatch = preload("res://scripts/RoundBatch.gd")
 var currentRoundIdx = 0
 var manager
+var resetManager
 var playerTurn
 var currentPlayerTurn
 var gotLoadInfo
@@ -12,6 +13,7 @@ signal setLoadInfo
 
 func _ready():
 	manager = get_tree().get_root().get_node("MultiplayerManager/MultiplayerRoundManager")
+	resetManager = GlobalVariables.get_current_scene_node().get_node("standalone managers/reset manager")
 	manager.loadInfo.connect(loadInfo)
 	GlobalVariables.get_current_scene_node().get_node("standalone managers/endless mode").SetupEndless()
 	playerData.hasSignedWaiver = true
@@ -59,7 +61,8 @@ func EndMainBatch():
 		await get_tree().create_timer(.08, false).timeout
 		death.viewblocker.visible = true
 		death.DisableSpeakers()
-		death.MainDeathRoutine()
+		await get_tree().create_timer(.5, false).timeout
+		resetManager.Reset()
 		return
 	healthCounter.DisableCounter()
 	speaker_roundShutDown.play()

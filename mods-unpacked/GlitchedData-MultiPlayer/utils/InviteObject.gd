@@ -67,16 +67,20 @@ func acceptPressed():
 	inviteMenu.outgoingButton.visible = false
 	inviteMenu.buttonHighlightAnimator.get_parent().visible = false
 	self.queue_free()
+	setCursorImage("point")
 
 func denyPressed():
+	inviteMenu.deniedUsers.append(inviteFromUsername)
 	inviteMenu.multiplayerManager.denyInvite.rpc(inviteFromID)
 	inviteMenu.inviteShowQueue.erase(inviteFromID)
 	self.queue_free()
+	setCursorImage("point")
 	
 func cancelPressed():
 	var to = inviteFromID
 	inviteMenu.multiplayerManager.retractInvite.rpc(to)
 	self.queue_free()
+	setCursorImage("point")
 
 func destroy(name):
 	if !isInMenu:
@@ -86,3 +90,4 @@ func destroy(name):
 		inviteMenu.inviteFinished.emit()
 		inviteMenu.popupVisible = false
 		self.queue_free()
+		setCursorImage("point")

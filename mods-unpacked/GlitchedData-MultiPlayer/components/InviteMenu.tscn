@@ -170,6 +170,10 @@ _data = {
 "countdown": SubResource("Animation_ke08f")
 }
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_x6aeu"]
+bg_color = Color(0.227451, 0.227451, 0.227451, 0.529412)
+expand_margin_left = 2.0
+
 [sub_resource type="LabelSettings" id="LabelSettings_r6o12"]
 font = ExtResource("3")
 font_size = 13
@@ -234,13 +238,6 @@ layout_mode = 2
 size_flags_horizontal = 6
 size_flags_vertical = 0
 theme_override_constants/separation = 15
-
-[node name="popup section" type="Control" parent="."]
-anchors_preset = 0
-offset_left = 20.0
-offset_top = 478.0
-offset_right = 60.0
-offset_bottom = 518.0
 
 [node name="menuButton" type="Button" parent="."]
 layout_mode = 0
@@ -655,103 +652,112 @@ libraries = {
 [node name="chat" type="Control" parent="."]
 anchors_preset = 0
 offset_left = 3.0
-offset_top = 289.0
+offset_top = 310.0
 offset_right = 631.0
-offset_bottom = 478.0
+offset_bottom = 531.0
 
 [node name="chat1" type="Label" parent="chat"]
 offset_left = 2.33
 offset_top = 3.0
 offset_right = 628.33
 offset_bottom = 23.0
+theme_override_styles/normal = SubResource("StyleBoxFlat_x6aeu")
 label_settings = SubResource("LabelSettings_r6o12")
 clip_text = true
 
 [node name="chat2" type="Label" parent="chat"]
 offset_left = 2.33
-offset_top = 20.0
+offset_top = 23.0
 offset_right = 628.33
-offset_bottom = 40.0
+offset_bottom = 43.0
+theme_override_styles/normal = SubResource("StyleBoxFlat_x6aeu")
 label_settings = SubResource("LabelSettings_r6o12")
 clip_text = true
 
 [node name="chat3" type="Label" parent="chat"]
 offset_left = 2.33
-offset_top = 37.0
+offset_top = 43.0
 offset_right = 628.33
-offset_bottom = 57.0
+offset_bottom = 63.0
+theme_override_styles/normal = SubResource("StyleBoxFlat_x6aeu")
 label_settings = SubResource("LabelSettings_r6o12")
 clip_text = true
 
 [node name="chat4" type="Label" parent="chat"]
 offset_left = 2.33
-offset_top = 54.0
+offset_top = 63.0
 offset_right = 628.33
-offset_bottom = 74.0
+offset_bottom = 83.0
+theme_override_styles/normal = SubResource("StyleBoxFlat_x6aeu")
 label_settings = SubResource("LabelSettings_r6o12")
 clip_text = true
 
 [node name="chat5" type="Label" parent="chat"]
 offset_left = 2.33
-offset_top = 71.0
+offset_top = 83.0
 offset_right = 628.33
-offset_bottom = 91.0
+offset_bottom = 103.0
+theme_override_styles/normal = SubResource("StyleBoxFlat_x6aeu")
 label_settings = SubResource("LabelSettings_r6o12")
 clip_text = true
 
 [node name="chat6" type="Label" parent="chat"]
 offset_left = 2.33
-offset_top = 88.0
+offset_top = 103.0
 offset_right = 628.33
-offset_bottom = 108.0
+offset_bottom = 123.0
+theme_override_styles/normal = SubResource("StyleBoxFlat_x6aeu")
 label_settings = SubResource("LabelSettings_r6o12")
 clip_text = true
 
 [node name="chat7" type="Label" parent="chat"]
 offset_left = 2.33
-offset_top = 105.0
+offset_top = 123.0
 offset_right = 628.33
-offset_bottom = 125.0
+offset_bottom = 143.0
+theme_override_styles/normal = SubResource("StyleBoxFlat_x6aeu")
 label_settings = SubResource("LabelSettings_r6o12")
 clip_text = true
 
 [node name="chat8" type="Label" parent="chat"]
 offset_left = 2.33
-offset_top = 122.0
+offset_top = 143.0
 offset_right = 628.33
-offset_bottom = 142.0
+offset_bottom = 163.0
+theme_override_styles/normal = SubResource("StyleBoxFlat_x6aeu")
 label_settings = SubResource("LabelSettings_r6o12")
 clip_text = true
 
 [node name="chat9" type="Label" parent="chat"]
 offset_left = 2.33
-offset_top = 139.0
+offset_top = 163.0
 offset_right = 628.33
-offset_bottom = 159.0
+offset_bottom = 183.0
+theme_override_styles/normal = SubResource("StyleBoxFlat_x6aeu")
 label_settings = SubResource("LabelSettings_r6o12")
 clip_text = true
 
 [node name="chat10" type="Label" parent="chat"]
 offset_left = 2.33
-offset_top = 156.0
+offset_top = 183.0
 offset_right = 628.33
-offset_bottom = 176.0
+offset_bottom = 203.0
+theme_override_styles/normal = SubResource("StyleBoxFlat_x6aeu")
 label_settings = SubResource("LabelSettings_r6o12")
 clip_text = true
 
 [node name="chat input background" type="ColorRect" parent="chat"]
-offset_left = 0.33
-offset_top = 171.0
-offset_right = 533.33
-offset_bottom = 189.0
-color = Color(0.227451, 0.227451, 0.227451, 0.529412)
+offset_top = 203.0
+offset_right = 628.0
+offset_bottom = 221.0
+color = Color(0.168627, 0.168627, 0.168627, 0.529412)
 visible = false
 
 [node name="chat input" type="LineEdit" parent="chat"]
-offset_left = 2.33
-offset_top = 165.0
-offset_right = 33.1875
-offset_bottom = 196.0
+offset_left = 2.0
+offset_top = 197.0
+offset_right = 532.0
+offset_bottom = 228.0
 theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_fonts/font = ExtResource("3")
 theme_override_font_sizes/font_size = 13
@@ -760,3 +766,10 @@ theme_override_styles/focus = SubResource("StyleBoxFlat_tmgcm")
 expand_to_text_length = true
 caret_blink = true
 visible = false
+
+[node name="popup section" type="Control" parent="."]
+anchors_preset = 0
+offset_left = 20.0
+offset_top = 478.0
+offset_right = 60.0
+offset_bottom = 518.0

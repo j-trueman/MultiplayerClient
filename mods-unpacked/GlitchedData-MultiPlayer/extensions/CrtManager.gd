@@ -7,7 +7,6 @@ var screenparent_multiplayer : Node3D
 var multiplayerManager
 var mrm
 var inviteeID
-var deniedUsers = []
 var ascii = [	  "%%%%%%%*   =%%#%## #%%##     %%%%%%*  #%%#%#%%%%#   #%%%%   #%%%%% +%%%%%%     #%%%%#     ##%######%" +
 		"\n%%%%*%%%%   %%%%#= ##%%*    %%%##%%#  *#%%%+##%%*  +%# #%    %%%#=  #%%%#     #%%=%%%#    %%%%%%%%%%" +
 		"\n %%%  %%%    %%%     %     *%%   #%%    %%   #%    #%  %#    %%%+    *%%     %%%   #%%*  #%*  %%# #%",
@@ -147,6 +146,11 @@ func processInviteStatus(username, status):
 		"accept":
 			if !multiplayerManager.inMatch:
 				multiplayerManager.inMatch = true
+				if multiplayerManager.inviteMenu.popupVisible:
+					multiplayerManager.inviteMenu.popupInvite.animationPlayer.stop()
+					multiplayerManager.inviteMenu.popupInvite.acceptButton.visible = false
+					multiplayerManager.inviteMenu.popupInvite.denyButton.visible = false
+					multiplayerManager.inviteMenu.popupInvite.destroy(null)
 				intro.roundManager.playerData.playername = multiplayerManager.accountName.to_upper()
 				multiplayerManager.inviteMenu.showReady(username)
 				await multiplayerManager.inviteMenu.timerAccept.animation_finished

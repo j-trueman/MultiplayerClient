@@ -113,6 +113,7 @@ func Kill(who : String, trueDeath : bool, returningShotgun : bool):
 					await(healthCounter.UpdateDisplayRoutine(false, !shotgunShooting.playerCanGoAgain, false))
 					defibParent.visible = false
 				else:
+					shotgunShooting.roundManager.dealerAtTable = true
 					await get_tree().create_timer(1, false).timeout
 					dealerAI.dealerHoldingShotgun = false
 					animator_shotgun.play("RESET")

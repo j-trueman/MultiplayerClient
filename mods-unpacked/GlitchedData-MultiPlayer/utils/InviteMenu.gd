@@ -29,6 +29,7 @@ extends Control
 signal serverInviteList(invites)
 signal connectionSuccess
 
+var popupInvite
 var inviteShowQueue = []
 var multiplayerManager
 var mrm
@@ -46,6 +47,7 @@ var chatTimer_array = [10.0,10.0,10.0,10.0,10.0,10.0,10.0,10.0,10.0,10.0]
 var chatTimer = true
 var markForFocus = false
 var popupVisible = false
+var deniedUsers = []
 
 signal inviteFinished
 
@@ -122,8 +124,9 @@ func _input(event):
 			chat_background.visible = multiplayerManager.chat_enabled
 			chat_input.visible = multiplayerManager.chat_enabled
 			for i in range(10):
-				if chatTimer_array[i] > 7.0: chatTimer_array[i] = 7.0
-				chat_array[i].modulate.a = 1.0
+				if chat_array[i].text != "":
+					if chatTimer_array[i] > 7.0: chatTimer_array[i] = 7.0
+					chat_array[i].modulate.a = 1.0
 			markForFocus = true
 		if (event.is_action_pressed("ui_accept") and not chatTimer):
 			sendChat(chat_input.text)
@@ -210,21 +213,21 @@ func toggleMenu():
 		updateInviteList("incoming", true)
 
 func receiveInvite(fromUsername, fromID):
-	inviteShowQueue.push_back(fromID)
-	print(inviteShowQueue.find(fromID))
-	if inviteShowQueue.find(fromID) > 0:
-		while inviteShowQueue.find(fromID) != 0:
-			await inviteFinished
-			
-	var popupInvite = load("res://mods-unpacked/GlitchedData-MultiPlayer/components/invite.tscn").instantiate()
-	popupInvite.setup(fromUsername, fromID, self)
-	popupSection.add_child(popupInvite)
-	if multiplayerManager.inMatch:
-		popupInvite.acceptButton.visible = false
-		popupInvite.denyButton.visible = false
-	print(popupInvite)
-	popupInvite.animationPlayer.play("progress")
-	popupVisible = true
+	if deniedUsers.has(fromUsername):
+		multiplayerManager.denyInvite.rpc(fromID)
+	else:
+		inviteShowQueue.push_back(fromID)
+		print(inviteShowQueue.find(fromID))
+		if inviteShowQueue.find(fromID) > 0:
+			while inviteShowQueue.find(fromID) != 0:
+				await inviteFinished
+		
+		popupInvite = load("res://mods-unpacked/GlitchedData-MultiPlayer/components/invite.tscn").instantiate()
+		popupInvite.setup(fromUsername, fromID, self)
+		popupSection.add_child(popupInvite)
+		print(popupInvite)
+		popupInvite.animationPlayer.play("progress")
+		popupVisible = true
 
 func removeInvite(from):
 	for invite in inviteList.get_children():

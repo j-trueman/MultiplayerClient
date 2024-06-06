@@ -192,57 +192,42 @@ func GrabItem():
 func GrabItems_Enemy_New(itemsOnTable_var):
 	var itemsOnTable_prev = itemsOnTable
 	itemsOnTable = itemsOnTable_var
-	var selectedResource
-	var multiIdx = 0
 	var dealerIdx = 1 if manager.players[0] == multiplayer.get_unique_id() else 0
 	for i in range(8):
-		if itemsOnTable_prev[dealerIdx][i].is_empty(): multiIdx += 1
-		if itemsOnTable[dealerIdx][i].is_empty() or not itemsOnTable_prev[dealerIdx][i].is_empty(): continue
-		multiIdx -= 1
+		if itemsOnTable_prev[dealerIdx][i] == itemsOnTable[dealerIdx][i]: continue
 		
-		var amountArray : Array[AmountResource] = amounts.array_amounts
-		availableItemsToGrabArray_dealer = []
-		for res in amountArray:
-			if (res.amount_active == 0): 
-				continue
-			if (res.amount_dealer != res.amount_active):
-				availableItemsToGrabArray_dealer.append(res.itemName)
-		
-		if (roundManager.currentRound == 0 && roundManager.roundArray[roundManager.currentRound].startingHealth == 2):
-			if ("handsaw" in availableItemsToGrabArray_dealer): availableItemsToGrabArray_dealer.erase("handsaw")
-		
-		#SPAWN ITEM
+		var selectedResource
 		for c in range(instanceArray_dealer.size()):
 			if (itemsOnTable[dealerIdx][i] == instanceArray_dealer[c].itemName):
 				selectedResource = instanceArray_dealer[c]
-				#ADD STRING TO DEALER ITEM ARRAY
 				itemArray_dealer.append(instanceArray_dealer[c].itemName.to_lower())
 				break
+		
+		for j in range(itemArray_instances_dealer.size()):
+			if itemArray_instances_dealer[j].get_child(1).itemGridIndex == i:
+				itemArray_instances_dealer.remove_at(j)
+				break
+		for item in itemSpawnParent.get_children():
+			if item.get_child(0).isDealerItem and item.get_child(1).itemGridIndex == i:
+				item.queue_free()
+				break
+				
 		var itemInstance = selectedResource.instance.instantiate()
 		var temp_itemIndicator = itemInstance.get_child(0)
 		temp_itemIndicator.isDealerItem = true
-		for res in amountArray:
-			if (selectedResource.itemName == res.itemName):
-				res.amount_dealer += 1
-				break
 		itemInstance.get_child(1).itemGridIndex = i
-		#ADD INSTANCE TO DEALER ITEM ARRAY (mida vittu this code is getting out of hand)
 		itemArray_instances_dealer.append(itemInstance)
 		activeItem_enemy = itemInstance
 		itemSpawnParent.add_child(activeItem_enemy)
 		
-		#PLACE ITEM ON GRID
-		var randgrid = gridParentArray_enemy_available.size() - 1 - multiIdx
-		var gridname = gridParentArray_enemy_available[randgrid]
-		activeItem_enemy.transform.origin = gridParentArray_enemy_available[randgrid].transform.origin + selectedResource.pos_offset
-		activeItem_enemy.rotation_degrees = gridParentArray_enemy_available[randgrid].rotation_degrees + selectedResource.rot_offset
+		var randgrid = 7 - i
+		var gridname = gridParentArray_enemy[randgrid]
+		activeItem_enemy.transform.origin = gridParentArray_enemy[randgrid].transform.origin + selectedResource.pos_offset
+		activeItem_enemy.rotation_degrees = gridParentArray_enemy[randgrid].rotation_degrees + selectedResource.rot_offset
 		if (activeItem_enemy.transform.origin.z > 0): temp_itemIndicator.whichSide = "right"
 		else: temp_itemIndicator.whichSide = "left"
-		temp_itemIndicator.dealerGridIndex = gridParentArray_enemy_available[randgrid].get_child(0).activeIndex
+		temp_itemIndicator.dealerGridIndex = gridParentArray_enemy[randgrid].get_child(0).activeIndex
 		temp_itemIndicator.dealerGridName = gridname
-		if (activeItem_enemy.get_child(1).itemName == "cigarettes"): numberOfCigs_dealer += 1
-		gridParentArray_enemy_available.erase(gridname)
-		numberOfItemsGrabbed_enemy += 1
 
 func PlaceDownItem(gridIndex : int):
 	itemTableIdxArray.append(gridIndex)

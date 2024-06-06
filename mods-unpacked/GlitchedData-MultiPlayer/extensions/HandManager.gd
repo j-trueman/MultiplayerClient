@@ -85,6 +85,7 @@ func PickupItemFromTable(itemName : String):
 	animator_hands.play("RESET")
 	animator_hands.play(animationName)
 	var length = animator_hands.get_animation(animationName).get_length()
+	if itemName == "cigarettes": length += 1.5
 	moving = false
 	await get_tree().create_timer(length, false).timeout
 	stealing = false

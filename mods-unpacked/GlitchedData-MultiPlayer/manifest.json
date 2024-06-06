@@ -1,7 +1,7 @@
 {
   "name": "MultiPlayer",
   "namespace": "GlitchedData",
-  "version_number": "0.2.0",
+  "version_number": "0.2.1",
   "description": "Want to enjoy Buckshot Roulette with your friends? Now you can!",
   "website_url": "https://buckshotmultiplayer.net",
   "dependencies": [],

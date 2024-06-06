@@ -6,7 +6,7 @@ signal keyReceived(status)
 
 var debug_mode = false
 
-var version = "0.2.0"
+var version = "0.2.1"
 
 var chat_enabled = true
 var voice_enabled = true
@@ -155,6 +155,7 @@ func receiveInviteList(list):
 
 @rpc("any_peer", "call_local", "reliable") 
 func acceptInvite(from):
+	inMatch = true
 	inviteMenu.showJoin()
 	await inviteMenu.timerJoin.animation_finished 
 	inviteMenu.joiningGameSection.visible = false
@@ -162,7 +163,6 @@ func acceptInvite(from):
 	crtManager.intro.speaker_pillselect.play()
 	await get_tree().create_timer(2.5, false).timeout
 	crtManager.SetCRT(false)
-	inMatch = true
 
 @rpc("any_peer", "reliable") 
 func opponentDisconnect():
