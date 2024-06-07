@@ -73,3 +73,4 @@ We plan on continuing to update MultiPlayer, even after the official release of 
 * MPB017: Dealer face changes too quickly between rounds
 * MPB018: Player can send messages when not in a match
 * MPB019: Action validation for picking up shotgun not received by opponent after returning from handcuff check
+* MPB020: Escape text not showing up when not using chat
