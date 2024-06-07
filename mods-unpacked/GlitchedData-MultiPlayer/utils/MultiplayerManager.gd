@@ -6,7 +6,7 @@ signal keyReceived(status)
 
 var debug_mode = false
 
-var version = "0.2.1"
+var version = "0.2.2"
 
 var chat_enabled = true
 var voice_enabled = true

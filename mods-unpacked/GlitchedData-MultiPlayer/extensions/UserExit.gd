@@ -5,7 +5,7 @@ var multiplayerManager
 func _ready():
 	await get_tree().create_timer(.5, false).timeout
 	exitAllowed = true
-	var multiplayerManager = get_tree().get_root().get_node("MultiplayerManager")
+	multiplayerManager = get_tree().get_root().get_node("MultiplayerManager")
 
 func ExitGame():
 	multiplayer.multiplayer_peer = null

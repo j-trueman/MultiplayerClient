@@ -57,6 +57,7 @@ func _ready():
 	mrm = get_tree().root.get_node("MultiplayerManager/MultiplayerRoundManager")
 	multiplayerManager.inviteMenu = self
 	multiplayerManager.loginStatus.connect(processLoginStatus)
+	multiplayerManager.opponentActive = false
 	menuButton.button_down.connect(toggleMenu)
 	signupButton.button_down.connect(requestUsername)
 	incomingButton.button_down.connect(func(): updateInviteList("incoming", false))

@@ -96,15 +96,18 @@ func EndMainBatch():
 func MainBatchSetup(dealerEnterAtStart : bool):
 	itemManager.itemsOnTable = [["","","","","","","",""],
 					["","","","","","","",""]]
-	dealerAI.dealermesh_crushed.set_layer_mask_value(1, false)
-	dealerAI.dealermesh_normal.set_layer_mask_value(1, true)
-	dealerAI.swapped = false
 	manager.receivePlayerInfo.rpc()
 	manager.receiveLoadInfo.rpc()
 	gotLoadInfo = false
 	manager.receiveActionReady.rpc()
 	await manager.smartAwait("action ready")
 	super(dealerEnterAtStart)
+
+func RoundIndicator():
+	super()
+	dealerAI.dealermesh_crushed.set_layer_mask_value(1, false)
+	dealerAI.dealermesh_normal.set_layer_mask_value(1, true)
+	dealerAI.swapped = false	
 
 func OutOfHealth(who : String):
 	if who == "player":
