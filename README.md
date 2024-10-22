@@ -11,7 +11,7 @@
 
 We know many of you have been anxiously awaiting the release of official multiplayer for Buckshot Roulette. Since there is no ETA, [MSLaFaver](https://github.com/MSLaFaver/) and I decided to take matters into our own hands. And now, a mere two months after the Steam release, we are proud to present to you _MultiPlayer_, a 1v1 mod for Buckshot Roulette.
 
-<p align="center"><strong>LATEST VERSION: 0.2.2</strong><br>Please check your version before connecting online.</p>
+<p align="center"><strong>LATEST VERSION: 0.3.0</strong><br>Please check your version before connecting online.</p>
 
 Although based off of my (Josh's) [original](https://github.com/j-trueman/BuckshotRouletteMultiplayer) multiplayer mod for the itch.io version of the game, _MultiPlayer_ is better in almost every way. Let's take a look at a couple of things.
 
@@ -69,7 +69,4 @@ I released the original mod as a _patch_ meaning that it was standalone and not 
 We plan on continuing to update MultiPlayer, even after the official release of multiplayer as I'm sure there will be features that will not be implemented into official multiplayer but people will still want to see.
 
 ## Known Bugs
-* MPB012: Unclear status of players currently in matches
-* MPB021: Invalid target peer error server-side after a user can't log in
-* MPB022: Camera doesn't lerp to health counter at the beginning of Round 1 after completing a match
-* MPB023: Player list not automatically updated
+* MPB024: "Invalid packet received" client-side error
