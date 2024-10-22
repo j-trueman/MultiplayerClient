@@ -70,3 +70,4 @@ We plan on continuing to update MultiPlayer, even after the official release of 
 
 ## Known Bugs
 * MPB024: "Invalid packet received" client-side error
+* MPB025: Player score missing trailing zeroes and commas on invite menu
