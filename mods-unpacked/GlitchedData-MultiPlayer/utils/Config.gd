@@ -4,6 +4,8 @@ extends Node
 @export var chat : CheckBox
 @export var voice : CheckBox
 
+const AUTHORNAME_MODNAME_DIR := "GlitchedData-MultiPlayer"
+
 var multiplayermanager
 var lefting = false
 var righting = false
@@ -30,6 +32,15 @@ func _exit_tree():
 	multiplayermanager.chat_enabled = chat.button_pressed
 	multiplayermanager.voice_enabled = voice.button_pressed
 
+	ModLoaderStore.mod_data[AUTHORNAME_MODNAME_DIR].load_configs()
+	var config_object = ModLoaderConfig.get_config(AUTHORNAME_MODNAME_DIR, multiplayermanager.keyLocation)
+	if (config_object != null):
+		config_object.data.url = multiplayermanager.url
+		config_object.data.chat_enabled = multiplayermanager.chat_enabled
+		config_object.data.voice_enabled = multiplayermanager.voice_enabled
+		ModLoaderConfig.update_config(config_object)
+
+
 func _process(delta):
 	if url.has_focus() and canMove:
 		if lefting and url.caret_column > 0:
@@ -42,7 +53,7 @@ func _process(delta):
 			url.caret_column += 1
 			url.delete_char_at_caret()
 	if lefting or righting or backspacing or deleting:
-		moveTimer += get_process_delta_time()
+		moveTimer += delta
 	if moveTimer > 0 and moveTimer <= 0.45:
 		canMove = false
 	if moveTimer > 0.45:

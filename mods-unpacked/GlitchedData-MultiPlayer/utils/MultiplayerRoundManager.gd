@@ -10,6 +10,16 @@ signal finished
 
 var players
 var opponent
+var timer = 0.0
+var exit
+
+func _process(delta):
+	if timer > 0:
+		timer -= delta
+		exit.label.text = str(ceili(timer))
+		exit.anim.stop()
+		exit.label.self_modulate = Color(1, 1, 1, 1)
+	elif timer < 0: timer = 0
 
 @rpc("any_peer", "reliable")
 func receivePlayerInfo(): pass
@@ -97,3 +107,29 @@ func smartAwait(method):
 				await actionReady
 			actionReady_flag = false
 	emit_signal("finished")
+
+@rpc("any_peer", "reliable")
+func receiveBruteforce(option): pass
+	
+@rpc("any_peer", "reliable")
+func sendBruteforce(roundType, liveCount, blankCount, player, opponent, tempState): pass
+
+func resetFlags():
+	loadInfo_flag = false
+	loadInfo_smart = false
+	items_flag = false
+	items_smart = false
+	actionValidation_flag = false
+	actionValidation_smart = false
+	actionReady_flag = false
+	actionReady_smart = false
+
+@rpc("any_peer", "reliable")
+func requestCountdown(): pass
+
+@rpc("any_peer", "reliable")
+func alertCountdown(timeout):
+	timer = timeout
+	if timeout == 0:
+		exit.anim.play("fade out")
+	

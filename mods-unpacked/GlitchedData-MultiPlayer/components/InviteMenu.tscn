@@ -184,7 +184,7 @@ bg_color = Color(0.261113, 0.261113, 0.261112, 0)
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_tmgcm"]
 bg_color = Color(0.6, 0.6, 0.6, 0)
 
-[node name="InviteMenu" type="Control" node_paths=PackedStringArray("inviteContainer", "inviteList", "popupSection", "playerListSection", "signupSection", "menuButton", "incomingButton", "outgoingButton", "buttonHighlightAnimator", "crtMenu", "userList", "usernameInput", "signupButton", "opponentUsernameLabel", "gameReadySection", "joiningGameSection", "timerAccept", "timerJoin", "errorLabel", "title", "underline", "chat_parent", "chat_array", "chat_background", "chat_input")]
+[node name="InviteMenu" type="Control" node_paths=PackedStringArray("inviteContainer", "inviteList", "popupSection", "playerListSection", "signupSection", "menuButton", "incomingButton", "outgoingButton", "buttonHighlightAnimator", "crtMenu", "userList", "usernameInput", "signupButton", "opponentUsernameLabel", "gameReadySection", "joiningGameSection", "timerAccept", "timerJoin", "errorLabel", "title", "underline", "onlinePlayers", "chat_parent", "chat_array", "chat_background", "chat_input")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -213,6 +213,7 @@ timerJoin = NodePath("joining game/Panel/label3/AnimationPlayer")
 errorLabel = NodePath("crt menu/signup section/error")
 title = NodePath("crt menu/title")
 underline = NodePath("crt menu/underline")
+onlinePlayers = NodePath("crt menu/playerlist section/online players")
 chat_parent = NodePath("chat")
 chat_array = [NodePath("chat/chat1"), NodePath("chat/chat2"), NodePath("chat/chat3"), NodePath("chat/chat4"), NodePath("chat/chat5"), NodePath("chat/chat6"), NodePath("chat/chat7"), NodePath("chat/chat8"), NodePath("chat/chat9"), NodePath("chat/chat10")]
 chat_background = NodePath("chat/chat input background")
@@ -349,7 +350,7 @@ theme_override_colors/font_color = Color(0.648438, 0.832031, 0.632813, 1)
 theme_override_fonts/font = ExtResource("2")
 theme_override_font_sizes/font_size = 14
 text = "Lost connection to server.
-open crt menu to reconnect"
+Use CRT to reconnect."
 horizontal_alignment = 1
 
 [node name="Panel" type="Panel" parent="disconnected"]
@@ -358,7 +359,7 @@ layout_mode = 0
 offset_left = -10.0
 offset_top = -7.0
 offset_right = 257.0
-offset_bottom = 47.0
+offset_bottom = 65.0
 theme_override_styles/panel = SubResource("StyleBoxFlat_7lnrk")
 
 [node name="disconnectedInGame" type="Label" parent="."]
@@ -372,9 +373,7 @@ theme_override_colors/font_color = Color(0.648438, 0.832031, 0.632813, 1)
 theme_override_fonts/font = ExtResource("2")
 theme_override_font_sizes/font_size = 14
 text = "Lost connection to server.
-open crt menu to reconnect
-
-returning to lobby..."
+Returning to lobby..."
 horizontal_alignment = 1
 
 [node name="Panel" type="Panel" parent="disconnectedInGame"]
@@ -383,7 +382,7 @@ layout_mode = 0
 offset_left = -10.0
 offset_top = -7.0
 offset_right = 257.0
-offset_bottom = 87.0
+offset_bottom = 65.0
 theme_override_styles/panel = SubResource("StyleBoxFlat_7lnrk")
 
 [node name="opponentDisconnected" type="Label" parent="."]
@@ -396,7 +395,8 @@ offset_bottom = 324.0
 theme_override_colors/font_color = Color(0.648438, 0.832031, 0.632813, 1)
 theme_override_fonts/font = ExtResource("2")
 theme_override_font_sizes/font_size = 14
-text = "Opponent disconnected\nreturning to lobby..."
+text = "Opponent disconnected
+returning to lobby..."
 horizontal_alignment = 1
 
 [node name="Panel" type="Panel" parent="opponentDisconnected"]
@@ -405,7 +405,7 @@ layout_mode = 0
 offset_left = 9.0
 offset_top = -7.0
 offset_right = 236.0
-offset_bottom = 46.0
+offset_bottom = 65.0
 theme_override_styles/panel = SubResource("StyleBoxFlat_7lnrk")
 
 [node name="crt menu" type="Panel" parent="."]
@@ -453,7 +453,7 @@ offset_bottom = 229.0
 layout_mode = 2
 offset_left = 9.0
 offset_top = 7.0
-offset_right = 266.0
+offset_right = 267.0
 offset_bottom = 23.0
 theme_override_colors/font_color = Color(0.764706, 1, 0.741176, 1)
 theme_override_constants/shadow_outline_size = 0

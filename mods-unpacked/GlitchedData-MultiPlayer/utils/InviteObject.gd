@@ -59,28 +59,32 @@ func setup(username, id, menu, isOutgoing = false):
 func acceptPressed():
 	inviteMenu.multiplayerManager.acceptInvite.rpc(inviteFromID)
 	inviteMenu.multiplayerManager.crtManager.intro.roundManager.playerData.playername = inviteMenu.multiplayerManager.accountName.to_upper()
-	inviteMenu.multiplayerManager.crtManager.intro.dealerName.text = usernameLabel.text.to_upper()
-	inviteMenu.mrm.opponent = usernameLabel.text.to_upper()
+	inviteMenu.multiplayerManager.crtManager.intro.dealerName.text = inviteFromUsername.to_upper()
+	inviteMenu.mrm.opponent = inviteFromUsername.to_upper()
 	inviteMenu.inviteShowQueue.erase(inviteFromID)
 	inviteMenu.inviteContainer.visible = false
 	inviteMenu.incomingButton.visible = false
 	inviteMenu.outgoingButton.visible = false
 	inviteMenu.buttonHighlightAnimator.get_parent().visible = false
-	self.queue_free()
 	setCursorImage("point")
+	inviteMenu.removeInvite(inviteFromID)
 
 func denyPressed():
 	inviteMenu.deniedUsers.append(inviteFromUsername)
 	inviteMenu.multiplayerManager.denyInvite.rpc(inviteFromID)
 	inviteMenu.inviteShowQueue.erase(inviteFromID)
-	self.queue_free()
 	setCursorImage("point")
+	inviteMenu.removeInvite(inviteFromID)
 	
 func cancelPressed():
-	var to = inviteFromID
-	inviteMenu.multiplayerManager.retractInvite.rpc(to)
-	self.queue_free()
+	inviteMenu.multiplayerManager.retractInvite.rpc(inviteFromID)
+	for user in inviteMenu.userList.get_children():
+		if user.username == inviteFromUsername:
+			user.inviteButton.text = "INVITE"
+			user.inviteButton.disabled = false
+			break
 	setCursorImage("point")
+	inviteMenu.removeInvite(inviteFromID)
 
 func destroy(name):
 	if !isInMenu:
@@ -89,5 +93,5 @@ func destroy(name):
 		inviteMenu.inviteShowQueue.erase(inviteFromID)
 		inviteMenu.inviteFinished.emit()
 		inviteMenu.popupVisible = false
-		self.queue_free()
 		setCursorImage("point")
+		queue_free()

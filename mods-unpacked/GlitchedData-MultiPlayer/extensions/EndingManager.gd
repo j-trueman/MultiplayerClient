@@ -15,3 +15,9 @@ func ExitGame():
 	isActive = false
 	await get_tree().create_timer(4, false).timeout
 	resetManager.Reset()
+
+func FinalScore():
+	endless_overwriting = true
+	endless_score = 70000
+	super()
+	

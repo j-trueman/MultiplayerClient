@@ -1,74 +1,79 @@
-[gd_scene load_steps=8 format=3 uid="uid://detw7u3rcgms5"]
+[gd_scene load_steps=4 format=3 uid="uid://bwv5o4ji87e2p"]
 
-[ext_resource type="FontFile" uid="uid://bquox4twb507h" path="res://fonts/fake receipt.otf" id="1_tswvb"]
-[ext_resource type="Script" path="res://mods-unpacked/GlitchedData-MultiPlayer/utils/UserObject.gd" id="1_umd4f"]
+[ext_resource type="FontFile" path="res://fonts/fake receipt.otf" id="1"]
+[ext_resource type="Script" path="res://mods-unpacked/GlitchedData-MultiPlayer/utils/UserObject.gd" id="2"]
 
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_d6ggp"]
-
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_rr0qd"]
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty"]
 content_margin_left = 0.0
 content_margin_top = 0.0
 content_margin_right = 0.0
 content_margin_bottom = 0.0
 
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_7kucy"]
-content_margin_left = 0.0
-content_margin_top = 0.0
-content_margin_right = 0.0
-content_margin_bottom = 0.0
+[node name="user" type="Panel" node_paths=PackedStringArray("usernameButton", "blockButton", "inviteButton", "scoreLabel")]
+script = ExtResource("2")
+usernameButton = NodePath("username")
+blockButton = NodePath("block")
+inviteButton = NodePath("invite")
+scoreLabel = NodePath("score")
 
-[sub_resource type="Animation" id="Animation_ogqfy"]
-resource_name = "invitehover"
-loop_mode = 1
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Button:text")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.5, 1),
-"transitions": PackedFloat32Array(1, 1, 1),
-"update": 1,
-"values": ["INVITE", "[INVITE]", "INVITE"]
-}
-
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_7yhvj"]
-_data = {
-"invitehover": SubResource("Animation_ogqfy")
-}
-
-[node name="user" type="Panel" node_paths=PackedStringArray("usernameLabel", "inviteButton", "animationPlayer")]
-theme_override_styles/panel = SubResource("StyleBoxEmpty_d6ggp")
-script = ExtResource("1_umd4f")
-usernameLabel = NodePath("Label")
-inviteButton = NodePath("Button")
-animationPlayer = NodePath("AnimationPlayer")
-
-[node name="Label" type="Label" parent="."]
+[node name="username" type="Button" parent="."]
 layout_mode = 2
-offset_right = 88.0
+offset_right = 74.0
 offset_bottom = 16.0
 theme_override_colors/font_color = Color(0.679688, 0.878906, 0.660156, 1)
-theme_override_fonts/font = ExtResource("1_tswvb")
+theme_override_fonts/font = ExtResource("1")
 theme_override_font_sizes/font_size = 10
-text = "USERNAME HERE"
+theme_override_styles/focus = SubResource("StyleBoxEmpty")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty")
+theme_override_styles/hover = SubResource("StyleBoxEmpty")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty")
+theme_override_styles/normal = SubResource("StyleBoxEmpty")
+text = "USER NAME"
+alignment = 0
 
-[node name="Button" type="Button" parent="."]
+[node name="block" type="Button" parent="."]
+layout_mode = 0
+offset_left = 85.0
+offset_right = 135.0
+offset_bottom = 16.0
+theme_override_colors/font_color = Color(0.643137, 0.823529, 0.623529, 1)
+theme_override_fonts/font = ExtResource("1")
+theme_override_font_sizes/font_size = 10
+theme_override_styles/focus = SubResource("StyleBoxEmpty")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty")
+theme_override_styles/hover = SubResource("StyleBoxEmpty")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty")
+theme_override_styles/normal = SubResource("StyleBoxEmpty")
+text = "BLOCK"
+visible = false
+
+[node name="invite" type="Button" parent="."]
 layout_mode = 0
 offset_left = 199.0
-offset_top = -1.0
 offset_right = 258.0
-offset_bottom = 14.0
+offset_bottom = 16.0
+theme_override_colors/font_disabled_color = Color(0.643137, 0.823529, 0.623529, 1)
 theme_override_colors/font_color = Color(0.643137, 0.823529, 0.623529, 1)
-theme_override_fonts/font = ExtResource("1_tswvb")
+theme_override_fonts/font = ExtResource("1")
 theme_override_font_sizes/font_size = 10
-theme_override_styles/normal = SubResource("StyleBoxEmpty_rr0qd")
-theme_override_styles/pressed = SubResource("StyleBoxEmpty_7kucy")
+theme_override_styles/focus = SubResource("StyleBoxEmpty")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty")
+theme_override_styles/hover = SubResource("StyleBoxEmpty")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty")
+theme_override_styles/normal = SubResource("StyleBoxEmpty")
 text = "INVITE"
-clip_text = true
+alignment = 2
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-libraries = {
-"": SubResource("AnimationLibrary_7yhvj")
-}
+[node name="score" type="Label" parent="."]
+layout_mode = 0
+offset_left = 142.0
+offset_right = 189.0
+offset_bottom = 16.0
+theme_override_colors/font_color = Color(0.643137, 0.823529, 0.623529, 1)
+theme_override_fonts/font = ExtResource("1")
+theme_override_font_sizes/font_size = 10
+theme_override_styles/normal = SubResource("StyleBoxEmpty")
+text = ""
+visible = false
+horizontal_alignment = 2
+vertical_alignment = 1

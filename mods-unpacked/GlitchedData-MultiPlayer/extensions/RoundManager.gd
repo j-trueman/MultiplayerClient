@@ -15,6 +15,7 @@ func _ready():
 	manager = get_tree().get_root().get_node("MultiplayerManager/MultiplayerRoundManager")
 	resetManager = GlobalVariables.get_current_scene_node().get_node("standalone managers/reset manager")
 	manager.loadInfo.connect(loadInfo)
+	manager.resetFlags()
 	GlobalVariables.get_current_scene_node().get_node("standalone managers/endless mode").SetupEndless()
 	playerData.hasSignedWaiver = true
 	super()
@@ -103,12 +104,6 @@ func MainBatchSetup(dealerEnterAtStart : bool):
 	await manager.smartAwait("action ready")
 	super(dealerEnterAtStart)
 
-func RoundIndicator():
-	super()
-	dealerAI.dealermesh_crushed.set_layer_mask_value(1, false)
-	dealerAI.dealermesh_normal.set_layer_mask_value(1, true)
-	dealerAI.swapped = false	
-
 func OutOfHealth(who : String):
 	if who == "player":
 		score -= 1
@@ -121,7 +116,6 @@ func OutOfHealth(who : String):
 
 func SetupRoundArray():
 	await manager.smartAwait("load info")
-	
 
 func loadInfo(roundIdx, loadIdx, currentPlayerTurn_var, healthPlayers, totalShells, liveCount):
 	if roundIdx > currentRoundIdx:
@@ -219,6 +213,7 @@ func LoadShells():
 		SetupDeskUI()
 		playerTurn = true
 	else:
+		await get_tree().create_timer(0.641, false).timeout
 		EndTurn(false)
 
 func EndTurn(playerCanGoAgain : bool):
@@ -262,6 +257,7 @@ func BeginPlayerTurn():
 			handcuffs.CheckPlayerHandCuffs(false)
 			await get_tree().create_timer(1.4, false).timeout
 			camera.BeginLerp("enemy")
+			await get_tree().create_timer(0.5, false).timeout
 			dealerAI.BeginDealerTurn()
 			returning = true
 			playerAboutToBreakFree = true
@@ -292,6 +288,10 @@ func StartRound(gettingNext : bool):
 		await setLoadInfo
 	gotLoadInfo = true
 	if (gettingNext): currentRound += 1
+	else:
+		dealerAI.dealermesh_crushed.set_layer_mask_value(1, false)
+		dealerAI.dealermesh_normal.set_layer_mask_value(1, true)
+		dealerAI.swapped = false
 	#USINGITEMS: SETUP ITEM GRIDS IF ROUND CLASS HAS SETUP ITEM GRIDS ENABLED
 	#UNCUFF BOTH PARTIES BEFORE ITEM DISTRIBUTION
 	await (handcuffs.RemoveAllCuffsRoutine())

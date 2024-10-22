@@ -1,6 +1,7 @@
 extends "res://scripts/IntroManager.gd"
 
 var dealerName
+var multiplayerManager
 
 func _ready():
 	parent_pills.visible = false
@@ -19,7 +20,7 @@ func _ready():
 	dealerName.scale = Vector3(0.334,0.331,0.374)
 	dealerName.position.y = 0.676
 
-	var multiplayerManager = get_tree().get_root().get_node("MultiplayerManager")
+	multiplayerManager = get_tree().get_root().get_node("MultiplayerManager")
 	multiplayerManager.resetManager = GlobalVariables.get_current_scene_node().get_node("standalone managers/reset manager")
 
 func RevertCRT():
@@ -37,7 +38,7 @@ func RevertCRT():
 	cursor.SetCursor(true, true)
 	intbranch_bathroomdoor.interactionAllowed = true
 	btn_bathroomdoor.visible = true
-	intbranch_crt.interactionAllowed = true
+	intbranch_crt.interactionAllowed = not multiplayerManager.inMatch
 	btn_screen.visible = true
 	if (cursor.controller_active): btn_bathroomdoor.grab_focus()
 	controller.previousFocus = btn_bathroomdoor

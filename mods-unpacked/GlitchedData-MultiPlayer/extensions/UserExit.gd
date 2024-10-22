@@ -1,11 +1,14 @@
 extends "res://scripts/UserExit.gd"
 
 var multiplayerManager
+var mrm
 
 func _ready():
 	await get_tree().create_timer(.5, false).timeout
 	exitAllowed = true
 	multiplayerManager = get_tree().get_root().get_node("MultiplayerManager")
+	mrm = multiplayerManager.get_node("MultiplayerRoundManager")
+	mrm.exit = self
 
 func ExitGame():
 	multiplayer.multiplayer_peer = null

@@ -27,7 +27,7 @@ func _ready():
 
 func _process(delta):
 	if (lerping):
-		elapsed_time += get_process_delta_time()
+		elapsed_time += delta
 		if elapsed_time > 0.05:
 			brightness += 0.01
 			elapsed_time = 0.0

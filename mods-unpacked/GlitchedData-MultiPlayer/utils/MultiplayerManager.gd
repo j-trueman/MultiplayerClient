@@ -4,9 +4,11 @@ signal player_list(playerDict)
 signal loginStatus(status)
 signal keyReceived(status)
 
+const AUTHORNAME_MODNAME_DIR := "GlitchedData-MultiPlayer"
+
 var debug_mode = false
 
-var version = "0.2.2"
+var version = "0.3.0"
 
 var chat_enabled = true
 var voice_enabled = true
@@ -25,11 +27,22 @@ var resetManager
 var inCredits
 var openedBriefcase
 var opponentActive
+var regex
 
 func _ready():
 	if debug_mode:
 		url = "localhost"
 		keyLocation = "res"
+
+	ModLoaderStore.mod_data[AUTHORNAME_MODNAME_DIR].load_configs()
+	var config_object = ModLoaderConfig.get_config(AUTHORNAME_MODNAME_DIR, keyLocation)
+	if (config_object == null):
+		config_object = ModLoaderConfig.create_config(AUTHORNAME_MODNAME_DIR, keyLocation,
+			{"url": url, "chat_enabled": chat_enabled, "voice_enabled": voice_enabled})
+	else:
+		url = config_object.data.url
+		chat_enabled = config_object.data.chat_enabled
+		voice_enabled = config_object.data.voice_enabled
 
 	multiplayer.connected_to_server.connect(func(): connectionTimer("stop"))
 	multiplayer.server_disconnected.connect(_onServerDisconnected)
@@ -43,6 +56,12 @@ func _ready():
 		inCredits = false
 		multiplayer.multiplayer_peer = null
 
+	regex = RegEx.new()
+	regex.compile("^[A-Za-z0-9 ~!@#%&_=:;'<>,/\\-\\$\\^\\*\\(\\)\\+\\{\\}\\|\\[\\]\\.\\?\\\"]+$")
+
+func isValidString(input):
+	return true if input.is_empty() or regex.search(input) != null else false
+
 func AddKey(action, key):
 	InputMap.add_action(action)
 	var ev = InputEventKey.new()
@@ -53,11 +72,13 @@ func connectionTimer(action):
 	if action == "start":
 		timer = Timer.new()
 		GlobalVariables.get_current_scene_node().add_child(timer)
-		if not inviteMenu.signupSection.visible: inviteMenu.get_node("connecting").visible = true
-		inviteMenu.get_node("connecting/AnimationPlayer").play("connecting")
 		timer.timeout.connect(_onConnectionFail)
 		timer.start(10)
 		timerRunning = true
+		await get_tree().create_timer(0.5, false).timeout
+		if timerRunning:
+			if not inviteMenu.signupSection.visible: inviteMenu.get_node("connecting").visible = true
+			inviteMenu.get_node("connecting/AnimationPlayer").play("connecting")
 	else:
 		timerRunning = false
 		inviteMenu.signupSection.visible = false
@@ -119,7 +140,7 @@ func _onServerDisconnected():
 		inviteMenu.get_node("disconnectedInGame").visible = true
 		Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
 		await get_tree().create_timer(5).timeout
-		await get_tree().reload_current_scene()
+		resetManager.Reset()
 
 @rpc("any_peer", "reliable")
 func receiveUserCreationStatus(return_value: bool): 
@@ -157,7 +178,7 @@ func receiveInviteList(list):
 func acceptInvite(from):
 	inMatch = true
 	inviteMenu.showJoin()
-	await inviteMenu.timerJoin.animation_finished 
+	await inviteMenu.timerJoin.animation_finished
 	inviteMenu.joiningGameSection.visible = false
 	crtManager.Interaction("exit")
 	crtManager.intro.speaker_pillselect.play()
@@ -181,13 +202,16 @@ func receiveChat(message):
 	inviteMenu.addChatMessage(message, false)
 
 # GHOST FUNCTIONS
-#@rpc("any_peer", "reliable") func requestUserExistsStatus(username : String): pass
-@rpc("any_peer", "reliable") func requestNewUser(username: String) : pass
-@rpc("any_peer", "reliable") func verifyUserCreds(keyFileData, version): pass
+#@rpc("any_peer", "reliable") func requestUserExistsStatus(_username : String): pass
+@rpc("any_peer", "reliable") func requestNewUser(_username: String) : pass
+@rpc("any_peer", "reliable") func verifyUserCreds(_keyFileData, version): pass
 @rpc("any_peer", "reliable") func requestPlayerList(): pass
-@rpc("any_peer", "reliable") func createInvite(to : int): pass
-@rpc("any_peer", "reliable") func retractInvite(to): pass
+@rpc("any_peer", "reliable") func createInvite(_to : int): pass
+@rpc("any_peer", "reliable") func retractInvite(_to): pass
 @rpc("any_peer", "reliable") func retractAllInvites(): pass
-@rpc("any_peer", "reliable") func getInvites(type): pass
-@rpc("any_peer", "reliable") func denyInvite(from): pass
-@rpc("any_peer", "reliable") func sendChat(message): pass
+@rpc("any_peer", "reliable") func getInvites(_type): pass
+@rpc("any_peer", "reliable") func denyInvite(_from): pass
+@rpc("any_peer", "reliable") func sendChat(_message): pass
+@rpc("any_peer", "reliable") func verifyDealer(_key, _playerID): pass
+@rpc("any_peer", "reliable") func linkDealer(_id): pass
+@rpc("any_peer", "reliable") func startDealer(): pass

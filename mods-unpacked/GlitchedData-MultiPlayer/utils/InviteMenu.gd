@@ -21,6 +21,7 @@ extends Control
 @export var errorLabel : Label
 @export var title : Label
 @export var underline : Label
+@export var onlinePlayers : Label
 @export var chat_parent : Control
 @export var chat_array : Array[Label]
 @export var chat_background : ColorRect
@@ -37,6 +38,8 @@ var cursorManager
 var interactionManager
 var menuIsVisible = false
 var selectedInput
+var inputText = ""
+var inputColumn = 0
 var lefting = false
 var righting = false
 var backspacing = false
@@ -48,6 +51,10 @@ var chatTimer = true
 var markForFocus = false
 var popupVisible = false
 var deniedUsers = []
+var blockedUsers = []
+var playerListRefreshTimer = 0.0
+var currentUserList = {}
+var score = 0
 
 signal inviteFinished
 
@@ -62,6 +69,10 @@ func _ready():
 	signupButton.button_down.connect(requestUsername)
 	incomingButton.button_down.connect(func(): updateInviteList("incoming", false))
 	outgoingButton.button_down.connect(func(): updateInviteList("outgoing", false))
+
+	var blockedUsersFile = FileAccess.open("user://blockedusers.json", FileAccess.READ)
+	blockedUsers = blockedUsersFile.get_var()
+	blockedUsersFile.close()
 
 	cursorManager = GlobalVariables.get_current_scene_node().get_node("standalone managers/cursor manager")
 	interactionManager = GlobalVariables.get_current_scene_node().get_node("standalone managers/interaction manager")
@@ -78,9 +89,17 @@ func _ready():
 	chat_parent.visible = multiplayerManager.chat_enabled
 	selectedInput = usernameInput
 	chat_input.text_changed.connect(onChatEdit)
+	chat_input.text_changed.connect(onTextEdit)
+	usernameInput.text_changed.connect(onTextEdit)
 
 func _process(delta):
-	if Input.get_mouse_mode() == Input.MOUSE_MODE_VISIBLE and multiplayerManager.loggedIn and not multiplayerManager.inMatch:
+	if multiplayerManager.loggedIn and multiplayerManager.crtManager.viewing:
+		playerListRefreshTimer += delta
+		if playerListRefreshTimer >= 0.5:
+			playerListRefreshTimer = 0.0
+			multiplayerManager.requestPlayerList.rpc()
+
+	if Input.get_mouse_mode() == Input.MOUSE_MODE_VISIBLE and multiplayerManager.loggedIn and not (multiplayerManager.inMatch or multiplayerManager.inCredits):
 		menuButton.visible = true
 		if menuIsVisible:
 			inviteContainer.visible = true
@@ -104,14 +123,14 @@ func _process(delta):
 		selectedInput.caret_column += 1
 		selectedInput.delete_char_at_caret()
 	if lefting or righting or backspacing or deleting:
-		moveTimer += get_process_delta_time()
+		moveTimer += delta
 	if moveTimer > 0 and moveTimer <= 0.45:
 		canMove = false
 	if moveTimer > 0.45:
 		canMove = !canMove
 	if chatTimer:
 		for i in range(10):
-			if chatTimer_array[i] < 10.0: chatTimer_array[i] += get_process_delta_time()
+			if chatTimer_array[i] < 10.0: chatTimer_array[i] += delta
 			if chatTimer_array[i] > 10.0: chatTimer_array[i] = 10.0
 			if chatTimer_array[i] >= 7.0: chat_array[i].modulate.a = (10.0 - chatTimer_array[i])/3.0
 	if markForFocus:
@@ -130,8 +149,9 @@ func _input(event):
 					chat_array[i].modulate.a = 1.0
 			markForFocus = true
 		if (event.is_action_pressed("ui_accept") and not chatTimer):
-			sendChat(chat_input.text)
-			chat_input.text = ""
+			if not chat_input.text.is_empty():
+				sendChat(chat_input.text)
+				chat_input.text = ""
 			chatTimer = true
 			chat_background.visible = false
 			chat_input.visible = false
@@ -214,7 +234,7 @@ func toggleMenu():
 		updateInviteList("incoming", true)
 
 func receiveInvite(fromUsername, fromID):
-	if deniedUsers.has(fromUsername):
+	if deniedUsers.has(fromUsername) or blockedUsers.has(fromUsername):
 		multiplayerManager.denyInvite.rpc(fromID)
 	else:
 		inviteShowQueue.push_back(fromID)
@@ -226,6 +246,10 @@ func receiveInvite(fromUsername, fromID):
 		popupInvite = load("res://mods-unpacked/GlitchedData-MultiPlayer/components/invite.tscn").instantiate()
 		popupInvite.setup(fromUsername, fromID, self)
 		popupSection.add_child(popupInvite)
+		var newMenuInvite = load("res://mods-unpacked/GlitchedData-MultiPlayer/components/invite.tscn").instantiate()
+		newMenuInvite.setup(fromUsername, fromID, self)
+		newMenuInvite.isInMenu = true
+		inviteList.add_child(newMenuInvite)
 		print(popupInvite)
 		popupInvite.animationPlayer.play("progress")
 		popupVisible = true
@@ -233,10 +257,10 @@ func receiveInvite(fromUsername, fromID):
 func removeInvite(from):
 	for invite in inviteList.get_children():
 		if invite.inviteFromID == from:
-			inviteList.remove_child(invite)
+			invite.queue_free()
 	for invite in popupSection.get_children():
 		if invite.inviteFromID == from:
-			popupSection.remove_child(invite)
+			invite.queue_free()
 
 func showReady(username):
 	setupMatch()
@@ -256,6 +280,9 @@ func setupMatch():
 	multiplayerManager.openedBriefcase = false
 	multiplayerManager.crtManager.viewing = false
 	multiplayerManager.crtManager.branch_exit.interactionAllowed = false
+	multiplayerManager.crtManager.intro.intbranch_crt.interactionAllowed = false
+	inputText = ""
+	inputColumn = 0
 	selectedInput = chat_input
 	Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
 
@@ -282,26 +309,48 @@ func updateInviteList(type, reset):
 func updateUserList(list):
 	multiplayerManager.getInvites.rpc("outgoing")
 	var inviteList = await serverInviteList
-	list.erase(list.find_key(multiplayer.get_unique_id()))
-	for user in userList.get_children():
-		user.queue_free()
+	score = list[multiplayer.get_unique_id()].score
+	var spacer = ""
+	for i in (23 - str(score * 1000).length()): spacer += " "
+	onlinePlayers.text = "ONLINE PLAYERS" + spacer + "$" + str(score)
+	list.erase(multiplayer.get_unique_id())
+	var users = userList.get_children()
+	for userObject in users:
+		if list.get(userObject.userID) == null:
+			userObject.queue_free()
+			currentUserList.erase(userObject.userID)
+		else:
+			userObject.setStatus(list[userObject.userID].status)
+			userObject.stylizeScore(list[userObject.userID].score)
+	var needToSort = false
 	for user in list:
-		var username = user
-		var id = list[user]
+		var username = list[user].username
+		var userStatus = list[user].status
+		var inList = currentUserList.get(user)	# No idea why this needs to be on a separate line but whatever
+		if (inList != null) or blockedUsers.has(list[user].username): continue
+		needToSort = true
+		currentUserList[user] = list[user]
 		var newUserItem = load('res://mods-unpacked/GlitchedData-MultiPlayer/components/user.tscn').instantiate()
+		newUserItem.setStatus(userStatus)
+		newUserItem.stylizeScore(list[user].score)
+		var hasInvite = false
 		for invite in inviteList:
-			if invite.find_key("id") == id:
-				newUserItem.setup(username, id, multiplayerManager, true)
-				userList.add_child(newUserItem)
-				return
-		newUserItem.setup(username, id, multiplayerManager, false)
+			if invite.find_key("id") == user:
+				hasInvite = true
+				break
+		newUserItem.setup(username, user, multiplayerManager, hasInvite)
 		userList.add_child(newUserItem)
+	if needToSort:
+		users.sort_custom(
+			func(a: Node, b: Node): return a.username == "dealer" or a.username < b.username
+		)
+		for i in range(users.size()): userList.move_child(users[i], i)
 		
 func processLoginStatus(reason):
 	if reason == "success":
 		title.text = "WELCOME, " + multiplayerManager.accountName.to_upper()
 		underline.text = "-------- "
-		for i in range(multiplayerManager.accountName.length()): underline.text = underline.text + "-"
+		for i in range(multiplayerManager.accountName.length()): underline.text += "-"
 		crtMenu.visible = true
 		playerListSection.visible = true
 		signupSection.visible = false
@@ -368,3 +417,27 @@ func onChatEdit(text):
 	else:
 		chat_input.max_length = 0
 	chat_input.caret_column = column
+
+func onTextEdit(input):
+	if multiplayerManager.isValidString(input):
+		inputText = selectedInput.text
+		inputColumn = selectedInput.caret_column
+	else:
+		selectedInput.text = inputText
+		selectedInput.caret_column = inputColumn
+
+func blockUser(username):
+	blockedUsers.append(username)
+	for user in userList.get_children():
+		if user.username == username:
+			user.queue_free()
+			break
+	var blockedUsersFile = FileAccess.open("user://blockedusers.json", FileAccess.WRITE)
+	blockedUsersFile.store_var(blockedUsers)
+	blockedUsersFile.close()
+
+func removePopup():
+	popupInvite.animationPlayer.stop()
+	popupInvite.acceptButton.visible = false
+	popupInvite.denyButton.visible = false
+	popupInvite.destroy(null)

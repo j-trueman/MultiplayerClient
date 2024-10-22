@@ -238,8 +238,10 @@ func EndItemGrabbing():
 	interaction_intake.interactionAllowed = false
 	cursor.SetCursor(false, false)
 	ClearIntakeFocus()
+	manager.actionReady_smart = true	# For "waiting for opponent" message
 	manager.receiveItemsOnTable.rpc(itemTableIdxArray)
 	await manager.itemsOnTable_signal
+	manager.actionReady_smart = false
 	await get_tree().create_timer(.45, false).timeout
 	comp.CycleCompartment("hide briefcase")
 	await get_tree().create_timer(1, false).timeout
