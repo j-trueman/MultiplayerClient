@@ -8,7 +8,7 @@ const AUTHORNAME_MODNAME_DIR := "GlitchedData-MultiPlayer"
 
 var debug_mode = false
 
-var version = "0.3.0"
+var version = "0.3.1"
 
 var chat_enabled = true
 var voice_enabled = true
@@ -28,6 +28,7 @@ var inCredits
 var openedBriefcase
 var opponentActive
 var regex
+var rpcMismatch = true
 
 func _ready():
 	if debug_mode:
@@ -201,11 +202,16 @@ func opponentDisconnect():
 func receiveChat(message):
 	inviteMenu.addChatMessage(message, false)
 
+@rpc("any_peer", "reliable") 
+func receiveLeaderboard(list):
+	inviteMenu.receiveLeaderboard(list)
+
 # GHOST FUNCTIONS
 #@rpc("any_peer", "reliable") func requestUserExistsStatus(_username : String): pass
 @rpc("any_peer", "reliable") func requestNewUser(_username: String) : pass
 @rpc("any_peer", "reliable") func verifyUserCreds(_keyFileData, version): pass
 @rpc("any_peer", "reliable") func requestPlayerList(): pass
+@rpc("any_peer", "reliable") func requestLeaderboard(): pass
 @rpc("any_peer", "reliable") func createInvite(_to : int): pass
 @rpc("any_peer", "reliable") func retractInvite(_to): pass
 @rpc("any_peer", "reliable") func retractAllInvites(): pass

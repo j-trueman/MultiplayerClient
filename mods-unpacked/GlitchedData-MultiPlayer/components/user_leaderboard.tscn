@@ -1,0 +1,61 @@
+[gd_scene load_steps=4 format=3 uid="uid://ck6k0t08aod7a"]
+
+[ext_resource type="Script" path="res://mods-unpacked/GlitchedData-MultiPlayer/utils/UserObjectLeaderboard.gd" id="1"]
+[ext_resource type="FontFile" path="res://fonts/fake receipt.otf" id="2"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty"]
+content_margin_left = 0.0
+content_margin_top = 0.0
+content_margin_right = 0.0
+content_margin_bottom = 0.0
+
+[node name="user" type="Panel" node_paths=PackedStringArray("usernameButton", "blockButton", "scoreLabel")]
+usernameButton = NodePath("username")
+blockButton = NodePath("block")
+scoreLabel = NodePath("score")
+script = ExtResource("1")
+custom_minimum_size = Vector2(0, 15)
+
+[node name="username" type="Button" parent="."]
+layout_mode = 2
+offset_right = 74.0
+offset_bottom = 16.0
+theme_override_colors/font_color = Color(0.679688, 0.878906, 0.660156, 1)
+theme_override_fonts/font = ExtResource("2")
+theme_override_font_sizes/font_size = 10
+theme_override_styles/normal = SubResource("StyleBoxEmpty")
+theme_override_styles/hover = SubResource("StyleBoxEmpty")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty")
+theme_override_styles/focus = SubResource("StyleBoxEmpty")
+text = "YYYYYYYYYY"
+alignment = 0
+
+[node name="block" type="Button" parent="."]
+visible = false
+layout_mode = 0
+offset_left = 85.0
+offset_right = 135.0
+offset_bottom = 16.0
+theme_override_colors/font_color = Color(0.643137, 0.823529, 0.623529, 1)
+theme_override_fonts/font = ExtResource("2")
+theme_override_font_sizes/font_size = 10
+theme_override_styles/normal = SubResource("StyleBoxEmpty")
+theme_override_styles/hover = SubResource("StyleBoxEmpty")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty")
+theme_override_styles/focus = SubResource("StyleBoxEmpty")
+text = "BLOCK"
+clip_text = true
+
+[node name="score" type="Label" parent="."]
+layout_mode = 0
+offset_left = 139.0
+offset_right = 258.0
+offset_bottom = 16.0
+theme_override_colors/font_color = Color(0.643137, 0.823529, 0.623529, 1)
+theme_override_fonts/font = ExtResource("2")
+theme_override_font_sizes/font_size = 10
+theme_override_styles/normal = SubResource("StyleBoxEmpty")
+text = "$9,999,999,999,999"
+horizontal_alignment = 2

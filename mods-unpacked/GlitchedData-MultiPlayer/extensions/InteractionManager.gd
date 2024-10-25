@@ -64,10 +64,11 @@ func InteractWith(alias : String):
 				multiManager.openedBriefcase = true
 			"crt button":
 				if (activeInteractionBranch.crtButton_alias != "" ):
-					if ((activeInteractionBranch.crtButton_alias == "right" or activeInteractionBranch.crtButton_alias == "left") \
-						and multiManager.inviteMenu.popupVisible):
-						busy = false
-						return
+					if (activeInteractionBranch.crtButton_alias == "right" or activeInteractionBranch.crtButton_alias == "left"):
+						multiManager.inviteMenu.toggleLeaderboard()
+						if multiManager.inviteMenu.popupVisible:
+							busy = false
+							return
 					else: crt.Interaction(activeInteractionBranch.crtButton_alias)
 		super(alias)
 		busy = false

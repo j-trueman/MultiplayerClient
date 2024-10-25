@@ -36,7 +36,7 @@ func inviteUser():
 	multiplayerManager.createInvite.rpc(userID)
 
 func toggleBlock():
-	if blockButton.visible:
+	if username.to_lower() == "dealer" or blockButton.visible:
 		blockButton.visible = false
 	else:
 		for user in get_parent().get_children():

@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=3 uid="uid://bx7fk0shftvp5"]
+[gd_scene load_steps=20 format=3 uid="uid://bx7fk0shftvp5"]
 
 [ext_resource type="Script" path="res://mods-unpacked/GlitchedData-MultiPlayer/utils/InviteMenu.gd" id="1"]
 [ext_resource type="FontFile" uid="uid://bquox4twb507h" path="res://fonts/fake receipt.otf" id="2"]
@@ -184,7 +184,7 @@ bg_color = Color(0.261113, 0.261113, 0.261112, 0)
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_tmgcm"]
 bg_color = Color(0.6, 0.6, 0.6, 0)
 
-[node name="InviteMenu" type="Control" node_paths=PackedStringArray("inviteContainer", "inviteList", "popupSection", "playerListSection", "signupSection", "menuButton", "incomingButton", "outgoingButton", "buttonHighlightAnimator", "crtMenu", "userList", "usernameInput", "signupButton", "opponentUsernameLabel", "gameReadySection", "joiningGameSection", "timerAccept", "timerJoin", "errorLabel", "title", "underline", "onlinePlayers", "chat_parent", "chat_array", "chat_background", "chat_input")]
+[node name="InviteMenu" type="Control" node_paths=PackedStringArray("inviteContainer", "inviteList", "popupSection", "playerListSection", "signupSection", "menuButton", "incomingButton", "outgoingButton", "buttonHighlightAnimator", "crtMenu", "userList", "userListLeaderboard", "usernameInput", "signupButton", "opponentUsernameLabel", "gameReadySection", "joiningGameSection", "timerAccept", "timerJoin", "errorLabel", "title", "underline", "onlinePlayers", "chat_parent", "chat_array", "chat_background", "chat_input")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -203,6 +203,7 @@ outgoingButton = NodePath("outgoing")
 buttonHighlightAnimator = NodePath("ColorRect/AnimationPlayer")
 crtMenu = NodePath("crt menu")
 userList = NodePath("crt menu/playerlist section/ScrollContainer/userList")
+userListLeaderboard = NodePath("crt menu/playerlist section/ScrollContainer/userListLeaderboard")
 usernameInput = NodePath("crt menu/signup section/LineEdit")
 signupButton = NodePath("crt menu/signup section/Button")
 opponentUsernameLabel = NodePath("invite accepted/Panel/username")
@@ -291,6 +292,124 @@ color = Color(0.101961, 0.101961, 0.101961, 0.501961)
 libraries = {
 "": SubResource("AnimationLibrary_rgobc")
 }
+
+[node name="chat" type="Control" parent="."]
+anchors_preset = 0
+offset_left = 3.0
+offset_top = 310.0
+offset_right = 631.0
+offset_bottom = 531.0
+
+[node name="chat1" type="Label" parent="chat"]
+offset_left = 2.33
+offset_top = 3.0
+offset_right = 628.33
+offset_bottom = 23.0
+theme_override_styles/normal = SubResource("StyleBoxFlat_x6aeu")
+label_settings = SubResource("LabelSettings_r6o12")
+clip_text = true
+
+[node name="chat2" type="Label" parent="chat"]
+offset_left = 2.33
+offset_top = 23.0
+offset_right = 628.33
+offset_bottom = 43.0
+theme_override_styles/normal = SubResource("StyleBoxFlat_x6aeu")
+label_settings = SubResource("LabelSettings_r6o12")
+clip_text = true
+
+[node name="chat3" type="Label" parent="chat"]
+offset_left = 2.33
+offset_top = 43.0
+offset_right = 628.33
+offset_bottom = 63.0
+theme_override_styles/normal = SubResource("StyleBoxFlat_x6aeu")
+label_settings = SubResource("LabelSettings_r6o12")
+clip_text = true
+
+[node name="chat4" type="Label" parent="chat"]
+offset_left = 2.33
+offset_top = 63.0
+offset_right = 628.33
+offset_bottom = 83.0
+theme_override_styles/normal = SubResource("StyleBoxFlat_x6aeu")
+label_settings = SubResource("LabelSettings_r6o12")
+clip_text = true
+
+[node name="chat5" type="Label" parent="chat"]
+offset_left = 2.33
+offset_top = 83.0
+offset_right = 628.33
+offset_bottom = 103.0
+theme_override_styles/normal = SubResource("StyleBoxFlat_x6aeu")
+label_settings = SubResource("LabelSettings_r6o12")
+clip_text = true
+
+[node name="chat6" type="Label" parent="chat"]
+offset_left = 2.33
+offset_top = 103.0
+offset_right = 628.33
+offset_bottom = 123.0
+theme_override_styles/normal = SubResource("StyleBoxFlat_x6aeu")
+label_settings = SubResource("LabelSettings_r6o12")
+clip_text = true
+
+[node name="chat7" type="Label" parent="chat"]
+offset_left = 2.33
+offset_top = 123.0
+offset_right = 628.33
+offset_bottom = 143.0
+theme_override_styles/normal = SubResource("StyleBoxFlat_x6aeu")
+label_settings = SubResource("LabelSettings_r6o12")
+clip_text = true
+
+[node name="chat8" type="Label" parent="chat"]
+offset_left = 2.33
+offset_top = 143.0
+offset_right = 628.33
+offset_bottom = 163.0
+theme_override_styles/normal = SubResource("StyleBoxFlat_x6aeu")
+label_settings = SubResource("LabelSettings_r6o12")
+clip_text = true
+
+[node name="chat9" type="Label" parent="chat"]
+offset_left = 2.33
+offset_top = 163.0
+offset_right = 628.33
+offset_bottom = 183.0
+theme_override_styles/normal = SubResource("StyleBoxFlat_x6aeu")
+label_settings = SubResource("LabelSettings_r6o12")
+clip_text = true
+
+[node name="chat10" type="Label" parent="chat"]
+offset_left = 2.33
+offset_top = 183.0
+offset_right = 628.33
+offset_bottom = 203.0
+theme_override_styles/normal = SubResource("StyleBoxFlat_x6aeu")
+label_settings = SubResource("LabelSettings_r6o12")
+clip_text = true
+
+[node name="chat input background" type="ColorRect" parent="chat"]
+offset_top = 203.0
+offset_right = 628.0
+offset_bottom = 221.0
+color = Color(0.168627, 0.168627, 0.168627, 0.529412)
+visible = false
+
+[node name="chat input" type="LineEdit" parent="chat"]
+offset_left = 2.0
+offset_top = 197.0
+offset_right = 532.0
+offset_bottom = 228.0
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_fonts/font = ExtResource("3")
+theme_override_font_sizes/font_size = 13
+theme_override_styles/normal = SubResource("StyleBoxFlat_771gu")
+theme_override_styles/focus = SubResource("StyleBoxFlat_tmgcm")
+expand_to_text_length = true
+caret_blink = true
+visible = false
 
 [node name="connecting" type="Label" parent="."]
 visible = false
@@ -483,7 +602,12 @@ vertical_scroll_mode = 3
 
 [node name="userList" type="VBoxContainer" parent="crt menu/playerlist section/ScrollContainer"]
 layout_mode = 2
-theme_override_constants/separation = 15
+theme_override_constants/separation = 0
+
+[node name="userListLeaderboard" type="VBoxContainer" parent="crt menu/playerlist section/ScrollContainer"]
+layout_mode = 2
+theme_override_constants/separation = 0
+visible = false
 
 [node name="signup section" type="Control" parent="crt menu"]
 visible = false
@@ -648,124 +772,6 @@ horizontal_alignment = 1
 libraries = {
 "": SubResource("AnimationLibrary_duf5e")
 }
-
-[node name="chat" type="Control" parent="."]
-anchors_preset = 0
-offset_left = 3.0
-offset_top = 310.0
-offset_right = 631.0
-offset_bottom = 531.0
-
-[node name="chat1" type="Label" parent="chat"]
-offset_left = 2.33
-offset_top = 3.0
-offset_right = 628.33
-offset_bottom = 23.0
-theme_override_styles/normal = SubResource("StyleBoxFlat_x6aeu")
-label_settings = SubResource("LabelSettings_r6o12")
-clip_text = true
-
-[node name="chat2" type="Label" parent="chat"]
-offset_left = 2.33
-offset_top = 23.0
-offset_right = 628.33
-offset_bottom = 43.0
-theme_override_styles/normal = SubResource("StyleBoxFlat_x6aeu")
-label_settings = SubResource("LabelSettings_r6o12")
-clip_text = true
-
-[node name="chat3" type="Label" parent="chat"]
-offset_left = 2.33
-offset_top = 43.0
-offset_right = 628.33
-offset_bottom = 63.0
-theme_override_styles/normal = SubResource("StyleBoxFlat_x6aeu")
-label_settings = SubResource("LabelSettings_r6o12")
-clip_text = true
-
-[node name="chat4" type="Label" parent="chat"]
-offset_left = 2.33
-offset_top = 63.0
-offset_right = 628.33
-offset_bottom = 83.0
-theme_override_styles/normal = SubResource("StyleBoxFlat_x6aeu")
-label_settings = SubResource("LabelSettings_r6o12")
-clip_text = true
-
-[node name="chat5" type="Label" parent="chat"]
-offset_left = 2.33
-offset_top = 83.0
-offset_right = 628.33
-offset_bottom = 103.0
-theme_override_styles/normal = SubResource("StyleBoxFlat_x6aeu")
-label_settings = SubResource("LabelSettings_r6o12")
-clip_text = true
-
-[node name="chat6" type="Label" parent="chat"]
-offset_left = 2.33
-offset_top = 103.0
-offset_right = 628.33
-offset_bottom = 123.0
-theme_override_styles/normal = SubResource("StyleBoxFlat_x6aeu")
-label_settings = SubResource("LabelSettings_r6o12")
-clip_text = true
-
-[node name="chat7" type="Label" parent="chat"]
-offset_left = 2.33
-offset_top = 123.0
-offset_right = 628.33
-offset_bottom = 143.0
-theme_override_styles/normal = SubResource("StyleBoxFlat_x6aeu")
-label_settings = SubResource("LabelSettings_r6o12")
-clip_text = true
-
-[node name="chat8" type="Label" parent="chat"]
-offset_left = 2.33
-offset_top = 143.0
-offset_right = 628.33
-offset_bottom = 163.0
-theme_override_styles/normal = SubResource("StyleBoxFlat_x6aeu")
-label_settings = SubResource("LabelSettings_r6o12")
-clip_text = true
-
-[node name="chat9" type="Label" parent="chat"]
-offset_left = 2.33
-offset_top = 163.0
-offset_right = 628.33
-offset_bottom = 183.0
-theme_override_styles/normal = SubResource("StyleBoxFlat_x6aeu")
-label_settings = SubResource("LabelSettings_r6o12")
-clip_text = true
-
-[node name="chat10" type="Label" parent="chat"]
-offset_left = 2.33
-offset_top = 183.0
-offset_right = 628.33
-offset_bottom = 203.0
-theme_override_styles/normal = SubResource("StyleBoxFlat_x6aeu")
-label_settings = SubResource("LabelSettings_r6o12")
-clip_text = true
-
-[node name="chat input background" type="ColorRect" parent="chat"]
-offset_top = 203.0
-offset_right = 628.0
-offset_bottom = 221.0
-color = Color(0.168627, 0.168627, 0.168627, 0.529412)
-visible = false
-
-[node name="chat input" type="LineEdit" parent="chat"]
-offset_left = 2.0
-offset_top = 197.0
-offset_right = 532.0
-offset_bottom = 228.0
-theme_override_colors/font_color = Color(1, 1, 1, 1)
-theme_override_fonts/font = ExtResource("3")
-theme_override_font_sizes/font_size = 13
-theme_override_styles/normal = SubResource("StyleBoxFlat_771gu")
-theme_override_styles/focus = SubResource("StyleBoxFlat_tmgcm")
-expand_to_text_length = true
-caret_blink = true
-visible = false
 
 [node name="popup section" type="Control" parent="."]
 anchors_preset = 0

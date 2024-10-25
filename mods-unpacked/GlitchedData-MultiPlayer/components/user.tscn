@@ -15,6 +15,7 @@ usernameButton = NodePath("username")
 blockButton = NodePath("block")
 inviteButton = NodePath("invite")
 scoreLabel = NodePath("score")
+custom_minimum_size = Vector2(0, 15)
 
 [node name="username" type="Button" parent="."]
 layout_mode = 2

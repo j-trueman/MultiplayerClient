@@ -11,6 +11,7 @@ extends Control
 @export var buttonHighlightAnimator : AnimationPlayer
 @export var crtMenu : Panel
 @export var userList : VBoxContainer
+@export var userListLeaderboard : VBoxContainer
 @export var usernameInput : LineEdit
 @export var signupButton : Button
 @export var opponentUsernameLabel : Label
@@ -99,7 +100,7 @@ func _process(delta):
 			playerListRefreshTimer = 0.0
 			multiplayerManager.requestPlayerList.rpc()
 
-	if Input.get_mouse_mode() == Input.MOUSE_MODE_VISIBLE and multiplayerManager.loggedIn and not (multiplayerManager.inMatch or multiplayerManager.inCredits):
+	if Input.get_mouse_mode() == Input.MOUSE_MODE_VISIBLE and multiplayerManager.loggedIn and not ((multiplayerManager.inMatch and mrm.opponent != "DEALER") or multiplayerManager.inCredits):
 		menuButton.visible = true
 		if menuIsVisible:
 			inviteContainer.visible = true
@@ -246,10 +247,16 @@ func receiveInvite(fromUsername, fromID):
 		popupInvite = load("res://mods-unpacked/GlitchedData-MultiPlayer/components/invite.tscn").instantiate()
 		popupInvite.setup(fromUsername, fromID, self)
 		popupSection.add_child(popupInvite)
+		if mrm.opponent == "DEALER":
+			popupInvite.acceptButton.queue_free()
+			popupInvite.denyButton.queue_free()
 		var newMenuInvite = load("res://mods-unpacked/GlitchedData-MultiPlayer/components/invite.tscn").instantiate()
 		newMenuInvite.setup(fromUsername, fromID, self)
 		newMenuInvite.isInMenu = true
 		inviteList.add_child(newMenuInvite)
+		if mrm.opponent == "DEALER":
+			newMenuInvite.acceptButton.queue_free()
+			newMenuInvite.denyButton.queue_free()
 		print(popupInvite)
 		popupInvite.animationPlayer.play("progress")
 		popupVisible = true
@@ -263,9 +270,9 @@ func removeInvite(from):
 			invite.queue_free()
 
 func showReady(username):
-	setupMatch()
 	multiplayerManager.crtManager.intro.dealerName.text = username.to_upper()
 	mrm.opponent = username.to_upper()
+	setupMatch()
 	gameReadySection.visible = true
 	opponentUsernameLabel.text = username
 	timerAccept.play("countdown")
@@ -276,6 +283,7 @@ func showJoin():
 	timerJoin.play("countdown")
 
 func setupMatch():
+	firstChatMessage()
 	multiplayerManager.opponentActive = true
 	multiplayerManager.openedBriefcase = false
 	multiplayerManager.crtManager.viewing = false
@@ -304,15 +312,19 @@ func updateInviteList(type, reset):
 		newMenuInvite.isInMenu = true
 		newMenuInvite.setup(invite.find_key("username"), invite.find_key("id"), self, isOutgoing)
 		inviteList.add_child(newMenuInvite)
+		if mrm.opponent == "DEALER":
+			newMenuInvite.acceptButton.queue_free()
+			newMenuInvite.denyButton.queue_free()
 		await get_tree().create_timer(.1, false).timeout
 		
 func updateUserList(list):
 	multiplayerManager.getInvites.rpc("outgoing")
 	var inviteList = await serverInviteList
 	score = list[multiplayer.get_unique_id()].score
+	var scoreStr = longScore(score)
 	var spacer = ""
-	for i in (23 - str(score * 1000).length()): spacer += " "
-	onlinePlayers.text = "ONLINE PLAYERS" + spacer + "$" + str(score)
+	for i in (23 - scoreStr.length()): spacer += " "
+	onlinePlayers.text = ("LEADERBOARD   " if userListLeaderboard.visible else "ONLINE PLAYERS") + spacer + "$" + scoreStr
 	list.erase(multiplayer.get_unique_id())
 	var users = userList.get_children()
 	for userObject in users:
@@ -327,7 +339,7 @@ func updateUserList(list):
 		var username = list[user].username
 		var userStatus = list[user].status
 		var inList = currentUserList.get(user)	# No idea why this needs to be on a separate line but whatever
-		if (inList != null) or blockedUsers.has(list[user].username): continue
+		if (inList != null) or blockedUsers.has(username): continue
 		needToSort = true
 		currentUserList[user] = list[user]
 		var newUserItem = load('res://mods-unpacked/GlitchedData-MultiPlayer/components/user.tscn').instantiate()
@@ -347,6 +359,7 @@ func updateUserList(list):
 		for i in range(users.size()): userList.move_child(users[i], i)
 		
 func processLoginStatus(reason):
+	multiplayerManager.rpcMismatch = false
 	if reason == "success":
 		title.text = "WELCOME, " + multiplayerManager.accountName.to_upper()
 		underline.text = "-------- "
@@ -409,6 +422,16 @@ func addChatMessage(message, isPlayer):
 	chat_array[9].modulate.a = 1.0
 	chatTimer_array[9] = 0.0
 
+func firstChatMessage():
+	var message
+	if mrm.opponent == "DEALER":
+		message = "You are now connected with the Dealer. Press T to chat. Messages may be saved."
+	else:
+		message = "You are now connected with " + mrm.opponent + ". Press T to chat."
+	chat_array[9].text = message
+	chat_array[9].modulate.a = 1.0
+	chatTimer_array[9] = 0.0
+
 func onChatEdit(text):
 	var column = chat_input.caret_column
 	chat_input.size.x = 0
@@ -441,3 +464,42 @@ func removePopup():
 	popupInvite.acceptButton.visible = false
 	popupInvite.denyButton.visible = false
 	popupInvite.destroy(null)
+
+func toggleLeaderboard():
+	if userList.visible:
+		userList.visible = false
+		userListLeaderboard.visible = true
+		multiplayerManager.requestLeaderboard.rpc()
+		onlinePlayers.text = onlinePlayers.text.replace("ONLINE PLAYERS","LEADERBOARD   ")
+	elif userListLeaderboard.visible:
+		userList.visible = true
+		userListLeaderboard.visible = false
+		onlinePlayers.text = onlinePlayers.text.replace("LEADERBOARD   ","ONLINE PLAYERS")
+
+func receiveLeaderboard(list):
+	for user in userListLeaderboard.get_children():
+		user.queue_free()
+	list.sort_custom(func(a: Node, b: Node): return (a.score > b.score))
+	for user in list:
+		var username = user.username
+		if blockedUsers.has(username): continue
+		var newUserItem = load('res://mods-unpacked/GlitchedData-MultiPlayer/components/user_leaderboard.tscn').instantiate()
+		newUserItem.setup(username, multiplayerManager, "$" + longScore(user.score))
+		userListLeaderboard.add_child(newUserItem)
+		if username == multiplayerManager.accountName:
+			newUserItem.disconnectUsername()
+
+func longScore(score):
+	var scoreStr = str(score * 1000)
+	var len = scoreStr.length()
+	for i in len-1:
+		if (i+1) % 3 == 0:
+			scoreStr = scoreStr.insert(len-i-1,",")
+	return scoreStr
+
+func rpcMismatch():
+	signupSection.visible = true
+	usernameInput.visible = false
+	signupButton.visible = false
+	crtMenu.visible = true
+	errorLabel.text = "OUTDATED CLIENT! PLEASE UPDATE\nAT BUCKSHOTMULTIPLAYER.NET"

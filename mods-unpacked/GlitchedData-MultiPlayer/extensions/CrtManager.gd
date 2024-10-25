@@ -49,7 +49,7 @@ func _ready():
 	stream.loop = true
 	stream.loop_offset = 6.0
 	speaker_bootuploop.stream = stream
-
+	
 	for i in range(8):
 		array_bootuplogo[i].font_size = 18
 		array_bootuplogo[i].position.x = -1.5
@@ -90,10 +90,12 @@ func Interaction(alias : String):
 			branch_right.get_parent().get_child(1).Press()
 			if multiplayerManager.inviteMenu.signupSection.visible and multiplayerManager.inviteMenu.usernameInput.caret_column < multiplayerManager.inviteMenu.usernameInput.text.length():
 				multiplayerManager.inviteMenu.usernameInput.caret_column += 1
+			multiplayerManager.inviteMenu.toggleLeaderboard()
 		"left":
 			branch_left.get_parent().get_child(1).Press()
 			if multiplayerManager.inviteMenu.signupSection.visible and multiplayerManager.inviteMenu.usernameInput.caret_column > 0:
 				multiplayerManager.inviteMenu.usernameInput.caret_column -= 1
+			multiplayerManager.inviteMenu.toggleLeaderboard()
 		"window":
 			if multiplayerManager.inviteMenu.usernameInput.has_focus():
 				multiplayerManager.inviteMenu.requestUsername()
@@ -122,6 +124,9 @@ func Bootup():
 		multiplayerManager.connectToServer()
 		await multiplayer.connected_to_server
 		multiplayerManager.attemptLogin()
+		await get_tree().create_timer(1.5, false).timeout
+		if multiplayerManager.rpcMismatch:
+			multiplayerManager.inviteMenu.rpcMismatch()
 	else:
 		multiplayerManager.inviteMenu.processLoginStatus("success")
 
@@ -172,6 +177,7 @@ func processInviteStatus(username, status):
 					if user.inviteButton.text == "PENDING":
 						user.inviteButton.text = "INVITE"
 						user.inviteButton.disabled = false
+				multiplayerManager.inviteMenu.outgoingButton.queue_free()
 				userObject.override = false
 				userObject.setStatus(true)
 				multiplayerManager.inMatch = true
