@@ -63,6 +63,7 @@ func _ready():
 	cursorManager = GlobalVariables.get_current_scene_node().get_node("standalone managers/cursor manager")
 	multiplayerManager = get_tree().root.get_node("MultiplayerManager")
 	mrm = get_tree().root.get_node("MultiplayerManager/MultiplayerRoundManager")
+	mrm.opponent = ""
 	multiplayerManager.inviteMenu = self
 	multiplayerManager.loginStatus.connect(processLoginStatus)
 	multiplayerManager.opponentActive = false
@@ -479,7 +480,6 @@ func toggleLeaderboard():
 func receiveLeaderboard(list):
 	for user in userListLeaderboard.get_children():
 		user.queue_free()
-	list.sort_custom(func(a: Node, b: Node): return (a.score > b.score))
 	for user in list:
 		var username = user.username
 		if blockedUsers.has(username): continue
