@@ -65,7 +65,6 @@ func InteractWith(alias : String):
 			"crt button":
 				if (activeInteractionBranch.crtButton_alias != "" ):
 					if (activeInteractionBranch.crtButton_alias == "right" or activeInteractionBranch.crtButton_alias == "left"):
-						multiManager.inviteMenu.toggleLeaderboard()
 						if multiManager.inviteMenu.popupVisible:
 							busy = false
 							return
