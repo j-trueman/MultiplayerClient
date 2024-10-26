@@ -1,7 +1,7 @@
 {
   "name": "MultiPlayer",
   "namespace": "GlitchedData",
-  "version_number": "0.3.2",
+  "version_number": "0.3.3",
   "description": "Want to enjoy Buckshot Roulette with your friends? Now you can! Special thanks to ITR and ballardrog for use of the SmarterDealer code.",
   "website_url": "https://buckshotmultiplayer.net",
   "dependencies": [],
