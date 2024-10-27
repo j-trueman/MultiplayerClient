@@ -1,9 +1,11 @@
 extends "res://scripts/ResetManager.gd"
 
-func Reset():
-	multiplayer.multiplayer_peer = null
+func Reset(hard = true):
 	var multiplayerManager = get_node("/root/MultiplayerManager")
-	multiplayerManager.loggedIn = false
+	if hard:
+		multiplayer.multiplayer_peer = null
+		multiplayerManager.loggedIn = false
+		multiplayerManager.savedInvite = ""
 	multiplayerManager.inMatch = false
 	save.ClearSave()
 	print("changing scene to: death")

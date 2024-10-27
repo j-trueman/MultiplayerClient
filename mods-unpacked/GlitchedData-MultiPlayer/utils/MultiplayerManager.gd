@@ -8,7 +8,7 @@ const AUTHORNAME_MODNAME_DIR := "GlitchedData-MultiPlayer"
 
 var debug_mode = false
 
-var version = "0.3.3"
+var version = "0.3.4"
 
 var chat_enabled = true
 var voice_enabled = true
@@ -29,6 +29,7 @@ var openedBriefcase
 var opponentActive
 var regex
 var rpcMismatch = true
+var savedInvite = ""
 
 func _ready():
 	if debug_mode:

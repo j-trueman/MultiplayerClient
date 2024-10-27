@@ -208,6 +208,21 @@ func _input(event):
 			moveTimer = 0.0
 			righting = false
 
+func acceptSavedInvite():
+	if not multiplayerManager.savedInvite.is_empty():
+		multiplayerManager.crtManager.intro.intbranch_crt.interactionInvalid = true
+		await updateInviteList("incoming", false)
+		var found = false
+		for invite in inviteList.get_children():
+			if invite.inviteFromUsername == multiplayerManager.savedInvite:
+				found = true
+				invite.acceptPressed()
+				break
+		if not found:
+			print("SAVED INVITE NOT FOUND. RESETTING")
+			multiplayerManager.savedInvite = ""
+			GlobalVariables.get_current_scene_node().get_node("standalone managers/reset manager").Reset()
+
 func requestUsername():
 	multiplayerManager.connectToServer()
 	await multiplayer.connected_to_server
@@ -244,20 +259,13 @@ func receiveInvite(fromUsername, fromID):
 		if inviteShowQueue.find(fromID) > 0:
 			while inviteShowQueue.find(fromID) != 0:
 				await inviteFinished
-		
 		popupInvite = load("res://mods-unpacked/GlitchedData-MultiPlayer/components/invite.tscn").instantiate()
 		popupInvite.setup(fromUsername, fromID, self)
 		popupSection.add_child(popupInvite)
-		if mrm.opponent == "DEALER":
-			popupInvite.acceptButton.queue_free()
-			popupInvite.denyButton.queue_free()
 		var newMenuInvite = load("res://mods-unpacked/GlitchedData-MultiPlayer/components/invite.tscn").instantiate()
 		newMenuInvite.setup(fromUsername, fromID, self)
 		newMenuInvite.isInMenu = true
 		inviteList.add_child(newMenuInvite)
-		if mrm.opponent == "DEALER":
-			newMenuInvite.acceptButton.queue_free()
-			newMenuInvite.denyButton.queue_free()
 		print(popupInvite)
 		popupInvite.animationPlayer.play("progress")
 		popupVisible = true
@@ -313,9 +321,6 @@ func updateInviteList(type, reset):
 		newMenuInvite.isInMenu = true
 		newMenuInvite.setup(invite.find_key("username"), invite.find_key("id"), self, isOutgoing)
 		inviteList.add_child(newMenuInvite)
-		if mrm.opponent == "DEALER":
-			newMenuInvite.acceptButton.queue_free()
-			newMenuInvite.denyButton.queue_free()
 		await get_tree().create_timer(.1, false).timeout
 		
 func updateUserList(list):
@@ -333,7 +338,7 @@ func updateUserList(list):
 			userObject.queue_free()
 			currentUserList.erase(userObject.userID)
 		else:
-			userObject.setStatus(list[userObject.userID].status)
+			userObject.setStatus(true if userObject.username == mrm.opponent else list[userObject.userID].status)
 			userObject.stylizeScore(list[userObject.userID].score)
 	var needToSort = false
 	for user in list:

@@ -57,17 +57,21 @@ func setup(username, id, menu, isOutgoing = false):
 	denyButton.button_down.connect(denyPressed)
 
 func acceptPressed():
-	inviteMenu.mrm.opponent = inviteFromUsername.to_upper()
-	inviteMenu.multiplayerManager.acceptInvite.rpc(inviteFromID)
-	inviteMenu.multiplayerManager.crtManager.intro.roundManager.playerData.playername = inviteMenu.multiplayerManager.accountName.to_upper()
-	inviteMenu.multiplayerManager.crtManager.intro.dealerName.text = inviteFromUsername.to_upper()
-	inviteMenu.inviteShowQueue.erase(inviteFromID)
-	inviteMenu.inviteContainer.visible = false
-	inviteMenu.incomingButton.visible = false
-	inviteMenu.outgoingButton.visible = false
-	inviteMenu.buttonHighlightAnimator.get_parent().visible = false
 	setCursorImage("point")
-	inviteMenu.removeInvite(inviteFromID)
+	if inviteMenu.mrm.opponent == "DEALER":
+		inviteMenu.multiplayerManager.savedInvite = inviteFromUsername
+		GlobalVariables.get_current_scene_node().get_node("standalone managers/reset manager").Reset(false)
+	else:
+		inviteMenu.mrm.opponent = inviteFromUsername.to_upper()
+		inviteMenu.multiplayerManager.acceptInvite.rpc(inviteFromID)
+		inviteMenu.multiplayerManager.crtManager.intro.roundManager.playerData.playername = inviteMenu.multiplayerManager.accountName.to_upper()
+		inviteMenu.multiplayerManager.crtManager.intro.dealerName.text = inviteFromUsername.to_upper()
+		inviteMenu.inviteShowQueue.erase(inviteFromID)
+		inviteMenu.inviteContainer.visible = false
+		inviteMenu.incomingButton.visible = false
+		inviteMenu.outgoingButton.visible = false
+		inviteMenu.buttonHighlightAnimator.get_parent().visible = false
+		inviteMenu.removeInvite(inviteFromID)
 
 func denyPressed():
 	inviteMenu.deniedUsers.append(inviteFromUsername)

@@ -23,6 +23,10 @@ func _ready():
 	multiplayerManager = get_tree().get_root().get_node("MultiplayerManager")
 	multiplayerManager.resetManager = GlobalVariables.get_current_scene_node().get_node("standalone managers/reset manager")
 
+func MainTrackLoad():
+	super()
+	multiplayerManager.inviteMenu.acceptSavedInvite()
+
 func RevertCRT():
 	animator_pp.play("brightness fade out")
 	#anim_revert.play("revert")

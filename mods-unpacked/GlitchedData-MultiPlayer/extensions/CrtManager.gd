@@ -172,7 +172,8 @@ func processInviteStatus(username, status):
 			break
 	match status:
 		"accept":
-			if !multiplayerManager.inMatch:
+			if not multiplayerManager.inMatch:
+				multiplayerManager.inMatch = true
 				for user in multiplayerManager.inviteMenu.userList.get_children():
 					if user.inviteButton.text == "PENDING":
 						user.inviteButton.text = "INVITE"
@@ -180,7 +181,6 @@ func processInviteStatus(username, status):
 				multiplayerManager.inviteMenu.outgoingButton.queue_free()
 				userObject.override = false
 				userObject.setStatus(true)
-				multiplayerManager.inMatch = true
 				if multiplayerManager.inviteMenu.popupVisible:
 					multiplayerManager.inviteMenu.removePopup()
 				intro.roundManager.playerData.playername = multiplayerManager.accountName.to_upper()
@@ -192,17 +192,14 @@ func processInviteStatus(username, status):
 				await get_tree().create_timer(2.5, false).timeout
 				SetCRT(false)
 		"busy":
-#			multiplayerMenuManager.error_label_players.text = "ERROR: USER HAS PENDING INVITE, TRY AGAIN"
 			userObject.override = false
 			userObject.setStatus(true)
 		"deny":
-#			multiplayerMenuManager.error_label_players.text = "ERROR: INVITE DECLINED"
 			print(username + " denied")
 			userObject.override = true
 			userObject.inviteButton.disabled = true
 			userObject.inviteButton.text = "DECLINED"
 		"cancel":
-#			multiplayerMenuManager.error_label_players.text = "INVITE RETRACTED"
 			for invite in multiplayerManager.inviteMenu.inviteList.get_children():
 				if invite.inviteFromUsername == username:
 					invite.queue_free()
