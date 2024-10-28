@@ -11,7 +11,7 @@
 
 We know many of you have been anxiously awaiting the release of official multiplayer for Buckshot Roulette. Since there is no ETA, [MSLaFaver](https://github.com/MSLaFaver/) and I decided to take matters into our own hands. And now, a mere two months after the Steam release, we are proud to present to you _MultiPlayer_, a 1v1 mod for Buckshot Roulette.
 
-<p align="center"><strong>LATEST VERSION: 0.3.4</strong><br>Please check your version before connecting online.</p>
+<p align="center"><strong>LATEST VERSION: 0.3.5</strong><br>Please check your version before connecting online.</p>
 
 Although based off of my (Josh's) [original](https://github.com/j-trueman/BuckshotRouletteMultiplayer) multiplayer mod for the itch.io version of the game, _MultiPlayer_ is better in almost every way. Let's take a look at a couple of things.
 
