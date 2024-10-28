@@ -73,7 +73,9 @@ func _ready():
 	outgoingButton.button_down.connect(func(): updateInviteList("outgoing", false))
 
 	var blockedUsersFile = FileAccess.open("user://blockedusers.json", FileAccess.READ)
-	blockedUsers = blockedUsersFile.get_var()
+	var blockedUsersVar = blockedUsersFile.get_var(true)
+	if blockedUsersVar is Array:
+		blockedUsers = blockedUsersVar
 	blockedUsersFile.close()
 
 	cursorManager = GlobalVariables.get_current_scene_node().get_node("standalone managers/cursor manager")
@@ -464,8 +466,12 @@ func blockUser(username):
 		if user.username == username:
 			user.queue_free()
 			break
+	for user in userListLeaderboard.get_children():
+		if user.username == username:
+			user.queue_free()
+			break
 	var blockedUsersFile = FileAccess.open("user://blockedusers.json", FileAccess.WRITE)
-	blockedUsersFile.store_var(blockedUsers)
+	blockedUsersFile.store_var(blockedUsers,true)
 	blockedUsersFile.close()
 
 func removePopup():
@@ -475,6 +481,7 @@ func removePopup():
 	popupInvite.destroy(null)
 
 func toggleLeaderboard():
+	print(blockedUsers)
 	var scoreStr = longScore(score)
 	var spacer = ""
 	if userList.visible:

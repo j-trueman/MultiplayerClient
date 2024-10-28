@@ -30,4 +30,4 @@ func toggleBlock():
 		blockButton.visible = true
 
 func block():
-	multiplayerManager.blockUser(username)
+	multiplayerManager.inviteMenu.blockUser(username)
