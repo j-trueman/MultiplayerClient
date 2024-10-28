@@ -8,7 +8,7 @@ const AUTHORNAME_MODNAME_DIR := "GlitchedData-MultiPlayer"
 
 var debug_mode = false
 
-var version = "0.3.4"
+var version = "0.3.5"
 
 var chat_enabled = true
 var voice_enabled = true

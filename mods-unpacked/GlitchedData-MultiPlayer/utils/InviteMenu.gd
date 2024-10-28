@@ -95,7 +95,7 @@ func _ready():
 	usernameInput.text_changed.connect(onTextEdit)
 
 func _process(delta):
-	if multiplayerManager.loggedIn and multiplayerManager.crtManager.viewing:
+	if multiplayerManager.loggedIn and multiplayerManager.crtManager.viewing and userList.visible:
 		playerListRefreshTimer += delta
 		if playerListRefreshTimer >= 0.5:
 			playerListRefreshTimer = 0.0
@@ -327,10 +327,11 @@ func updateUserList(list):
 	multiplayerManager.getInvites.rpc("outgoing")
 	var inviteList = await serverInviteList
 	score = list[multiplayer.get_unique_id()].score
-	var scoreStr = longScore(score)
-	var spacer = ""
-	for i in (23 - scoreStr.length()): spacer += " "
-	onlinePlayers.text = ("LEADERBOARD   " if userListLeaderboard.visible else "ONLINE PLAYERS") + spacer + "$" + scoreStr
+	if onlinePlayers.text.ends_with("ONLINE PLAYERS"):
+		var scoreStr = longScore(score)
+		var spacer = ""
+		for i in (20 - scoreStr.length() - str(list.size()-1).length()): spacer += " "
+		onlinePlayers.text = "ONLINE PLAYERS (" + str(list.size()-1) + ")" + spacer + "$" + scoreStr
 	list.erase(multiplayer.get_unique_id())
 	var users = userList.get_children()
 	for userObject in users:
@@ -359,8 +360,9 @@ func updateUserList(list):
 		newUserItem.setup(username, user, multiplayerManager, hasInvite)
 		userList.add_child(newUserItem)
 	if needToSort:
+		users = userList.get_children()
 		users.sort_custom(
-			func(a: Node, b: Node): return a.username == "dealer" or a.username < b.username
+			func(a: Node, b: Node):	return (a.username == "dealer" or a.username < b.username) and not b.username == "dealer"
 		)
 		for i in range(users.size()): userList.move_child(users[i], i)
 		
@@ -375,6 +377,7 @@ func processLoginStatus(reason):
 		signupSection.visible = false
 		usernameInput.release_focus()
 		multiplayerManager.requestPlayerList.rpc()
+		multiplayerManager.requestLeaderboard.rpc()
 		return
 	else:
 		crtMenu.visible = true
@@ -472,15 +475,20 @@ func removePopup():
 	popupInvite.destroy(null)
 
 func toggleLeaderboard():
+	var scoreStr = longScore(score)
+	var spacer = ""
 	if userList.visible:
+		for i in (26 - scoreStr.length()): spacer += " "
+		onlinePlayers.text = ("LEADERBOARD" + spacer) + "$" + scoreStr
 		userList.visible = false
 		userListLeaderboard.visible = true
 		multiplayerManager.requestLeaderboard.rpc()
-		onlinePlayers.text = onlinePlayers.text.replace("ONLINE PLAYERS","LEADERBOARD   ")
 	elif userListLeaderboard.visible:
+		for i in (20 - scoreStr.length() - str(currentUserList.size()).length()): spacer += " "
+		onlinePlayers.text = "ONLINE PLAYERS (" + str(currentUserList.size()) + ")" + spacer + "$" + scoreStr
 		userList.visible = true
 		userListLeaderboard.visible = false
-		onlinePlayers.text = onlinePlayers.text.replace("LEADERBOARD   ","ONLINE PLAYERS")
+		multiplayerManager.requestPlayerList.rpc()
 
 func receiveLeaderboard(list):
 	for user in userListLeaderboard.get_children():

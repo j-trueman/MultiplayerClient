@@ -49,7 +49,7 @@ func setStatus(status):
 		inviteButton.text = "BUSY" if status else "INVITE"
 
 func block():
-	multiplayerManager.blockUser(username)
+	multiplayerManager.inviteMenu.blockUser(username)
 
 func stylizeScore(score):
 	if score > 0:
