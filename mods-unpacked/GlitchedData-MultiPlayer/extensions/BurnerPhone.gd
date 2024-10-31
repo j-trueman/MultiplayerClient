@@ -23,7 +23,7 @@ func SendDialogue():
 			6:
 				firstpart = tr("SEQUENCE7")
 			7:
-				firstpart = tr("SEQUENCE7")
+				firstpart = "EIGHTH SHELL"
 		fulldia = tr(firstpart) + "\n" + "... " + tr(secondpart)
 	else: fulldia = tr("UNFORTUNATE")
 	dia.ShowText_Phone(fulldia)

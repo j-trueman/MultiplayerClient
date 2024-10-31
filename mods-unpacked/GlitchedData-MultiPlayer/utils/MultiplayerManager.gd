@@ -8,7 +8,7 @@ const AUTHORNAME_MODNAME_DIR := "GlitchedData-MultiPlayer"
 
 var debug_mode = false
 
-var version = "0.3.5"
+var version = "0.4.0"
 
 var chat_enabled = true
 var voice_enabled = true
@@ -21,7 +21,7 @@ var inviteMenu
 var loggedIn = false
 var timer : Timer
 var timerRunning = false
-var url = "buckshotmultiplayer.net"
+var url = "play.buckshotmultiplayer.net"
 var keyLocation = "user"
 var resetManager
 var inCredits
@@ -93,7 +93,6 @@ func connectionTimer(action):
 func connectToServer():
 	connectionTimer("start")
 	var peer = ENetMultiplayerPeer.new()
-	if url == "buckshotmultiplayer.net": url = "connectviamultiplayerclient." + url
 	var error = peer.create_client(url, 2095)
 	if error:
 		print("ERROR: %s" % error)

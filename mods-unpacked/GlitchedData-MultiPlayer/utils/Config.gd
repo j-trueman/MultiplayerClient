@@ -11,7 +11,7 @@ var lefting = false
 var righting = false
 var backspacing = false
 var deleting = false
-var moveTimer
+var moveTimer = 0.0
 var canMove = true
 var returnButton
 

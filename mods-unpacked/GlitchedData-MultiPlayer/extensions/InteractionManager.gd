@@ -34,7 +34,10 @@ func InteractWith(alias : String):
 				manager.receiveActionValidation.rpc(idx)
 				await manager.smartAwait("action validation")
 				if not actionValidation_flag: await newAction
-				if action.length() == 1:
+				if action.length() == 1 or action == "invalid":
+					if action == "invalid":
+						print("ERROR: INVALID ACTION. PROCEEDING WITH MATCH...")
+						result = 0
 					action = itemManager.itemsOnTable[playerIdx][int(idx)]
 					itemManager.itemsOnTable[playerIdx][int(idx)] = ""
 				match action:

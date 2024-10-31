@@ -329,11 +329,6 @@ func updateUserList(list):
 	multiplayerManager.getInvites.rpc("outgoing")
 	var inviteList = await serverInviteList
 	score = list[multiplayer.get_unique_id()].score
-	if onlinePlayers.text.ends_with("ONLINE PLAYERS"):
-		var scoreStr = longScore(score)
-		var spacer = ""
-		for i in (20 - scoreStr.length() - str(list.size()-1).length()): spacer += " "
-		onlinePlayers.text = "ONLINE PLAYERS (" + str(list.size()-1) + ")" + spacer + "$" + scoreStr
 	list.erase(multiplayer.get_unique_id())
 	var users = userList.get_children()
 	for userObject in users:
@@ -367,6 +362,7 @@ func updateUserList(list):
 			func(a: Node, b: Node):	return (a.username == "dealer" or a.username < b.username) and not b.username == "dealer"
 		)
 		for i in range(users.size()): userList.move_child(users[i], i)
+	if userList.visible: stylizePlayerListHeader()
 		
 func processLoginStatus(reason):
 	multiplayerManager.rpcMismatch = false
@@ -481,18 +477,16 @@ func removePopup():
 	popupInvite.destroy(null)
 
 func toggleLeaderboard():
-	print(blockedUsers)
-	var scoreStr = longScore(score)
-	var spacer = ""
 	if userList.visible:
+		var scoreStr = longScore(score)
+		var spacer = ""
 		for i in (26 - scoreStr.length()): spacer += " "
 		onlinePlayers.text = ("LEADERBOARD" + spacer) + "$" + scoreStr
 		userList.visible = false
 		userListLeaderboard.visible = true
 		multiplayerManager.requestLeaderboard.rpc()
 	elif userListLeaderboard.visible:
-		for i in (20 - scoreStr.length() - str(currentUserList.size()).length()): spacer += " "
-		onlinePlayers.text = "ONLINE PLAYERS (" + str(currentUserList.size()) + ")" + spacer + "$" + scoreStr
+		stylizePlayerListHeader()
 		userList.visible = true
 		userListLeaderboard.visible = false
 		multiplayerManager.requestPlayerList.rpc()
@@ -523,3 +517,9 @@ func rpcMismatch():
 	signupButton.visible = false
 	crtMenu.visible = true
 	errorLabel.text = "OUTDATED CLIENT! PLEASE UPDATE\nAT BUCKSHOTMULTIPLAYER.NET"
+
+func stylizePlayerListHeader():
+	var scoreStr = longScore(score)
+	var spacer = ""
+	for i in (20 - scoreStr.length() - str(currentUserList.size()).length()): spacer += " "
+	onlinePlayers.text = "ONLINE PLAYERS (" + str(currentUserList.size()) + ")" + spacer + "$" + scoreStr
