@@ -81,7 +81,7 @@ func connectionTimer(action):
 		if timerRunning:
 			if not inviteMenu.signupSection.visible: inviteMenu.get_node("connecting").visible = true
 			inviteMenu.get_node("connecting/AnimationPlayer").play("connecting")
-	else:
+	elif inviteMenu != null:
 		timerRunning = false
 		inviteMenu.signupSection.visible = false
 		inviteMenu.get_node("connecting").visible = false

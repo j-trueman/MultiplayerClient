@@ -45,7 +45,7 @@ var lefting = false
 var righting = false
 var backspacing = false
 var deleting = false
-var moveTimer
+var moveTimer = 0.0
 var canMove = true
 var chatTimer_array = [10.0,10.0,10.0,10.0,10.0,10.0,10.0,10.0,10.0,10.0]
 var chatTimer = true
@@ -73,10 +73,11 @@ func _ready():
 	outgoingButton.button_down.connect(func(): updateInviteList("outgoing", false))
 
 	var blockedUsersFile = FileAccess.open("user://blockedusers.json", FileAccess.READ)
-	var blockedUsersVar = blockedUsersFile.get_var(true)
-	if blockedUsersVar is Array:
-		blockedUsers = blockedUsersVar
-	blockedUsersFile.close()
+	if blockedUsersFile != null:
+		var blockedUsersVar = blockedUsersFile.get_var(true)
+		if blockedUsersVar is Array:
+			blockedUsers = blockedUsersVar
+		blockedUsersFile.close()
 
 	cursorManager = GlobalVariables.get_current_scene_node().get_node("standalone managers/cursor manager")
 	interactionManager = GlobalVariables.get_current_scene_node().get_node("standalone managers/interaction manager")

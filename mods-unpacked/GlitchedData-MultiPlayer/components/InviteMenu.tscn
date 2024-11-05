@@ -1,8 +1,8 @@
 [gd_scene load_steps=20 format=3 uid="uid://bx7fk0shftvp5"]
 
 [ext_resource type="Script" path="res://mods-unpacked/GlitchedData-MultiPlayer/utils/InviteMenu.gd" id="1"]
-[ext_resource type="FontFile" uid="uid://bquox4twb507h" path="res://fonts/fake receipt.otf" id="2"]
-[ext_resource type="FontFile" uid="uid://cjt600vs5hbut" path="res://fonts/DOTMATRI.TTF" id="3"]
+[ext_resource type="FontFile" path="res://fonts/fake receipt.otf" id="2"]
+[ext_resource type="FontFile" path="res://fonts/DOTMATRI.TTF" id="3"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_jvphg"]
 bg_color = Color(1, 1, 1, 0.121569)
