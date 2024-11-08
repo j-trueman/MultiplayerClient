@@ -623,10 +623,11 @@ func GrabItems_Enemy_New(itemsOnTable_var):
 				itemArray_instances_dealer.remove_at(j)
 				break
 		for item in itemSpawnParent.get_children():
-			if item.get_child(0).isDealerItem and item.get_child(1).itemGridIndex == i:
-				item.queue_free()
-				break
-				
+			if item.get_child_count() > 2:
+				if item.get_child(0).isDealerItem and item.get_child(1).itemGridIndex == i:
+					item.queue_free()
+					break
+		
 		var itemInstance = selectedResource.instance.instantiate()
 		var temp_itemIndicator = itemInstance.get_child(0)
 		temp_itemIndicator.isDealerItem = true

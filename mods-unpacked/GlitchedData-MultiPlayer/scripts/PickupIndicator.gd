@@ -1,10 +1,7 @@
 extends Node
 
-const DescriptionManager = preload("res://mods-unpacked/GlitchedData-MultiPlayer/scripts/DescriptionManager.gd")
-const InteractionManager = preload("res://mods-unpacked/GlitchedData-MultiPlayer/scripts/InteractionManager.gd")
-
-@export var description : DescriptionManager
-@export var interaction : InteractionManager
+var description
+var interaction
 @export var obj : Node3D
 @export var collider : Node3D
 

@@ -81,12 +81,6 @@ func Animator_CheckHandcuffs():
 func Animator_GiveHandcuffs():
 	speaker_giveHandcuffs.play()
 
-func BeginDealerTurn():
-	mainLoopFinished = false
-	usingHandsaw = false
-	usingMedicine = false
-	DealerChoice()
-
 var dealerTarget = ""
 var knownShell = ""
 var dealerKnowsShell = false
@@ -459,6 +453,21 @@ func _ready():
 
 func Timeout():
 	stealing = false
+
+func BeginDealerTurn():
+	mainLoopFinished = false
+	usingHandsaw = false
+	dealerHasShot = false
+	if (roundManager.requestedWireCut):
+		await(roundManager.defibCutter.CutWire(roundManager.wireToCut))
+	if (shellSpawner.sequenceArray.size() == 0):
+		roundManager.StartRound(true)
+		return
+	roundManager.playerTurn = false
+	manager.receiveActionReady.rpc()
+	await manager.smartAwait("action ready")
+	while !dealerHasShot:
+		await manager.actionValidation
 
 func PerformDealerAction(action, result):
 	if not roundManager.playerTurn:

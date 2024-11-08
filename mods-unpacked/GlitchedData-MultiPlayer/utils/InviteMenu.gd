@@ -109,13 +109,15 @@ func _process(delta):
 		if menuIsVisible:
 			inviteContainer.visible = true
 			incomingButton.visible = true
-			outgoingButton.visible = true
+			if outgoingButton != null:
+				outgoingButton.visible = true
 			buttonHighlightAnimator.get_parent().visible = true
 	else:
 		menuButton.visible = false
 		inviteContainer.visible = false
 		incomingButton.visible = false
-		outgoingButton.visible = false
+		if outgoingButton != null:
+			outgoingButton.visible = false
 		buttonHighlightAnimator.get_parent().visible = false
 
 	if canMove and moveTimer > 0.45 and lefting and selectedInput.caret_column > 0:
