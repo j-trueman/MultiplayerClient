@@ -66,7 +66,19 @@ I released the original mod as a _patch_ meaning that it was standalone and not 
 
 ## Future Plans
 
-We plan on continuing to update MultiPlayer, even after the official release of multiplayer as I'm sure there will be features that will not be implemented into official multiplayer but people will still want to see.
+### Update Roadmap
+* Wagers (v0.5)
+* Double or nothing (v0.6)
+* Adrenaline and expired medicine (v0.7)
+* Integration with official multiplayer mode (v0.8)
+* Stable release (v1.0)
+
+### Other Planned Fearues
+* Spinning shotgun
+* Voice chat
+* ChatGPT Dealer comments unprompted on events
+* Change config location
+* Auto scroll user list when using arrow keys
 
 ## Known Bugs
 * None at the moment :D
