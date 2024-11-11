@@ -1,19 +1,19 @@
 extends Node
 
-const AmountResource = preload("res://mods-unpacked/GlitchedData-MultiPlayer/scripts/AmountResource.gd")
-const Amounts = preload("res://mods-unpacked/GlitchedData-MultiPlayer/scripts/ItemAmounts.gd")
+const AmountResource = preload("res://scripts/AmountResource.gd")
+const Amounts = preload("res://scripts/ItemAmounts.gd")
 const CameraManager = preload("res://mods-unpacked/GlitchedData-MultiPlayer/scripts/CameraManager.gd")
-const CompartmentManager = preload("res://mods-unpacked/GlitchedData-MultiPlayer/scripts/CompartmentManager.gd")
-const ControllerManager = preload("res://mods-unpacked/GlitchedData-MultiPlayer/scripts/ControllerManager.gd")
-const CursorManager = preload("res://mods-unpacked/GlitchedData-MultiPlayer/scripts/CursorManager.gd")
+const CompartmentManager = preload("res://scripts/CompartmentManager.gd")
+const ControllerManager = preload("res://scripts/ControllerManager.gd")
+const CursorManager = preload("res://scripts/CursorManager.gd")
 const Dialogue = preload("res://mods-unpacked/GlitchedData-MultiPlayer/scripts/DialogueManager.gd")
 const GridIndicator = preload("res://mods-unpacked/GlitchedData-MultiPlayer/scripts/ItemGridIndicator.gd")
 const InteractionBranch = preload("res://mods-unpacked/GlitchedData-MultiPlayer/scripts/InteractionBranch.gd")
 const ItemInteraction = preload("res://mods-unpacked/GlitchedData-MultiPlayer/scripts/ItemInteraction.gd")
-const ItemResource = preload("res://mods-unpacked/GlitchedData-MultiPlayer/scripts/ItemResource.gd")
-const PickupIndicator = preload("res://mods-unpacked/GlitchedData-MultiPlayer/scripts/PickupIndicator.gd")
+const ItemResource = preload("res://scripts/ItemResource.gd")
+const PickupIndicator = preload("res://scripts/PickupIndicator.gd")
 const RoundManager = preload("res://mods-unpacked/GlitchedData-MultiPlayer/scripts/RoundManager.gd")
-const SpeakerController = preload("res://mods-unpacked/GlitchedData-MultiPlayer/scripts/SpeakerController.gd")
+const SpeakerController = preload("res://scripts/SpeakerController.gd")
 
 @export var grid : GridIndicator
 @export var cursor : CursorManager

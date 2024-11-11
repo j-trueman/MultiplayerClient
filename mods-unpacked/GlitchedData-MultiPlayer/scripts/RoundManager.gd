@@ -1,30 +1,30 @@
 extends Node
 
-const Achievement = preload("res://mods-unpacked/GlitchedData-MultiPlayer/scripts/AchievementManager.gd")
-const Amounts = preload("res://mods-unpacked/GlitchedData-MultiPlayer/scripts/ItemAmounts.gd")
+const Achievement = preload("res://scripts/AchievementManager.gd")
+const Amounts = preload("res://scripts/ItemAmounts.gd")
 const BriefcaseMachine = preload("res://mods-unpacked/GlitchedData-MultiPlayer/scripts/BriefcaseMachine.gd")
 const CameraManager = preload("res://mods-unpacked/GlitchedData-MultiPlayer/scripts/CameraManager.gd")
-const ControllerManager = preload("res://mods-unpacked/GlitchedData-MultiPlayer/scripts/ControllerManager.gd")
-const CursorManager = preload("res://mods-unpacked/GlitchedData-MultiPlayer/scripts/CursorManager.gd")
+const ControllerManager = preload("res://scripts/ControllerManager.gd")
+const CursorManager = preload("res://scripts/CursorManager.gd")
 const DealerIntelligence = preload("res://mods-unpacked/GlitchedData-MultiPlayer/scripts/DealerIntelligence.gd")
 const DeathManager = preload("res://mods-unpacked/GlitchedData-MultiPlayer/scripts/DeathManager.gd")
 const DefibCutter = preload("res://mods-unpacked/GlitchedData-MultiPlayer/scripts/DefibCutter.gd")
-const GameOverManager = preload("res://mods-unpacked/GlitchedData-MultiPlayer/scripts/GameOverManager.gd")
+const GameOverManager = preload("res://scripts/GameOverManager.gd")
 const HandcuffManager = preload("res://mods-unpacked/GlitchedData-MultiPlayer/scripts/HandcuffManager.gd")
 const HealthCounter = preload("res://mods-unpacked/GlitchedData-MultiPlayer/scripts/HealthCounter.gd")
 const InteractionBranch = preload("res://mods-unpacked/GlitchedData-MultiPlayer/scripts/InteractionBranch.gd")
 const ItemManager = preload("res://mods-unpacked/GlitchedData-MultiPlayer/scripts/ItemManager.gd")
 const MusicManager = preload("res://mods-unpacked/GlitchedData-MultiPlayer/scripts/MusicManager.gd")
 const PermissionManager = preload("res://mods-unpacked/GlitchedData-MultiPlayer/scripts/PermissionManager.gd")
-const PlayerData = preload("res://mods-unpacked/GlitchedData-MultiPlayer/scripts/PlayerData.gd")
-const RoundClass = preload("res://mods-unpacked/GlitchedData-MultiPlayer/scripts/RoundClass.gd")
+const PlayerData = preload("res://scripts/PlayerData.gd")
+const RoundClass = preload("res://scripts/RoundClass.gd")
 const SegmentManager = preload("res://mods-unpacked/GlitchedData-MultiPlayer/scripts/SegmentManager.gd")
 const ShellEjectManager = preload("res://mods-unpacked/GlitchedData-MultiPlayer/scripts/ShellEjectManager.gd")
 const ShellLoader = preload("res://mods-unpacked/GlitchedData-MultiPlayer/scripts/ShellLoader.gd")
 const ShellSpawner = preload("res://mods-unpacked/GlitchedData-MultiPlayer/scripts/ShellSpawner.gd")
 const Signature = preload("res://mods-unpacked/GlitchedData-MultiPlayer/scripts/SignatureManager.gd")
 const Statue = preload("res://mods-unpacked/GlitchedData-MultiPlayer/scripts/StatueManager.gd")
-const TypingManager = preload("res://mods-unpacked/GlitchedData-MultiPlayer/scripts/TypingManager.gd")
+const TypingManager = preload("res://scripts/TypingManager.gd")
 
 @export var sign : Signature
 @export var brief : BriefcaseMachine
@@ -393,7 +393,7 @@ func RestartBatch():
 	await get_tree().create_timer(2, false).timeout
 	musicManager.LoadTrack_FadeIn()
 
-const RoundBatch = preload("res://mods-unpacked/GlitchedData-MultiPlayer/scripts/RoundBatch.gd")
+const RoundBatch = preload("res://scripts/RoundBatch.gd")
 var currentRoundIdx = 0
 var manager
 var resetManager

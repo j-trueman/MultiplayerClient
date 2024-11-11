@@ -5,7 +5,7 @@
 [ext_resource type="Texture2D" uid="uid://lfmfitl7scmq" path="res://models/main items/main items1_health counter metal.png" id="3"]
 [ext_resource type="Texture2D" uid="uid://bgdmyioec15lt" path="res://models/main items/main items1_TexturesCom_MetalSheet_Aged_512_normal.png" id="4"]
 [ext_resource type="Texture2D" uid="uid://blgurm0a51yyq" path="res://models/main items/main items1_cigarette.png" id="5"]
-[ext_resource type="Script" path="res://mods-unpacked/GlitchedData-MultiPlayer/scripts/PickupIndicator.gd" id="6"]
+[ext_resource type="Script" path="res://scripts/PickupIndicator.gd" id="6"]
 [ext_resource type="AudioStream" uid="uid://bhs7mis2dy263" path="res://audio/place down cigarettes.ogg" id="7"]
 [ext_resource type="AudioStream" uid="uid://bh65i4noa0i2" path="res://audio/pick up cigarettes.ogg" id="8"]
 [ext_resource type="Script" path="res://mods-unpacked/GlitchedData-MultiPlayer/scripts/InteractionBranch.gd" id="9"]

@@ -5,7 +5,7 @@ const DealerIntelligence = preload("res://mods-unpacked/GlitchedData-MultiPlayer
 const Dialogue = preload("res://mods-unpacked/GlitchedData-MultiPlayer/scripts/DialogueManager.gd")
 const HealthCounter = preload("res://mods-unpacked/GlitchedData-MultiPlayer/scripts/HealthCounter.gd")
 const RoundManager = preload("res://mods-unpacked/GlitchedData-MultiPlayer/scripts/RoundManager.gd")
-const ShellClass = preload("res://mods-unpacked/GlitchedData-MultiPlayer/scripts/ShellBranch.gd")
+const ShellClass = preload("res://scripts/ShellBranch.gd")
 
 @export var dialogue : Dialogue
 @export var anim_compartment : AnimationPlayer

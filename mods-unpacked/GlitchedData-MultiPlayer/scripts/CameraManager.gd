@@ -1,6 +1,6 @@
 extends Node
 
-const CameraSocket = preload("res://mods-unpacked/GlitchedData-MultiPlayer/scripts/CameraSocket.gd")
+const CameraSocket = preload("res://scripts/CameraSocket.gd")
 const DefibCutter = preload("res://mods-unpacked/GlitchedData-MultiPlayer/scripts/DefibCutter.gd")
 
 @export var cam : Camera3D

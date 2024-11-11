@@ -1,7 +1,7 @@
 extends Node
 
 const InteractionManager = preload("res://mods-unpacked/GlitchedData-MultiPlayer/scripts/InteractionManager.gd")
-const PickupIndicator = preload("res://mods-unpacked/GlitchedData-MultiPlayer/scripts/PickupIndicator.gd")
+const PickupIndicator = preload("res://scripts/PickupIndicator.gd")
 
 @export var interaction : InteractionManager
 @export var uiArray : Array[Label]

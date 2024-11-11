@@ -1,11 +1,11 @@
 extends Node
 
 const Board = preload("res://mods-unpacked/GlitchedData-MultiPlayer/scripts/LeaderboardManager.gd")
-const CrtIcon = preload("res://mods-unpacked/GlitchedData-MultiPlayer/scripts/CrtIcon.gd")
-const ExitManager = preload("res://mods-unpacked/GlitchedData-MultiPlayer/scripts/UserExit.gd")
+const CrtIcon = preload("res://scripts/CrtIcon.gd")
+const ExitManager = preload("res://scripts/UserExit.gd")
 const InteractionBranch = preload("res://mods-unpacked/GlitchedData-MultiPlayer/scripts/InteractionBranch.gd")
 const IntroManager = preload("res://mods-unpacked/GlitchedData-MultiPlayer/scripts/IntroManager.gd")
-const PartitionBranch = preload("res://mods-unpacked/GlitchedData-MultiPlayer/scripts/PartitionBranch.gd")
+const PartitionBranch = preload("res://scripts/PartitionBranch.gd")
 
 @export var exit : ExitManager
 var viewing = false

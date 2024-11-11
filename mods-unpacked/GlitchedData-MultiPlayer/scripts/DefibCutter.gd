@@ -1,7 +1,7 @@
 extends Node
 
 const CameraManager = preload("res://mods-unpacked/GlitchedData-MultiPlayer/scripts/CameraManager.gd")
-const DefibBlade = preload("res://mods-unpacked/GlitchedData-MultiPlayer/scripts/DefibBlade.gd")
+const DefibBlade = preload("res://scripts/DefibBlade.gd")
 const Dialogue = preload("res://mods-unpacked/GlitchedData-MultiPlayer/scripts/DialogueManager.gd")
 const RoundManager = preload("res://mods-unpacked/GlitchedData-MultiPlayer/scripts/RoundManager.gd")
 

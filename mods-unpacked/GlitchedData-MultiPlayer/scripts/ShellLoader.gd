@@ -1,11 +1,11 @@
 extends Node
 
 const CameraManager = preload("res://mods-unpacked/GlitchedData-MultiPlayer/scripts/CameraManager.gd")
-const CursorManager = preload("res://mods-unpacked/GlitchedData-MultiPlayer/scripts/CursorManager.gd")
+const CursorManager = preload("res://scripts/CursorManager.gd")
 const DealerIntelligence = preload("res://mods-unpacked/GlitchedData-MultiPlayer/scripts/DealerIntelligence.gd")
 const Dialogue = preload("res://mods-unpacked/GlitchedData-MultiPlayer/scripts/DialogueManager.gd")
 const PermissionManager = preload("res://mods-unpacked/GlitchedData-MultiPlayer/scripts/PermissionManager.gd")
-const PlayerData = preload("res://mods-unpacked/GlitchedData-MultiPlayer/scripts/PlayerData.gd")
+const PlayerData = preload("res://scripts/PlayerData.gd")
 const RoundManager = preload("res://mods-unpacked/GlitchedData-MultiPlayer/scripts/RoundManager.gd")
 
 @export var perm : PermissionManager

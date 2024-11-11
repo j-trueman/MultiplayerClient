@@ -4,7 +4,7 @@ const DescriptionManager = preload("res://mods-unpacked/GlitchedData-MultiPlayer
 const InteractionBranch = preload("res://mods-unpacked/GlitchedData-MultiPlayer/scripts/InteractionBranch.gd")
 const ItemInteraction = preload("res://mods-unpacked/GlitchedData-MultiPlayer/scripts/ItemInteraction.gd")
 const ItemManager = preload("res://mods-unpacked/GlitchedData-MultiPlayer/scripts/ItemManager.gd")
-const PickupIndicator = preload("res://mods-unpacked/GlitchedData-MultiPlayer/scripts/PickupIndicator.gd")
+const PickupIndicator = preload("res://scripts/PickupIndicator.gd")
 const RoundManager = preload("res://mods-unpacked/GlitchedData-MultiPlayer/scripts/RoundManager.gd")
 
 @export var roundManager : RoundManager

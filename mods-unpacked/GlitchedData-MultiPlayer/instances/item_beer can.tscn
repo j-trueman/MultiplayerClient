@@ -5,7 +5,7 @@
 [ext_resource type="Texture2D" uid="uid://dqis1yo2ousvi" path="res://models/main items/main items1_metal sheet copy_beer can brighter.png" id="3"]
 [ext_resource type="Texture2D" uid="uid://bgdmyioec15lt" path="res://models/main items/main items1_TexturesCom_MetalSheet_Aged_512_normal.png" id="4"]
 [ext_resource type="Texture2D" uid="uid://ju0xosnx8akk" path="res://models/main items/main items1_metal sheet brighter2.png" id="5"]
-[ext_resource type="Script" path="res://mods-unpacked/GlitchedData-MultiPlayer/scripts/PickupIndicator.gd" id="6"]
+[ext_resource type="Script" path="res://scripts/PickupIndicator.gd" id="6"]
 [ext_resource type="AudioStream" uid="uid://c0k1qaaod1e1t" path="res://audio/place down beer.ogg" id="7"]
 [ext_resource type="AudioStream" uid="uid://c6oauphmblf2w" path="res://audio/pick up beer.ogg" id="8"]
 [ext_resource type="Script" path="res://mods-unpacked/GlitchedData-MultiPlayer/scripts/InteractionBranch.gd" id="9"]

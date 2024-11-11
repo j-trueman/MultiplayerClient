@@ -1,9 +1,9 @@
 extends Node
 
-const FilterController = preload("res://mods-unpacked/GlitchedData-MultiPlayer/scripts/FilterController.gd")
+const FilterController = preload("res://scripts/FilterController.gd")
 const RoundManager = preload("res://mods-unpacked/GlitchedData-MultiPlayer/scripts/RoundManager.gd")
-const SpeakerController = preload("res://mods-unpacked/GlitchedData-MultiPlayer/scripts/SpeakerController.gd")
-const TrackInstance = preload("res://mods-unpacked/GlitchedData-MultiPlayer/scripts/TrackInstance.gd")
+const SpeakerController = preload("res://scripts/SpeakerController.gd")
+const TrackInstance = preload("res://scripts/TrackInstance.gd")
 
 @export var trackArray : Array[TrackInstance]
 @export var speaker_music : AudioStreamPlayer2D

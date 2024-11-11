@@ -4,7 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://dcu3qh0f40n64" path="res://models/new items/new items main1_brass albedo1.png" id="2"]
 [ext_resource type="Texture2D" uid="uid://b02s4fi6ngj8i" path="res://models/new items/new items main1_syringe test2.png" id="3"]
 [ext_resource type="Texture2D" uid="uid://c2dlnmfhcl8w7" path="res://models/new items/new items main1_valve thing.png" id="4"]
-[ext_resource type="Script" path="res://mods-unpacked/GlitchedData-MultiPlayer/scripts/PickupIndicator.gd" id="5"]
+[ext_resource type="Script" path="res://scripts/PickupIndicator.gd" id="5"]
 [ext_resource type="AudioStream" uid="uid://cc2s0rltryyjk" path="res://audio/place down adrenaline.ogg" id="6"]
 [ext_resource type="AudioStream" uid="uid://b23j4bdh6qvek" path="res://audio/pick up adrenaline.ogg" id="7"]
 [ext_resource type="Script" path="res://mods-unpacked/GlitchedData-MultiPlayer/scripts/InteractionBranch.gd" id="8"]

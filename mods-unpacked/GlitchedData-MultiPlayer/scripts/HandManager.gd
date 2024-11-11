@@ -1,7 +1,7 @@
 extends Node
 
-const AmountResource = preload("res://mods-unpacked/GlitchedData-MultiPlayer/scripts/AmountResource.gd")
-const Amounts = preload("res://mods-unpacked/GlitchedData-MultiPlayer/scripts/ItemAmounts.gd")
+const AmountResource = preload("res://scripts/AmountResource.gd")
+const Amounts = preload("res://scripts/ItemAmounts.gd")
 const CameraManager = preload("res://mods-unpacked/GlitchedData-MultiPlayer/scripts/CameraManager.gd")
 const DealerIntelligence = preload("res://mods-unpacked/GlitchedData-MultiPlayer/scripts/DealerIntelligence.gd")
 const ItemInteraction = preload("res://mods-unpacked/GlitchedData-MultiPlayer/scripts/ItemInteraction.gd")

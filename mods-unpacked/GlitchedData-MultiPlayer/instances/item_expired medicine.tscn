@@ -1,7 +1,7 @@
 [gd_scene load_steps=20 format=3]
 
 [ext_resource type="Texture2D" uid="uid://c7nobvp5d6my2" path="res://textures/expired medicine texture corrected1.png" id="1"]
-[ext_resource type="Script" path="res://mods-unpacked/GlitchedData-MultiPlayer/scripts/PickupIndicator.gd" id="2"]
+[ext_resource type="Script" path="res://scripts/PickupIndicator.gd" id="2"]
 [ext_resource type="AudioStream" uid="uid://cuno4ddsqn5oy" path="res://audio/place down medicine.ogg" id="3"]
 [ext_resource type="AudioStream" uid="uid://oxkl88kd3nr6" path="res://audio/pick up medicine.ogg" id="4"]
 [ext_resource type="Script" path="res://mods-unpacked/GlitchedData-MultiPlayer/scripts/InteractionBranch.gd" id="5"]

@@ -1,7 +1,7 @@
 extends Node
 
 const InteractionManager = preload("res://mods-unpacked/GlitchedData-MultiPlayer/scripts/InteractionManager.gd")
-const MouseRaycast = preload("res://mods-unpacked/GlitchedData-MultiPlayer/scripts/MouseRaycast.gd")
+const MouseRaycast = preload("res://scripts/MouseRaycast.gd")
 const SignButton = preload("res://mods-unpacked/GlitchedData-MultiPlayer/scripts/SignatureButtonBranch.gd")
 const Signature = preload("res://mods-unpacked/GlitchedData-MultiPlayer/scripts/SignatureManager.gd")
 

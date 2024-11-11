@@ -1,12 +1,12 @@
 extends Node
 
-const Achievement = preload("res://mods-unpacked/GlitchedData-MultiPlayer/scripts/AchievementManager.gd")
-const AmountResource = preload("res://mods-unpacked/GlitchedData-MultiPlayer/scripts/AmountResource.gd")
-const Amounts = preload("res://mods-unpacked/GlitchedData-MultiPlayer/scripts/ItemAmounts.gd")
+const Achievement = preload("res://scripts/AchievementManager.gd")
+const AmountResource = preload("res://scripts/AmountResource.gd")
+const Amounts = preload("res://scripts/ItemAmounts.gd")
 const CameraManager = preload("res://mods-unpacked/GlitchedData-MultiPlayer/scripts/CameraManager.gd")
-const CursorManager = preload("res://mods-unpacked/GlitchedData-MultiPlayer/scripts/CursorManager.gd")
+const CursorManager = preload("res://scripts/CursorManager.gd")
 const DealerIntelligence = preload("res://mods-unpacked/GlitchedData-MultiPlayer/scripts/DealerIntelligence.gd")
-const FilterController = preload("res://mods-unpacked/GlitchedData-MultiPlayer/scripts/FilterController.gd")
+const FilterController = preload("res://scripts/FilterController.gd")
 const HandManager = preload("res://mods-unpacked/GlitchedData-MultiPlayer/scripts/HandManager.gd")
 const ItemManager = preload("res://mods-unpacked/GlitchedData-MultiPlayer/scripts/ItemManager.gd")
 const Medicine = preload("res://mods-unpacked/GlitchedData-MultiPlayer/scripts/MedicineManager.gd")

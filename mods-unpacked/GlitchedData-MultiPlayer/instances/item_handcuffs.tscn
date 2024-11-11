@@ -2,7 +2,7 @@
 
 [ext_resource type="Texture2D" uid="uid://dn8l2cjfbyh2m" path="res://models/main items/main items1_metal sheet copy_handcuffs.png" id="1"]
 [ext_resource type="Texture2D" uid="uid://bgdmyioec15lt" path="res://models/main items/main items1_TexturesCom_MetalSheet_Aged_512_normal.png" id="2"]
-[ext_resource type="Script" path="res://mods-unpacked/GlitchedData-MultiPlayer/scripts/PickupIndicator.gd" id="3"]
+[ext_resource type="Script" path="res://scripts/PickupIndicator.gd" id="3"]
 [ext_resource type="AudioStream" uid="uid://bl835gemn2qp2" path="res://audio/place down handcuffs.ogg" id="4"]
 [ext_resource type="AudioStream" uid="uid://bb3f5j2ecwibg" path="res://audio/pick up handcuffs.ogg" id="5"]
 [ext_resource type="Script" path="res://mods-unpacked/GlitchedData-MultiPlayer/scripts/InteractionBranch.gd" id="6"]

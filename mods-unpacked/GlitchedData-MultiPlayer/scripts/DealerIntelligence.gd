@@ -1,22 +1,22 @@
 extends Node
 
-const AmountResource = preload("res://mods-unpacked/GlitchedData-MultiPlayer/scripts/AmountResource.gd")
-const Amounts = preload("res://mods-unpacked/GlitchedData-MultiPlayer/scripts/ItemAmounts.gd")
+const AmountResource = preload("res://scripts/AmountResource.gd")
+const Amounts = preload("res://scripts/ItemAmounts.gd")
 const CameraManager = preload("res://mods-unpacked/GlitchedData-MultiPlayer/scripts/CameraManager.gd")
-const CameraShaker = preload("res://mods-unpacked/GlitchedData-MultiPlayer/scripts/CameraShaker.gd")
+const CameraShaker = preload("res://scripts/CameraShaker.gd")
 const DeathManager = preload("res://mods-unpacked/GlitchedData-MultiPlayer/scripts/DeathManager.gd")
 const HandManager = preload("res://mods-unpacked/GlitchedData-MultiPlayer/scripts/HandManager.gd")
 const HealthCounter = preload("res://mods-unpacked/GlitchedData-MultiPlayer/scripts/HealthCounter.gd")
 const InteractionBranch = preload("res://mods-unpacked/GlitchedData-MultiPlayer/scripts/InteractionBranch.gd")
 const ItemManager = preload("res://mods-unpacked/GlitchedData-MultiPlayer/scripts/ItemManager.gd")
 const Medicine = preload("res://mods-unpacked/GlitchedData-MultiPlayer/scripts/MedicineManager.gd")
-const PickupIndicator = preload("res://mods-unpacked/GlitchedData-MultiPlayer/scripts/PickupIndicator.gd")
+const PickupIndicator = preload("res://scripts/PickupIndicator.gd")
 const RoundManager = preload("res://mods-unpacked/GlitchedData-MultiPlayer/scripts/RoundManager.gd")
 const ShellEjectManager = preload("res://mods-unpacked/GlitchedData-MultiPlayer/scripts/ShellEjectManager.gd")
 const ShellLoader = preload("res://mods-unpacked/GlitchedData-MultiPlayer/scripts/ShellLoader.gd")
 const ShellSpawner = preload("res://mods-unpacked/GlitchedData-MultiPlayer/scripts/ShellSpawner.gd")
 const ShotgunShooting = preload("res://mods-unpacked/GlitchedData-MultiPlayer/scripts/ShotgunShooting.gd")
-const SmokeController = preload("res://mods-unpacked/GlitchedData-MultiPlayer/scripts/SmokeController.gd")
+const SmokeController = preload("res://scripts/SmokeController.gd")
 
 #ALTHOUGH THE CLASS NAME SUGGESTS THAT THE DEALER HAS INTELLIGENCE, AND IT'S TRUE THERE ARE MANY INTELLIGENT DEALERS,
 #CONTRARY TO THOSE THIS ONE IS NOT. HERE THERE IS NO INTELLIGENCE. ONLY LAYERS, HEAPS AND CLUMPS OF SPAGHETTI JUMBLE CODE.

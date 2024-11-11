@@ -1,21 +1,21 @@
 extends Node
 
-const Achievement = preload("res://mods-unpacked/GlitchedData-MultiPlayer/scripts/AchievementManager.gd")
-const Blockout = preload("res://mods-unpacked/GlitchedData-MultiPlayer/scripts/BlockoutManager.gd")
-const BpmLight = preload("res://mods-unpacked/GlitchedData-MultiPlayer/scripts/BpmLight.gd")
+const Achievement = preload("res://scripts/AchievementManager.gd")
+const Blockout = preload("res://scripts/BlockoutManager.gd")
+const BpmLight = preload("res://scripts/BpmLight.gd")
 const CRT = preload("res://mods-unpacked/GlitchedData-MultiPlayer/scripts/CrtManager.gd")
-const CameraShaker = preload("res://mods-unpacked/GlitchedData-MultiPlayer/scripts/CameraShaker.gd")
-const ControllerManager = preload("res://mods-unpacked/GlitchedData-MultiPlayer/scripts/ControllerManager.gd")
-const CursorManager = preload("res://mods-unpacked/GlitchedData-MultiPlayer/scripts/CursorManager.gd")
+const CameraShaker = preload("res://scripts/CameraShaker.gd")
+const ControllerManager = preload("res://scripts/ControllerManager.gd")
+const CursorManager = preload("res://scripts/CursorManager.gd")
 const Dialogue = preload("res://mods-unpacked/GlitchedData-MultiPlayer/scripts/DialogueManager.gd")
 const Endless = preload("res://mods-unpacked/GlitchedData-MultiPlayer/scripts/EndlessMode.gd")
-const FilterController = preload("res://mods-unpacked/GlitchedData-MultiPlayer/scripts/FilterController.gd")
+const FilterController = preload("res://scripts/FilterController.gd")
 const InteractionBranch = preload("res://mods-unpacked/GlitchedData-MultiPlayer/scripts/InteractionBranch.gd")
 const MusicManager = preload("res://mods-unpacked/GlitchedData-MultiPlayer/scripts/MusicManager.gd")
 const PipelineManager = preload("res://mods-unpacked/GlitchedData-MultiPlayer/scripts/PipelineManager.gd")
 const RoundManager = preload("res://mods-unpacked/GlitchedData-MultiPlayer/scripts/RoundManager.gd")
 const Statue = preload("res://mods-unpacked/GlitchedData-MultiPlayer/scripts/StatueManager.gd")
-const Unlocker = preload("res://mods-unpacked/GlitchedData-MultiPlayer/scripts/DonUnlockManager.gd")
+const Unlocker = preload("res://scripts/DonUnlockManager.gd")
 
 @export var cameraParent : Node3D
 @export var intbranch_bathroomdoor : InteractionBranch

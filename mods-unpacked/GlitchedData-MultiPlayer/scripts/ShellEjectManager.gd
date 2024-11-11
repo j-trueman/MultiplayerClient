@@ -2,7 +2,7 @@ extends Node
 
 const DealerIntelligence = preload("res://mods-unpacked/GlitchedData-MultiPlayer/scripts/DealerIntelligence.gd")
 const ShellSpawner = preload("res://mods-unpacked/GlitchedData-MultiPlayer/scripts/ShellSpawner.gd")
-const SmokeController = preload("res://mods-unpacked/GlitchedData-MultiPlayer/scripts/SmokeController.gd")
+const SmokeController = preload("res://scripts/SmokeController.gd")
 
 @export var mesh : MeshInstance3D
 @export var shellSpawner : ShellSpawner

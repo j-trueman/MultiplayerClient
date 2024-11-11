@@ -1,8 +1,8 @@
 extends Node
 
 const CameraManager = preload("res://mods-unpacked/GlitchedData-MultiPlayer/scripts/CameraManager.gd")
-const ControllerManager = preload("res://mods-unpacked/GlitchedData-MultiPlayer/scripts/ControllerManager.gd")
-const CursorManager = preload("res://mods-unpacked/GlitchedData-MultiPlayer/scripts/CursorManager.gd")
+const ControllerManager = preload("res://scripts/ControllerManager.gd")
+const CursorManager = preload("res://scripts/CursorManager.gd")
 const EndingManager = preload("res://mods-unpacked/GlitchedData-MultiPlayer/scripts/EndingManager.gd")
 const InteractionBranch = preload("res://mods-unpacked/GlitchedData-MultiPlayer/scripts/InteractionBranch.gd")
 

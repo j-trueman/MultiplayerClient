@@ -1,17 +1,17 @@
 extends Node
 
-const Achievement = preload("res://mods-unpacked/GlitchedData-MultiPlayer/scripts/AchievementManager.gd")
+const Achievement = preload("res://scripts/AchievementManager.gd")
 const CameraManager = preload("res://mods-unpacked/GlitchedData-MultiPlayer/scripts/CameraManager.gd")
-const CameraShaker = preload("res://mods-unpacked/GlitchedData-MultiPlayer/scripts/CameraShaker.gd")
+const CameraShaker = preload("res://scripts/CameraShaker.gd")
 const DealerIntelligence = preload("res://mods-unpacked/GlitchedData-MultiPlayer/scripts/DealerIntelligence.gd")
-const FilterController = preload("res://mods-unpacked/GlitchedData-MultiPlayer/scripts/FilterController.gd")
+const FilterController = preload("res://scripts/FilterController.gd")
 const HealthCounter = preload("res://mods-unpacked/GlitchedData-MultiPlayer/scripts/HealthCounter.gd")
 const RoundManager = preload("res://mods-unpacked/GlitchedData-MultiPlayer/scripts/RoundManager.gd")
 const SaveFileManager = preload("res://mods-unpacked/GlitchedData-MultiPlayer/scripts/SaveFileManager.gd")
 const ShellEjectManager = preload("res://mods-unpacked/GlitchedData-MultiPlayer/scripts/ShellEjectManager.gd")
 const ShellLoader = preload("res://mods-unpacked/GlitchedData-MultiPlayer/scripts/ShellLoader.gd")
 const ShotgunShooting = preload("res://mods-unpacked/GlitchedData-MultiPlayer/scripts/ShotgunShooting.gd")
-const SpeakerController = preload("res://mods-unpacked/GlitchedData-MultiPlayer/scripts/SpeakerController.gd")
+const SpeakerController = preload("res://scripts/SpeakerController.gd")
 
 @export var cam : CameraManager
 @export var viewblocker : ColorRect

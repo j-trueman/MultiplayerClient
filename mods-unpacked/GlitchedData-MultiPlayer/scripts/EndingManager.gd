@@ -1,15 +1,15 @@
 extends Node
 
-const Achievement = preload("res://mods-unpacked/GlitchedData-MultiPlayer/scripts/AchievementManager.gd")
+const Achievement = preload("res://scripts/AchievementManager.gd")
 const Board = preload("res://mods-unpacked/GlitchedData-MultiPlayer/scripts/LeaderboardManager.gd")
 const CameraManager = preload("res://mods-unpacked/GlitchedData-MultiPlayer/scripts/CameraManager.gd")
-const DialogueEnding = preload("res://mods-unpacked/GlitchedData-MultiPlayer/scripts/DialogueManager_Ending.gd")
-const ExitManager = preload("res://mods-unpacked/GlitchedData-MultiPlayer/scripts/UserExit.gd")
+const DialogueEnding = preload("res://scripts/DialogueManager_Ending.gd")
+const ExitManager = preload("res://scripts/UserExit.gd")
 const RoundManager = preload("res://mods-unpacked/GlitchedData-MultiPlayer/scripts/RoundManager.gd")
 const SaveFileManager = preload("res://mods-unpacked/GlitchedData-MultiPlayer/scripts/SaveFileManager.gd")
-const SpeakerController = preload("res://mods-unpacked/GlitchedData-MultiPlayer/scripts/SpeakerController.gd")
-const TextFire = preload("res://mods-unpacked/GlitchedData-MultiPlayer/scripts/TextFire.gd")
-const Unlocker = preload("res://mods-unpacked/GlitchedData-MultiPlayer/scripts/DonUnlockManager.gd")
+const SpeakerController = preload("res://scripts/SpeakerController.gd")
+const TextFire = preload("res://scripts/TextFire.gd")
+const Unlocker = preload("res://scripts/DonUnlockManager.gd")
 
 @export var save : SaveFileManager
 @export var roundManager : RoundManager

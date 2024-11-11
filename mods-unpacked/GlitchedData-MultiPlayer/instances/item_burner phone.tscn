@@ -1,7 +1,7 @@
 [gd_scene load_steps=14 format=3]
 
 [ext_resource type="Texture2D" uid="uid://hf48pyfehxu1" path="res://models/new items/new items main1_burner phone2.png" id="1"]
-[ext_resource type="Script" path="res://mods-unpacked/GlitchedData-MultiPlayer/scripts/PickupIndicator.gd" id="2"]
+[ext_resource type="Script" path="res://scripts/PickupIndicator.gd" id="2"]
 [ext_resource type="AudioStream" uid="uid://ck8nljwbtpqgw" path="res://audio/place down burner phone.ogg" id="3"]
 [ext_resource type="AudioStream" uid="uid://cerv4vk2vn172" path="res://audio/pick up burner phone.ogg" id="4"]
 [ext_resource type="Script" path="res://mods-unpacked/GlitchedData-MultiPlayer/scripts/InteractionBranch.gd" id="5"]

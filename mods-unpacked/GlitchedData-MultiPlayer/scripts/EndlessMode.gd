@@ -1,6 +1,6 @@
 extends Node
 
-const Amounts = preload("res://mods-unpacked/GlitchedData-MultiPlayer/scripts/ItemAmounts.gd")
+const Amounts = preload("res://scripts/ItemAmounts.gd")
 const RoundManager = preload("res://mods-unpacked/GlitchedData-MultiPlayer/scripts/RoundManager.gd")
 
 @export var roundManager : RoundManager

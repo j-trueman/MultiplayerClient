@@ -1,23 +1,23 @@
 extends Node
 
-const Achievement = preload("res://mods-unpacked/GlitchedData-MultiPlayer/scripts/AchievementManager.gd")
+const Achievement = preload("res://scripts/AchievementManager.gd")
 const CameraManager = preload("res://mods-unpacked/GlitchedData-MultiPlayer/scripts/CameraManager.gd")
-const CameraShaker = preload("res://mods-unpacked/GlitchedData-MultiPlayer/scripts/CameraShaker.gd")
-const ControllerManager = preload("res://mods-unpacked/GlitchedData-MultiPlayer/scripts/ControllerManager.gd")
-const CursorManager = preload("res://mods-unpacked/GlitchedData-MultiPlayer/scripts/CursorManager.gd")
+const CameraShaker = preload("res://scripts/CameraShaker.gd")
+const ControllerManager = preload("res://scripts/ControllerManager.gd")
+const CursorManager = preload("res://scripts/CursorManager.gd")
 const DeathManager = preload("res://mods-unpacked/GlitchedData-MultiPlayer/scripts/DeathManager.gd")
 const DecisionTextManager = preload("res://mods-unpacked/GlitchedData-MultiPlayer/scripts/DecisionTextManager.gd")
 const HealthCounter = preload("res://mods-unpacked/GlitchedData-MultiPlayer/scripts/HealthCounter.gd")
-const ObjectShaker = preload("res://mods-unpacked/GlitchedData-MultiPlayer/scripts/ObjectShaker.gd")
+const ObjectShaker = preload("res://scripts/ObjectShaker.gd")
 const PermissionManager = preload("res://mods-unpacked/GlitchedData-MultiPlayer/scripts/PermissionManager.gd")
-const PickupIndicator = preload("res://mods-unpacked/GlitchedData-MultiPlayer/scripts/PickupIndicator.gd")
+const PickupIndicator = preload("res://scripts/PickupIndicator.gd")
 const RoundManager = preload("res://mods-unpacked/GlitchedData-MultiPlayer/scripts/RoundManager.gd")
 const ShellEjectManager = preload("res://mods-unpacked/GlitchedData-MultiPlayer/scripts/ShellEjectManager.gd")
 const ShellSpawner = preload("res://mods-unpacked/GlitchedData-MultiPlayer/scripts/ShellSpawner.gd")
-const SmokeController = preload("res://mods-unpacked/GlitchedData-MultiPlayer/scripts/SmokeController.gd")
-const SpeakerController = preload("res://mods-unpacked/GlitchedData-MultiPlayer/scripts/SpeakerController.gd")
-const SpeakerController3D = preload("res://mods-unpacked/GlitchedData-MultiPlayer/scripts/SpeakerController3D.gd")
-const TimeScaleManager = preload("res://mods-unpacked/GlitchedData-MultiPlayer/scripts/TimeScaleManager.gd")
+const SmokeController = preload("res://scripts/SmokeController.gd")
+const SpeakerController = preload("res://scripts/SpeakerController.gd")
+const SpeakerController3D = preload("res://scripts/SpeakerController3D.gd")
+const TimeScaleManager = preload("res://scripts/TimeScaleManager.gd")
 
 @export var ejectionManager_player : ShellEjectManager
 @export var cursorManager : CursorManager

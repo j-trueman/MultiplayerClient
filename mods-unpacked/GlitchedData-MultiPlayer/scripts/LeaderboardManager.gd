@@ -1,6 +1,6 @@
 extends Node
 
-const Achievement = preload("res://mods-unpacked/GlitchedData-MultiPlayer/scripts/AchievementManager.gd")
+const Achievement = preload("res://scripts/AchievementManager.gd")
 const CRT = preload("res://mods-unpacked/GlitchedData-MultiPlayer/scripts/CrtManager.gd")
 const SaveFileManager = preload("res://mods-unpacked/GlitchedData-MultiPlayer/scripts/SaveFileManager.gd")
 

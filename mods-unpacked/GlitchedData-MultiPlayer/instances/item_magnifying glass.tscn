@@ -4,7 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://ca8l1qy44k70b" path="res://models/main items/main items1_TexturesCom_Metal_BronzeBare_512_normal.png" id="2"]
 [ext_resource type="Texture2D" uid="uid://c3ye8p6ci68ox" path="res://models/main items/main items1_wood worn albedo.png" id="3"]
 [ext_resource type="Texture2D" uid="uid://c42htmd36ei70" path="res://models/main items/main items1_TCom_Wood_Worn2_512_normal.png" id="4"]
-[ext_resource type="Script" path="res://mods-unpacked/GlitchedData-MultiPlayer/scripts/PickupIndicator.gd" id="5"]
+[ext_resource type="Script" path="res://scripts/PickupIndicator.gd" id="5"]
 [ext_resource type="AudioStream" uid="uid://dixq8u3rp6m8i" path="res://audio/place down magnifier2.ogg" id="6"]
 [ext_resource type="AudioStream" uid="uid://bvjmpchrm50ii" path="res://audio/pick up magnifier.ogg" id="7"]
 [ext_resource type="Script" path="res://mods-unpacked/GlitchedData-MultiPlayer/scripts/InteractionBranch.gd" id="8"]
