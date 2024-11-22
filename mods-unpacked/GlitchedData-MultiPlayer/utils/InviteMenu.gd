@@ -109,15 +109,13 @@ func _process(delta):
 		if menuIsVisible:
 			inviteContainer.visible = true
 			incomingButton.visible = true
-			if outgoingButton != null:
-				outgoingButton.visible = true
+			if outgoingButton != null: outgoingButton.visible = true
 			buttonHighlightAnimator.get_parent().visible = true
 	else:
 		menuButton.visible = false
 		inviteContainer.visible = false
 		incomingButton.visible = false
-		if outgoingButton != null:
-			outgoingButton.visible = false
+		if outgoingButton != null: outgoingButton.visible = false
 		buttonHighlightAnimator.get_parent().visible = false
 
 	if canMove and moveTimer > 0.45 and lefting and selectedInput.caret_column > 0:
@@ -344,7 +342,7 @@ func updateUserList(list):
 	var needToSort = false
 	for user in list:
 		var username = list[user].username
-		var userStatus = list[user].status
+		var userStatus = mrm.opponent == "DEALER" if username == "dealer" else list[user].status
 		var inList = currentUserList.get(user)	# No idea why this needs to be on a separate line but whatever
 		if (inList != null) or blockedUsers.has(username): continue
 		needToSort = true

@@ -19,8 +19,8 @@ func _ready():
 	buttons[18].connect("is_pressed", ResetControls)
 	buttons[19].connect("is_pressed", DiscordLink)
 	buttons[22].connect("is_pressed", Start)
-	buttons[23].connect("is_pressed", ModsMenu)
-	buttons[24].connect("is_pressed", ReturnToLastScreen)
+	buttons[24].connect("is_pressed", ModsMenu)
+	buttons[25].connect("is_pressed", ReturnToLastScreen)
 	
 	buttons_options[0].connect("is_pressed", IncreaseVol)
 	buttons_options[1].connect("is_pressed", DecreaseVol)
@@ -30,6 +30,7 @@ func _ready():
 	buttons_options[5].connect("is_pressed", ControllerDisable)
 	buttons_options[6].connect("is_pressed", ToggleColorblind)
 	buttons_options[7].connect("is_pressed", ToggleMusic)
+	buttons_options[8].connect("is_pressed", ToggleGreyscaleDeath)
 	
 	version.text = GlobalVariables.currentVersion
 
@@ -39,17 +40,4 @@ func _ready():
 
 func Start():
 	multiplayer.multiplayer_peer = null
-	Buttons(false)
-	ResetButtons()
-	for screen in screens: screen.visible = false
-	title.visible = false
-	controller.previousFocus = null
-	speaker_music.stop()
-	animator_intro.play("snap")
-	for w in waterfalls: w.pause()
-	speaker_start.play()
-	cursor.SetCursor(false, false)
-	savefile.ClearSave()
-	await get_tree().create_timer(4, false).timeout
-	print("changing scene to: main")
-	get_tree().change_scene_to_file("res://mods-unpacked/GlitchedData-MultiPlayer/scenes/main.tscn")
+	await super()

@@ -8,7 +8,7 @@ const AUTHORNAME_MODNAME_DIR := "GlitchedData-MultiPlayer"
 
 var debug_mode = false
 
-var version = "0.4.1"
+var version = "0.4.2"
 
 var chat_enabled = true
 var voice_enabled = true
@@ -48,7 +48,8 @@ func _ready():
 
 	multiplayer.connected_to_server.connect(func(): connectionTimer("stop"))
 	multiplayer.server_disconnected.connect(_onServerDisconnected)
-	
+
+	AddKey("mp_delete", KEY_DELETE)
 	AddKey("mp_chat", KEY_T)
 	
 	if inMatch:
@@ -80,7 +81,7 @@ func connectionTimer(action):
 		if timerRunning:
 			if not inviteMenu.signupSection.visible: inviteMenu.get_node("connecting").visible = true
 			inviteMenu.get_node("connecting/AnimationPlayer").play("connecting")
-	elif inviteMenu != null:
+	else:
 		timerRunning = false
 		inviteMenu.signupSection.visible = false
 		inviteMenu.get_node("connecting").visible = false
